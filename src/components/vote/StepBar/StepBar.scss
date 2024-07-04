@@ -1,0 +1,115 @@
+.hidden {
+  transform: translateY(-100%);
+}
+
+.step-active {
+  transform: translateY(0);
+}
+
+.step-inactive {
+  transform: translateY(-100%);
+}
+
+.step-bar {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 100;
+  transition: transform 0.3s;
+  .control-button {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px -2px 8px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: min(100%, 1200px);
+    background-color: white;
+    padding: 0px 10px;
+    border-radius: 10px 10px 0 0;
+    #btnPrev,
+    #btnNext {
+      cursor: pointer;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      flex-direction: row;
+      height: 40px;
+      padding: 0.5rem 1rem;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: aliceblue;
+      font-weight: 300;
+      font-size: clamp(10px, 2.5vw, 14px);
+      font-family: "Lexend";
+      svg {
+        color: aliceblue;
+        font-size: 2rem;
+      }
+      background-color: #404660;
+    }
+    .control-step {
+      width: 60%;
+      .ant-steps {
+        .ant-steps-item-icon {
+          font-family: "Lexend";
+          font-weight: 600;
+          margin-inline-end: 0;
+        }
+        .ant-steps-item-process:not(.ant-steps-item-custom) {
+          .ant-steps-item-icon {
+            background-color: #404660;
+            border-color: #404660;
+          }
+        }
+        .ant-steps-item-custom .ant-steps-item-icon > .ant-steps-icon {
+          color: #404660;
+        }
+        .ant-steps-item:first-child .ant-steps-item-container {
+          margin-inline-start: 0;
+        }
+      }
+    }
+    .inactivate {
+      opacity: 0.3;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .step-bar {
+    .control-button {
+      padding: 5px;
+      border-radius: 0;
+      justify-content: center;
+      gap: 10px;
+      #btnPrev,
+      #btnNext {
+        height: 35px;
+        border-radius: 5px;
+      }
+      .control-step {
+        width: 70%;
+        .ant-steps {
+          .ant-steps-item::before {
+            bottom: 5px;
+          }
+          .ant-steps-item::after {
+            width: 6px;
+            height: 6px;
+          }
+          .anticon svg {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+}

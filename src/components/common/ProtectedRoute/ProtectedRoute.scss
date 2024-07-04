@@ -1,0 +1,36 @@
+.protected-route {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #e8e8e8;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        input {
+            height: 45px;
+            line-height: 30px;
+            padding: 0 1rem;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            outline: none;
+            background-color: #f8fafc;
+            color: #0d0c22;
+        }
+        button {
+            font-size: clamp(10px, 3vw, 15px);
+            background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
+            color: white;
+            padding: 0.8em 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    }
+}

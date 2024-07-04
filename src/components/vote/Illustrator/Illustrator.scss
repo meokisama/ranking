@@ -1,0 +1,195 @@
+.ant-popover-inner-content {
+    img {
+        width: 200px;
+    }
+}
+.ant-btn-primary {
+    background-color: #dd6e61;
+    &:hover {
+        background-color: #c53e1f !important;
+    }
+}
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: #dd6e61;
+    border-color: #dd6e61;
+}
+.ant-input-outlined:hover {
+    border-color: #dd6e61;
+}
+.ant-input-outlined:focus,
+.ant-input-outlined:focus-within {
+    border-color: #dd6e61 !important;
+}
+
+.ant-checkbox .ant-checkbox-inner {
+    border-color: #9d9d9d;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #dd6e61;
+    border-color: #dd6e61;
+}
+.ant-checkbox-wrapper-checked:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-inner,
+:where(.css-dev-only-do-not-override-1rqnfsa).ant-checkbox-checked:not(.ant-checkbox-disabled):hover
+    .ant-checkbox-inner {
+    background-color: #dd6e61 !important;
+}
+
+.ant-checkbox-indeterminate .ant-checkbox-inner:after {
+    background-color: #dd6e61;
+}
+.ant-checkbox-indeterminate .ant-checkbox-inner {
+    border-color: #dd6e61;
+}
+
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-inner,
+:where(.css-dev-only-do-not-override-1rqnfsa).ant-checkbox:not(.ant-checkbox-disabled):hover .ant-checkbox-inner {
+    border-color: #dd6e61;
+}
+
+.ant-popover .ant-popover-inner {
+    padding: 0;
+}
+
+.series-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .series-column-search {
+        padding: 2px 0 2px 2px;
+        svg {
+            width: 85%;
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.06);
+            border-radius: 6px;
+        }
+    }
+}
+
+.series-viewer {
+    p {
+        font-family: 'Lexend';
+        cursor: pointer;
+        margin: 0;
+        padding: 10px 10px;
+        font-weight: 300;
+        color: #000000ad;
+        span {
+            strong {
+                font-weight: 700;
+                color: #c53e1f;
+            }
+        }
+        &:hover {
+            background-color: #4e4d4d17;
+        }
+    }
+}
+
+.favorite-illustrator {
+    padding-bottom: 10rem;
+    .ant-alert-content {
+        font-family: 'Lexend';
+        font-weight: 300;
+        strong {
+            font-weight: 700;
+            color: #dd6e61;
+        }
+    }
+    .illustrator-table {
+        .ant-table {
+            margin-bottom: 40px;
+        }
+        .ant-table-wrapper .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+            background: #ffe5e15c !important;
+        }
+        .ant-table-wrapper .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell-row-hover {
+            background: #ffe5e19f !important;
+        }
+        .ant-table-content {
+            font-family: 'Lexend';
+            font-weight: 300;
+            color: #4e4d4d;
+            th {
+                color: #dd6e61 !important;
+                font-weight: 700 !important;
+                font-size: 1.5rem;
+            }
+            .anticon {
+                color: #494949d7;
+            }
+        }
+        .ant-pagination-item {
+            font-family: 'Lexend';
+            font-weight: 300;
+        }
+        .ant-select,
+        .ant-select-dropdown {
+            font-family: 'Lexend', sans-serif;
+        }
+        .ant-select-selector {
+            color: rgb(129 123 123 / 88%);
+        }
+        .ant-select-dropdown .ant-select-item {
+            color: #4e4d4d;
+        }
+        .ant-pagination-item-active {
+            border-color: #dd6e61;
+            a {
+                font-weight: 600;
+                color: #dd6e61;
+            }
+        }
+    }
+    .series-cover {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 1rem 0;
+        .series-cover-item {
+            img {
+                cursor: pointer;
+                width: 100px;
+                height: 100%;
+                object-fit: cover;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ant-popover-inner-content {
+        img {
+            width: 100px;
+        }
+    }
+
+    .ant-table-content {
+        table {
+            table-layout: fixed !important;
+        }
+    }
+
+    .ant-alert {
+        font-size: 1.3rem;
+    }
+
+    .favorite-illustrator {
+        padding-bottom: 5rem;
+        .illustrator-table {
+            .ant-table {
+                font-size: 1.2rem !important;
+            }
+            .ant-table-content {
+                th {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap");
+
+.thankyou-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff7f8;
+  background-image: url("/sakura_circle.svg");
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+  .thankyou-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    h1 {
+      font-size: 12vw;
+      font-weight: 900;
+      font-family: "Poppins";
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin: 0;
+      width: 100%;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(0, 0, 0, 0.15);
+    }
+    .subtitle {
+      font-family: "Imperial Script", cursive;
+      font-size: 6vw;
+      text-align: center;
+      margin: 0;
+      position: absolute;
+      background-image: linear-gradient(
+        90deg,
+        #ff9a8b 0%,
+        #ff6a88 55%,
+        #ff99ac 100%
+      );
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .thankyou-content {
+    width: min(1000px, 90%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    img {
+      width: 40%;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .text-content {
+      width: 60%;
+      .thankyou-graph {
+        text-align: justify;
+        color: #414040;
+        strong {
+          font-weight: 600;
+          color: #ff6a88;
+        }
+      }
+      input {
+        width: 100%;
+        color: #ff6a88;
+        caret-color: #ff6a88;
+        border: 1px solid #ff99ac;
+        background-color: #fff3f5;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-family: "Lexend";
+        font-weight: 500;
+        padding: 15px 15px;
+        border-radius: 10px;
+        text-align: center;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .thankyou-wrapper {
+    background-size: 120%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .thankyou-wrapper {
+    .thankyou-title {
+      h1 {
+        font-size: 15vw;
+        -webkit-text-stroke: 1px rgba(0, 0, 0, 0.15);
+      }
+      .subtitle {
+        font-size: 10vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .thankyou-wrapper {
+    .thankyou-content {
+      .text-content {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .thankyou-wrapper {
+    padding: 5rem 0;
+    .thankyou-content {
+      flex-direction: column;
+      img {
+        width: 70%;
+      }
+      .text-content {
+        font-size: 1.3rem;
+        width: 100%;
+        input {
+          letter-spacing: 3px;
+        }
+      }
+    }
+  }
+}

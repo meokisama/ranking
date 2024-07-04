@@ -1,0 +1,164 @@
+.feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-bottom: 10rem;
+    .ant-input {
+        font-family: 'Lexend' !important;
+    }
+    textarea.ant-input {
+        font-weight: 400 !important;
+        color: rgba(0, 0, 0, 0.6392156863);
+    }
+    .ant-checkbox-wrapper {
+        padding-top: 10px;
+        span {
+            font-family: 'Lexend' !important;
+            font-weight: 300 !important;
+            color: rgba(0, 0, 0, 0.6392156863);
+        }
+    }
+
+    .slogan {
+        h1 {
+            font-size: 600%;
+            font-weight: 900;
+            font-family: 'Poppins';
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            line-height: 80%;
+            margin: 0;
+            width: 100%;
+            color: rgba(182, 182, 182, 0);
+            text-align: center;
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    .feedback-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 5rem;
+        .feedback-image {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 55%;
+            }
+        }
+        .feedback-wrapper {
+            width: 60%;
+            .feedback-container,
+            .recommend-container {
+                width: 100%;
+                h2 {
+                    font-family: 'Phudu';
+                    font-weight: normal !important;
+                    letter-spacing: -0.5px;
+                    background-image: linear-gradient(90deg, #ff9a8b 0%, #ff6a88 55%, #ff99ac 100%);
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                .description {
+                    font-weight: 300;
+                    color: rgba(0, 0, 0, 0.6392156863);
+                }
+                .input-area {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    margin-bottom: 10px;
+                    padding: 20px 0;
+                    p {
+                        font-family: 'Lexend';
+                        margin: 0;
+                        font-weight: 400;
+                        font-size: 1.3rem;
+                        color: rgba(0, 0, 0, 0.486);
+                    }
+                }
+            }
+
+            .recommend-container {
+                margin-top: 5rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .feedback {
+        .ant-input {
+            font-size: 1.5rem !important;
+        }
+        .ant-checkbox-wrapper {
+            span {
+                font-size: 1.5rem !important;
+            }
+        }
+        .slogan {
+            h1 {
+                font-size: 400%;
+            }
+        }
+        .feedback-section {
+            .feedback-wrapper {
+                width: 100% !important;
+                .feedback-container,
+                .recommend-container {
+                    h2 {
+                        font-size: 2rem;
+                    }
+                    .description {
+                        font-size: 1.3rem;
+                    }
+                    .input-area {
+                        padding: 10px 0;
+                    }
+                }
+            }
+            .feedback-image {
+                display: none !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .feedback {
+        .ant-input {
+            font-size: 1.2rem !important;
+        }
+        .ant-checkbox-wrapper {
+            span {
+                font-size: 1.2rem !important;
+            }
+        }
+        .slogan {
+            h1 {
+                font-size: 300%;
+            }
+        }
+        .feedback-section {
+            .feedback-wrapper {
+                .feedback-container,
+                .recommend-container {
+                    h2 {
+                        font-size: 1.6rem;
+                    }
+                    .description {
+                        font-size: 1.2rem;
+                    }
+                    .input-area {
+                        padding: 5px 0;
+                    }
+                }
+            }
+        }
+    }
+}

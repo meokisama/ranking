@@ -1,0 +1,194 @@
+.ant-modal {
+    .ant-modal-content {
+        padding: 0;
+        overflow: hidden;
+        background-color: #fff2f2;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    }
+    .ant-modal-close {
+        color: white;
+        &:hover {
+            background-color: white;
+        }
+    }
+}
+
+.popup-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+    .popup-banner {
+        height: 40%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        user-select: none;
+        pointer-events: none;
+        .bannerimg {
+            height: 320px;
+            width: 100%;
+            filter: brightness(35%);
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .bannertext {
+            position: absolute;
+            display: inline-block;
+            text-align: center;
+            h1 {
+                font-family: 'Jaro';
+                text-transform: uppercase;
+                font-weight: normal;
+                font-size: 550%;
+                line-height: 84%;
+                text-align: center;
+                filter: drop-shadow(2px 2px 20px rgb(20, 10, 10));
+                #bannertext01 {
+                    padding-top: 20px;
+                    background-image: linear-gradient(90deg, #ff9a8b 0%, #ff6a88 55%, #ff99ac 100%);
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                #bannertext02 {
+                    background-image: linear-gradient(90deg, #ff9a8b 0%, #ff6a88 55%, #ff99ac 100%);
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                #bannertext03 {
+                    background-image: linear-gradient(
+                        to right,
+                        #b8cbb8 0%,
+                        #b8cbb8 0%,
+                        #b465da 0%,
+                        #cf6cc9 33%,
+                        #ee609c 66%,
+                        #ee609c 100%
+                    );
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    transition: all;
+                    background-size: 200% 200%;
+                    animation: gradient 2s infinite linear;
+                }
+                @keyframes gradient {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+            }
+        }
+    }
+    .popup-content {
+        height: 60%;
+        font-family: 'Lexend' !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+        width: 100%;
+        #greeting {
+            margin-top: 20px;
+        }
+        p {
+            margin-top: 0;
+            text-align: justify;
+            font-size: 1.6rem;
+            width: min(95%, 800px);
+            font-weight: 300;
+            color: rgb(85, 83, 83);
+            strong {
+                font-weight: 600;
+            }
+        }
+        .split-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            width: 90%;
+            padding-bottom: 10px;
+            span {
+                font-size: 1.6rem;
+                font-weight: 300;
+                color: rgb(85, 83, 83);
+                strong {
+                    font-weight: 600;
+                }
+            }
+        }
+        #start-btn {
+            font-family: 'Phudu';
+            text-decoration: none;
+            font-size: 2.3rem;
+            text-transform: uppercase;
+            display: flex;
+            gap: 1%;
+            justify-content: space-around;
+            align-items: center;
+            border: 2px solid salmon;
+            border-radius: 10px;
+            padding: 5px 40px;
+            transition: all 0.5s ease-in-out;
+            background: linear-gradient(#fbf2f2 0 0) padding-box,
+                linear-gradient(to bottom, transparent, #fa7667) border-box;
+            border: 1px solid transparent;
+            box-shadow: rgba(250, 146, 134, 0.35) 0px 20px 25px -5px, rgba(250, 146, 134, 0.51) 0px 10px 10px -5px;
+            color: #fa7667;
+            line-height: 5rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .popup-modal {
+        padding-bottom: 1rem;
+        .popup-banner {
+            .bannerimg {
+                height: 190px;
+            }
+            .bannertext {
+                h1 {
+                    font-size: 350%;
+                    letter-spacing: -1.5px;
+                }
+            }
+        }
+        .popup-content {
+            p {
+                font-size: 1.3rem;
+            }
+            #start-btn {
+                font-size: 1.8rem;
+                padding: 5px 30px;
+                line-height: 4rem;
+            }
+            .split-categories {
+                span {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .popup-modal {
+        .split-categories {
+            grid-template-columns: repeat(1, 1fr) !important;
+        }
+    }
+}
