@@ -115,7 +115,6 @@ function Vote() {
   const components = [
     <ListComponent
       id="1"
-      key="1"
       title="Light Novel được yêu thích nhất"
       category="favoriteRanobe"
       listData={favoriteRanobe.sort((a, b) =>
@@ -136,7 +135,6 @@ function Vote() {
     />,
     <Illustrator
       id="2"
-      key="2"
       title="Họa sĩ minh họa được yêu thích nhất"
       category="favoriteIllustrator"
       listData={favoriteIllustrator.sort((a, b) =>
@@ -157,7 +155,6 @@ function Vote() {
     />,
     <ListComponent
       id="3"
-      key="3"
       title="Nhà phát hành được yêu thích nhất"
       category="favoritePublisher"
       listData={favoritePublisher}
@@ -174,7 +171,6 @@ function Vote() {
     />,
     <Feedback
       id="4"
-      key="4"
       title="Chia sẻ ý kiến và đề xuất"
       category="feedback"
       description={
@@ -187,7 +183,7 @@ function Vote() {
       }
       onSelectionChange={handleChildSelection}
     />,
-    <SendResult key="5" result={selectedItems} />,
+    <SendResult result={selectedItems} />,
   ];
 
   const isLastComponent = currentComponent === components.length - 1;

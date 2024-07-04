@@ -227,9 +227,9 @@ function LeaderBoardTable() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img key="gold" src={gold} alt="" width={20} />,
-          <img key="silver" src={silver} alt="" width={20} />,
-          <img key="bronze" src={bronze} alt="" width={20} />,
+          <img src={gold} alt="" width={20} />,
+          <img src={silver} alt="" width={20} />,
+          <img src={bronze} alt="" width={20} />,
         ];
         const getRankImage = (rank) =>
           (
@@ -423,9 +423,9 @@ function LeaderBoardTable() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img key="gold" src={gold} alt="" width={20} />,
-          <img key="silver" src={silver} alt="" width={20} />,
-          <img key="bronze" src={bronze} alt="" width={20} />,
+          <img src={gold} alt="" width={20} />,
+          <img src={silver} alt="" width={20} />,
+          <img src={bronze} alt="" width={20} />,
         ];
         const getRankImage = (rank) =>
           (
