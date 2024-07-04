@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React, { useRef, useState, useEffect } from "react";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Table, Button, Input, Space, Popover, Rate } from "antd";
@@ -228,9 +227,9 @@ function LeaderBoardTable() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img src={gold} alt="" width={20} />,
-          <img src={silver} alt="" width={20} />,
-          <img src={bronze} alt="" width={20} />,
+          <img key="gold" src={gold} alt="" width={20} />,
+          <img key="silver" src={silver} alt="" width={20} />,
+          <img key="bronze" src={bronze} alt="" width={20} />,
         ];
         const getRankImage = (rank) =>
           (
@@ -424,9 +423,9 @@ function LeaderBoardTable() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img src={gold} alt="" width={20} />,
-          <img src={silver} alt="" width={20} />,
-          <img src={bronze} alt="" width={20} />,
+          <img key="gold" src={gold} alt="" width={20} />,
+          <img key="silver" src={silver} alt="" width={20} />,
+          <img key="bronze" src={bronze} alt="" width={20} />,
         ];
         const getRankImage = (rank) =>
           (
