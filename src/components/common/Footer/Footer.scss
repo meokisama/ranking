@@ -133,6 +133,13 @@
       p {
         font-size: 1.2rem;
       }
+      .scrolling-authors {
+        p {
+          span {
+            font-size: 1.2rem !important;
+          }
+        }
+      }
     }
   }
 }

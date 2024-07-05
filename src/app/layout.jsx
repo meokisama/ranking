@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import "./globals.css";
+import "./globals.scss";
 
 const DTPhudu = localFont({
   src: "./DTPhudu-Black.otf",

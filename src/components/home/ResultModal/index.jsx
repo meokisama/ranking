@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Modal } from "antd";
 import { ROUTES } from "@/constants";
 import "./ResultModal.scss";
+import Image from "next/image";
 
 function ResultModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +41,12 @@ function ResultModal() {
         <div className="result-modal">
           <div className="result-banner">
             <div className="bannerimg">
-              <img src="/bannerimg.webp" alt="" />
+              <Image
+                src="/bannerimg.webp"
+                alt="alisa banner"
+                width={800}
+                height={350}
+              />
             </div>
             <div className="bannertext">
               <h1>

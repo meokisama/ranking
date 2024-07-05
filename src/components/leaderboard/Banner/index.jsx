@@ -1,10 +1,16 @@
+import Image from "next/image";
 import "./Banner.scss";
 
 function Banner() {
   return (
     <div className="ld-banner">
       <div className="bannerimg">
-        <img src="/bannerimg.webp" alt="" />
+        <Image
+          src="/bannerimg.webp"
+          alt="banner image"
+          width={1820}
+          height={956}
+        />
       </div>
       <div className="bannertext">
         <h1>

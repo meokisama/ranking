@@ -11,6 +11,7 @@ import {
   favoriteIllustrator as allIllustrator,
   favoritePublisher as allPublisher,
 } from "@/app/vote/List";
+import Image from "next/image";
 
 const selectArray = [
   {
@@ -224,9 +225,9 @@ function LeaderBoardTable() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img src="/gold.png" alt="" width={20} />,
-          <img src="/silver.png" alt="" width={20} />,
-          <img src="/bronze.png" alt="" width={20} />,
+          <img src="/gold.png" alt="gold" width={20} />,
+          <img src="/silver.png" alt="sivler" width={20} />,
+          <img src="/bronze.png" alt="bronze" width={20} />,
         ];
         const getRankImage = (rank) =>
           (
@@ -420,9 +421,9 @@ function LeaderBoardTable() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img src="/gold.png" alt="" width={20} />,
-          <img src="/silver.png" alt="" width={20} />,
-          <img src="/bronze.png" alt="" width={20} />,
+          <img src="/gold.png" alt="gold" width={20} />,
+          <img src="/silver.png" alt="silver" width={20} />,
+          <img src="/bronze.png" alt="bronze" width={20} />,
         ];
         const getRankImage = (rank) =>
           (
@@ -513,7 +514,12 @@ function LeaderBoardTable() {
         <strong>lọc ra các tác phẩm của mỗi nhà xuất bản</strong> tương ứng.
       </p>
       <div className="ld-chibi">
-        <img src="/nonoa_chibi.webp" alt="" />
+        <Image
+          src="/nonoa_chibi.webp"
+          alt="nonoa chibi"
+          width={138}
+          height={224}
+        />
       </div>
       <div className="ld-table-header">
         <div className="header-left-panel">
@@ -584,7 +590,7 @@ function LeaderBoardTable() {
               <div className={`publisher-item ${ln.publisherLogo}`} key={index}>
                 <div className="logo-wrapper">
                   <img
-                    alt=""
+                    alt="publisher logo"
                     src={`images/publisher/${ln.publisherLogo}.webp`}
                     loading="lazy"
                   />
