@@ -32,47 +32,19 @@ function StepBar({
   const [show, setShow] = useState(true);
   // const [scrollPos, setScrollPos] = useState(0);
   // useEffect(() => {
-  //     const handleScroll = () => {
-  //         const currentScrollPos = window.scrollY;
-  //         const visible = scrollPos > currentScrollPos;
-  //         setShow(visible);
-  //         setScrollPos(currentScrollPos);
-  //     };
+  //   const handleScroll = () => {
+  //     const currentScrollPos = window.scrollY;
+  //     const visible = scrollPos > currentScrollPos;
+  //     setShow(visible);
+  //     setScrollPos(currentScrollPos);
+  //   };
 
-  //     window.addEventListener('scroll', handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-  //     return () => {
-  //         window.removeEventListener('scroll', handleScroll);
-  //     };
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
   // }, [scrollPos]);
-
-  // useEffect(() => {
-  //     const handleClick = (event) => {
-  //         const excludedSelectors = [
-  //             '.series-cover-item',
-  //             '.ranobe-item',
-  //             '.publisher-item',
-  //             '.filter-container input',
-  //             '.filter-container button',
-  //             '.btn-container button',
-  //             '.result-publisher',
-  //             '.result-item',
-  //             '.step-bar',
-  //             '.series-column-search',
-  //             '.ant-popover',
-  //             '.ant-checkbox',
-  //         ];
-
-  //         const isExcluded = excludedSelectors.some((selector) => event.target.closest(selector));
-  //         if (!isExcluded) {
-  //             setShow((prevShow) => !prevShow);
-  //         }
-  //     };
-  //     window.addEventListener('click', handleClick);
-  //     return () => {
-  //         window.removeEventListener('click', handleClick);
-  //     };
-  // }, [show]);
 
   return (
     <div className={`step-bar ${show ? "" : "hidden"}`}>

@@ -1,12 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ROUTES } from "@/constants";
-import {
-  Footer,
-  DocumentTitle,
-  ScrollToTop,
-  SplashScreen,
-} from "@/components/common";
+import { Footer, ScrollToTop, SplashScreen } from "@/components/common";
 import {
   VoteHeader,
   ListComponent,
@@ -20,8 +15,6 @@ import {
 import { favoriteRanobe, favoriteIllustrator, favoritePublisher } from "./List";
 
 function Vote() {
-  DocumentTitle("Bình Chọn - Bảng Xếp Hạng Light Novel Việt Nam");
-
   const [thanks, setThanks] = useState(false);
   useEffect(() => {
     setThanks(localStorage.getItem("isVoteDone") === "true" ? true : false);

@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const title = "Bảng Xếp Hạng Light Novel Việt Nam";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
       <body>
         <div id="root">{children}</div>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4} />
     </html>
   );
 }
