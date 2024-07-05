@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
+
+:root {
+  --color-black: #181123;
+  --color-gray: rgba(34, 34, 34, 0.6);
+  --color-background: #ffffff;
+  --color-azure: #f2f5f8;
+  --color-quote: #f8d8e2;
+  --color-answer-border: rgb(216, 215, 215);
+  --color-question: rgb(79, 76, 76);
+  --color-answer-hover-bg: rgb(248, 245, 241);
+  --color-answer-hover-border: rgb(245, 152, 152);
+  --color-answer-hover-right-bg: rgb(213 255 200);
+  --color-answer-hover-right-border: rgb(64 197 69);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-family: "Lexend";
+  font-weight: 200;
+  text-rendering: optimizeSpeed;
+  margin: 0 !important;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Start scrollbar-------------------------------------- */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track:horizontal {
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #404660;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: #fa7667;
+  border-radius: 10px;
+}
+/* End scrollbar------------------------------------------ */
+
+.contentContainer {
+  background-image: url("/sakura_circle.svg");
+  background-repeat: no-repeat;
+  background-color: #fff7f8;
+  background-size: 50%;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 200;
+  overflow: hidden;
+  img {
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .wrapper {
+    max-width: 1200px;
+    padding: 10rem 2rem 20rem;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 900px) {
+    .wrapper {
+      padding: 2rem 1rem;
+    }
+  }
+}
+
+.voteContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 2rem;
+  background-color: var(--color-background);
+  overflow: hidden;
+  .control-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: min(100%, 1200px);
+    background-color: white;
+    padding: 0px 10px 5px;
+    #btnPrev,
+    #btnNext {
+      cursor: pointer;
+      border-radius: 8px;
+      width: 60px;
+      height: 60px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Lexend";
+      svg {
+        color: aliceblue;
+        font-size: 2.5rem;
+      }
+      background-color: #404660;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+    .inactivate {
+      opacity: 0.3;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}
+
+.popover-content {
+  font-family: "Lexend";
+  cursor: pointer;
+  p {
+    margin: 0;
+    padding: 5px 15px 5px 10px;
+    color: #4e4d4d;
+    &:hover:not(.selected-category) {
+      background-color: rgba(192, 190, 190, 0.411);
+    }
+  }
+  .selected-category {
+    background-color: #f193a6;
+    color: white;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .voteContainer {
+    padding: 1.5rem;
+    .control-button {
+      #btnPrev,
+      #btnNext {
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
