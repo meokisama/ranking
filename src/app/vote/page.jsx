@@ -178,11 +178,15 @@ function Vote() {
   const isPenultimate = currentComponent === components.length - 2;
 
   //Scroll to top
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  const ScrollToTop = () => {
+    useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, []);
+
+    return null;
   };
 
   return thanks ? (
