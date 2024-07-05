@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { Divider, Input, Checkbox } from "antd";
 import Category from "../Category";
@@ -62,18 +63,6 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
     localStorage.setItem("bxhlnvn_recommend", JSON.stringify(recommend));
   }, [feedback, recommend]);
 
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 768);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth > 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <div className="feedback">
       <Category title={id + ". " + title} description={description} />
@@ -98,7 +87,7 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
                 placeholder="Chủ đề muốn nói (Không bắt buộc)"
                 style={{ marginBottom: 5 }}
                 allowClear
-                addonBefore={isWideScreen && <p>Chủ đề</p>}
+                addonBefore={<p>Chủ đề</p>}
                 disabled={!allowFeedback}
                 onChange={(e) =>
                   setFeedback({ ...feedback, topic: e.target.value })
@@ -134,7 +123,7 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
                 placeholder="Tên tác phẩm đề xuất"
                 style={{ marginBottom: 5 }}
                 allowClear
-                addonBefore={isWideScreen && <p>Tên tác phẩm đề xuất</p>}
+                addonBefore={<p>Tác phẩm</p>}
                 disabled={!allowRecommend}
                 onChange={(e) =>
                   setRecommend({ ...recommend, title: e.target.value })
@@ -145,7 +134,7 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
                 placeholder="Nhà phát hành mong muốn (Không bắt buộc)"
                 style={{ marginBottom: 5 }}
                 allowClear
-                addonBefore={isWideScreen && <p>Nhà phát hành mong muốn</p>}
+                addonBefore={<p>Nhà phát hành</p>}
                 disabled={!allowRecommend}
                 onChange={(e) =>
                   setRecommend({ ...recommend, publisher: e.target.value })

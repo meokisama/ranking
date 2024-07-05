@@ -6,7 +6,7 @@ import "./ScrollToTop.scss";
 function ScrollToTop() {
   //Scroll to top
   const [isVisible, setIsVisible] = useState(false);
-  const handleScroll = () => setIsVisible(true);
+  const handleScroll = () => setIsVisible(window.scrollY > 400);
 
   const scrollToTop = () => {
     window.scrollTo({
