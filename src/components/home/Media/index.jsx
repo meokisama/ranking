@@ -1,6 +1,7 @@
 import "./Media.scss";
 import SectionTitle from "../SectionTitle";
 import { COLLAB_PAGES } from "@/constants";
+import Link from "next/link";
 
 function Media() {
   return (
@@ -18,11 +19,9 @@ function Media() {
             }`}
           >
             <div className="mediaAvatar">
-              <img
-                onClick={() => window.open(media.url, "_blank")}
-                alt=""
-                src={media.avatar}
-              />
+              <Link href={media.url} target="_blank">
+                <img alt="fanpage avatar" src={media.avatar} />
+              </Link>
             </div>
             <div className="mediaInfo">
               <span className="username">@{media.username}</span>

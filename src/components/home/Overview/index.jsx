@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Timeline } from "antd";
 import CountUp from "react-countup";

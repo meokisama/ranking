@@ -1,3 +1,4 @@
+"use client";
 import {
   useSpring,
   useTrail,
@@ -63,7 +64,7 @@ function SplashScreen() {
     const timeoutId = setTimeout(() => {
       document.body.style.position = "";
       setShouldUnmount(true);
-    }, 4000);
+    }, 5000);
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -71,7 +72,6 @@ function SplashScreen() {
   return shouldUnmount ? null : (
     <div className="splashScreen">
       <div className="splashTextBG">
-        uyhb
         <animated.div className="left" style={propsLeft}>
           <span>Vietnam</span>
           <span>Light Novel</span>

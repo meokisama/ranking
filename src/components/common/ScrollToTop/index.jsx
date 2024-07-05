@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { CaretUpFilled } from "@ant-design/icons";
 import "./ScrollToTop.scss";

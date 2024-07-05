@@ -4,9 +4,6 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import "./SendResult.scss";
 import Category from "../Category";
 import { MessageHub } from "@/components/common";
-import ReactGA from "react-ga4";
-
-ReactGA.initialize(process.env.NEXT_PUBLIC_GA4);
 
 const cardTitleStyles = {
   fontFamily: "Lexend",
@@ -33,13 +30,6 @@ function SendResult({ result }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //Google Analytics
-    ReactGA.event({
-      category: "Form",
-      action: "Submit",
-      label: "Vote Form",
-    });
 
     const resultToSend = result.reduce((data, item) => {
       data[item.category_short] = item.chosenItems;

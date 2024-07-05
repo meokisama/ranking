@@ -1,16 +1,11 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import {
-  CaretUpFilled,
-  CaretLeftFilled,
-  CaretRightFilled,
-} from "@ant-design/icons";
+import { useState, useEffect } from "react";
 import { ROUTES } from "@/constants";
 import {
-  Transition,
   Footer,
   DocumentTitle,
   ScrollToTop,
+  SplashScreen,
 } from "@/components/common";
 import {
   VoteHeader,
@@ -23,22 +18,15 @@ import {
   ThankYou,
 } from "@/components/vote";
 import { favoriteRanobe, favoriteIllustrator, favoritePublisher } from "./List";
-import ReactGA from "react-ga4";
-
-ReactGA.initialize(process.env.NEXT_PUBLIC_GA4);
 
 function Vote() {
   DocumentTitle("Bình Chọn - Bảng Xếp Hạng Light Novel Việt Nam");
 
+  const [thanks, setThanks] = useState(false);
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: window.location.pathname,
-      title: "Votepage Pageview",
-    });
+    setThanks(localStorage.getItem("isVoteDone") === "true" ? true : false);
   }, []);
 
-  const thanks = localStorage.getItem("isVoteDone") === "true" ? true : false;
   const [currentComponent, setCurrentComponent] = useState(0);
 
   //Get selected items from each category
@@ -197,84 +185,37 @@ function Vote() {
     });
   };
 
-  //Fix first second of content when transition's opacity = 0
-  const [contentMouted, setContentMounted] = useState(false);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setContentMounted(true);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  //Hide Transition on small screen
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 800);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth > 800);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return thanks ? (
     <ThankYou />
   ) : (
     <div>
-      {isWideScreen && <Transition />}
+      <SplashScreen />
       <PopupModal />
-      {contentMouted && (
-        <div>
-          <StepBar
-            currentComponent={currentComponent}
-            onChange={onChange}
-            isLastComponent={isLastComponent}
-            isPenultimate={isPenultimate}
-            handlePrevious={handlePrevious}
-            handleNext={handleNext}
-          />
-          <VoteHeader />
-          <div className="voteContainer">
-            {components.map((component, index) => (
-              <div
-                key={index}
-                style={{
-                  display: currentComponent === index ? "block" : "none",
-                }}
-              >
-                {component}
-              </div>
-            ))}
-
-            <ScrollToTop />
-
-            {/* {currentComponent !== components.length - 1 ? (
-                            <div className="control-button">
-                                <button
-                                    className={currentComponent === 0 ? 'inactivate' : ''}
-                                    id="btnPrev"
-                                    onClick={handlePrevious}
-                                >
-                                    <CaretLeftFilled />
-                                </button>
-                                <button
-                                    className={isLastComponent ? 'inactivate' : ''}
-                                    id="btnNext"
-                                    onClick={handleNext}
-                                >
-                                    <CaretRightFilled />
-                                </button>
-                            </div>
-                        ) : (
-                            <></>
-                        )} */}
-          </div>
-          <Footer text="Trang Chủ" to={ROUTES.HOME} />
+      <div>
+        <StepBar
+          currentComponent={currentComponent}
+          onChange={onChange}
+          isLastComponent={isLastComponent}
+          isPenultimate={isPenultimate}
+          handlePrevious={handlePrevious}
+          handleNext={handleNext}
+        />
+        <VoteHeader />
+        <div className="voteContainer">
+          {components.map((component, index) => (
+            <div
+              key={index}
+              style={{
+                display: currentComponent === index ? "block" : "none",
+              }}
+            >
+              {component}
+            </div>
+          ))}
+          <ScrollToTop />
         </div>
-      )}
+        <Footer text="Trang Chủ" to={ROUTES.HOME} />
+      </div>
     </div>
   );
 }

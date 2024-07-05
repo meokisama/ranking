@@ -1,140 +1,157 @@
 .footer {
-    padding-top: 20rem;
-    --time: 20s;
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .btnLink {
-            text-decoration: none;
-        }
-        .footerBtn {
-            width: 300px;
-            height: auto;
-            margin: 4rem 0;
-            padding: 1.5rem 0;
-            box-shadow: rgb(250 118 103 / 75%) 0px 2px 5px -1px, rgb(252 197 191) 0px 1px 3px -1px;
-            border-radius: 10px;
-            text-align: center;
-            span {
-                font-family: 'Phudu';
-                font-size: 2rem;
-                color: rgb(245 116 101);
-            }
-            &:hover {
-                cursor: pointer;
-            }
-        }
-        .scrolling-authors {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            overflow: hidden;
-            font-weight: 300;
-            font-size: 1.6rem;
-            color: rgb(151, 151, 151);
-            width: min(600px, 95%);
-            margin: 0 auto;
-            padding-bottom: 2rem;
-            -webkit-mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
-            strong {
-                cursor: pointer;
-                &:hover {
-                    color: salmon;
-                }
-            }
-            p {
-                white-space: nowrap;
-                animation: scroll var(--time) linear infinite;
-                animation-delay: calc(var(--time) * -1);
-            }
-            p:nth-child(2) {
-                animation: scroll2 var(--time) linear infinite;
-                animation-delay: calc(var(--time) / -2);
-            }
-        }
-        @keyframes scroll {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        @keyframes scroll2 {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-200%);
-            }
-        }
+  padding-top: 20rem;
+  --time: 20s;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .btnLink {
+      text-decoration: none;
     }
-    .credit {
-        font-weight: 300;
-        color: rgb(151, 151, 151);
-        text-align: center;
+    a {
+      text-decoration: none;
+      color: gray;
     }
+    .footerBtn {
+      width: 300px;
+      height: auto;
+      margin: 4rem 0;
+      padding: 1.5rem 0;
+      box-shadow: rgb(250 118 103 / 75%) 0px 2px 5px -1px,
+        rgb(252 197 191) 0px 1px 3px -1px;
+      border-radius: 10px;
+      text-align: center;
+      span {
+        font-family: "Phudu";
+        font-size: 2rem;
+        color: rgb(245 116 101);
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .scrolling-authors {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      overflow: hidden;
+      font-weight: 300;
+      font-size: 1.6rem;
+      color: rgb(151, 151, 151);
+      width: min(600px, 95%);
+      margin: 0 auto;
+      padding-bottom: 2rem;
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #fff 20%,
+        #fff 80%,
+        transparent
+      );
+      mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #fff 20%,
+        #fff 80%,
+        transparent
+      );
+      strong {
+        cursor: pointer;
+        &:hover {
+          color: salmon;
+        }
+      }
+      p {
+        white-space: nowrap;
+        animation: scroll var(--time) linear infinite;
+        animation-delay: calc(var(--time) * -1);
+      }
+      p:nth-child(2) {
+        animation: scroll2 var(--time) linear infinite;
+        animation-delay: calc(var(--time) / -2);
+      }
+    }
+    @keyframes scroll {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes scroll2 {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-200%);
+      }
+    }
+  }
+  .credit {
+    font-weight: 300;
+    color: rgb(151, 151, 151);
+    text-align: center;
+  }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1450px) {
-    .footer {
-        padding-top: 15rem;
-        div {
-            .footerBtn {
-                width: 250px;
-                padding: 5px 0;
-                span {
-                    font-size: 1.8rem;
-                    padding: 1rem 0;
-                }
-            }
-            p {
-                font-size: 1.4rem;
-            }
+  .footer {
+    padding-top: 15rem;
+    div {
+      .footerBtn {
+        width: 250px;
+        padding: 5px 0;
+        span {
+          font-size: 1.8rem;
+          padding: 1rem 0;
         }
+      }
+      p {
+        font-size: 1.4rem;
+      }
     }
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .footer {
-        padding-top: 10rem;
-        div {
-            .footerBtn {
-                width: 200px;
-                padding: 5px 0;
-                span {
-                    font-size: 1.5rem;
-                    padding: 1rem 0;
-                }
-            }
-            p {
-                font-size: 1.2rem;
-            }
+  .footer {
+    padding-top: 10rem;
+    div {
+      .footerBtn {
+        width: 200px;
+        padding: 5px 0;
+        span {
+          font-size: 1.5rem;
+          padding: 1rem 0;
         }
+      }
+      p {
+        font-size: 1.2rem;
+      }
     }
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .footer {
-        div {
-            .footerBtn {
-                width: 150px;
-                padding: 2px 0;
-                border-radius: 5px;
-                span {
-                    font-size: 1.2rem;
-                    padding: 1rem 0;
-                }
-            }
-            p {
-                font-size: 1.1rem;
-            }
+  .footer {
+    div {
+      .footerBtn {
+        width: 150px;
+        padding: 2px 0;
+        border-radius: 5px;
+        span {
+          font-size: 1.2rem;
+          padding: 1rem 0;
         }
+      }
+      p {
+        font-size: 1.1rem;
+      }
     }
+  }
 }

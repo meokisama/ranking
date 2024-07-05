@@ -11,9 +11,9 @@ function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
             {AUTHORS.map((author, index) => (
               <span key={index}>
                 「
-                <strong onClick={() => window.open(author.url, "_blank")}>
-                  {author.name}
-                </strong>{" "}
+                <Link href={author.url} target="_blank">
+                  <strong>{author.name}</strong>{" "}
+                </Link>
                 ({author.description})」
               </span>
             ))}
@@ -22,9 +22,9 @@ function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
             {AUTHORS.map((author, index) => (
               <span key={index}>
                 「
-                <strong onClick={() => window.open(author.url, "_blank")}>
-                  {author.name}
-                </strong>{" "}
+                <Link href={author.url} target="_blank">
+                  <strong>{author.name}</strong>{" "}
+                </Link>
                 ({author.description})」
               </span>
             ))}
@@ -35,12 +35,7 @@ function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
             <span>{text}</span>
           </div>
         </Link>
-        <p
-          className="credit"
-          onClick={() => window.open(SOCIAL.facebook, "_blank")}
-        >
-          © BXH Light Novel Việt Nam 2024
-        </p>
+        <p className="credit">© BXH Light Novel Việt Nam 2024</p>
       </div>
     </div>
   );

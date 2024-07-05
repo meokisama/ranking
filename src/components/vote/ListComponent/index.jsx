@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef, useState, useEffect } from "react";
 import { Tooltip, Divider, Empty, Skeleton } from "antd";
 import "./ListComponent.scss";

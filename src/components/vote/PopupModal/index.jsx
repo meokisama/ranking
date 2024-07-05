@@ -1,7 +1,6 @@
+"use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { Modal } from "antd";
-import { ROUTES } from "@/constants";
 import "./PopupModal.scss";
 
 function PopupModal() {
@@ -24,18 +23,6 @@ function PopupModal() {
     setIsModalOpen(false);
   };
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <>
       <Modal
@@ -44,7 +31,7 @@ function PopupModal() {
         onCancel={handleCancel}
         centered
         footer={[]}
-        width={isMobile ? 600 : 820}
+        width={820}
         zIndex={479}
         destroyOnClose={true}
       >

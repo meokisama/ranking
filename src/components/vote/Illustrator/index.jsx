@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import {
   SearchOutlined,
@@ -27,12 +28,18 @@ function Illustrator({
   const [viewerMode, setViewerMode] = useState("titleViewer");
   const searchInput = useRef(null);
 
-  const [chosenItems, setChosenItems] = useState(
-    JSON.parse(localStorage.getItem(`bxhlnvn_${category}_rows`)) ?? []
-  );
-  const [selectedRowKeys, setSelectedRowKeys] = useState(
-    JSON.parse(localStorage.getItem(`bxhlnvn_${category}_rowkeys`)) ?? []
-  );
+  const [chosenItems, setChosenItems] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  useEffect(() => {
+    const storedItems =
+      JSON.parse(localStorage.getItem(`bxhlnvn_${category}_rows`)) ?? [];
+    const storedKeys =
+      JSON.parse(localStorage.getItem(`bxhlnvn_${category}_rowkeys`)) ?? [];
+
+    setChosenItems(storedItems);
+    setSelectedRowKeys(storedKeys);
+  }, [category]);
 
   const [showOnlySelected, setShowOnlySelected] = useState(false);
 
