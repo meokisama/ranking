@@ -45,7 +45,7 @@
       display: inline-block;
       text-align: center;
       h1 {
-        font-family: "Jaro";
+        font-family: var(--font-jaro);
         text-transform: uppercase;
         font-weight: normal;
         font-size: 550%;
@@ -105,7 +105,7 @@
   }
   .result-content {
     height: 60%;
-    font-family: "Lexend" !important;
+    font-family: var(--font-lexend) !important;
     display: flex;
     flex-direction: column;
     align-items: center;

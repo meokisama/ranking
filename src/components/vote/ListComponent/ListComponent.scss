@@ -22,7 +22,7 @@
       background-repeat: no-repeat;
       caret-color: rgb(73, 74, 75);
       width: min(500px, 95%);
-      font-family: "Lexend";
+      font-family: var(--font-lexend);
       font-size: 1.5rem;
       font-weight: 300;
       padding: 15px 15px 15px 40px;
@@ -36,7 +36,7 @@
       }
     }
     button {
-      font-family: "Lexend";
+      font-family: var(--font-lexend);
       font-size: 1.5rem;
       font-weight: 300;
       padding: 15px;

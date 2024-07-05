@@ -21,7 +21,7 @@
     h1 {
       font-size: 12vw;
       font-weight: 900;
-      font-family: "Poppins";
+      font-family: var(--font-poppins);
       text-transform: uppercase;
       letter-spacing: -0.01em;
       margin: 0;
@@ -76,7 +76,7 @@
         background-color: #fff3f5;
         text-transform: uppercase;
         letter-spacing: 5px;
-        font-family: "Lexend";
+        font-family: var(--font-lexend);
         font-weight: 500;
         padding: 15px 15px;
         border-radius: 10px;

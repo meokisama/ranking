@@ -8,7 +8,7 @@ import { MessageHub } from "@/components/common";
 import Image from "next/image";
 
 const cardTitleStyles = {
-  fontFamily: "Lexend",
+  fontFamily: "var(--font-lexend)",
   color: "rgb(0 0 0 /70%)",
   fontWeight: 400,
   display: "flex",
@@ -164,7 +164,7 @@ function SendResult({ result }) {
                   description={
                     <span
                       style={{
-                        fontFamily: "Lexend",
+                        fontFamily: "var(--font-lexend)",
                         fontWeight: 300,
                         color: "#636161e0",
                       }}
@@ -250,7 +250,7 @@ function SendResult({ result }) {
                     description={
                       <span
                         style={{
-                          fontFamily: "Lexend",
+                          fontFamily: "var(--font-lexend)",
                           fontWeight: 300,
                           color: "#636161e0",
                         }}
@@ -280,7 +280,7 @@ function SendResult({ result }) {
                 description={
                   <span
                     style={{
-                      fontFamily: "Lexend",
+                      fontFamily: "var(--font-lexend)",
                       fontWeight: 300,
                       color: "#636161e0",
                     }}

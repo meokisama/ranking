@@ -1,10 +1,32 @@
 import localFont from "next/font/local";
+import { Lexend, Playfair_Display, Poppins } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.scss";
 
 const DTPhudu = localFont({
   src: "./DTPhudu-Black.otf",
   variable: "--font-phudu",
+  display: "swap",
+});
+const jaro = localFont({
+  src: "./Jaro.ttf",
+  variable: "--font-jaro",
+  display: "swap",
+});
+const lexend = Lexend({
+  subsets: ["vietnamese"],
+  variable: "--font-lexend",
+  display: "swap",
+});
+const playfair_display = Playfair_Display({
+  subsets: ["vietnamese"],
+  variable: "--font-playfair_display",
+  display: "swap",
+});
+const poppins = Poppins({
+  weight: "900",
+  subsets: ["latin"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -47,7 +69,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="vi" className={`${DTPhudu.variable}`}>
+    <html
+      lang="vi"
+      className={`${DTPhudu.variable} ${jaro.variable} ${lexend.variable} ${playfair_display.variable} ${poppins.variable}`}
+    >
       <body>
         <div id="root">{children}</div>
       </body>

@@ -196,7 +196,7 @@ function ListComponent({
           description={
             <span
               style={{
-                fontFamily: "Lexend",
+                fontFamily: "var(--font-lexend)",
                 fontWeight: 300,
                 color: "#636161e0",
               }}

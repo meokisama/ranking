@@ -137,7 +137,7 @@
       margin-bottom: 40px;
     }
     .ant-table-content {
-      font-family: "Lexend";
+      font-family: var(--font-lexend);
       font-weight: 300;
       color: #4e4d4d;
       th {
@@ -179,12 +179,12 @@
       }
     }
     .ant-pagination-item {
-      font-family: "Lexend";
+      font-family: var(--font-lexend);
       font-weight: 300;
     }
     .ant-select,
     .ant-select-dropdown {
-      font-family: "Lexend", sans-serif;
+      font-family: var(--font-lexend), sans-serif;
     }
     .ant-select-selector {
       color: rgb(129 123 123 / 88%);

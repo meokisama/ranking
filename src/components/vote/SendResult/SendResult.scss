@@ -144,7 +144,7 @@
     }
 
     .feedback-result {
-      font-family: "Lexend" !important;
+      font-family: var(--font-lexend) !important;
       h4 {
         color: #4b4b4bda !important;
       }
@@ -171,19 +171,19 @@
         gap: 1rem;
         .result-illustrator-item {
           span {
-            font-family: "Lexend";
+            font-family: var(--font-lexend);
             font-weight: 500;
             color: #dd6e61;
           }
           strong {
-            font-family: "Lexend";
+            font-family: var(--font-lexend);
             color: #5a5959b0;
           }
           &:not(:last-child)::after {
             content: " / ";
             font-weight: 500;
             color: #5a5959b0;
-            font-family: "Lexend";
+            font-family: var(--font-lexend);
           }
         }
       }

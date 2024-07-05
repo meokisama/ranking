@@ -46,7 +46,7 @@
       color: aliceblue;
       font-weight: 300;
       font-size: clamp(10px, 2.5vw, 14px);
-      font-family: "Lexend";
+      font-family: var(--font-lexend);
       svg {
         color: aliceblue;
         font-size: 2rem;
@@ -57,7 +57,7 @@
       width: 60%;
       .ant-steps {
         .ant-steps-item-icon {
-          font-family: "Lexend";
+          font-family: var(--font-lexend);
           font-weight: 600;
           margin-inline-end: 0;
         }

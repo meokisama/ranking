@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 const title = "Bình Chọn - Bảng Xếp Hạng Light Novel Việt Nam";
 const description =
   "Đây là bảng xếp hạng Light Novel Việt Nam, nơi sức sáng tạo của tác giả gặp gỡ với đam mê của độc giả. Hãy bình chọn cho tác phẩm yêu thích của bạn!";
@@ -36,5 +38,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const shouldRedirect = true;
+  if (shouldRedirect) {
+    redirect("/");
+  }
   return <div>{children}</div>;
 }
