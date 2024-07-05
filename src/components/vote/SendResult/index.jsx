@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState, useRef } from "react";
 import { Card, Empty } from "antd";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
@@ -18,9 +19,11 @@ function SendResult({ result }) {
   //Captcha
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [token, setToken] = useState(null);
-  const [done, setDone] = useState(
-    localStorage.getItem("isVoteDone") === "true" ? true : false
-  );
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    const isVoteDone = localStorage.getItem("isVoteDone") === "true";
+    setDone(isVoteDone);
+  }, []);
   const captchaRef = useRef(null);
 
   const onVerify = (token) => {
@@ -82,7 +85,6 @@ function SendResult({ result }) {
             .then((data) => {
               //   console.log(data);
               if (data.message === "created") {
-                localStorage.clear();
                 setDone(true);
               }
             })

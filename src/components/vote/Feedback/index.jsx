@@ -6,21 +6,39 @@ import "./Feedback.scss";
 const { TextArea } = Input;
 
 function Feedback({ id, title, category, description, onSelectionChange }) {
-  const [feedback, setFeedback] = useState(
-    JSON.parse(localStorage.getItem("bxhlnvn_feedback")) ?? {
+  const [feedback, setFeedback] = useState({
+    name: "Ý kiến đánh giá",
+    topic: "",
+    content: "",
+  });
+
+  const [allowFeedback, setAllowFeedback] = useState(true);
+
+  const [recommend, setRecommend] = useState({
+    name: "Đề xuất bản quyền",
+    title: "",
+    publisher: "",
+  });
+
+  useEffect(() => {
+    const storedFeedback = JSON.parse(
+      localStorage.getItem("bxhlnvn_feedback")
+    ) ?? {
       name: "Ý kiến đánh giá",
       topic: "",
       content: "",
-    }
-  );
-  const [allowFeedback, setAllowFeedback] = useState(true);
-  const [recommend, setRecommend] = useState(
-    JSON.parse(localStorage.getItem("bxhlnvn_recommend")) ?? {
+    };
+    setFeedback(storedFeedback);
+
+    const storedRecommend = JSON.parse(
+      localStorage.getItem("bxhlnvn_recommend")
+    ) ?? {
       name: "Đề xuất bản quyền",
       title: "",
       publisher: "",
-    }
-  );
+    };
+    setRecommend(storedRecommend);
+  }, []);
   const [allowRecommend, setAllowRecommend] = useState(true);
 
   const onFeedbackCheckboxChange = (e) => {
