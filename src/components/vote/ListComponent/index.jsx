@@ -1,9 +1,10 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { Tooltip, Divider, Empty, Skeleton } from "antd";
+import { Tooltip, Divider, Empty } from "antd";
 import "./ListComponent.scss";
 import Category from "../Category";
 import { MessageHub } from "@/components/common";
+import Image from "next/image";
 
 //Vietnamese accents to Latin
 const removeAccents = (str) =>
@@ -27,7 +28,6 @@ function ListComponent({
   const [chosenItems, setChosenItems] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [showSelected, setShowSelected] = useState(false);
-  const [imgLoadingList, setImgLoadingList] = useState({});
 
   //Reset compoent when parent change to next category
   useEffect(() => {
@@ -78,15 +78,6 @@ function ListComponent({
     setShowSelected(!showSelected);
   };
 
-  useEffect(() => {
-    const newImgLoadingList = {};
-    listData.forEach((ln) => {
-      newImgLoadingList[ln.id] = true;
-    });
-    console.log(newImgLoadingList);
-    setImgLoadingList(newImgLoadingList);
-  }, []);
-
   const displayList = showSelected ? chosenItems : filteredList;
 
   return (
@@ -127,25 +118,11 @@ function ListComponent({
               onClick={() => handleClick(ln.id)}
             >
               <div className="cover-wrapper">
-                {imgLoadingList[ln.id] && (
-                  <Skeleton.Image
-                    active
-                    style={{
-                      width: "320px",
-                      height: "320px",
-                      objectFit: "cover",
-                    }}
-                  />
-                )}
-                <img
-                  alt=""
+                <Image
+                  alt="light novel cover"
                   src={ln.coverUrl}
-                  onLoad={() => {
-                    setImgLoadingList((prevImgLoadingList) => ({
-                      ...prevImgLoadingList,
-                      [ln.id]: false,
-                    }));
-                  }}
+                  width={175}
+                  height={240}
                   loading="lazy"
                 />
               </div>

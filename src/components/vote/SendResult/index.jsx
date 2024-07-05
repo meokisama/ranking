@@ -5,6 +5,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import "./SendResult.scss";
 import Category from "../Category";
 import { MessageHub } from "@/components/common";
+import Image from "next/image";
 
 const cardTitleStyles = {
   fontFamily: "Lexend",
@@ -142,7 +143,12 @@ function SendResult({ result }) {
                   {resultItem.chosenItems.map((ln, index) => (
                     <div key={index} className="result-item">
                       <div className="result-cover">
-                        <img alt="" src={ln.coverUrl} />
+                        <Image
+                          alt="light novel cover"
+                          src={ln.coverUrl}
+                          width={150}
+                          height={203}
+                        />
                       </div>
                       <div className="info">
                         <h4>{ln.seriesName}</h4>

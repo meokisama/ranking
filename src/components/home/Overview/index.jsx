@@ -7,6 +7,7 @@ import "./Overview.scss";
 import { ROUTES } from "@/constants";
 import timelineItem from "./Timeline";
 import SectionTitle from "../SectionTitle";
+import Image from "next/image";
 
 function Overview() {
   const [isWideScreen, setIsWideScreen] = useState(true);
@@ -135,11 +136,28 @@ function Overview() {
             target="_blank"
           >
             <span>Bình Chọn</span>
-            <img alt="" src="/sakura1.svg" />
+            <Image
+              alt="sakura petal"
+              src="/sakura1.svg"
+              width={44}
+              height={44}
+            />
           </Link>
         </div>
-        <img id="chibi00" alt="" src="/chibi00.webp" />
-        <img id="chibi01" alt="" src="/chibi01.webp" />
+        <Image
+          id="chibi00"
+          alt="chibi su gia bon mua"
+          src="/chibi00.webp"
+          width={290}
+          height={264}
+        />
+        <Image
+          id="chibi01"
+          alt="chibi makeine"
+          src="/chibi01.webp"
+          width={244}
+          height={277}
+        />
       </div>
     </div>
   );

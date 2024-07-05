@@ -113,7 +113,7 @@
         gap: 10px;
         #votebtn,
         #leaderboard-btn {
-          font-family: "Phudu";
+          font-family: var(--font-phudu);
           text-decoration: none;
           font-size: 1.6vw;
           text-transform: capitalize;
@@ -244,8 +244,8 @@
         .textTitle {
           h1 {
             text-align: center;
-            font-size: 14vw;
-            line-height: 12vw;
+            font-size: 16vw;
+            line-height: 14vw;
             letter-spacing: -1.5px;
             position: relative;
             z-index: 2;
@@ -264,11 +264,13 @@
         }
         p {
           margin: 0 auto;
+          margin-top: 2rem;
           font-size: 2rem;
           width: 90%;
         }
         #textBtn {
           gap: 0;
+          margin-top: 2rem;
           #votebtn,
           #leaderboard-btn {
             margin: 0 auto;
@@ -304,6 +306,7 @@
         }
         p {
           font-size: 1.5rem;
+          margin-top: 4rem;
         }
       }
     }
@@ -316,12 +319,12 @@
       .textContent {
         .textTitle {
           #rotSakura1 {
-            top: 55%;
-            left: 85%;
+            top: 54%;
+            left: 88%;
           }
           #rotSakura2 {
             top: 60%;
-            left: 12%;
+            left: 10%;
           }
         }
         p {

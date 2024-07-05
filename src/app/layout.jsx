@@ -1,5 +1,12 @@
+import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+
+const DTPhudu = localFont({
+  src: "./DTPhudu-Black.otf",
+  variable: "--font-phudu",
+  display: "swap",
+});
 
 const title = "Bảng Xếp Hạng Light Novel Việt Nam";
 const description =
@@ -40,7 +47,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="vi">
+    <html lang="vi" className={`${DTPhudu.variable}`}>
       <body>
         <div id="root">{children}</div>
       </body>

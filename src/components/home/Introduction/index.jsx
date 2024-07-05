@@ -1,11 +1,18 @@
 import Link from "next/link";
 import "./Introduction.scss";
 import { INTRODUCTION_INFO, SOCIAL } from "@/constants";
+import Image from "next/image";
 
 function Introduction() {
   return (
     <div className="introduction">
-      <img id="saki" src="/saki.webp" alt="" />
+      <Image
+        id="saki"
+        src="/saki.webp"
+        alt="saki image"
+        width={405}
+        height={450}
+      />
       <div className="inner">
         <div className="holder">
           <div>

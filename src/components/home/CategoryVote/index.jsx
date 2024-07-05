@@ -1,6 +1,7 @@
 import "./CategoryVote.scss";
 import SectionTitle from "../SectionTitle";
 import { CATEGORIES } from "@/constants";
+import Image from "next/image";
 
 function CategoryVote() {
   return (
@@ -11,7 +12,13 @@ function CategoryVote() {
       />
       <div className="categoryContainer">
         <div className="categoryImg">
-          <img id="haruhi" alt="" src="/makein.webp" />
+          <Image
+            id="haruhi"
+            alt="banner makine"
+            src="/makein.webp"
+            width={418}
+            height={923}
+          />
         </div>
         <div className="categoryText">
           {CATEGORIES.map((category, index) => (

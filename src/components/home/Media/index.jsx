@@ -2,6 +2,7 @@ import "./Media.scss";
 import SectionTitle from "../SectionTitle";
 import { COLLAB_PAGES } from "@/constants";
 import Link from "next/link";
+import Image from "next/image";
 
 function Media() {
   return (
@@ -20,7 +21,12 @@ function Media() {
           >
             <div className="mediaAvatar">
               <Link href={media.url} target="_blank">
-                <img alt="fanpage avatar" src={media.avatar} />
+                <Image
+                  alt="fanpage avatar"
+                  src={media.avatar}
+                  width={94}
+                  height={94}
+                />
               </Link>
             </div>
             <div className="mediaInfo">

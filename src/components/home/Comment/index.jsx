@@ -40,7 +40,13 @@ function Comment() {
             <SwiperSlide key={index}>
               <div className="slideContent">
                 <div className="avatar">
-                  <img className="avatarMain" alt="" src={comment.avatar} />
+                  <Image
+                    className="avatarMain"
+                    alt="avatar page"
+                    src={comment.avatar}
+                    width={94}
+                    height={94}
+                  />
                   <p>@{comment.username}</p>
                 </div>
                 <p className="content">{comment.content}</p>
@@ -52,7 +58,12 @@ function Comment() {
           ))}
         </Swiper>
         <div className="commentImg">
-          <img alt="" src="/makein2.webp" />
+          <Image
+            alt="banner makeine"
+            src="/makein2.webp"
+            width={600}
+            height={790}
+          />
         </div>
       </div>
     </div>

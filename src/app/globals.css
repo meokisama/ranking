@@ -37,12 +37,6 @@ body {
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
-@font-face {
-  font-family: "Phudu";
-  src: local("DT Phudu Black"),
-    url("/public/fonts/DTPhudu-Black.otf") format("opentype");
-}
-
 /* Start scrollbar-------------------------------------- */
 ::-webkit-scrollbar {
   width: 5px;
