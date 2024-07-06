@@ -14,10 +14,9 @@
     flex-direction: row;
     width: 100%;
     min-height: 100vh;
-    font-family: var(--font-phudu);
-    font-size: 9.5vw;
-    letter-spacing: 1px;
-    font-weight: 900;
+    font-family: var(--font-jaro);
+    font-size: 11vw;
+    letter-spacing: -1px;
     text-transform: uppercase;
     .left {
       width: 50%;
@@ -29,7 +28,7 @@
       justify-content: center;
       color: rgb(204, 57, 57);
       text-align: right;
-      line-height: 90%;
+      line-height: 80%;
       overflow: hidden;
     }
     .right {
@@ -42,7 +41,7 @@
       justify-content: center;
       color: black;
       text-align: left;
-      line-height: 90%;
+      line-height: 80%;
       overflow: hidden;
     }
   }

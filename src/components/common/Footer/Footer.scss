@@ -159,6 +159,13 @@
       p {
         font-size: 1.1rem;
       }
+      .scrolling-authors {
+        p {
+          span {
+            font-size: 1.1rem !important;
+          }
+        }
+      }
     }
   }
 }

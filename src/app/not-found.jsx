@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 const Custom404 = () => {
-  redirect("/");
+  // redirect("/");
 
   return null;
 };

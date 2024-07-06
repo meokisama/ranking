@@ -54,7 +54,6 @@ export const metadata = {
   openGraph: {
     title: title,
     description: description,
-    images: "/meta.jpg",
     url: "https://vnlnranking.moe",
     type: "website",
   },
@@ -63,7 +62,6 @@ export const metadata = {
     title: title,
     description: description,
     url: "https://vnlnranking.moe",
-    images: "/meta.jpg",
   },
 };
 
