@@ -147,6 +147,50 @@ body {
   }
 }
 
+.custom-404 {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  .text-404 {
+    width: min(600px, 90%);
+    h3 {
+      color: #fa7667;
+      font-size: 2.5rem;
+    }
+    a {
+      text-decoration: none;
+    }
+    button {
+      color: #fa7667;
+      margin-top: 50px;
+      cursor: pointer;
+      font-family: var(--font-phudu);
+      text-decoration: none;
+      font-size: 2rem;
+      text-transform: capitalize;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-radius: 8px;
+      padding: 10px 30px;
+      transition: all 0.5s ease-in-out;
+      background: linear-gradient(#fbf2f2 0 0) padding-box,
+        linear-gradient(to bottom, transparent, #fa7667) border-box;
+      border: 1px solid transparent;
+      box-shadow: rgba(250, 146, 134, 0.35) 0px 20px 25px -5px,
+        rgba(250, 146, 134, 0.51) 0px 10px 10px -5px;
+    }
+  }
+  img {
+    width: 200px;
+    height: auto;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .voteContainer {
     padding: 1.5rem;
@@ -156,6 +200,25 @@ body {
         width: 30px;
         height: 30px;
         border-radius: 5px;
+      }
+    }
+  }
+  .custom-404 {
+    flex-direction: column;
+    text-align: center;
+    img {
+      width: 100px;
+    }
+    .text-404 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      h3 {
+        font-size: 1.6rem;
+      }
+      p {
+        font-size: 1.3rem;
       }
     }
   }

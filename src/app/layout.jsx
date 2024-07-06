@@ -49,12 +49,14 @@ export const metadata = {
     "bxhlnvn",
     "bảng xếp hạng",
     "bình chọn",
+    "bảng xếp hạng light novel việt nam",
   ],
   metadataBase: new URL("https://vnlnranking.moe"),
   openGraph: {
     title: title,
     description: description,
     url: "https://vnlnranking.moe",
+    siteName: title,
     type: "website",
   },
   twitter: {
