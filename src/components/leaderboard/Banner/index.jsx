@@ -7,7 +7,7 @@ function Banner() {
       <div className="bannerimg">
         <Image
           src="/bannerimg.webp"
-          alt="banner image"
+          alt="bxh light novel banner image"
           width={1820}
           height={956}
         />

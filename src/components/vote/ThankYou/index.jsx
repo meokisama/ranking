@@ -8,7 +8,7 @@ function ThankYou() {
         <p className="subtitle">Xin cảm ơn!</p>
       </div>
       <div className="thankyou-content">
-        <img src="/thankyou-chibi.webp" alt="thankyou image" />
+        <img src="/thankyou-chibi.webp" alt="bxh light novel thankyou image" />
         <div className="text-content">
           <p className="thankyou-graph">
             <p>

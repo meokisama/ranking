@@ -247,7 +247,7 @@ function Illustrator({
             {series.map((item, index) => (
               <div className="series-cover-item" key={index}>
                 <Popover placement="topLeft" content={item.seriesTitle}>
-                  <img src={item.coverUrl} alt="" />
+                  <img src={item.coverUrl} alt="light novel cover" />
                 </Popover>
               </div>
             ))}

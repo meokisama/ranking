@@ -50,6 +50,7 @@ export const metadata = {
     "bảng xếp hạng",
     "bình chọn",
     "bảng xếp hạng light novel việt nam",
+    "bxh ln vn",
   ],
   metadataBase: new URL("https://vnlnranking.moe"),
   openGraph: {

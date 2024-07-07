@@ -46,12 +46,16 @@ function LastTop10() {
                 <div className="panel">
                   <div className="panel-rank">
                     {panel.rank.includes("png") ? (
-                      <img alt="" src={panel.rank} />
+                      <img alt="top rank icon" src={panel.rank} />
                     ) : (
                       <span>{panel.rank}</span>
                     )}
                   </div>
-                  <img className="panel-cover" alt="" src={panel.src} />
+                  <img
+                    className="panel-cover"
+                    alt="light novel cover"
+                    src={panel.src}
+                  />
                 </div>
               </SwiperSlide>
             ))}

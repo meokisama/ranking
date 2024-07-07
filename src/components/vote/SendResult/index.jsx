@@ -270,7 +270,7 @@ function SendResult({ result }) {
                   >
                     <img
                       src={`images/publisher/${item.publisherLogo}.webp`}
-                      alt=""
+                      alt="light novel publisher logo"
                     />
                   </div>
                 ))}

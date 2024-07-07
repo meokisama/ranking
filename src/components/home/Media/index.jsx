@@ -22,7 +22,7 @@ function Media() {
             <div className="mediaAvatar">
               <Link href={media.url} target="_blank">
                 <Image
-                  alt="fanpage avatar"
+                  alt="bxh light novel fanpage avatar"
                   src={media.avatar}
                   width={94}
                   height={94}

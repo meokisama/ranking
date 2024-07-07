@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <a href="https://vnlnranking.moe">
+    <img src="src/app/favicon.ico" />
+  </a>
+</p>
 
-## Getting Started
+<h2 align="center"> Vietnam Light Novel Ranking </h2>
 
-First, run the development server:
+<h4 align="center"> A modern voting platform with a clean yet expressive design. </h4>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## About Ranking
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+In the Vietnamese Light Novel reader community, the **Vietnamese Light Novel Ranking** shines as a spiritual destination, where passionate souls of Japanese literature gather, share their passion, and discover the most popular works. This journey is not just a vote, but also an adventure, a journey of cultural and spiritual exploration, intertwined with the author's creativity and the reader's passion.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Each year, when the **Vietnamese Light Novel Ranking** kicks off, a grand voting event opens up, inviting the entire community to embark on a journey to find the most outstanding works, the most emotional stories, and the most fascinating characters.
 
-## Learn More
+More than that, the **Vietnamese Light Novel Ranking** is not just a playground for works, but also contributes to building the community, creating a cultural space where people can connect, exchange, spread their passion and enjoy the richness of Light Novel literature.
 
-To learn more about Next.js, take a look at the following resources:
+##
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![](preview/demo.jpg)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## About Committee
 
-## Deploy on Vercel
+And at the heart of the **Vietnamese Light Novel Ranking** is the organizing and communications team, a passionate and dedicated team led by Baka Hyddyt, who are willing to sacrifice their time and effort to create the fairest and highest quality playground for the Light Novel community.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+They are not just organizers, but also representatives of the reader community, inspiring and planting seeds of dreams, leading new souls to wander through the fascinating worlds of literature.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Since 2018, the organizing committee of the **Vietnamese Light Novel Ranking** has embarked on this ambitious journey. Through many ups and downs, overcoming all challenges to create a colorful space for the Light Novel community. With their passion and continuous efforts, they are building a strong and vibrant community, where every work and every passion is honored and spread.
+
+##
+
+![](preview/publisher.jpg)

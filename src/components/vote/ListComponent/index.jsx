@@ -168,7 +168,7 @@ function ListComponent({
               >
                 <div className="logo-wrapper">
                   <img
-                    alt=""
+                    alt="light novel publisher logo"
                     src={`images/publisher/${ln.publisherLogo}.webp`}
                     loading="lazy"
                   />

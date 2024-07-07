@@ -42,7 +42,7 @@ function VoteHeader() {
     <div className="voteHeader">
       <Image
         id="votebanner"
-        alt="banner image"
+        alt="bxh light novel banner image"
         src="/voteHalu.webp"
         width={1820}
         height={791}

@@ -38,7 +38,10 @@ function PopupModal() {
         <div className="popup-modal">
           <div className="popup-banner">
             <div className="bannerimg">
-              <img src="/popup_img.webp" alt="popup modal image" />
+              <img
+                src="/popup_img.webp"
+                alt="bxh light novel popup modal image"
+              />
             </div>
             <div className="bannertext">
               <h1>

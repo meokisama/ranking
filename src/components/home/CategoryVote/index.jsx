@@ -14,7 +14,7 @@ function CategoryVote() {
         <div className="categoryImg">
           <Image
             id="haruhi"
-            alt="banner makine"
+            alt="light novel makeine character"
             src="/makein.webp"
             width={418}
             height={923}

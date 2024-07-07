@@ -146,14 +146,14 @@ function Overview() {
         </div>
         <Image
           id="chibi00"
-          alt="chibi su gia bon mua"
+          alt="bxh light novel chibi su gia bon mua"
           src="/chibi00.webp"
           width={290}
           height={264}
         />
         <Image
           id="chibi01"
-          alt="chibi makeine"
+          alt="bxh light novel chibi makeine"
           src="/chibi01.webp"
           width={244}
           height={277}

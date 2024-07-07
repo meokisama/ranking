@@ -42,7 +42,7 @@ function Comment() {
                 <div className="avatar">
                   <Image
                     className="avatarMain"
-                    alt="avatar page"
+                    alt="bxh light novel avatar page"
                     src={comment.avatar}
                     width={94}
                     height={94}
@@ -59,7 +59,7 @@ function Comment() {
         </Swiper>
         <div className="commentImg">
           <Image
-            alt="banner makeine"
+            alt="bxh light novel banner makeine"
             src="/makein2.webp"
             width={600}
             height={790}

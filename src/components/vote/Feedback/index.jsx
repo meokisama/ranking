@@ -148,7 +148,7 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
           </div>
         </div>
         <div className="feedback-image">
-          <img src="/haruhi.webp" alt="haruhi image" />
+          <img src="/haruhi.webp" alt="bxh light novel haruhi image" />
         </div>
       </div>
     </div>

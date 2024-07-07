@@ -6,7 +6,7 @@ const timelineItem = TIMELINE.map((item) => ({
   children: (
     <div className={`tlref timelineItem${item.position}`}>
       <div className="index">
-        <img alt="" src={item.index} />
+        <img alt="bxh light novel timeline chibi" src={item.index} />
       </div>
       <div className="detail">
         <span className="date">{item.date}</span>
