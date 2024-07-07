@@ -10,7 +10,10 @@ import { Table, Button, Input, Space, Popover, Divider, Alert } from "antd";
 import Highlighter from "react-highlight-words";
 import Category from "../Category";
 import "./Illustrator.scss";
-import { MessageHub } from "@/components/common";
+import {
+  NotificationHub,
+  useNotification,
+} from "@/components/common/Notification";
 
 function Illustrator({
   id,
@@ -22,7 +25,6 @@ function Illustrator({
   description,
   onSelectionChange,
 }) {
-  const alertRef = useRef(null);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [viewerMode, setViewerMode] = useState("titleViewer");
@@ -347,6 +349,8 @@ function Illustrator({
     },
   ];
 
+  const noti = useNotification();
+
   const rowSelection = {
     selectedRowKeys,
     onChange: (selectedRowKeys, selectedRows) => {
@@ -366,7 +370,7 @@ function Illustrator({
       } else {
         selectedRowKeys.pop();
         selectedRows.pop();
-        alertRef.current(notification);
+        NotificationHub(noti, "Số bình chọn không hợp lệ!", notification);
       }
     },
     getCheckboxProps: (record) => ({
@@ -446,7 +450,6 @@ function Illustrator({
           }}
         />
       </div>
-      <MessageHub>{(msg) => (alertRef.current = msg)}</MessageHub>
     </div>
   );
 }

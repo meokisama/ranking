@@ -83,7 +83,7 @@ function Header() {
             bảng vàng!
           </p>
           <div id="textBtn">
-            <Link id="votebtn" href={ROUTES.VOTE} target="_blank">
+            <Link id="header-vote" href={ROUTES.VOTE} target="_blank">
               <span>Bình Chọn</span>
               <Image
                 alt="sakura petal"

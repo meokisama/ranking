@@ -4,8 +4,11 @@ import { Card, Empty } from "antd";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import "./SendResult.scss";
 import Category from "../Category";
-import { MessageHub } from "@/components/common";
 import Image from "next/image";
+import {
+  NotificationHub,
+  useNotification,
+} from "@/components/common/Notification";
 
 const cardTitleStyles = {
   fontFamily: "var(--font-lexend)",
@@ -31,6 +34,8 @@ function SendResult({ result }) {
     setCaptchaVerified(true);
     setToken(token);
   };
+
+  const noti = useNotification();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,22 +97,32 @@ function SendResult({ result }) {
             .catch((error) => {
               //   console.error('Error:', error);
               if (error.message === "rateLimit") {
-                alertRef.current(
+                NotificationHub(
+                  noti,
+                  "Bình chọn đã bị chặn!",
                   "Bạn đã bình chọn trước đó! Mỗi địa chỉ IP chỉ có một cơ hội."
                 );
               } else if (error.message === "invalidCaptcha") {
-                alertRef.current("Captcha không hợp lệ!");
+                NotificationHub(
+                  noti,
+                  "Captcha không hợp lệ!",
+                  "Captcha xác minh không hợp lệ, có thể tải lại trang nếu cần."
+                );
               } else {
-                alertRef.current("Lỗi khi gửi yêu cầu!");
+                NotificationHub(noti, "Lỗi!", "Lỗi khi gửi yêu cầu!");
               }
             })
-        : alertRef.current(
+        : NotificationHub(
+            noti,
+            "Chưa hoàn thành bình chọn!",
             "Bạn chưa hoàn thành hết các hạng mục bình chọn bắt buộc!"
           )
-      : alertRef.current("Vui lòng xác minh captcha trước khi gửi!");
+      : NotificationHub(
+          noti,
+          "Xác minh captcha!",
+          "Vui lòng xác minh captcha trước khi gửi!"
+        );
   };
-
-  const alertRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("isVoteDone", JSON.stringify(done));
@@ -332,7 +347,6 @@ function SendResult({ result }) {
           )}
         </div>
       </div>
-      <MessageHub>{(msg) => (alertRef.current = msg)}</MessageHub>
     </div>
   );
 }

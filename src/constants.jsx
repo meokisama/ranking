@@ -1,7 +1,3 @@
-import gold from "/public/gold.png";
-import silver from "/public/silver.png";
-import bronze from "/public/bronze.png";
-
 const ROUTES = {
   HOME: "/",
   VOTE: "/vote",

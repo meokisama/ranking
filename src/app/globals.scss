@@ -191,6 +191,18 @@ body {
   }
 }
 
+.ant-notification {
+  .ant-notification-notice-message {
+    font-family: var(--font-lexend);
+    font-weight: 600;
+    color: #fa7667 !important;
+  }
+  .ant-notification-notice-description {
+    font-family: var(--font-lexend);
+    font-weight: 300;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .voteContainer {
     padding: 1.5rem;

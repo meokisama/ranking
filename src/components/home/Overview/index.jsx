@@ -26,13 +26,14 @@ function Overview() {
     };
   }, []);
 
-  const targetDate = "2024-06-25T23:59:00";
+  const targetDate = "2024-12-14T23:59:00";
   const calculateTimeLeft = () => {
     const difference = new Date(targetDate) - new Date();
     let timeLeft = {};
 
     if (difference > 0) {
       timeLeft = {
+        title: "Kỳ tiếp theo (14/12/2024)",
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor(
           (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -46,14 +47,20 @@ function Overview() {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    setHydrated(true);
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearTimeout(timer);
   }, [timeLeft]);
+
+  if (!hydrated) {
+    return null;
+  }
 
   return (
     <div className="wrapper overview">
@@ -96,7 +103,7 @@ function Overview() {
       </div>
       <div className="countdown">
         <div className="cdwrapper">
-          <p>Thời gian bình chọn còn lại?</p>
+          <p>{timeLeft.title}</p>
           <div className="timeLeft">
             <div>
               <h2>

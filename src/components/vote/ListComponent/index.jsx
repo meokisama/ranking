@@ -3,8 +3,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { Tooltip, Divider, Empty } from "antd";
 import "./ListComponent.scss";
 import Category from "../Category";
-import { MessageHub } from "@/components/common";
 import Image from "next/image";
+import {
+  NotificationHub,
+  useNotification,
+} from "@/components/common/Notification";
 
 //Vietnamese accents to Latin
 const removeAccents = (str) =>
@@ -24,10 +27,10 @@ function ListComponent({
   category,
   onSelectionChange,
 }) {
-  const alertRef = useRef(null);
   const [chosenItems, setChosenItems] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [showSelected, setShowSelected] = useState(false);
+  const noti = useNotification();
 
   //Reset compoent when parent change to next category
   useEffect(() => {
@@ -41,7 +44,7 @@ function ListComponent({
     const isChosen = chosenItems.find((item) => item.id === id);
     //Show alert if reach max number of items
     if (chosenItems.length >= maxItems && !isChosen) {
-      alertRef.current(notification);
+      NotificationHub(noti, "Số bình chọn không hợp lệ!", notification);
       return;
     }
 
@@ -206,7 +209,6 @@ function ListComponent({
           }
         />
       ) : null}
-      <MessageHub>{(msg) => (alertRef.current = msg)}</MessageHub>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import { Lexend, Playfair_Display, Poppins } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.scss";
+import { NotificationProvider } from "@/components/common/Notification";
 
 const DTPhudu = localFont({
   src: "./DTPhudu-Black.otf",
@@ -75,7 +76,9 @@ export default function RootLayout({ children }) {
       className={`${DTPhudu.variable} ${jaro.variable} ${lexend.variable} ${playfair_display.variable} ${poppins.variable}`}
     >
       <body>
-        <div id="root">{children}</div>
+        <NotificationProvider>
+          <div id="root">{children}</div>
+        </NotificationProvider>
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4} />
     </html>

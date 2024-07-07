@@ -1,10 +1,12 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { MessageHub } from "@/components/common";
+import { useEffect } from "react";
+import {
+  NotificationHub,
+  useNotification,
+} from "@/components/common/Notification";
 
 function DateChecker({ ids }) {
-  const alertRef = useRef(null);
-
+  const notificaion = useNotification();
   useEffect(() => {
     const handleVoteClick = (event) => {
       const today = new Date();
@@ -16,13 +18,17 @@ function DateChecker({ ids }) {
 
       if (today < startDate) {
         event.preventDefault();
-        alertRef.current(
+        NotificationHub(
+          notificaion,
+          "Bình chọn chưa mở!",
           "Chưa tới thời gian bình chọn, vui lòng quay lại vào 20:00 ngày 15/06."
         );
       } else if (today > endDate) {
         event.preventDefault();
-        alertRef.current(
-          "Thời gian bình chọn kì này đã kết thúc vào ngày 25/06."
+        NotificationHub(
+          notificaion,
+          "Đã khóa bình chọn!",
+          "Thời gian bình chọn cho kì này đã kết thúc. Hẹn gặp lại quý độc giả vào kì tiếp theo (14/12/2024)."
         );
       }
     };
@@ -44,7 +50,7 @@ function DateChecker({ ids }) {
     };
   }, [ids]);
 
-  return <MessageHub>{(msg) => (alertRef.current = msg)}</MessageHub>;
+  return <></>;
 }
 
 export default DateChecker;

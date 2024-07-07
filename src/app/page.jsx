@@ -1,4 +1,5 @@
 import {
+  Header,
   LargeText,
   Introduction,
   CategoryVote,
@@ -10,11 +11,6 @@ import {
 } from "@/components/home";
 import DateChecker from "@/components/home/DateChecker";
 import { Footer, ScrollToTop, SplashScreen } from "@/components/common";
-import dynamic from "next/dynamic";
-
-const Header = dynamic(() => import("@/components/home/Header"), {
-  ssr: false,
-});
 
 function Home() {
   return (
@@ -35,7 +31,7 @@ function Home() {
           <ScrollToTop />
         </div>
         <DateChecker
-          ids={["votebtn", "overview-vote", "timeline-vote", "footer-vote"]}
+          ids={["header-vote", "overview-vote", "timeline-vote", "footer-vote"]}
         />
       </div>
     </main>
