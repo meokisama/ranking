@@ -5,16 +5,13 @@ import {
   useNotification,
 } from "@/components/common/Notification";
 
-function DateChecker({ ids }) {
+export default function DateChecker({ ids }) {
   const notificaion = useNotification();
   useEffect(() => {
     const handleVoteClick = (event) => {
       const today = new Date();
-      const startDate = new Date(today.getFullYear(), 5, 15); // 15/06
-      startDate.setHours(19, 57, 0, 0); // Set to 20:00:00.000
-
-      const endDate = new Date(today.getFullYear(), 5, 25); // 25/06
-      endDate.setHours(23, 29, 59, 999); // Optionally set to end of the day
+      const startDate = new Date(today.getFullYear(), 5, 15, 19, 57, 0, 0); // 15/06 19:57:00
+      const endDate = new Date(today.getFullYear(), 5, 25, 23, 29, 59, 999); // 25/06 23:29:59.999
 
       if (today < startDate) {
         event.preventDefault();
@@ -28,7 +25,7 @@ function DateChecker({ ids }) {
         NotificationHub(
           notificaion,
           "Đã khóa bình chọn!",
-          "Thời gian bình chọn cho kì này đã kết thúc. Hẹn gặp lại quý độc giả vào kì tiếp theo (14/12/2024)."
+          "Thời gian bình chọn cho kỳ này đã kết thúc, hẹn gặp lại quý độc giả vào kỳ tiếp theo (14/12/2024)."
         );
       }
     };
@@ -50,7 +47,5 @@ function DateChecker({ ids }) {
     };
   }, [ids]);
 
-  return <></>;
+  return null;
 }
-
-export default DateChecker;

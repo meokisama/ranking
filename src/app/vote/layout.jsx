@@ -5,7 +5,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const shouldRedirect = false;
+  const shouldRedirect = true;
   if (shouldRedirect) {
     redirect("/");
   }
