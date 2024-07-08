@@ -5,10 +5,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import "./SendResult.scss";
 import Category from "../Category";
 import Image from "next/image";
-import {
-  NotificationHub,
-  useNotification,
-} from "@/components/common/Notification";
+import { NotificationHub, useNotification } from "@/utils/Notification";
 
 const cardTitleStyles = {
   fontFamily: "var(--font-lexend)",

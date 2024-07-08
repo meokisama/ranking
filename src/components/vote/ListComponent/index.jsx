@@ -4,10 +4,7 @@ import { Tooltip, Divider, Empty } from "antd";
 import "./ListComponent.scss";
 import Category from "../Category";
 import Image from "next/image";
-import {
-  NotificationHub,
-  useNotification,
-} from "@/components/common/Notification";
+import { NotificationHub, useNotification } from "@/utils/Notification";
 
 //Vietnamese accents to Latin
 const removeAccents = (str) =>

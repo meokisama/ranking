@@ -5,8 +5,8 @@ import { ROUTES } from "@/constants";
 import "./Header.scss";
 import Sakura from "../Sakura";
 import Image from "next/image";
-import { useNotification } from "@/components/common/Notification";
-import DateChecker from "../DateChecker";
+import { useNotification } from "@/utils/Notification";
+import DateChecker from "@/utils/DateChecker";
 
 function Header() {
   const [imgHeight, setImgHeight] = useState(null);

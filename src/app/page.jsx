@@ -9,7 +9,8 @@ import {
   Overview,
   ResultModal,
 } from "@/components/home";
-import { Footer, ScrollToTop, SplashScreen } from "@/components/common";
+import { Footer, SocialHub, SplashScreen } from "@/components/common";
+import ScrollToTop from "@/utils/ScrollToTop";
 
 function Home() {
   return (
@@ -28,6 +29,7 @@ function Home() {
           <Comment />
           <Footer />
           <ScrollToTop />
+          <SocialHub />
         </div>
       </div>
     </main>

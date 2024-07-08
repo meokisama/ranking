@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import { Lexend, Playfair_Display, Poppins } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.scss";
-import { NotificationProvider } from "@/components/common/Notification";
+import { NotificationProvider } from "@/utils/Notification";
 
 const DTPhudu = localFont({
   src: "./DTPhudu-Black.otf",

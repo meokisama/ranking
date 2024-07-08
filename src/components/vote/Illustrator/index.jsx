@@ -10,10 +10,7 @@ import { Table, Button, Input, Space, Popover, Divider, Alert } from "antd";
 import Highlighter from "react-highlight-words";
 import Category from "../Category";
 import "./Illustrator.scss";
-import {
-  NotificationHub,
-  useNotification,
-} from "@/components/common/Notification";
+import { NotificationHub, useNotification } from "@/utils/Notification";
 
 function Illustrator({
   id,

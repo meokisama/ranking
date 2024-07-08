@@ -1,4 +1,4 @@
-import { NotificationHub } from "@/components/common/Notification";
+import { NotificationHub } from "@/utils/Notification";
 
 export default function DateChecker(notification) {
   return (event) => {

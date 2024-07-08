@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ROUTES } from "@/constants";
-import { Footer, ScrollToTop, SplashScreen } from "@/components/common";
+import { Footer, SplashScreen } from "@/components/common";
 import {
   VoteHeader,
   ListComponent,
@@ -13,6 +13,7 @@ import {
   ThankYou,
 } from "@/components/vote";
 import { favoriteRanobe, favoriteIllustrator, favoritePublisher } from "./List";
+import ScrollToTop from "@/utils/ScrollToTop";
 
 function Vote() {
   const [thanks, setThanks] = useState(false);

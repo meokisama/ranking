@@ -1,7 +1,8 @@
 "use client";
-import { SplashScreen, Footer, ScrollToTop } from "@/components/common";
+import { SplashScreen, Footer } from "@/components/common";
 import { Banner, LeaderBoardTable } from "@/components/leaderboard";
 import { ROUTES } from "@/constants";
+import ScrollToTop from "@/utils/ScrollToTop";
 
 function LeaderBoard() {
   return (

@@ -2,8 +2,8 @@
 import Link from "next/link";
 import "./Footer.scss";
 import { ROUTES, AUTHORS } from "@/constants";
-import { useNotification } from "../Notification";
-import DateChecker from "@/components/home/DateChecker";
+import { useNotification } from "@/utils/Notification";
+import DateChecker from "@/utils/DateChecker";
 import { useEffect } from "react";
 
 function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {

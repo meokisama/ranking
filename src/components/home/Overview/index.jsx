@@ -8,8 +8,8 @@ import { ROUTES } from "@/constants";
 import timelineItem from "./Timeline";
 import SectionTitle from "../SectionTitle";
 import Image from "next/image";
-import { useNotification } from "@/components/common/Notification";
-import DateChecker from "../DateChecker";
+import { useNotification } from "@/utils/Notification";
+import DateChecker from "@/utils/DateChecker";
 
 function Overview() {
   const [isWideScreen, setIsWideScreen] = useState(true);
