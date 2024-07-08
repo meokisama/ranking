@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Bảng Tổng - Bảng Xếp Hạng Light Novel Việt Nam",
+  title: "Bảng Tổng",
 };
 
 export default function RootLayout({ children }) {

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Bình Chọn - Bảng Xếp Hạng Light Novel Việt Nam",
+  title: "Bình Chọn",
 };
 
 export default function RootLayout({ children }) {

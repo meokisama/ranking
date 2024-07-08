@@ -36,7 +36,10 @@ const description =
   "Đây là bảng xếp hạng Light Novel Việt Nam, nơi sức sáng tạo của tác giả gặp gỡ với đam mê của độc giả. Hãy bình chọn cho tác phẩm yêu thích của bạn!";
 
 export const metadata = {
-  title: title,
+  title: {
+    template: "%s | Bảng Xếp Hạng Light Novel Việt Nam",
+    default: title,
+  },
   description: description,
   creator: "Meoki",
   publisher: "Meoki",

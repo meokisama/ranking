@@ -5,6 +5,8 @@ import { ROUTES } from "@/constants";
 import "./Header.scss";
 import Sakura from "../Sakura";
 import Image from "next/image";
+import { useNotification } from "@/components/common/Notification";
+import DateChecker from "../DateChecker";
 
 function Header() {
   const [imgHeight, setImgHeight] = useState(null);
@@ -44,6 +46,15 @@ function Header() {
       }
     };
   }, []);
+
+  const notification = useNotification();
+  useEffect(() => {
+    const voteBtn = document.getElementById("header-vote");
+    const handleClick = DateChecker(notification);
+    voteBtn.addEventListener("click", handleClick);
+
+    return () => voteBtn.removeEventListener("click", handleClick);
+  }, [notification]);
 
   return (
     <div className="header">

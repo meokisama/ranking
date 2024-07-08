@@ -9,7 +9,6 @@ import {
   Overview,
   ResultModal,
 } from "@/components/home";
-import DateChecker from "@/components/home/DateChecker";
 import { Footer, ScrollToTop, SplashScreen } from "@/components/common";
 
 function Home() {
@@ -30,9 +29,6 @@ function Home() {
           <Footer />
           <ScrollToTop />
         </div>
-        <DateChecker
-          ids={["header-vote", "overview-vote", "timeline-vote", "footer-vote"]}
-        />
       </div>
     </main>
   );

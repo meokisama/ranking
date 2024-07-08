@@ -8,6 +8,8 @@ import { ROUTES } from "@/constants";
 import timelineItem from "./Timeline";
 import SectionTitle from "../SectionTitle";
 import Image from "next/image";
+import { useNotification } from "@/components/common/Notification";
+import DateChecker from "../DateChecker";
 
 function Overview() {
   const [isWideScreen, setIsWideScreen] = useState(true);
@@ -33,7 +35,7 @@ function Overview() {
 
     if (difference > 0) {
       timeLeft = {
-        title: "Kỳ tiếp theo (14/12/2024)",
+        title: "Kì tiếp theo (14/12/2024)",
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor(
           (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -48,15 +50,34 @@ function Overview() {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [hydrated, setHydrated] = useState(false);
+  const notification = useNotification();
 
   useEffect(() => {
-    setHydrated(true);
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearTimeout(timer);
   }, [timeLeft]);
+
+  useEffect(() => {
+    if (hydrated) {
+      const overviewBtn = document.getElementById("overview-vote");
+      const timelineBtn = document.getElementById("timeline-vote");
+      const handleClick = DateChecker(notification);
+      overviewBtn.addEventListener("click", handleClick);
+      timelineBtn.addEventListener("click", handleClick);
+
+      return () => {
+        overviewBtn.removeEventListener("click", handleClick);
+        timelineBtn.removeEventListener("click", handleClick);
+      };
+    }
+  }, [hydrated, notification]);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   if (!hydrated) {
     return null;

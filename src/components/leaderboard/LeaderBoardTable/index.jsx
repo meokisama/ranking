@@ -578,7 +578,7 @@ function LeaderBoardTable() {
             />
           </div>
           <div className="next-container">
-            <p>Kỳ tiếp theo</p>
+            <p>Kì tiếp theo</p>
             <span>14/12/2024</span>
           </div>
         </div>
