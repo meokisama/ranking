@@ -385,7 +385,7 @@ function Illustrator({
 
   useEffect(() => {
     onSelectionChange(category, title, chosenItems);
-  }, [selectedRowKeys]);
+  }, [category, chosenItems, onSelectionChange, selectedRowKeys, title]);
 
   return (
     <div className="favorite-illustrator">

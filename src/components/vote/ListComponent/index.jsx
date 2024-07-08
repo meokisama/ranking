@@ -62,7 +62,7 @@ function ListComponent({
   //Pass chosen items to parent component
   useEffect(() => {
     onSelectionChange(category, title, chosenItems);
-  }, [chosenItems]);
+  }, [category, chosenItems, onSelectionChange, title]);
 
   //Search function
   const handleSearchInputChange = (e) => {

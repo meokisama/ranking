@@ -55,7 +55,7 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
   //Pass chosen items to parent component
   useEffect(() => {
     onSelectionChange(category, title, [feedback, recommend]);
-  }, [feedback, recommend]);
+  }, [category, feedback, onSelectionChange, recommend, title]);
 
   //Write to local storage
   useEffect(() => {

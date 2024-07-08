@@ -9,12 +9,14 @@ import { useEffect } from "react";
 function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
   const notification = useNotification();
   useEffect(() => {
-    const voteBtn = document.getElementById("footer-vote");
-    const handleClick = DateChecker(notification);
-    voteBtn.addEventListener("click", handleClick);
+    if (text === "Bình Chọn") {
+      const voteBtn = document.getElementById("footer-vote");
+      const handleClick = DateChecker(notification);
+      voteBtn.addEventListener("click", handleClick);
 
-    return () => voteBtn.removeEventListener("click", handleClick);
-  }, [notification]);
+      return () => voteBtn.removeEventListener("click", handleClick);
+    }
+  }, [notification, text]);
 
   return (
     <div className="footer">

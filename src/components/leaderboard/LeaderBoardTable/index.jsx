@@ -116,7 +116,7 @@ function LeaderBoardTable() {
       setData(favoriteRanobe);
       setCountVote(allRank.data.count);
     }
-  }, [allRank]);
+  }, []);
 
   const [data, setData] = useState(dataInput.favoriteRanobe);
   const [searchText, setSearchText] = useState("");
