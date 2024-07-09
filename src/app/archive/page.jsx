@@ -1,4 +1,6 @@
-import { ArchiveHero } from "@/components/archive";
+import { ArchiveHero, Chart } from "@/components/archive";
+import { Footer, SocialHub } from "@/components/common";
+import { ROUTES } from "@/constants";
 
 export const metadata = {
   title: "Thư Viện",
@@ -6,8 +8,11 @@ export const metadata = {
 
 function Archive() {
   return (
-    <div className="archive-route">
+    <div>
       <ArchiveHero />
+      <Chart />
+      <SocialHub />
+      <Footer text="Trang Chủ" to={ROUTES.HOME} />
     </div>
   );
 }

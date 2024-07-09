@@ -1,13 +1,22 @@
 import Image from "next/image";
 import "./Hero.scss";
 import Link from "next/link";
-import { SOCIAL } from "@/constants";
+import { ROUTES, SOCIAL } from "@/constants";
 
 function ArchiveHero() {
   return (
     <div className="archive-hero">
       <div className="archive-banner">
         <div className="text-content">
+          <div className="logo-header">
+            <Image
+              src="/sakura1.svg"
+              alt="logo header chibi"
+              width={400}
+              height={400}
+              id="sakura-petal"
+            />
+          </div>
           <h1>
             Đại sảnh xếp hạng Light Novel <span>lớn nhất Đông Lào!</span>
           </h1>
@@ -22,22 +31,6 @@ function ArchiveHero() {
             thời gian!
           </p>
           <div className="content-action">
-            <Link href={SOCIAL.facebook} target="_blank">
-              <Image
-                src="/facebook-circled.svg"
-                alt="light novel ranking logo"
-                width={50}
-                height={50}
-              />
-            </Link>
-            <Link href={SOCIAL.facebook} target="_blank">
-              <Image
-                src="/facebook-circled.svg"
-                alt="light novel ranking logo"
-                width={50}
-                height={50}
-              />
-            </Link>
             <Link href={SOCIAL.facebook} target="_blank">
               <Image
                 src="/facebook-circled.svg"

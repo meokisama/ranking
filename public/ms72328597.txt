@@ -1,5 +1,0 @@
-﻿{
-  "Description": "Domain ownership verification file for Microsoft 365 - place in the website root",
-  "Domain": "vnlnranking.moe",
-  "Id": "a8eed255-cae7-4bef-a75f-c284cb65d7c9"
-}
