@@ -54,16 +54,14 @@ export default function Example() {
         <div className="text-center mb-8 lg:mb16">
           <SectionTitle
             title="Tiểu Thuyết Đại Cương"
-            description="Đây là đại sảnh xếp hạng Light Novel, một thư viện tập hợp toàn bộ
-            những câu chuyện xuất sắc nhất được tôn vinh qua từng kì bình chọn
-            trong suốt 6 năm vừa qua."
+            description="Đây là thư viện lưu trữ cho Bảng Xếp Hạng Light Novel Việt Nam, đại cương về light novel cho những người vừa bước chân vào lĩnh vực tiểu thuyết nhẹ."
           />
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-32 lg:max-w-[90%]">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
             {features.map((feature) => (
               <div key={feature.name} className="relative pl-16 lg:pl-24">
-                <dt className="feature-name text-2xl lg:text-4xl font-semibold lg:font-bold leading-7 text-[#fa7667]">
+                <dt className="feature-name text-2xl lg:text-4xl font-normal lg:font-bold leading-7 text-[#fa7667]">
                   <div className="absolute left-0 top-0 flex h-12 w-12 lg:h-16 lg:w-16 items-center justify-center rounded-[5px] bg-[#fa7667]">
                     <feature.icon
                       aria-hidden="true"
@@ -72,7 +70,7 @@ export default function Example() {
                   </div>
                   {feature.name}
                 </dt>
-                <dd className="mt-2 lg:mt-8 text-base lg:text-[1.7rem] lg:max-w-[90%] lg:text-justify leading-7 lg:leading-10 text-gray-600">
+                <dd className="mt-2 lg:mt-8 text-base lg:text-[1.7rem] lg:max-w-[90%] lg:text-justify leading-7 lg:leading-10 ml-0 text-gray-600">
                   {feature.description}
                 </dd>
               </div>

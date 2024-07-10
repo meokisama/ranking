@@ -20,16 +20,24 @@ function ArchiveHero() {
           <h1>
             Đại sảnh xếp hạng Light Novel <span>lớn nhất Đông Lào!</span>
           </h1>
-          <p>
-            Chào mừng đến với đại sảnh Light Novel, một thư viện khổng lồ tập
-            hợp toàn bộ những câu chuyện xuất sắc nhất được tôn vinh qua từng kì
-            bình chọn trong suốt 6 năm vừa qua. Mỗi câu chuyện là một mảnh ghép
-            được vun đắp bởi những độc giả thầm lặng, đại diện cho từng thời đại
-            thăng trầm của lịch sử Light Novel nước nhà. Ngay bây giờ, hãy là
-            một con mọt sách, rong ruổi qua những câu chuyện đầy mê hoặc đó, dấn
-            thân vào những cuộc hành trình được sáng tạo bởi những bộ não vượt
-            thời gian!
-          </p>
+          <div>
+            <p>
+              Đây là đại sảnh Light Novel, một thư viện tập hợp toàn bộ xếp hạng
+              của những câu chuyện xuất sắc nhất được tôn vinh qua từng thời kì
+              bình chọn trong suốt 6 năm qua của{" "}
+              <strong style={{ fontWeight: "600", color: "#fa7667" }}>
+                Bảng Xếp Hạng Light Novel Việt Nam
+              </strong>
+              .
+            </p>
+            <p>
+              Mỗi câu chuyện là một mảnh ghép được vun đắp bởi những độc giả
+              thầm lặng đại diện cho từng thời đại thăng trầm của lịch sử Light
+              Novel nước nhà. Ngay bây giờ, hãy là một con mọt sách, rong ruổi
+              qua những câu chuyện đầy mê hoặc đó, bước chân vào những cuộc hành
+              trình được sáng tạo bởi những bộ não vượt thời gian!
+            </p>
+          </div>
           <div className="content-action">
             <Link href={SOCIAL.facebook} target="_blank">
               <Image

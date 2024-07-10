@@ -42,7 +42,7 @@ export function Chart() {
   return (
     <Card className="h-full">
       <CardHeader>
-        <CardTitle>Số lượng bình chọn</CardTitle>
+        <CardTitle className="text-gray-700">Số lượng bình chọn</CardTitle>
         <CardDescription className="lg:text-xl">
           Từ 2018 - Hiện tại
         </CardDescription>
@@ -72,7 +72,7 @@ export function Chart() {
                 position="top"
                 offset={12}
                 className="fill-foreground"
-                fontSize={12}
+                fontSize={10}
               />
             </Bar>
             <Bar dataKey="secondHalf" fill="var(--color-secondHalf)" radius={4}>
@@ -80,7 +80,7 @@ export function Chart() {
                 position="top"
                 offset={12}
                 className="fill-foreground"
-                fontSize={8}
+                fontSize={10}
               />
             </Bar>
           </BarChart>
@@ -88,7 +88,8 @@ export function Chart() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium lg:text-2xl leading-none">
-          Tăng trưởng thêm 5.2% trong năm nay <TrendingUp className="h-4 w-4" />
+          Tăng trưởng thêm 5.2% trong năm nay{" "}
+          <TrendingUp className="h-4 w-4 lg:h-8 lg:w-8" />
         </div>
         <div className="leading-none lg:text-xl text-muted-foreground">
           Đang hiển thị toàn bộ số bình chọn theo mỗi kì qua từng năm
