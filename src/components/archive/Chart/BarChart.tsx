@@ -43,7 +43,7 @@ export function Chart() {
     <Card className="h-full">
       <CardHeader>
         <CardTitle>Số lượng bình chọn</CardTitle>
-        <CardDescription className="text-xl">
+        <CardDescription className="lg:text-xl">
           Từ 2018 - Hiện tại
         </CardDescription>
       </CardHeader>
@@ -57,19 +57,22 @@ export function Chart() {
               tickMargin={10}
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 4)}
-              className="text-xl"
+              className="lg:text-xl"
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <ChartLegend className="text-xl" content={<ChartLegendContent />} />
+            <ChartLegend
+              className="lg:text-xl"
+              content={<ChartLegendContent />}
+            />
             <Bar dataKey="firstHalf" fill="var(--color-firstHalf)" radius={4}>
               <LabelList
                 position="top"
                 offset={12}
                 className="fill-foreground"
-                fontSize={8}
+                fontSize={12}
               />
             </Bar>
             <Bar dataKey="secondHalf" fill="var(--color-secondHalf)" radius={4}>
@@ -84,10 +87,10 @@ export function Chart() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium text-2xl leading-none">
+        <div className="flex gap-2 font-medium lg:text-2xl leading-none">
           Tăng trưởng thêm 5.2% trong năm nay <TrendingUp className="h-4 w-4" />
         </div>
-        <div className="leading-none text-xl text-muted-foreground">
+        <div className="leading-none lg:text-xl text-muted-foreground">
           Đang hiển thị toàn bộ số bình chọn theo mỗi kì qua từng năm
         </div>
       </CardFooter>

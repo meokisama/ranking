@@ -8,6 +8,9 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   prefix: "",
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     container: {
       center: true,
