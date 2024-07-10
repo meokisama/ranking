@@ -49,6 +49,14 @@ function ArchiveHero() {
             </Link>
           </div>
         </div>
+        <div className="image-content">
+          <Image
+            src="/alisa-gura.webp"
+            alt="alisa chibi"
+            width={600}
+            height={603}
+          />
+        </div>
       </div>
       <div className="scrolling-text">
         <p>Vietnam Light Novel Ranking</p>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
-import { Table, Button, Input, Space, Popover, Rate } from "antd";
+import { Table, Button, Input, Space, Popover, Rate, Dropdown } from "antd";
 import Highlighter from "react-highlight-words";
 import "./HallOfRank.scss";
 import { publisherFilter, handleList, addZeroCount } from "./Data";
@@ -11,6 +11,107 @@ import {
   favoriteIllustrator as allIllustrator,
   favoritePublisher as allPublisher,
 } from "@/app/vote/List";
+
+const periodItems = [
+  {
+    key: "1",
+    label: "2018",
+    children: [
+      {
+        key: "1-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "1-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+  {
+    key: "2",
+    label: "2019",
+    children: [
+      {
+        key: "2-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "2-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+  {
+    key: "3",
+    label: "2020",
+    children: [
+      {
+        key: "3-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "3-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+  {
+    key: "4",
+    label: "2021",
+    children: [
+      {
+        key: "4-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "4-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+  {
+    key: "5",
+    label: "2022",
+    children: [
+      {
+        key: "5-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "5-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+  {
+    key: "6",
+    label: "2023",
+    children: [
+      {
+        key: "6-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "6-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+  {
+    key: "7",
+    label: "2024",
+    children: [
+      {
+        key: "7-1",
+        label: "Nửa đầu",
+      },
+      {
+        key: "7-2",
+        label: "Nửa sau",
+      },
+    ],
+  },
+];
 
 const selectArray = [
   {
@@ -502,6 +603,16 @@ function HallOfRank() {
     setData(dataInput[value]);
   };
 
+  //Period Selection
+  const [selectedItem, setSelectedItem] = useState("Nửa đầu 2024");
+  const handlePeriodClick = (e) => {
+    console.log("Click: ", e);
+    const year = periodItems.find((item) => item.key === e.keyPath[1]);
+    const half = year.children.find((child) => child.key === e.key);
+    const selected = `${half.label} ${year.label}`;
+    setSelectedItem(selected);
+  };
+
   return (
     <div className="hall-of-rank">
       <div className="ld-table-header">
@@ -562,8 +673,36 @@ function HallOfRank() {
           </div>
           <div className="next-container">
             <p>Kì bình chọn</p>
+            <div className="period-dropdown">
+              <Dropdown
+                menu={{
+                  items: periodItems,
+                  selectable: true,
+                  defaultSelectedKeys: ["7-1"],
+                  onClick: handlePeriodClick,
+                }}
+                trigger={"click"}
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <div className="period-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </a>
+              </Dropdown>
+            </div>
             <span>
-              <strong>Nửa đầu 2024</strong>
+              <strong>{selectedItem}</strong>
             </span>
           </div>
         </div>

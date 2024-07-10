@@ -25,11 +25,13 @@
   padding: 2rem 10px;
   display: block;
   margin: 0 auto;
+  position: relative;
   .ld-table-header {
     display: flex;
     align-items: stretch;
     width: 100%;
     gap: 10px;
+    position: relative;
     .header-right-panel {
       display: flex;
       align-items: stretch;
@@ -76,10 +78,22 @@
       }
       .next-container {
         width: 30%;
-        background: linear-gradient(#fbf2f2 0 0) padding-box,
-          linear-gradient(to bottom, transparent, #fa7667) border-box;
-        border: 1px solid transparent;
+        // background: linear-gradient(#fbf2f2 0 0) padding-box,
+        //   linear-gradient(to bottom, transparent, #fa7667) border-box;
+        // border: 1px solid transparent;
         // box-shadow: rgba(250, 146, 134, 0.35) 0px 20px 25px -5px, rgba(250, 146, 134, 0.51) 0px 10px 10px -5px;
+        .period-dropdown {
+          .period-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            svg {
+              color: #4b4b4bc0;
+              width: 20px;
+              cursor: pointer;
+            }
+          }
+        }
         span {
           padding: 0 1rem;
           font-weight: 400;
@@ -530,7 +544,7 @@
           display: none;
         }
         .vote-container {
-          width: 40%;
+          width: 50%;
           .vote-number {
             p {
               font-size: 1.5rem;
@@ -538,7 +552,7 @@
           }
         }
         .next-container {
-          width: 60%;
+          width: 50%;
         }
       }
       .header-left-panel {
