@@ -11,6 +11,7 @@ import {
   favoriteIllustrator as allIllustrator,
   favoritePublisher as allPublisher,
 } from "@/app/vote/List";
+import Image from "next/image";
 
 const periodItems = [
   {
@@ -325,9 +326,27 @@ function HallOfRank() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img src="/gold.png" alt="gold" width={20} />,
-          <img src="/silver.png" alt="sivler" width={20} />,
-          <img src="/bronze.png" alt="bronze" width={20} />,
+          <Image
+            key="gold"
+            src="/gold.png"
+            alt="gold"
+            width={20}
+            height={15}
+          />,
+          <Image
+            key="silver"
+            src="/silver.png"
+            alt="sivler"
+            width={20}
+            height={15}
+          />,
+          <Image
+            key="bronze"
+            src="/bronze.png"
+            alt="bronze"
+            width={20}
+            height={15}
+          />,
         ];
         const getRankImage = (rank) =>
           (
@@ -521,9 +540,27 @@ function HallOfRank() {
       render: (rank) => {
         const rankColors = ["#e79827", "#7784a5", "#b46933"];
         const rankImages = [
-          <img src="/gold.png" alt="gold" width={20} />,
-          <img src="/silver.png" alt="silver" width={20} />,
-          <img src="/bronze.png" alt="bronze" width={20} />,
+          <Image
+            key="gold"
+            src="/gold.png"
+            alt="gold"
+            width={20}
+            height={15}
+          />,
+          <Image
+            key="silver"
+            src="/silver.png"
+            alt="sivler"
+            width={20}
+            height={15}
+          />,
+          <Image
+            key="bronze"
+            src="/bronze.png"
+            alt="bronze"
+            width={20}
+            height={15}
+          />,
         ];
         const getRankImage = (rank) =>
           (
