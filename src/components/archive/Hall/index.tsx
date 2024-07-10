@@ -6,7 +6,7 @@ import { Divider } from "antd";
 
 function Hall() {
   return (
-    <div className="hall mt-20 lg:mt-60 max-w-[98%] lg:max-w-screen-xl block my-0 mx-auto">
+    <div className="hall mt-20 lg:mt-60 max-w-[98%] lg:max-w-screen-xl block my-0 mx-auto overflow-hidden">
       <Divider />
       <div className="mb-20 flex justify-center items-center select-none pointer-events-none">
         <Image
