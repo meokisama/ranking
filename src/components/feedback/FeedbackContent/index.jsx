@@ -1,27 +1,19 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import "./FeedbackContent.scss";
-import axios from "axios";
+import { feedback_data } from "./feedback_output";
 
-const fetchFeedbacks = async (page) => {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_FEEDBACK}?limit=40&page=${page}`
-  );
-  const data = response.data.data.results
-    .filter((item) => item.feedback.topic || item.feedback.content)
-    .reverse()
-    .map((item) => ({
-      feedback: item.feedback,
-      createdAt: item.createdAt,
-    }));
+const ITEMS_PER_PAGE = 20;
+
+const fetchFeedbacks = (page) => {
+  const start = (page - 1) * ITEMS_PER_PAGE;
+  const end = page * ITEMS_PER_PAGE;
+  const data = feedback_data.slice(start, end).reverse();
   return data;
 };
 
-const fetchTotalItems = async () => {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_FEEDBACK}?limit=1&page=1`
-  );
-  return response.data.data.total;
+const fetchTotalItems = () => {
+  return feedback_data.length;
 };
 
 function FeedbackContent() {
@@ -45,9 +37,9 @@ function FeedbackContent() {
   );
 
   useEffect(() => {
-    const initialize = async () => {
-      const total = await fetchTotalItems();
-      const lastPage = Math.ceil(total / 40);
+    const initialize = () => {
+      const total = fetchTotalItems();
+      const lastPage = Math.ceil(total / ITEMS_PER_PAGE);
       setPage(lastPage);
     };
 
@@ -55,10 +47,10 @@ function FeedbackContent() {
   }, []);
 
   useEffect(() => {
-    const loadFeedbacks = async () => {
+    const loadFeedbacks = () => {
       if (page <= 0) return;
       setLoading(true);
-      const newFeedbacks = await fetchFeedbacks(page);
+      const newFeedbacks = fetchFeedbacks(page);
       newFeedbacks.length === 0
         ? setPage((prevPage) => prevPage - 1)
         : setFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...newFeedbacks]);
@@ -97,7 +89,6 @@ function FeedbackContent() {
                 : "___"}
             </p>
             <div className="date">
-              {" "}
               {new Date(feedback.createdAt).toLocaleString("en-GB")}
             </div>
           </div>
