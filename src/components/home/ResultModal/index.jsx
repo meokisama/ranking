@@ -64,8 +64,11 @@ function ResultModal() {
               Chúng tôi xin trân trọng thông báo rằng quá trình bình chọn cho{" "}
               <strong>Bảng Xếp Hạng Light Novel Việt Nam</strong> đã kết thúc và
               kết quả chính thức đã được công bố! Vui lòng ấn vào nút{" "}
-              <strong style={{ color: "#fa7667" }}>Xem kết quả</strong> bên dưới
-              để xem danh sách đầy đủ kết quả cho các hạng mục bình chọn.
+              <strong style={{ color: "hsl(var(--text-color))" }}>
+                Xem kết quả
+              </strong>{" "}
+              bên dưới để xem danh sách đầy đủ kết quả cho các hạng mục bình
+              chọn.
             </p>
             <p>
               Một lần nữa xin được cảm ơn sự tham gia nhiệt tình từ quý độc giả

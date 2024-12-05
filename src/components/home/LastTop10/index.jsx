@@ -15,7 +15,7 @@ function LastTop10() {
         </h1>
         <p>
           Vinh danh 10 series được bình chọn nhiều nhất cho bảng xếp hạng đợt
-          gần nhất, <strong>nửa cuối năm 2023!</strong>
+          gần nhất, <strong>nửa đầu năm 2024!</strong>
         </p>
       </div>
       <div className="top10-series">

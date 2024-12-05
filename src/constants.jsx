@@ -104,21 +104,22 @@ const AUTHORS = [
 
 const CATEGORIES = [
   "Light Novel được yêu thích nhất",
-  "Họa sĩ minh họa được yêu thích nhất",
+  "Oneshot được yêu thích nhất",
   "Nhà phát hành được yêu thích nhất",
+  "Light Novel tân binh của năm",
 ];
 
 const TOP10 = [
-  { rank: "/gold.png", src: "/images/top10/01.webp" },
-  { rank: "/silver.png", src: "/images/top10/02.webp" },
-  { rank: "/bronze.png", src: "/images/top10/03.webp" },
-  { rank: "#4", src: "/images/top10/04.webp" },
-  { rank: "#5", src: "/images/top10/05.webp" },
-  { rank: "#6", src: "/images/top10/06.webp" },
-  { rank: "#7", src: "/images/top10/07.webp" },
-  { rank: "#8", src: "/images/top10/08.webp" },
-  { rank: "#9", src: "/images/top10/09.webp" },
-  { rank: "#10", src: "/images/top10/10.webp" },
+  { rank: "/gold.png", src: "/images/top10/01.jpg" },
+  { rank: "/silver.png", src: "/images/top10/02.jpg" },
+  { rank: "/bronze.png", src: "/images/top10/03.jpg" },
+  { rank: "#4", src: "/images/top10/04.jpg" },
+  { rank: "#5", src: "/images/top10/05.jpg" },
+  { rank: "#6", src: "/images/top10/06.jpg" },
+  { rank: "#7", src: "/images/top10/07.jpg" },
+  { rank: "#8", src: "/images/top10/08.jpg" },
+  { rank: "#9", src: "/images/top10/09.jpg" },
+  { rank: "#10", src: "/images/top10/10.jpg" },
 ];
 
 const TIMELINE = [

@@ -77,7 +77,8 @@
       .next-container {
         width: 30%;
         background: linear-gradient(#fbf2f2 0 0) padding-box,
-          linear-gradient(to bottom, transparent, #fa7667) border-box;
+          linear-gradient(to bottom, transparent, hsl(var(--text-color)))
+            border-box;
         border: 1px solid transparent;
         // box-shadow: rgba(250, 146, 134, 0.35) 0px 20px 25px -5px, rgba(250, 146, 134, 0.51) 0px 10px 10px -5px;
         span {

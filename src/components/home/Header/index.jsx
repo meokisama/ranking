@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ROUTES } from "@/constants";
 import "./Header.scss";
 import Sakura from "../Sakura";
@@ -62,13 +63,47 @@ function Header() {
         <Sakura density={60} />
         <div className="textContent">
           <div className="textTitle">
-            <h1>
-              <span id="text01">Bảng Xếp Hạng </span>
-              <br />
-              <span id="text02"> Light Novel</span>
-              <br />
-              <span id="text03"> Việt Nam</span>
-            </h1>
+            <div className="mt-16 mb-4">
+              <motion.h1
+                initial={{ opacity: 0, y: "-100px" }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  damping: 10,
+                  mass: 0.75,
+                  stiffness: 300,
+                  delay: 8.5,
+                }}
+              >
+                <span id="text01">Bảng Xếp Hạng </span>
+              </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: "-100px" }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  damping: 10,
+                  mass: 0.75,
+                  stiffness: 300,
+                  delay: 8.7,
+                }}
+              >
+                <span id="text02"> Light Novel</span>
+              </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: "-100px" }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  damping: 10,
+                  mass: 0.75,
+                  stiffness: 300,
+                  delay: 8.9,
+                }}
+              >
+                <span id="text03"> Việt Nam</span>
+              </motion.h1>
+            </div>
             <Image
               id="rotSakura1"
               alt="sakura petal"
@@ -84,7 +119,11 @@ function Header() {
               src="/sakura2.svg"
             />
           </div>
-          <p>
+          <motion.p
+            initial={{ opacity: 0, y: "50px" }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 9.2 }}
+          >
             Bạn là nhà thám hiểm rong ruổi trong những thế giới giả tưởng kỳ bí,
             là nhà lãnh đạo của những cuộc phiêu lưu bất tận được thêu dệt bởi
             những con chữ! Đến, và đem quyền lực của bạn để bình chọn cho những
@@ -92,30 +131,56 @@ function Header() {
             sắc nhất lịch sử Light Novel Việt Nam. Hãy là phù thủy của chính câu
             chuyện bạn yêu thích, và hãy để cái tên của câu chuyện đó ghi danh
             bảng vàng!
-          </p>
+          </motion.p>
           <div id="textBtn">
-            <Link id="header-vote" href={ROUTES.VOTE} target="_blank">
-              <span>Bình Chọn</span>
-              <Image
-                alt="sakura petal"
-                width={32}
-                height={32}
-                src="/sakura1.svg"
-              />
-            </Link>
-            <Link
-              id="leaderboard-btn"
-              href={ROUTES.LEADERBOARD}
-              target="_blank"
+            <motion.div
+              initial={{ opacity: 0, x: "-100px" }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                type: "spring",
+                damping: 10,
+                mass: 0.75,
+                stiffness: 300,
+                delay: 9.4,
+              }}
+              className="w-1/2 lg:w-1/4"
             >
-              <span>Xem kết quả</span>
-              <Image
-                alt="sakura petal"
-                width={32}
-                height={32}
-                src="/sakura1.svg"
-              />
-            </Link>
+              <Link id="header-vote" href={ROUTES.VOTE} target="_blank">
+                <span>Bình Chọn</span>
+                <Image
+                  alt="sakura petal"
+                  width={32}
+                  height={32}
+                  src="/sakura1.svg"
+                />
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: "-100px" }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                type: "spring",
+                damping: 10,
+                mass: 0.75,
+                stiffness: 300,
+                delay: 9.6,
+              }}
+              className="w-1/2 lg:w-1/4"
+            >
+              <Link
+                id="leaderboard-btn"
+                href={ROUTES.LEADERBOARD}
+                target="_blank"
+              >
+                <span>Xem kết quả</span>
+                <Image
+                  alt="sakura petal"
+                  width={32}
+                  height={32}
+                  src="/sakura1.svg"
+                />
+              </Link>
+            </motion.div>
           </div>
         </div>
         <div className="imgContent">

@@ -1,5 +1,5 @@
 .comment {
-  --swiper-pagination-color: #fa7667;
+  --swiper-pagination-color: hsl(var(--text-color));
   max-width: 1200px;
   margin: 0 auto;
   padding: 10rem 0 20rem;
@@ -32,7 +32,8 @@
       position: relative;
       .slideContent {
         background: linear-gradient(#fff9f9 0 0) padding-box,
-          linear-gradient(to bottom, transparent, #fa7667) border-box;
+          linear-gradient(to bottom, transparent, hsl(var(--text-color)))
+            border-box;
         border: 1px solid transparent;
         border-radius: 20px;
         padding: 20px 10% 30px;

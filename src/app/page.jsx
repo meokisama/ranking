@@ -9,17 +9,18 @@ import {
   Overview,
   ResultModal,
 } from "@/components/home";
-import { Footer, SocialHub, SplashScreen } from "@/components/common";
+import { Footer, SocialHub } from "@/components/common";
 import ScrollToTop from "@/utils/ScrollToTop";
+import SplashScreen from "@/components/common/splash-screen";
 
 function Home() {
   return (
-    <main style={{ backgroundColor: "#fff7f8" }}>
+    <div className="bg-[hsl(var(--main-background))]">
       <SplashScreen />
       <div>
         <Header />
         <div className="contentContainer">
-          <ResultModal />
+          {/* <ResultModal /> */}
           <LargeText />
           <Introduction />
           <Overview />
@@ -32,7 +33,7 @@ function Home() {
           <SocialHub />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

@@ -12,8 +12,8 @@
       border-bottom: 1px solid salmon;
       line-height: 0.1em;
       span {
-        color: #fa7667;
-        background: #fff7f8;
+        color: hsl(var(--text-color));
+        background: hsl(var(--main-background));
         padding: 10px 20px;
         border: 1px solid salmon;
         border-radius: 10px;
