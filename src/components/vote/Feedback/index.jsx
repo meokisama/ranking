@@ -1,8 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Divider, Input, Checkbox } from "antd";
 import Category from "../Category";
 import "./Feedback.scss";
+import Image from "next/image";
 
 const { TextArea } = Input;
 
@@ -12,14 +13,13 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
     topic: "",
     content: "",
   });
-
-  const [allowFeedback, setAllowFeedback] = useState(true);
-
   const [recommend, setRecommend] = useState({
     name: "Đề xuất bản quyền",
     title: "",
     publisher: "",
   });
+  const [allowFeedback, setAllowFeedback] = useState(true);
+  const [allowRecommend, setAllowRecommend] = useState(true);
 
   useEffect(() => {
     const storedFeedback = JSON.parse(
@@ -40,7 +40,6 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
     };
     setRecommend(storedRecommend);
   }, []);
-  const [allowRecommend, setAllowRecommend] = useState(true);
 
   const onFeedbackCheckboxChange = (e) => {
     setAllowFeedback(!e.target.checked);
@@ -52,16 +51,32 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
     if (e.target.checked)
       setRecommend({ name: "Đề xuất bản quyền", title: "", publisher: "" });
   };
+
+  // State để lưu trữ giá trị debounce
+  const [debouncedFeedback, setDebouncedFeedback] = useState(feedback);
+  const [debouncedRecommend, setDebouncedRecommend] = useState(recommend);
+  // Debounce feedback và recommend
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedFeedback(feedback);
+      setDebouncedRecommend(recommend);
+      localStorage.setItem("bxhlnvn_feedback", JSON.stringify(feedback));
+      localStorage.setItem("bxhlnvn_recommend", JSON.stringify(recommend));
+    }, 1000); // Delay 300ms hoặc thời gian bạn muốn
+
+    return () => clearTimeout(handler);
+  }, [feedback, recommend]);
+
   //Pass chosen items to parent component
   useEffect(() => {
-    onSelectionChange(category, title, [feedback, recommend]);
-  }, [category, feedback, recommend, title]);
-
-  //Write to local storage
-  useEffect(() => {
-    localStorage.setItem("bxhlnvn_feedback", JSON.stringify(feedback));
-    localStorage.setItem("bxhlnvn_recommend", JSON.stringify(recommend));
-  }, [feedback, recommend]);
+    onSelectionChange(category, title, [debouncedFeedback, debouncedRecommend]);
+  }, [
+    category,
+    debouncedFeedback,
+    debouncedRecommend,
+    onSelectionChange,
+    title,
+  ]);
 
   return (
     <div className="feedback">
@@ -148,7 +163,12 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
           </div>
         </div>
         <div className="feedback-image">
-          <img src="/haruhi.webp" alt="bxh light novel haruhi image" />
+          <Image
+            src="/haruhi.webp"
+            alt="bxh light novel haruhi image"
+            width={255}
+            height={981}
+          />
         </div>
       </div>
     </div>

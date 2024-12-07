@@ -200,7 +200,7 @@ export default function SplashScreen() {
       <motion.div
         animate={{ opacity: 0 }}
         transition={{ duration: 2, delay: 6.5 }}
-        className="font-playfair fixed flex flex-col justify-center items-center h-full w-full lg:text-3xl xl:text-5xl gap-5 xl:gap-10 text-center px-4 text-slate-800 z-[5001]"
+        className="font-playfair fixed flex flex-col justify-center items-center h-full w-full text-3xl md:text-5xl gap-5 xl:gap-10 text-center px-4 text-slate-800 z-[5001]"
       >
         <motion.p
           initial={{ opacity: 0, scale: 1.1 }}

@@ -26,6 +26,11 @@ function SendResult({ result }) {
   const [age, setAge] = useState(null);
 
   useEffect(() => {
+    setGender(JSON.parse(localStorage.getItem("bxhlnvn_gender")) ?? null);
+    setAge(JSON.parse(localStorage.getItem("bxhlnvn_age")) ?? null);
+  }, []);
+
+  useEffect(() => {
     const isVoteDone = localStorage.getItem("isVoteDone") === "true";
     setDone(isVoteDone);
   }, []);
@@ -366,7 +371,10 @@ function SendResult({ result }) {
                 width: 120,
                 marginRight: 10,
               }}
-              onChange={(value) => setGender(value)}
+              onChange={(value) => {
+                setGender(value);
+                localStorage.setItem("bxhlnvn_gender", JSON.stringify(value));
+              }}
               options={[
                 {
                   value: "male",
@@ -377,11 +385,15 @@ function SendResult({ result }) {
                   label: "Nữ",
                 },
               ]}
+              value={gender}
             />
             <InputNumber
               min={5}
               max={100}
-              onChange={(value) => setAge(value)}
+              onChange={(value) => {
+                setAge(value);
+                localStorage.setItem("bxhlnvn_age", JSON.stringify(value));
+              }}
               addonBefore={
                 <span
                   style={{
@@ -392,6 +404,7 @@ function SendResult({ result }) {
                   Tuổi
                 </span>
               }
+              value={age}
             />
           </div>
         </Card>
