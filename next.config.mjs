@@ -10,6 +10,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'i2.docln.net'
             },
+            {
+                protocol: 'https',
+                hostname: 'i.hako.vn'
+            },
         ],
     },
     sassOptions: {
