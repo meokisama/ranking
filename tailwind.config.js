@@ -22,6 +22,7 @@ module.exports = {
     extend: {
       fontFamily: {
         playfair: ["var(--font-playfair_display)"],
+        lexend: ["var(--font-lexend)"],
       },
       colors: {
         border: "hsl(var(--border))",

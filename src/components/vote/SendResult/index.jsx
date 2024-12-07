@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { Card, Empty } from "antd";
+import { Card, Empty, Select } from "antd";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import "./SendResult.scss";
 import Category from "../Category";
 import Image from "next/image";
 import { NotificationHub, useNotification } from "@/utils/Notification";
+import { InputNumber } from "antd";
 
 const cardTitleStyles = {
   fontFamily: "var(--font-lexend)",
@@ -304,6 +305,69 @@ function SendResult({ result }) {
             )}
           </Card>
         ))}
+
+        <Card
+          title={
+            <span style={cardTitleStyles}>Thông tin người bình chọn (*)</span>
+          }
+        >
+          <div
+            style={{
+              fontFamily: "var(--font-lexend)",
+              fontWeight: 300,
+              color: "#636161e0",
+            }}
+          >
+            <p>
+              Từ kỳ bình chọn lần này, chúng tôi sẽ thu thập thêm thông tin về
+              giới tính và độ tuổi của các bạn. Điều này không chỉ giúp chúng
+              tôi hiểu rõ hơn về những nhóm độc giả yêu thích light novel, mà
+              còn mở ra cơ hội phân tích sâu sắc hơn về xu hướng và sự thay đổi
+              trong thị hiếu của từng đối tượng.
+            </p>
+            <p>
+              Với mục tiêu phản ánh chân thực nhất bức tranh sở thích của cộng
+              đồng, chúng tôi hy vọng rằng những dữ liệu này sẽ là nền tảng để
+              xây dựng một thế giới light novel ngày càng phong phú và gần gũi
+              hơn với từng độc giả.
+            </p>
+          </div>
+          <div className="flex flex-row mt-16">
+            <Select
+              // defaultValue="male"
+              placeholder="Giới tính"
+              style={{
+                width: 120,
+                marginRight: 10,
+              }}
+              // onChange={handleChange}
+              options={[
+                {
+                  value: "male",
+                  label: "Nam",
+                },
+                {
+                  value: "female",
+                  label: "Nữ",
+                },
+              ]}
+            />
+            <InputNumber
+              min={5}
+              max={100}
+              addonBefore={
+                <span
+                  style={{
+                    fontFamily: "var(--font-lexend) !important",
+                    color: "#636161e0",
+                  }}
+                >
+                  Tuổi
+                </span>
+              }
+            />
+          </div>
+        </Card>
 
         <div className="captcha">
           {!done ? (
