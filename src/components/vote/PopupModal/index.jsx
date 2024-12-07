@@ -7,7 +7,7 @@ function PopupModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(showModal, 2000);
+    const timer = setTimeout(showModal, 6000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -63,11 +63,11 @@ function PopupModal() {
             <div className="split-categories">
               <span>
                 <strong>1.</strong> Light Novel được yêu thích nhất <br />
-                <strong>2.</strong> Họa sĩ minh họa được yêu thích nhất <br />
+                <strong>2.</strong> Oneshot được yêu thích nhất <br />
               </span>
               <span>
                 <strong>3.</strong> Nhà phát hành được yêu thích nhất <br />
-                <strong>Bonus.</strong> Tự do đóng góp ý kiến và đề xuất <br />
+                <strong>4.</strong> Light Novel tân binh của năm <br />
               </span>
             </div>
             <p>

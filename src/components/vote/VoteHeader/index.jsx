@@ -43,9 +43,10 @@ function VoteHeader() {
       <Image
         id="votebanner"
         alt="bxh light novel banner image"
-        src="/voteHalu.webp"
+        src="/v_mignon.jpg"
         width={1820}
         height={791}
+        quality={100}
       />
       <div style={{ height: imgHeight }}></div>
     </div>

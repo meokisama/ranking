@@ -22,6 +22,9 @@ function SendResult({ result }) {
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [token, setToken] = useState(null);
   const [done, setDone] = useState(false);
+  const [gender, setGender] = useState(null);
+  const [age, setAge] = useState(null);
+
   useEffect(() => {
     const isVoteDone = localStorage.getItem("isVoteDone") === "true";
     setDone(isVoteDone);
@@ -37,6 +40,21 @@ function SendResult({ result }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate gender and age
+    if (!gender) {
+      NotificationHub(
+        noti,
+        "Thiếu thông tin!",
+        "Vui lòng chọn giới tính của bạn."
+      );
+      return;
+    }
+
+    if (!age) {
+      NotificationHub(noti, "Thiếu thông tin!", "Vui lòng nhập tuổi của bạn.");
+      return;
+    }
 
     const resultToSend = result.reduce((data, item) => {
       data[item.category_short] = item.chosenItems;
@@ -62,10 +80,18 @@ function SendResult({ result }) {
       publisher: resultToSend.feedback[1].publisher,
     };
 
+    // Add gender and age to finalResult
+    finalResult.userInfo = {
+      gender: gender,
+      age: age,
+    };
+
     const allNotEmpty = Object.keys(finalResult).every((key) => {
       if (key === "feedback") return true;
       return Array.isArray(finalResult[key]) && finalResult[key].length > 0;
     });
+
+    // console.log(JSON.stringify(finalResult));
 
     captchaVerified
       ? allNotEmpty
@@ -340,7 +366,7 @@ function SendResult({ result }) {
                 width: 120,
                 marginRight: 10,
               }}
-              // onChange={handleChange}
+              onChange={(value) => setGender(value)}
               options={[
                 {
                   value: "male",
@@ -355,6 +381,7 @@ function SendResult({ result }) {
             <InputNumber
               min={5}
               max={100}
+              onChange={(value) => setAge(value)}
               addonBefore={
                 <span
                   style={{

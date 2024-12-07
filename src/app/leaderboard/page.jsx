@@ -1,5 +1,6 @@
 "use client";
 import { Footer, SocialHub } from "@/components/common";
+import ShortSplashScreen from "@/components/common/short-splash-screen";
 import { Banner, LeaderBoardTable } from "@/components/leaderboard";
 import { ROUTES } from "@/constants";
 import ScrollToTop from "@/utils/ScrollToTop";
@@ -7,7 +8,7 @@ import ScrollToTop from "@/utils/ScrollToTop";
 function LeaderBoard() {
   return (
     <div>
-      {/* <SplashScreen /> */}
+      <ShortSplashScreen />
       <div>
         <Banner />
         <LeaderBoardTable />

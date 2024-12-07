@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { ROUTES } from "@/constants";
 import { Footer } from "@/components/common";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@/components/vote";
 import { ranobe, favoritePublisher } from "./List";
 import ScrollToTop from "@/utils/ScrollToTop";
+import ShortSplashScreen from "@/components/common/short-splash-screen";
 
 function filterByIds(data, idsToInclude) {
   return data.filter((item) => idsToInclude.includes(item.id));
@@ -57,60 +58,73 @@ function Vote() {
 
   const [currentComponent, setCurrentComponent] = useState(0);
 
-  //Get selected items from each category
-  const [selectedItems, setSelectedItems] = useState([
-    {
-      category_name: "Light Novel được yêu thích nhất",
-      category_short: "favoriteRanobe",
-      chosenItems: [],
-    },
-    {
-      category_name: "Oneshot được yêu thích nhất",
-      category_short: "favoriteOneshot",
-      chosenItems: [],
-    },
-    {
-      category_name: "Nhà phát hành được yêu thích nhất",
-      category_short: "favoritePublisher",
-      chosenItems: [],
-    },
-    {
-      category_name: "Light Novel tân binh của năm",
-      category_short: "favoriteRookie",
-      chosenItems: [],
-    },
-    {
-      category_name: "Chia sẻ ý kiến và đề xuất",
-      category_short: "feedback",
-      chosenItems: [],
-    },
-  ]);
-  const handleChildSelection = (category, title, selectedItemsFromChild) => {
-    setSelectedItems((prevSelectedItems) => {
-      const updatedSelectedItems = [...prevSelectedItems];
-      const existingIndex = updatedSelectedItems.findIndex(
-        (item) => item.category_short === category
-      );
+  // Memoize initial state
+  const initialSelectedItems = useMemo(
+    () => [
+      {
+        category_name: "Light Novel được yêu thích nhất",
+        category_short: "favoriteRanobe",
+        chosenItems: [],
+      },
+      {
+        category_name: "Oneshot được yêu thích nhất",
+        category_short: "favoriteOneshot",
+        chosenItems: [],
+      },
+      {
+        category_name: "Nhà phát hành được yêu thích nhất",
+        category_short: "favoritePublisher",
+        chosenItems: [],
+      },
+      {
+        category_name: "Light Novel tân binh của năm",
+        category_short: "favoriteRookie",
+        chosenItems: [],
+      },
+      {
+        category_name: "Chia sẻ ý kiến và đề xuất",
+        category_short: "feedback",
+        chosenItems: [],
+      },
+    ],
+    []
+  );
 
-      if (existingIndex !== -1) {
-        // Update existing item
-        updatedSelectedItems[existingIndex] = {
-          category_name: title,
-          category_short: category,
-          chosenItems: selectedItemsFromChild,
-        };
-      } else {
-        // Add new item
-        updatedSelectedItems.push({
-          category_name: title,
-          category_short: category,
-          chosenItems: selectedItemsFromChild,
-        });
-      }
+  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
 
-      return updatedSelectedItems;
-    });
-  };
+  const handleChildSelection = useCallback(
+    (category, title, selectedItemsFromChild) => {
+      setSelectedItems((prevSelectedItems) => {
+        const updatedSelectedItems = [...prevSelectedItems];
+        const existingIndex = updatedSelectedItems.findIndex(
+          (item) => item.category_short === category
+        );
+
+        if (existingIndex !== -1) {
+          // Update existing item
+          updatedSelectedItems[existingIndex] = {
+            category_name: title,
+            category_short: category,
+            chosenItems: selectedItemsFromChild,
+          };
+        } else {
+          // Add new item
+          updatedSelectedItems.push({
+            category_name: title,
+            category_short: category,
+            chosenItems: selectedItemsFromChild,
+          });
+        }
+
+        return updatedSelectedItems;
+      });
+    },
+    []
+  );
+
+  useEffect(() => {
+    console.log(selectedItems);
+  }, [selectedItems]);
 
   //Change category component
   const handleNext = () => {
@@ -241,7 +255,7 @@ function Vote() {
     <ThankYou />
   ) : (
     <div>
-      {/* <SplashScreen /> */}
+      <ShortSplashScreen />
       <PopupModal />
       <div>
         <StepBar

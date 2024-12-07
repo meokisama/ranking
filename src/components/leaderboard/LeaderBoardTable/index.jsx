@@ -6,27 +6,7 @@ import Highlighter from "react-highlight-words";
 import "./LeaderBoardTable.scss";
 import { publisherFilter, handleList, addZeroCount } from "./Data";
 import { default as allRank } from "./Data/First_Half_2024";
-import {
-  favoriteRanobe as allRanobe,
-  favoriteIllustrator as allIllustrator,
-  favoritePublisher as allPublisher,
-} from "@/app/vote/List";
 import Image from "next/image";
-
-const selectArray = [
-  {
-    value: "favoriteRanobe",
-    label: "Light Novel được yêu thích nhất",
-  },
-  {
-    value: "favoriteIllustrator",
-    label: "Họa sĩ minh họa được yêu thích nhất",
-  },
-  {
-    value: "favoritePublisher",
-    label: "Nhà phát hành được yêu thích nhất",
-  },
-];
 
 const mergeRanobe = (array) => {
   return array.map((item) => {
@@ -49,6 +29,21 @@ const mergePublisher = (array) => {
   });
 };
 
+const selectArray = [
+  {
+    value: "favoriteRanobe",
+    label: "Light Novel được yêu thích nhất",
+  },
+  {
+    value: "favoriteIllustrator",
+    label: "Họa sĩ minh họa được yêu thích nhất",
+  },
+  {
+    value: "favoritePublisher",
+    label: "Nhà phát hành được yêu thích nhất",
+  },
+];
+
 function LeaderBoardTable() {
   const [selectedCategory, setSelectedCategory] = useState({
     value: "favoriteRanobe",
@@ -63,50 +58,15 @@ function LeaderBoardTable() {
   const [countVote, setCountVote] = useState(null);
   useEffect(() => {
     if (allRank && allRank.data) {
-      //Processing id list for original list
-      const votedRanobeIds = allRank.data.favoriteRanobes.map(
-        (item) => item._id
-      );
-      const votedIllustratorIds = allRank.data.favoriteIllustrators.map(
-        (item) => item._id
-      );
-      const votedPublisherIds = allRank.data.favoritePublishers.map(
-        (item) => item._id
-      );
-
-      //Remove voted items from original list
-      const allRemainingRanobe = allRanobe.filter(
-        (item) => !votedRanobeIds.includes(item.id)
-      );
-      const allRemainingIllustrator = allIllustrator.filter(
-        (item) => !votedIllustratorIds.includes(item.id)
-      );
-      const allRemainingPublisher = allPublisher.filter(
-        (item) => !votedPublisherIds.includes(item.id)
-      );
-
-      //Final list
       const favoriteRanobe = handleList(
-        mergeRanobe(allRank.data.favoriteRanobes).concat(
-          addZeroCount(allRemainingRanobe)
-        )
+        mergeRanobe(allRank.data.favoriteRanobes)
+      );
+      const favoritePublisher = handleList(
+        mergePublisher(allRank.data.favoritePublishers)
       );
       const favoriteIllustrator = handleList(
-        mergeIllustrator(allRank.data.favoriteIllustrators).concat(
-          addZeroCount(allRemainingIllustrator)
-        )
+        mergeIllustrator(allRank.data.favoriteIllustrators)
       );
-      //Modify for Momoco
-      favoriteIllustrator.forEach((item) =>
-        item.name === "Momoko" ? (item.name = "Momoco") : null
-      );
-
-      const favoritePublisher = handleList(
-        mergePublisher(allRank.data.favoritePublishers).concat(
-          addZeroCount(allRemainingPublisher)
-        )
-      );
-
       setDataInput({
         favoriteRanobe,
         favoriteIllustrator,
