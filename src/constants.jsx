@@ -125,7 +125,7 @@ const TOP10 = [
 const TIMELINE = [
   {
     index: "/tl01.webp",
-    date: "05-14/06/2024",
+    date: "10-14/12/2024",
     description:
       "Đăng bài phỏng vấn, PR các fandom lên dần chuẩn bị cho sự kiện.",
     position: "right",
@@ -133,7 +133,7 @@ const TIMELINE = [
   },
   {
     index: "/tl02.webp",
-    date: "10/06/2024",
+    date: "10/12/2024",
     description:
       "Công bố ra mắt banner Bảng Xếp Hạng Light Novel Việt Nam nửa đầu 2024.",
     position: "left",
@@ -141,7 +141,7 @@ const TIMELINE = [
   },
   {
     index: "/tl03.webp",
-    date: "15-25/06/2024",
+    date: "14-24/12/2024",
     description:
       "Chính thức mở bình chọn BXH LNVN nửa đầu 2024 với các hạng mục được giới thiệu ở phần tiếp theo.",
     position: "right",
@@ -149,7 +149,7 @@ const TIMELINE = [
   },
   {
     index: "/tl04.webp",
-    date: "26-29/06/2024",
+    date: "25-28/12/2024",
     description:
       "Ban tổ chức tiến hành tổng hợp các lượt bình chọn và xử lý kết quả.",
     position: "left",
@@ -157,7 +157,7 @@ const TIMELINE = [
   },
   {
     index: "/tl05.webp",
-    date: "30/06/2024",
+    date: "29-30/12/2024",
     description:
       "Đăng bài tổng kết bảng xếp hạng và ảnh mừng các tác phẩm đứng đầu.",
     position: "right",

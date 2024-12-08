@@ -21,34 +21,24 @@ function filterByIds(data, idsToInclude) {
 
 const sorted_favorite_rookie = filterByIds(
   ranobe,
-  [219, 218, 217, 216, 215, 214, 213, 212, 211, 209, 208, 207, 206]
+  [2, 6, 13, 17, 19, 22, 24, 38, 39, 40, 41, 43, 47]
 ).sort((a, b) => a.seriesName.localeCompare(b.seriesName, "vi"));
 
 const sorted_favorite_oneshot = filterByIds(
   ranobe,
   [
-    218, 216, 212, 211, 210, 208, 207, 206, 202, 199, 196, 195, 194, 192, 190,
-    188, 185, 184, 180, 179, 178, 166, 164, 159, 157, 155, 151, 139, 136, 135,
-    134, 133, 132, 131, 126, 125, 124, 122, 119, 114, 113, 112, 110, 107, 105,
-    101, 100, 98, 97, 95, 94, 93, 90, 88, 84, 83, 80, 79, 78, 74, 72, 69, 68,
-    67, 65, 59, 58, 57, 55, 54, 47, 44, 43, 40, 39, 38, 31, 27, 26, 21, 18, 16,
-    14, 12, 10, 9, 7, 5,
+    17, 22, 38, 39, 40, 41, 43, 48, 51, 61, 65, 68, 69, 72, 75, 82, 83, 85, 92,
+    95, 96, 105, 108, 113, 114, 118, 124, 131, 132, 133, 134, 136, 137, 138,
+    139, 141, 142, 143, 145, 147, 148, 149, 152, 153, 155, 156, 157, 158, 160,
+    161, 165, 167, 170, 171, 172, 174, 175, 176, 177, 181, 185, 186, 187, 188,
+    190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 204, 205,
+    206, 209, 210, 211, 213, 214, 215, 216, 217, 218,
   ]
 ).sort((a, b) => a.seriesName.localeCompare(b.seriesName, "vi"));
 
-const sorted_favorite_ranobe = filterByIds(
-  ranobe,
-  [
-    1, 2, 3, 4, 6, 8, 11, 13, 15, 17, 19, 20, 22, 23, 24, 25, 28, 29, 30, 32,
-    33, 34, 35, 36, 37, 41, 42, 45, 46, 48, 49, 50, 51, 52, 53, 56, 60, 61, 62,
-    63, 64, 66, 70, 71, 73, 75, 76, 77, 81, 82, 85, 86, 87, 89, 91, 92, 96, 99,
-    102, 103, 104, 106, 108, 109, 111, 115, 116, 117, 118, 120, 121, 123, 127,
-    128, 129, 130, 137, 138, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149,
-    150, 152, 153, 154, 156, 158, 160, 161, 162, 163, 165, 167, 168, 169, 170,
-    171, 172, 173, 174, 175, 176, 177, 181, 182, 183, 186, 187, 189, 191, 193,
-    197, 198, 200, 201, 203, 204, 205, 209, 213, 214, 215, 217, 219,
-  ]
-).sort((a, b) => a.seriesName.localeCompare(b.seriesName, "vi"));
+const sorted_favorite_ranobe = ranobe.sort((a, b) =>
+  a.seriesName.localeCompare(b.seriesName, "vi")
+);
 
 function Vote() {
   const [thanks, setThanks] = useState(false);
@@ -156,11 +146,14 @@ function Vote() {
       listData={sorted_favorite_ranobe}
       description={
         <p>
-          Best of the best, ngôi đền văn học, nơi những xúc cảm tuyệt vời nhất
-          thăng hoa. Đó chính là hạng mục Light Novel được ưa thích nhất. Vẫn
-          như mọi khi, <strong>10</strong> chính là con số tối đa các tác phẩm
-          mà bạn được bình chọn, hãy suy nghĩ khôn ngoan trước khi đưa ra lựa
-          chọn cuối cùng!
+          <em>
+            &quot;Best of the best, ngôi đền văn học, nơi những xúc cảm tuyệt
+            vời nhất thăng hoa.&quot;
+          </em>{" "}
+          Đó chính là hạng mục Light Novel được yêu thích nhất. Vẫn như mọi khi,{" "}
+          <strong>10</strong> là con số tối đa các tác phẩm mà bạn được phép
+          bình chọn. Hãy cân nhắc thật kỹ trước khi đưa ra quyết định cuối cùng
+          nhé!
         </p>
       }
       maxItems={10}
@@ -175,11 +168,14 @@ function Vote() {
       listData={sorted_favorite_oneshot}
       description={
         <p>
-          Best of the best, ngôi đền văn học, nơi những xúc cảm tuyệt vời nhất
-          thăng hoa. Đó chính là hạng mục Light Novel được ưa thích nhất. Vẫn
-          như mọi khi, <strong>10</strong> chính là con số tối đa các tác phẩm
-          mà bạn được bình chọn, hãy suy nghĩ khôn ngoan trước khi đưa ra lựa
-          chọn cuối cùng!
+          <em>
+            &quot;Những tác phẩm ngắn gọn nhưng đầy cảm xúc, nơi từng câu chữ
+            đều đọng lại trong tâm hồn người đọc.&quot;
+          </em>{" "}
+          Hạng mục Oneshot được yêu thích nhất chính là nơi vinh danh những câu
+          chuyện ngắn nhưng để lại ấn tượng sâu sắc. Bạn sẽ chọn ai trong số
+          những tuyệt tác chỉ cần một tập để chinh phục trái tim? Tối đa{" "}
+          <strong>10</strong> phiếu lựa chọn bắt đầu!
         </p>
       }
       maxItems={10}
@@ -194,9 +190,13 @@ function Vote() {
       listData={favoritePublisher}
       description={
         <p>
-          Bày tỏ tình cảm và tri ân dành cho các đơn vị xuất bản đã mang đến
-          những bộ Light Novel tuyệt vời cho cộng đồng. Con số tối đa được chọn
-          là <strong>3 nhà phát hành</strong> trong một lần bình chọn.
+          <em>
+            &quot;Người mang những giấc mơ đến gần hơn với bạn, những người giữ
+            lửa cho thế giới light novel.&quot;
+          </em>{" "}
+          Hạng mục này vinh danh các nhà phát hành – những người không chỉ đưa
+          tác phẩm đến tay bạn đọc mà còn định hình cả cộng đồng. Đừng ngần ngại
+          gửi lời cảm ơn với tối đa <strong>3</strong> phiếu bầu đầy trân trọng!
         </p>
       }
       maxItems={3}
@@ -211,14 +211,17 @@ function Vote() {
       listData={sorted_favorite_rookie}
       description={
         <p>
-          Best of the best, ngôi đền văn học, nơi những xúc cảm tuyệt vời nhất
-          thăng hoa. Đó chính là hạng mục Light Novel được ưa thích nhất. Vẫn
-          như mọi khi, <strong>10</strong> chính là con số tối đa các tác phẩm
-          mà bạn được bình chọn, hãy suy nghĩ khôn ngoan trước khi đưa ra lựa
-          chọn cuối cùng!
+          <em>
+            &quot;Ngọn gió mới thổi vào làng văn học, những cái tên đầy tiềm
+            năng và sáng tạo.&quot;
+          </em>{" "}
+          Hạng mục Light Novel tân binh của năm là nơi các gương mặt mới bước ra
+          ánh sáng. Ai sẽ là ngôi sao mới ấn tượng nhất? Hãy dành tối đa{" "}
+          <strong>5</strong>
+          phiếu bầu để khích lệ họ tiếp tục tỏa sáng!
         </p>
       }
-      maxItems={10}
+      maxItems={5}
       notification="Chỉ được chọn tối đa 10 tác phẩm. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một tác phẩm khác!"
       onSelectionChange={handleChildSelection}
     />,
