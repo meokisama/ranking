@@ -192,11 +192,12 @@ function Vote() {
         <p>
           <em>
             &quot;Người mang những giấc mơ đến gần hơn với bạn, những người giữ
-            lửa cho thế giới light novel.&quot;
+            lửa cho cộng đồng Light Novel nước nhà.&quot;
           </em>{" "}
           Hạng mục này vinh danh các nhà phát hành – những người không chỉ đưa
-          tác phẩm đến tay bạn đọc mà còn định hình cả cộng đồng. Đừng ngần ngại
-          gửi lời cảm ơn với tối đa <strong>3</strong> phiếu bầu đầy trân trọng!
+          tác phẩm đến tận tay bạn đọc mà còn góp phần định hình cả cộng đồng.
+          Đừng ngần ngại gửi lời cảm ơn với tối đa <strong>3</strong> phiếu bầu
+          đầy trân trọng!
         </p>
       }
       maxItems={3}
@@ -215,9 +216,9 @@ function Vote() {
             &quot;Ngọn gió mới thổi vào làng văn học, những cái tên đầy tiềm
             năng và sáng tạo.&quot;
           </em>{" "}
-          Hạng mục Light Novel tân binh của năm là nơi các gương mặt mới bước ra
-          ánh sáng. Ai sẽ là ngôi sao mới ấn tượng nhất? Hãy dành tối đa{" "}
-          <strong>5</strong>
+          Hạng mục Light Novel tân binh của năm là nơi cạnh tranh của các gương
+          mặt mới vừa đặt bước chân đầu tiên vào thị trường trong năm nay. Ai sẽ
+          là ngôi sao mới ấn tượng nhất? Hãy dành tối đa <strong>5</strong>{" "}
           phiếu bầu để khích lệ họ tiếp tục tỏa sáng!
         </p>
       }
