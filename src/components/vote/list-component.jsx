@@ -167,9 +167,12 @@ function ListComponent({
                 onClick={() => handleClick(ln.id)}
               >
                 <div className="logo-wrapper">
-                  <img
+                  <Image
                     alt="light novel publisher logo"
-                    src={`images/publisher/${ln.publisherLogo}.webp`}
+                    src={`/images/publisher/${ln.publisherLogo}.webp`}
+                    width={278}
+                    height={278}
+                    className="h-auto"
                     loading="lazy"
                   />
                 </div>

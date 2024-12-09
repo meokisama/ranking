@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import "./styles/last-top10.scss";
 import { TOP10 } from "@/constants";
+import Image from "next/image";
 
 function LastTop10() {
   return (
@@ -46,15 +47,23 @@ function LastTop10() {
                 <div className="panel">
                   <div className="panel-rank">
                     {panel.rank.includes("png") ? (
-                      <img alt="top rank icon" src={panel.rank} />
+                      <Image
+                        alt="top rank icon"
+                        src={panel.rank}
+                        width={60}
+                        height={44}
+                        className="h-auto"
+                      />
                     ) : (
                       <span>{panel.rank}</span>
                     )}
                   </div>
-                  <img
-                    className="panel-cover"
+                  <Image
+                    className="panel-cover w-auto"
                     alt="light novel cover"
                     src={panel.src}
+                    width={300}
+                    height={438}
                   />
                 </div>
               </SwiperSlide>

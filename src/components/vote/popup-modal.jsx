@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
 import "./styles/popup-modal.scss";
+import Image from "next/image";
 
 function PopupModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,9 +39,12 @@ function PopupModal() {
         <div className="popup-modal">
           <div className="popup-banner">
             <div className="bannerimg">
-              <img
+              <Image
                 src="/popup_img.webp"
                 alt="bxh light novel popup modal image"
+                width={820}
+                height={320}
+                className="h-auto"
               />
             </div>
             <div className="bannertext">

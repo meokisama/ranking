@@ -40,10 +40,10 @@ const sorted_favorite_ranobe = ranobe.sort((a, b) =>
 );
 
 function Vote() {
-  const [thanks, setThanks] = useState(false);
-  useEffect(() => {
-    setThanks(localStorage.getItem("isVoteDone") === "true" ? true : false);
-  }, []);
+  const [thanks, setThanks] = useState(() => {
+    const storedVote = localStorage.getItem("isVoteDone");
+    return storedVote === "true";
+  });
 
   const [currentComponent, setCurrentComponent] = useState(0);
 
@@ -111,9 +111,9 @@ function Vote() {
     []
   );
 
-  useEffect(() => {
-    console.log(selectedItems);
-  }, [selectedItems]);
+  // useEffect(() => {
+  //   console.log(selectedItems);
+  // }, [selectedItems]);
 
   //Change category component
   const handleNext = () => {
@@ -254,7 +254,10 @@ function Vote() {
   };
 
   return thanks ? (
-    <ThankYou />
+    <div>
+      <ShortSplashScreen />
+      <ThankYou />
+    </div>
   ) : (
     <div>
       <ShortSplashScreen />

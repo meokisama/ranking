@@ -1,3 +1,4 @@
+import Image from "next/image";
 import "./styles/thankyou.scss";
 
 function ThankYou() {
@@ -8,9 +9,15 @@ function ThankYou() {
         <p className="subtitle">Xin cảm ơn!</p>
       </div>
       <div className="thankyou-content">
-        <img src="/thankyou-chibi.webp" alt="bxh light novel thankyou image" />
+        <Image
+          src="/thankyou-chibi.webp"
+          alt="bxh light novel thankyou image"
+          width={400}
+          height={322}
+          className="h-auto"
+        />
         <div className="text-content">
-          <p className="thankyou-graph">
+          <div className="thankyou-graph">
             <p>
               Cảm ơn quý độc giả đã hoàn thành đợt bình chọn cho{" "}
               <strong>Bảng Xếp Hạng Light Novel Việt Nam</strong> lần này.
@@ -34,7 +41,7 @@ function ThankYou() {
               và <strong>ấn vào link bên dưới</strong> để tham gia GA của chúng
               tôi!
             </p>
-          </p>
+          </div>
           <input type="text" />
           <p className="thankyou-graph" style={{ textAlign: "left" }}>
             <strong>Link bài viết GA:</strong>{" "}

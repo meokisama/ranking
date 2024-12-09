@@ -585,9 +585,12 @@ function LeaderBoardTable() {
             {dataInput.favoritePublisher.map((ln, index) => (
               <div className={`publisher-item ${ln.publisherLogo}`} key={index}>
                 <div className="logo-wrapper">
-                  <img
+                  <Image
                     alt="publisher logo"
-                    src={`images/publisher/${ln.publisherLogo}.webp`}
+                    src={`/images/publisher/${ln.publisherLogo}.webp`}
+                    width={187}
+                    height={187}
+                    className="h-auto"
                     loading="lazy"
                   />
                 </div>

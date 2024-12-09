@@ -1,13 +1,20 @@
 "use client";
 import Link from "next/link";
 import { ROUTES, TIMELINE } from "@/constants";
+import Image from "next/image";
 
 const timelineItem = TIMELINE.map((item) => ({
   color: "salmon",
   children: (
     <div className={`tlref timeline-item-${item.position}`}>
       <div className="index">
-        <img alt="bxh light novel timeline chibi" src={item.index} />
+        <Image
+          alt="bxh light novel timeline chibi"
+          src={item.index}
+          width={110}
+          height={140}
+          className="h-auto"
+        />
       </div>
       <div className="detail">
         <span className="date">{item.date}</span>

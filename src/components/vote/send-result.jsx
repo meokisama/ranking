@@ -92,11 +92,9 @@ function SendResult({ result }) {
     };
 
     const allNotEmpty = Object.keys(finalResult).every((key) => {
-      if (key === "feedback") return true;
+      if (key === "feedback" || key === "userInfo") return true;
       return Array.isArray(finalResult[key]) && finalResult[key].length > 0;
     });
-
-    // console.log(JSON.stringify(finalResult));
 
     captchaVerified
       ? allNotEmpty
@@ -312,9 +310,12 @@ function SendResult({ result }) {
                     className={`result-publisher ${item.publisherLogo}`}
                     key={index}
                   >
-                    <img
-                      src={`images/publisher/${item.publisherLogo}.webp`}
+                    <Image
+                      src={`/images/publisher/${item.publisherLogo}.webp`}
                       alt="light novel publisher logo"
+                      width={130}
+                      height={130}
+                      className="h-auto"
                     />
                   </div>
                 ))}
