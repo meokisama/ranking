@@ -1,5 +1,7 @@
-import { FeedbackHero, FeedbackContent } from "@/components/feedback";
-import { Footer, SocialHub } from "@/components/common";
+import FeedbackHero from "@/components/feedback/feedback-hero";
+import FeedbackContent from "@/components/feedback/feedback-content";
+import Footer from "@/components/common/footer";
+import SocialHub from "@/components/common/social-hub";
 import { ROUTES } from "@/constants";
 
 export const metadata = {

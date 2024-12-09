@@ -1,17 +1,16 @@
 "use client";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { ROUTES } from "@/constants";
-import { Footer } from "@/components/common";
-import {
-  VoteHeader,
-  ListComponent,
-  SendResult,
-  StepBar,
-  PopupModal,
-  Feedback,
-  ThankYou,
-} from "@/components/vote";
-import { ranobe, favoritePublisher } from "./List";
+import Footer from "@/components/common/footer";
+import VoteHeader from "@/components/vote/vote-header";
+import ListComponent from "@/components/vote/list-component";
+import SendResult from "@/components/vote/send-result";
+import StepBar from "@/components/vote/stepbar";
+import PopupModal from "@/components/vote/popup-modal";
+import Feedback from "@/components/vote/feedback";
+import ThankYou from "@/components/vote/thankyou";
+import ranobe from "./data/ranobe.json";
+import publisher from "./data/publisher.json";
 import ScrollToTop from "@/utils/ScrollToTop";
 import ShortSplashScreen from "@/components/common/short-splash-screen";
 
@@ -152,8 +151,7 @@ function Vote() {
           </em>{" "}
           Đó chính là hạng mục Light Novel được yêu thích nhất. Vẫn như mọi khi,{" "}
           <strong>10</strong> là con số tối đa các tác phẩm mà bạn được phép
-          bình chọn. Hãy cân nhắc thật kỹ trước khi đưa ra quyết định cuối cùng
-          nhé!
+          bình chọn. Hãy cân nhắc thật kỹ trước khi đưa ra quyết định cuối cùng!
         </p>
       }
       maxItems={10}
@@ -187,7 +185,7 @@ function Vote() {
       key="3"
       title="Nhà phát hành được yêu thích nhất"
       category="favoritePublisher"
-      listData={favoritePublisher}
+      listData={publisher}
       description={
         <p>
           <em>
