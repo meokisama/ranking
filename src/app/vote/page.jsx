@@ -40,10 +40,11 @@ const sorted_favorite_ranobe = ranobe.sort((a, b) =>
 );
 
 function Vote() {
-  const [thanks, setThanks] = useState(() => {
-    const storedVote = localStorage.getItem("isVoteDone");
-    return storedVote === "true";
-  });
+  const [thanks, setThanks] = useState(false);
+
+  useEffect(() => {
+    setThanks(localStorage.getItem("isVoteDone") === "true");
+  }, []);
 
   const [currentComponent, setCurrentComponent] = useState(0);
 

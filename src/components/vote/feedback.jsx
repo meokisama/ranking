@@ -52,17 +52,16 @@ function Feedback({ id, title, category, description, onSelectionChange }) {
       setRecommend({ name: "Đề xuất bản quyền", title: "", publisher: "" });
   };
 
-  // State để lưu trữ giá trị debounce
   const [debouncedFeedback, setDebouncedFeedback] = useState(feedback);
   const [debouncedRecommend, setDebouncedRecommend] = useState(recommend);
-  // Debounce feedback và recommend
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedFeedback(feedback);
       setDebouncedRecommend(recommend);
       localStorage.setItem("bxhlnvn_feedback", JSON.stringify(feedback));
       localStorage.setItem("bxhlnvn_recommend", JSON.stringify(recommend));
-    }, 1000); // Delay 300ms hoặc thời gian bạn muốn
+    }, 1000);
 
     return () => clearTimeout(handler);
   }, [feedback, recommend]);

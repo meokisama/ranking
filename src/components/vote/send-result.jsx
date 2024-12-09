@@ -26,14 +26,11 @@ function SendResult({ result }) {
   const [age, setAge] = useState(null);
 
   useEffect(() => {
+    setDone(localStorage.getItem("isVoteDone") === "true");
     setGender(JSON.parse(localStorage.getItem("bxhlnvn_gender")) ?? null);
     setAge(JSON.parse(localStorage.getItem("bxhlnvn_age")) ?? null);
   }, []);
 
-  useEffect(() => {
-    const isVoteDone = localStorage.getItem("isVoteDone") === "true";
-    setDone(isVoteDone);
-  }, []);
   const captchaRef = useRef(null);
 
   const onVerify = (token) => {
@@ -46,7 +43,6 @@ function SendResult({ result }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate gender and age
     if (!gender) {
       NotificationHub(
         noti,
@@ -119,6 +115,7 @@ function SendResult({ result }) {
               //   console.log(data);
               if (data.message === "created") {
                 setDone(true);
+                localStorage.setItem("isVoteDone", true);
               }
             })
             .catch((error) => {
@@ -150,10 +147,6 @@ function SendResult({ result }) {
           "Vui lòng xác minh captcha trước khi gửi!"
         );
   };
-
-  useEffect(() => {
-    localStorage.setItem("isVoteDone", JSON.stringify(done));
-  }, [done]);
 
   return (
     <div className="result-container">
