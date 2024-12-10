@@ -14,15 +14,19 @@ import publisher from "./data/publisher.json";
 import ScrollToTop from "@/utils/ScrollToTop";
 import ShortSplashScreen from "@/components/common/short-splash-screen";
 
-function filterByIds(data, idsToInclude) {
-  return data.filter((item) => idsToInclude.includes(item.id));
+function filterByIds(data, ids) {
+  return data.filter((item) => ids.includes(item.id));
 }
-
+// 1.Favorite Light Novel
+const sorted_favorite_ranobe = ranobe.sort((a, b) =>
+  a.seriesName.localeCompare(b.seriesName, "vi")
+);
+// 2.Favorite Rookie
 const sorted_favorite_rookie = filterByIds(
   ranobe,
   [2, 6, 13, 17, 19, 22, 24, 38, 39, 40, 41, 43, 47]
 ).sort((a, b) => a.seriesName.localeCompare(b.seriesName, "vi"));
-
+// 3.Favorite Oneshot
 const sorted_favorite_oneshot = filterByIds(
   ranobe,
   [
@@ -35,13 +39,9 @@ const sorted_favorite_oneshot = filterByIds(
   ]
 ).sort((a, b) => a.seriesName.localeCompare(b.seriesName, "vi"));
 
-const sorted_favorite_ranobe = ranobe.sort((a, b) =>
-  a.seriesName.localeCompare(b.seriesName, "vi")
-);
-
 function Vote() {
+  // Load vote status from local storage
   const [thanks, setThanks] = useState(false);
-
   useEffect(() => {
     setThanks(localStorage.getItem("isVoteDone") === "true");
   }, []);
@@ -81,7 +81,7 @@ function Vote() {
   );
 
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
-
+  // Logic for update all selections from all categories
   const handleChildSelection = useCallback(
     (category, title, selectedItemsFromChild) => {
       setSelectedItems((prevSelectedItems) => {
@@ -112,6 +112,7 @@ function Vote() {
     []
   );
 
+  // Log all selections
   // useEffect(() => {
   //   console.log(selectedItems);
   // }, [selectedItems]);
@@ -156,7 +157,6 @@ function Vote() {
         </p>
       }
       maxItems={10}
-      notification="Chỉ được chọn tối đa 10 tác phẩm. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một tác phẩm khác!"
       onSelectionChange={handleChildSelection}
     />,
     <ListComponent
@@ -173,12 +173,11 @@ function Vote() {
           </em>{" "}
           Hạng mục Oneshot được yêu thích nhất chính là nơi vinh danh những câu
           chuyện ngắn nhưng để lại ấn tượng sâu sắc. Bạn sẽ chọn ai trong số
-          những tuyệt tác chỉ cần một tập để chinh phục trái tim? Tối đa{" "}
-          <strong>10</strong> phiếu lựa chọn bắt đầu!
+          những tuyệt tác chỉ cần một tập để chinh phục trái tim độc giả? Tối đa{" "}
+          <strong>5</strong> phiếu lựa chọn bắt đầu!
         </p>
       }
-      maxItems={10}
-      notification="Chỉ được chọn tối đa 10 tác phẩm. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một tác phẩm khác!"
+      maxItems={5}
       onSelectionChange={handleChildSelection}
     />,
     <ListComponent
@@ -200,7 +199,6 @@ function Vote() {
         </p>
       }
       maxItems={3}
-      notification="Chỉ được chọn tối đa 3 NPH. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một NPH khác!"
       onSelectionChange={handleChildSelection}
     />,
     <ListComponent
@@ -217,12 +215,11 @@ function Vote() {
           </em>{" "}
           Hạng mục Light Novel tân binh của năm là nơi cạnh tranh của các gương
           mặt mới vừa đặt bước chân đầu tiên vào thị trường trong năm nay. Ai sẽ
-          là ngôi sao mới ấn tượng nhất? Hãy dành tối đa <strong>5</strong>{" "}
+          là ngôi sao mới ấn tượng nhất? Hãy dành tối đa <strong>3</strong>{" "}
           phiếu bầu để khích lệ họ tiếp tục tỏa sáng!
         </p>
       }
-      maxItems={5}
-      notification="Chỉ được chọn tối đa 10 tác phẩm. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một tác phẩm khác!"
+      maxItems={3}
       onSelectionChange={handleChildSelection}
     />,
     <Feedback

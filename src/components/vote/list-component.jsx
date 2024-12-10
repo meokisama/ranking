@@ -20,7 +20,6 @@ function ListComponent({
   description,
   listData,
   maxItems,
-  notification,
   category,
   onSelectionChange,
 }) {
@@ -41,7 +40,13 @@ function ListComponent({
     const isChosen = chosenItems.find((item) => item.id === id);
     //Show alert if reach max number of items
     if (chosenItems.length >= maxItems && !isChosen) {
-      NotificationHub(noti, "Số bình chọn không hợp lệ!", notification);
+      NotificationHub(
+        noti,
+        "Số bình chọn không hợp lệ!",
+        category === "favoritePublisher"
+          ? `Chỉ được chọn tối đa ${maxItems} NPH. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một NPH khác!`
+          : `Chỉ được chọn tối đa ${maxItems} tác phẩm. Hãy thay đổi những lựa chọn trước đó nếu muốn chọn một tác phẩm khác!`
+      );
       return;
     }
 
