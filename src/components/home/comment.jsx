@@ -22,7 +22,7 @@ function Comment() {
             clickable: true,
           }}
           autoplay={{
-            delay: 3500,
+            delay: 4500,
             disableOnInteraction: false,
           }}
           breakpoints={{
@@ -38,7 +38,7 @@ function Comment() {
         >
           {COMMENTS.map((comment, index) => (
             <SwiperSlide key={index}>
-              <div className="slide-content">
+              <div className="slide-content w-full">
                 <div className="avatar">
                   <Image
                     className="avatar-main"

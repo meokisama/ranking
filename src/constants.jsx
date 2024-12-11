@@ -198,8 +198,8 @@ const COLLAB_PAGES = [
   },
   {
     name: "Sword Art Online Vietnam",
-    username: "sword.art.online.vietnam",
-    url: "https://facebook.com/sword.art.online.vietnam",
+    username: "saovthesurvivors",
+    url: "https://www.facebook.com/saovthesurvivors",
     avatar: "/images/media/sao.webp",
   },
   {
@@ -298,6 +298,24 @@ const COLLAB_PAGES = [
     url: "https://facebook.com/profile.php?id=100094379739358",
     avatar: "/images/media/shunkashuutou.webp",
   },
+  {
+    name: "Chitose-kun wa ramune bin no naka VN",
+    username: "ChiramuneVN",
+    url: "https://www.facebook.com/@ChiramuneVN",
+    avatar: "/images/media/chiramune.jpg",
+  },
+  {
+    name: "Unnamed Memory Vietnam",
+    username: "61559680882762",
+    url: "https://www.facebook.com/profile.php?id=61559680882762",
+    avatar: "/images/media/unname-memory.jpg",
+  },
+  {
+    name: "Gimai Seikatsu Vietnam Fanpage - Chung một mái nhà",
+    username: "gimaiseikatsuvn",
+    url: "https://www.facebook.com/gimaiseikatsuvn",
+    avatar: "/images/media/gimai-seikatsu.jpg",
+  },
 ];
 
 const COMMENTS = [
@@ -310,10 +328,10 @@ const COMMENTS = [
   },
   {
     content:
-      "Em nghĩ, fandom sẽ còn phát triển mạnh, nhất là khi Tsuki vừa nhá hàng spin-off của truyện. Đó là một dấu hiệu tích cực nhất về fandom này dù cho Vol 13 cũng đã ra mắt.",
-    author: "Otome Game Sekai wa Mob ni Kibishii Sekai Desu Việt Nam",
-    username: "MobSekaVietNam",
-    avatar: "/images/media/mobuseka.webp",
+      'Với sự ra quân lần đầu tiên và cũng có thể là cuối cùng, bọn mình đặt hết hi vọng vào các bạn fan của Gimai Seikatsu, để một lần chúng ta được "sánh ngang" với những Arya hay Thiên sứ quá đỗi quen thuộc. Mục tiêu không gì hết ngoài lọt vào top 3 chung cuộc, và nếu có thể thì sẽ bước lên cao hơn.',
+    author: "Gimai Seikatsu Vietnam Fanpage",
+    username: "gimaiseikatsuvn",
+    avatar: "/images/media/gimai-seikatsu.jpg",
   },
   {
     content:
@@ -324,17 +342,16 @@ const COMMENTS = [
   },
   {
     content:
-      "Chúng cháu sẽ vẫn chỉ giữ KPI như năm ngoái là lọt vô top 10. Còn về việc chúng cháu còn nắm giữ top 3 hay không thì chúng cháu sẽ để các fan quyết định ạ.",
-    author: "Netoge no Yome ga Ninki Idol datta Vietnam Fanpage",
-    username: "NetogeVN",
-    avatar: "/images/media/netoge.webp",
+      "Mong rằng trong tương lai, với việc Anime mùa 2 sắp được công chiều cùng với việc chúng mình sẽ cố gắng quảng bá và hợp tác trong các sự kiện nhiều hơn thì bộ truyện sẽ dần có được vị thế tốt hơn trong thị trường Light Novel Việt Nam.",
+    author: "Unnamed Memory Vietnam",
+    username: "61559680882762",
+    avatar: "/images/media/unname-memory.jpg",
   },
   {
-    content:
-      "Có lẽ chính nhờ sự kết hợp hài hoà giữa nhiều thể loại mà câu chuyện “Thám tử đã chết” mang một vẻ lôi cuốn riêng, không quá phức tạp như những bộ truyện thuần trinh thám hay thuần khoa học viễn tưởng, và cũng mang lại một sự giải trí nhẹ nhàng nhờ yếu tố tình cảm hài hước của nó.",
-    author: "Tantei wa Mou, Shindeiru VN",
-    username: "TanmoshiVN",
-    avatar: "/images/media/tanmoshi.webp",
+    content: "#bietthebanpage",
+    author: "Sword Art Online Vietnam",
+    username: "saovthesurvivors",
+    avatar: "/images/media/sao.webp",
   },
 ];
 
