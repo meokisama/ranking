@@ -1,12 +1,11 @@
+"use client";
 import FeedbackHero from "@/components/feedback/feedback-hero";
-import FeedbackContent from "@/components/feedback/feedback-content";
+// import FeedbackContent from "@/components/feedback/feedback-content";
+import FeedbackContent from "@/components/feedback/api";
 import Footer from "@/components/common/footer";
 import SocialHub from "@/components/common/social-hub";
+import ProtectedRoute from "@/components/common/protected-route";
 import { ROUTES } from "@/constants";
-
-export const metadata = {
-  title: "Feedback",
-};
 
 function FeedbackResult() {
   return (
@@ -19,4 +18,9 @@ function FeedbackResult() {
   );
 }
 
-export default FeedbackResult;
+function ProtectedBoard() {
+  return <ProtectedRoute component={FeedbackResult} />;
+}
+
+export default ProtectedBoard;
+// export default FeedbackResult;

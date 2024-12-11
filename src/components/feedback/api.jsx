@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
-import "./FeedbackContent.scss";
+import "./styles/feedback-content.scss";
 import axios from "axios";
 
 const fetchFeedbacks = async (page) => {

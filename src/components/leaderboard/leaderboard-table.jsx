@@ -8,28 +8,8 @@ import { publisherFilter, handleList, addZeroCount } from "./filter";
 import allRank from "./data/first-half-2024.json";
 import Image from "next/image";
 
-const mergeRanobe = (array) => {
-  return array.map((item) => {
-    const { ranobe, ...rest } = item;
-    return { ...rest, ...ranobe };
-  });
-};
-
-const mergeIllustrator = (array) => {
-  return array.map((item) => {
-    const { illustrator, ...rest } = item;
-    return { ...rest, ...illustrator };
-  });
-};
-
-const mergePublisher = (array) => {
-  return array.map((item) => {
-    const { publisher, ...rest } = item;
-    return { ...rest, ...publisher };
-  });
-};
-
-const selectArray = [
+// All categories of all time
+const selectable_categories = [
   {
     value: "favoriteRanobe",
     label: "Light Novel được yêu thích nhất",
@@ -42,30 +22,71 @@ const selectArray = [
     value: "favoritePublisher",
     label: "Nhà phát hành được yêu thích nhất",
   },
+  {
+    value: "favoriteOneshot",
+    label: "Oneshot được yêu thích nhất",
+  },
+  {
+    value: "favoriteRookie",
+    label: "Light Novel tân binh của năm",
+  },
 ];
 
+// Change format of JSON to fit with antd table
+const mergeAttribute = (array, attribute) => {
+  return array.map((item) => {
+    const { [attribute]: attr, ...rest } = item;
+    return { ...rest, ...attr };
+  });
+};
+// Utility function to filter categories based on selected year
+const filterCategories = (selectedValues) => {
+  return selectable_categories.filter((item) =>
+    selectedValues.includes(item.value)
+  );
+};
+
+const first_half_2024 = [
+  "favoriteRanobe",
+  "favoriteIllustrator",
+  "favoritePublisher",
+];
+const second_half_2024 = [
+  "favoriteRanobe",
+  "favoriteOneshot",
+  "favoritePublisher",
+  "favoriteRookie",
+];
+
+const selectArray = filterCategories(first_half_2024);
+
 function LeaderBoardTable() {
+  // Default category to init table
   const [selectedCategory, setSelectedCategory] = useState({
     value: "favoriteRanobe",
     label: "Light Novel được yêu thích nhất",
   });
-
+  // All data can be passed to table
   const [dataInput, setDataInput] = useState({
     favoriteRanobe: [],
     favoriteIllustrator: [],
     favoritePublisher: [],
   });
+
+  const [data, setData] = useState([]);
+
   const [countVote, setCountVote] = useState(null);
+
   useEffect(() => {
     if (allRank && allRank.data) {
       const favoriteRanobe = handleList(
-        mergeRanobe(allRank.data.favoriteRanobes)
+        mergeAttribute(allRank.data.favoriteRanobes, "ranobe")
       );
       const favoritePublisher = handleList(
-        mergePublisher(allRank.data.favoritePublishers)
+        mergeAttribute(allRank.data.favoritePublishers, "publisher")
       );
       const favoriteIllustrator = handleList(
-        mergeIllustrator(allRank.data.favoriteIllustrators)
+        mergeAttribute(allRank.data.favoriteIllustrators, "illustrator")
       );
       setDataInput({
         favoriteRanobe,
@@ -78,19 +99,21 @@ function LeaderBoardTable() {
     }
   }, []);
 
-  const [data, setData] = useState(dataInput.favoriteRanobe);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
+
   const handleReset = (clearFilters) => {
     clearFilters();
     setSearchText("");
   };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,

@@ -114,7 +114,7 @@ function Vote() {
 
   // Log all selections
   // useEffect(() => {
-  //   console.log(selectedItems);
+  //   console.log(JSON.stringify(selectedItems));
   // }, [selectedItems]);
 
   //Change category component

@@ -116,6 +116,7 @@ function SendResult({ result }) {
               if (data.message === "created") {
                 setDone(true);
                 localStorage.setItem("isVoteDone", true);
+                localStorage.setItem("bxhlnvn_result", JSON.stringify(result));
               }
             })
             .catch((error) => {

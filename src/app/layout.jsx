@@ -1,5 +1,10 @@
 import localFont from "next/font/local";
-import { Lexend, Playfair_Display, Poppins } from "next/font/google";
+import {
+  Lexend,
+  Playfair_Display,
+  Poppins,
+  Imperial_Script,
+} from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.scss";
 import { NotificationProvider } from "@/utils/Notification";
@@ -13,6 +18,12 @@ const DTPhudu = localFont({
 const jaro = localFont({
   src: "./Jaro.ttf",
   variable: "--font-jaro",
+  display: "swap",
+});
+const imperial = Imperial_Script({
+  subsets: ["vietnamese"],
+  variable: "--font-imperial-script",
+  weight: "400",
   display: "swap",
 });
 const lexend = Lexend({
@@ -77,7 +88,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="vi"
-      className={`${DTPhudu.variable} ${jaro.variable} ${lexend.variable} ${playfair_display.variable} ${poppins.variable}`}
+      className={`${DTPhudu.variable} ${jaro.variable} ${lexend.variable} ${playfair_display.variable} ${poppins.variable} ${imperial.variable}`}
       suppressHydrationWarning
     >
       <body>

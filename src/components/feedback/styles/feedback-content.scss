@@ -1,48 +1,51 @@
 .feedback-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  position: relative;
+  .feedback-grid {
+    padding: 2rem;
+    width: min(1300px, 95%);
+    // background-color: #f3f4f6;
+    // border: 1px solid #7c7b7b40;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
     position: relative;
-    .feedback-grid {
-        padding: 2rem;
-        width: min(1300px, 95%);
-        background-color: #f3f4f6;
-        border: 1px solid #7c7b7b40;
-        border-radius: 8px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        position: relative;
-        margin-bottom: 10rem;
-        .feedback-item {
-            background-color: white;
-            border: 1px solid #7c7b7b40;
-            border-radius: 5px;
-            padding: 10px;
-            position: relative;
-            .date {
-                text-align: right;
-                font-style: italic;
-                position: absolute;
-                bottom: 5px;
-                right: 10px;
-                font-size: 14px;
-            }
-        }
+    margin-bottom: 10rem;
+    .feedback-item {
+      background-color: #f5efe7;
+      box-shadow: 0 0 0 8px #f5efe7, 4px 4px 8px 2px rgba(0, 0, 0, 0.5);
+      border: 2px dashed #daa06d;
+      //   background-color: white;
+      //   border: 1px solid #7c7b7b40;
+      border-radius: 15px;
+      padding: 10px;
+      position: relative;
+      .date {
+        text-align: right;
+        font-style: italic;
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 14px;
+      }
     }
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .feedback-content {
-        .feedback-grid {
-            grid-template-columns: repeat(1, 1fr);
-            .feedback-item {
-                font-size: 14px;
-                .date {
-                    font-size: 12px;
-                }
-            }
+  .feedback-content {
+    .feedback-grid {
+      grid-template-columns: repeat(1, 1fr);
+      .feedback-item {
+        font-size: 14px;
+        .date {
+          font-size: 12px;
         }
+      }
     }
+  }
 }

@@ -42,6 +42,7 @@ const ProtectedRoute = ({ component: Component }) => {
               type="password"
               value={password}
               onChange={handlePasswordChange}
+              autoFocus
             />
             <button type="submit">Submit</button>
           </form>
