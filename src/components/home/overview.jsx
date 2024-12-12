@@ -28,14 +28,14 @@ function Overview() {
     };
   }, []);
 
-  const targetDate = "2024-12-14T23:59:00";
+  const targetDate = "2024-12-24T23:29:00";
   const calculateTimeLeft = () => {
     const difference = new Date(targetDate) - new Date();
     let timeLeft = {};
 
     if (difference > 0) {
       timeLeft = {
-        title: "Kì tiếp theo (14/12/2024)",
+        title: "Thời gian bình chọn còn lại",
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor(
           (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
