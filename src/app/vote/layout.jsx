@@ -1,13 +1,16 @@
 import { redirect } from "next/navigation";
+import { isVotingPeriod } from "@/utils/date-config";
 
 export const metadata = {
   title: "Bình Chọn",
 };
 
 export default function RootLayout({ children }) {
-  const shouldRedirect = true;
+  const shouldRedirect = !isVotingPeriod();
+
   if (shouldRedirect) {
     redirect("/");
   }
+
   return <div>{children}</div>;
 }

@@ -7,13 +7,13 @@ import "./styles/header.scss";
 import Sakura from "./sakura";
 import Image from "next/image";
 import { useNotification } from "@/utils/Notification";
-import DateChecker from "@/utils/DateChecker";
+import DateChecker from "@/utils/date-checker";
 
 function Header() {
-  const [imgHeight, setImgHeight] = useState(null);
-  const [shouldHide, setShouldHide] = useState(false);
-  const bannerRef = useRef(null);
-  const imgRef = useRef(null);
+  const [imgHeight, setImgHeight] = useState<number>();
+  const [shouldHide, setShouldHide] = useState<boolean>(false);
+  const bannerRef = useRef<any>(null);
+  const imgRef = useRef<any>(null);
 
   useEffect(() => {
     const bannerElement = bannerRef.current;
@@ -51,6 +51,7 @@ function Header() {
   const notification = useNotification();
   useEffect(() => {
     const voteBtn = document.getElementById("header-vote");
+    if (!voteBtn) return;
     const handleClick = DateChecker(notification);
     voteBtn.addEventListener("click", handleClick);
 

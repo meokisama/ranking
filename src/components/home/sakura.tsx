@@ -1,6 +1,6 @@
 import "./styles/sakura.scss";
 
-function Sakura({ density }) {
+function Sakura({ density }: { density: number }) {
   const number = density;
 
   return (

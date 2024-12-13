@@ -10,7 +10,7 @@ import ResultModal from "@/components/home/result-modal";
 import Footer from "@/components/common/footer";
 import SocialHub from "@/components/common/social-hub";
 import SplashScreen from "@/components/common/splash-screen";
-import ScrollToTop from "@/utils/ScrollToTop";
+import ScrollToTop from "@/utils/scroll-to-top";
 
 function Home() {
   return (

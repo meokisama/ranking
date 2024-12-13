@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 function VoteHeader() {
-  const [imgHeight, setImgHeight] = useState(null);
+  const [imgHeight, setImgHeight] = useState<number>();
 
   useEffect(() => {
     const handleResize = () => {

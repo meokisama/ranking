@@ -1,19 +1,22 @@
 import { NotificationHub } from "@/utils/Notification";
+import { VOTING_START_TIME, VOTING_END_TIME } from "@/utils/date-config";
 
-export default function DateChecker(notification) {
-  return (event) => {
+export default function DateChecker(notification: any) {
+  return (event: any) => {
     const today = new Date();
-    const startDate = new Date(today.getFullYear(), 11, 14, 19, 57, 0, 0); // 14/12 19:57:00
-    const endDate = new Date(today.getFullYear(), 11, 24, 23, 29, 59, 999); // 24/12 23:29:59.999
 
-    if (today < startDate) {
+    const formattedStartTime = `${VOTING_START_TIME.getDate()}/${
+      VOTING_START_TIME.getMonth() + 1
+    }`;
+
+    if (today < VOTING_START_TIME) {
       event.preventDefault();
       NotificationHub(
         notification,
         "Bình chọn chưa mở!",
-        "Chưa tới thời gian bình chọn, vui lòng quay lại vào 20:00 ngày 14/12."
+        `Chưa tới thời gian bình chọn, vui lòng quay lại vào 20:00 ngày ${formattedStartTime}.`
       );
-    } else if (today > endDate) {
+    } else if (today > VOTING_END_TIME) {
       event.preventDefault();
       NotificationHub(
         notification,

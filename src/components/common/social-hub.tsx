@@ -7,11 +7,14 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
-function SocialHub() {
+const SocialHub: React.FC = () => {
   const { theme, setTheme } = useTheme();
 
-  const [isVisible, setIsVisible] = useState(false);
-  const handleScroll = () => setIsVisible(window.scrollY > 400);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const handleScroll = () => {
+    setIsVisible(window.scrollY > 400);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -20,11 +23,13 @@ function SocialHub() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <div
       className="social-hub"
       style={{ display: isVisible ? "block" : "none" }}
     >
+      {/* Theme toggle button (commented out) */}
       {/* <div className="mb-2">
         <button
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
@@ -37,6 +42,7 @@ function SocialHub() {
           )}
         </button>
       </div> */}
+
       <Link href={SOCIAL.facebook} target="_blank">
         <div className="facebook">
           <Image
@@ -49,6 +55,6 @@ function SocialHub() {
       </Link>
     </div>
   );
-}
+};
 
 export default SocialHub;

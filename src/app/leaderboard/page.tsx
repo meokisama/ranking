@@ -3,13 +3,20 @@ import Footer from "@/components/common/footer";
 import SocialHub from "@/components/common/social-hub";
 import ShortSplashScreen from "@/components/common/short-splash-screen";
 import Banner from "@/components/leaderboard/banner";
-// import LeaderBoardTable from "@/components/leaderboard/leaderboard-table";
 import LeaderBoardTable from "@/components/leaderboard/leaderboard-api";
 import { ROUTES } from "@/constants";
-import ScrollToTop from "@/utils/ScrollToTop";
+import ScrollToTop from "@/utils/scroll-to-top";
 import ProtectedRoute from "@/components/common/protected-route";
 
-function LeaderBoard({ responseData: data }) {
+interface ResponseData {
+  [key: string]: any;
+}
+
+interface LeaderBoardProps {
+  responseData: ResponseData;
+}
+
+const LeaderBoard: React.FC<LeaderBoardProps> = ({ responseData: data }) => {
   return (
     <div>
       <ShortSplashScreen />
@@ -22,11 +29,10 @@ function LeaderBoard({ responseData: data }) {
       </div>
     </div>
   );
-}
+};
 
-function ProtectedBoard() {
+const ProtectedBoard: React.FC = () => {
   return <ProtectedRoute component={LeaderBoard} />;
-}
+};
 
-// export default LeaderBoard;
 export default ProtectedBoard;

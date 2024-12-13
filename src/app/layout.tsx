@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import localFont from "next/font/local";
 import {
   Lexend,
@@ -47,7 +48,7 @@ const title = "Bảng Xếp Hạng Light Novel Việt Nam";
 const description =
   "Đây là bảng xếp hạng Light Novel Việt Nam, nơi sức sáng tạo của tác giả gặp gỡ với đam mê của độc giả. Hãy bình chọn cho tác phẩm yêu thích của bạn!";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     template: "%s | Bảng Xếp Hạng Light Novel Việt Nam",
     default: title,
@@ -80,11 +81,14 @@ export const metadata = {
     card: "summary_large_image",
     title: title,
     description: description,
-    url: "https://vnlnranking.moe",
   },
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="vi"
@@ -98,7 +102,7 @@ export default function RootLayout({ children }) {
           </Providers>
         </NotificationProvider>
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4} />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4 as string} />
     </html>
   );
 }

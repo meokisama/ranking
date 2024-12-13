@@ -11,10 +11,27 @@ import Feedback from "@/components/vote/feedback";
 import ThankYou from "@/components/vote/thankyou";
 import ranobe from "./data/ranobe.json";
 import publisher from "./data/publisher.json";
-import ScrollToTop from "@/utils/ScrollToTop";
+import ScrollToTop from "@/utils/scroll-to-top";
 import ShortSplashScreen from "@/components/common/short-splash-screen";
 
-function filterByIds(data, ids) {
+interface RanobeItem {
+  id: number;
+  seriesName: string;
+  [key: string]: any;
+}
+
+interface PublisherItem {
+  id: number;
+  [key: string]: any;
+}
+
+interface SelectedCategory {
+  category_name: string;
+  category_short: string;
+  chosenItems: any[];
+}
+
+function filterByIds(data: RanobeItem[], ids: number[]) {
   return data.filter((item) => ids.includes(item.id));
 }
 // 1.Favorite Light Novel
@@ -83,7 +100,7 @@ function Vote() {
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
   // Logic for update all selections from all categories
   const handleChildSelection = useCallback(
-    (category, title, selectedItemsFromChild) => {
+    (category: string, title: string, selectedItemsFromChild: any) => {
       setSelectedItems((prevSelectedItems) => {
         const updatedSelectedItems = [...prevSelectedItems];
         const existingIndex = updatedSelectedItems.findIndex(
@@ -133,7 +150,7 @@ function Vote() {
   };
 
   //onChange for Steps
-  const onChange = (current) => {
+  const onChange = (current: number) => {
     setCurrentComponent(current);
     scrollToTop();
   };

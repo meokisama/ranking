@@ -1,18 +1,35 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Timeline } from "antd";
 import CountUp from "react-countup";
 import "./styles/overview.scss";
-import { ROUTES } from "@/constants";
+import { ROUTES, TIME_PERIOD } from "@/constants";
 import timelineItem from "./timeline";
 import SectionTitle from "./section-title";
 import Image from "next/image";
 import { useNotification } from "@/utils/Notification";
-import DateChecker from "@/utils/DateChecker";
+import DateChecker from "@/utils/date-checker";
+
+interface TimeLeft {
+  title?: string;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
 
 function Overview() {
-  const [isWideScreen, setIsWideScreen] = useState(true);
+  const [isWideScreen, setIsWideScreen] = useState<boolean>(true);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    title: "Thời gian bình chọn còn lại",
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const [hydrated, setHydrated] = useState<boolean>(false);
+  const notification = useNotification();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,13 +45,20 @@ function Overview() {
     };
   }, []);
 
-  const targetDate = "2024-12-24T23:29:00";
-  const calculateTimeLeft = () => {
-    const difference = new Date(targetDate) - new Date();
-    let timeLeft = {};
+  const calculateTimeLeft = useCallback((): TimeLeft => {
+    const targetDate = new Date(
+      TIME_PERIOD.end.year,
+      TIME_PERIOD.end.month,
+      TIME_PERIOD.end.day,
+      TIME_PERIOD.end.hour,
+      TIME_PERIOD.end.minute,
+      TIME_PERIOD.end.second,
+      TIME_PERIOD.end.millisecond
+    );
+    const difference = targetDate.getTime() - new Date().getTime();
 
     if (difference > 0) {
-      timeLeft = {
+      return {
         title: "Thời gian bình chọn còn lại",
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor(
@@ -45,12 +69,8 @@ function Overview() {
       };
     }
 
-    return timeLeft;
-  };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [hydrated, setHydrated] = useState(false);
-  const notification = useNotification();
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -58,13 +78,17 @@ function Overview() {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [timeLeft]);
+  }, [timeLeft, calculateTimeLeft]);
 
   useEffect(() => {
     if (hydrated) {
       const overviewBtn = document.getElementById("overview-vote");
       const timelineBtn = document.getElementById("timeline-vote");
+
+      if (!overviewBtn || !timelineBtn) return;
+
       const handleClick = DateChecker(notification);
+
       overviewBtn.addEventListener("click", handleClick);
       timelineBtn.addEventListener("click", handleClick);
 

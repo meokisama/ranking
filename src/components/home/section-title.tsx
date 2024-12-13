@@ -1,6 +1,12 @@
 import "./styles/section-title.scss";
 
-function SectionTitle({ title, description }) {
+function SectionTitle({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
   return (
     <div className="section-title">
       <div className="section-title-content">

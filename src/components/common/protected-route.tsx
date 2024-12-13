@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import "./styles/protected-route.scss";
 
-const ProtectedRoute = ({ component: Component }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState("");
-  const [data, setData] = useState(null);
+interface ProtectedRouteProps {
+  component: React.ComponentType<{ responseData: any }>;
+}
 
-  const handlePasswordChange = (event) => {
+interface AuthResponse {
+  message: string;
+  [key: string]: any;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  component: Component,
+}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
+  const [data, setData] = useState<any>(null);
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_ALL_RANK}?password=${password}`
       );
-      const result = await response.json();
+      const result: AuthResponse = await response.json();
+
       if (result.message === "incorrectPassword") {
         setIsAuthenticated(false);
         window.alert("Incorrect password");

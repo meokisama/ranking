@@ -3,18 +3,36 @@ import Link from "next/link";
 import "./styles/footer.scss";
 import { ROUTES, AUTHORS } from "@/constants";
 import { useNotification } from "@/utils/Notification";
-import DateChecker from "@/utils/DateChecker";
+import DateChecker from "@/utils/date-checker";
 import { useEffect } from "react";
 
-function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
+interface Author {
+  name: string;
+  url: string;
+  description: string;
+}
+
+interface FooterProps {
+  text?: string;
+  to?: string;
+}
+
+const Footer: React.FC<FooterProps> = ({
+  text = "Bình Chọn",
+  to = ROUTES.VOTE,
+}) => {
   const notification = useNotification();
+
   useEffect(() => {
     if (text === "Bình Chọn") {
       const voteBtn = document.getElementById("footer-vote");
-      const handleClick = DateChecker(notification);
-      voteBtn.addEventListener("click", handleClick);
 
-      return () => voteBtn.removeEventListener("click", handleClick);
+      if (voteBtn) {
+        const handleClick = DateChecker(notification);
+        voteBtn.addEventListener("click", handleClick);
+
+        return () => voteBtn.removeEventListener("click", handleClick);
+      }
     }
   }, [notification, text]);
 
@@ -23,7 +41,7 @@ function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
       <div>
         <div className="scrolling-authors">
           <p>
-            {AUTHORS.map((author, index) => (
+            {AUTHORS.map((author: Author, index: number) => (
               <span key={index}>
                 「
                 <Link href={author.url} target="_blank">
@@ -34,7 +52,7 @@ function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
             ))}
           </p>
           <p>
-            {AUTHORS.map((author, index) => (
+            {AUTHORS.map((author: Author, index: number) => (
               <span key={index}>
                 「
                 <Link href={author.url} target="_blank">
@@ -54,6 +72,6 @@ function Footer({ text = "Bình Chọn", to = ROUTES.VOTE }) {
       </div>
     </div>
   );
-}
+};
 
 export default Footer;

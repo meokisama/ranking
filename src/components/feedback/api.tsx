@@ -3,21 +3,33 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import "./styles/feedback-content.scss";
 import axios from "axios";
 
-const fetchFeedbacks = async (page) => {
+interface Feedback {
+  topic: string;
+  content: string;
+  title: string;
+  publisher: string;
+}
+
+interface FeedbackItem {
+  feedback: Feedback;
+  createdAt: string;
+}
+
+const fetchFeedbacks = async (page: number): Promise<FeedbackItem[]> => {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_FEEDBACK}?limit=40&page=${page}`
   );
   const data = response.data.data.results
-    .filter((item) => item.feedback.topic || item.feedback.content)
+    .filter((item: any) => item.feedback.topic || item.feedback.content)
     .reverse()
-    .map((item) => ({
+    .map((item: any) => ({
       feedback: item.feedback,
       createdAt: item.createdAt,
     }));
   return data;
 };
 
-const fetchTotalItems = async () => {
+const fetchTotalItems = async (): Promise<number> => {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_FEEDBACK}?limit=1&page=1`
   );
@@ -25,13 +37,13 @@ const fetchTotalItems = async () => {
 };
 
 function FeedbackContent() {
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
-  const observer = useRef();
+  const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const lastFeedbackElementRef = useCallback(
-    (node) => {
+    (node: HTMLElement | null) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
@@ -97,7 +109,6 @@ function FeedbackContent() {
                 : "___"}
             </p>
             <div className="date">
-              {" "}
               {new Date(feedback.createdAt).toLocaleString("en-GB")}
             </div>
           </div>
