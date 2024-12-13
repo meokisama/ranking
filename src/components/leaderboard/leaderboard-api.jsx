@@ -629,7 +629,7 @@ function LeaderBoardTable({ responseData: allRank }) {
           </div>
           <div className="next-container">
             <p>Kì tiếp theo</p>
-            <span>14/12/2024</span>
+            <span>Khai tử BXH</span>
           </div>
         </div>
       </div>

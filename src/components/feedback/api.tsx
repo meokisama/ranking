@@ -113,7 +113,7 @@ function FeedbackContent() {
             </div>
           </div>
         ))}
-        {loading && <div>Loading...</div>}
+        {loading && <div className="text-center">Loading...</div>}
       </div>
     </div>
   );
