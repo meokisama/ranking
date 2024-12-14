@@ -22,11 +22,46 @@ const cardTitleStyles = {
 };
 
 function ThankYou() {
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState([
+    {
+      category_name: "Light Novel được yêu thích nhất",
+      category_short: "favoriteRanobe",
+      chosenItems: [],
+    },
+    {
+      category_name: "Oneshot được yêu thích nhất",
+      category_short: "favoriteOneshot",
+      chosenItems: [],
+    },
+    {
+      category_name: "Nhà phát hành được yêu thích nhất",
+      category_short: "favoritePublisher",
+      chosenItems: [],
+    },
+    {
+      category_name: "Light Novel tân binh của năm",
+      category_short: "favoriteRookie",
+      chosenItems: [],
+    },
+  ]);
 
   useEffect(() => {
-    setResult(JSON.parse(localStorage.getItem("bxhlnvn_result")));
-  }, []);
+    // Tạo bản sao của result
+    const updatedResult = result.map((item) => {
+      // Lấy dữ liệu từ localStorage
+      const localStorageKey = `bxhlnvn_${item.category_short}`;
+      const chosenItems =
+        JSON.parse(localStorage.getItem(localStorageKey)) || [];
+      // Gán dữ liệu chosenItems
+      return {
+        ...item,
+        chosenItems,
+      };
+    });
+
+    // Cập nhật state
+    setResult(updatedResult);
+  }, []); // Chỉ chạy một lần khi component mount
 
   return (
     <div className="thankyou-wrapper">
