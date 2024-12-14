@@ -13,6 +13,7 @@ import ranobe from "./data/ranobe.json";
 import publisher from "./data/publisher.json";
 import ScrollToTop from "@/utils/scroll-to-top";
 import ShortSplashScreen from "@/components/common/short-splash-screen";
+import { THANKYOU_KEY } from "@/constants";
 
 interface RanobeItem {
   id: number;
@@ -60,7 +61,7 @@ function Vote() {
   // Load vote status from local storage
   const [thanks, setThanks] = useState(false);
   useEffect(() => {
-    setThanks(localStorage.getItem("isVoted") === "true");
+    setThanks(localStorage.getItem(THANKYOU_KEY) === "true");
   }, []);
 
   const [currentComponent, setCurrentComponent] = useState(0);

@@ -43,11 +43,41 @@ function ThankYou() {
       category_short: "favoriteRookie",
       chosenItems: [],
     },
+    {
+      category_name: "Chia sẻ ý kiến và đề xuất",
+      category_short: "feedback",
+      chosenItems: [],
+    },
   ]);
 
   useEffect(() => {
     const updatedResult = result.map((item) => {
       const localStorageKey = `bxhlnvn_${item.category_short}`;
+
+      if (item.category_short === "feedback") {
+        const feedbackItem =
+          JSON.parse(localStorage.getItem("bxhlnvn_feedback")) || {};
+        const recommendItem =
+          JSON.parse(localStorage.getItem("bxhlnvn_recommend")) || {};
+
+        const feedback = {
+          name: feedbackItem.name || "Ý kiến đánh giá",
+          topic: feedbackItem.topic || "",
+          content: feedbackItem.content || "",
+        };
+
+        const recommend = {
+          name: recommendItem.name || "Đề xuất bản quyền",
+          title: recommendItem.title || "",
+          publisher: recommendItem.publisher || "",
+        };
+
+        return {
+          ...item,
+          chosenItems: [feedback, recommend],
+        };
+      }
+
       const chosenItems =
         JSON.parse(localStorage.getItem(localStorageKey)) || [];
       return {
@@ -94,11 +124,6 @@ function ThankYou() {
               cùng các bạn trên hành trình văn chương đầy rực rỡ và thăng hoa
               phía trước. Trân trọng.
             </p>
-            {/* <p>
-              Cuối cùng, hãy điền tên của bạn vào ô bên dưới, chụp ảnh màn hình
-              và <strong>ấn vào link bên dưới</strong> để tham gia GA của chúng
-              tôi!
-            </p> */}
             <p>
               Cuối cùng, bạn có thể <strong>xem lại bình chọn</strong> của mình
               bằng cách nhấn vào nút bên dưới.
@@ -297,13 +322,6 @@ function ThankYou() {
               </div>
             </SheetContent>
           </Sheet>
-          {/* <input type="text" /> */}
-          {/* <p className="thankyou-graph" style={{ textAlign: "left" }}>
-            <strong>Link bài viết GA:</strong>{" "}
-            <a href="https://www.facebook.com/share/p/XiKs4vPbddeELqaS/">
-              https://www.facebook.com/share/p/XiKs4vPbddeELqaS/
-            </a>
-          </p> */}
         </div>
       </div>
     </div>

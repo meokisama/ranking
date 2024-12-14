@@ -7,6 +7,7 @@ import Category from "./category";
 import Image from "next/image";
 import { NotificationHub, useNotification } from "@/utils/Notification";
 import { InputNumber } from "antd";
+import { THANKYOU_KEY } from "@/constants";
 
 const cardTitleStyles = {
   fontFamily: "var(--font-lexend)",
@@ -26,7 +27,7 @@ function SendResult({ result }) {
   const [age, setAge] = useState(null);
 
   useEffect(() => {
-    setDone(localStorage.getItem("isVoted") === "true");
+    setDone(localStorage.getItem(THANKYOU_KEY) === "true");
     setGender(JSON.parse(localStorage.getItem("bxhlnvn_gender")) ?? null);
     setAge(JSON.parse(localStorage.getItem("bxhlnvn_age")) ?? null);
   }, []);
@@ -115,8 +116,7 @@ function SendResult({ result }) {
               //   console.log(data);
               if (data.message === "created") {
                 setDone(true);
-                localStorage.setItem("isVoted", true);
-                localStorage.setItem("bxhlnvn_result", JSON.stringify(result));
+                localStorage.setItem(THANKYOU_KEY, true);
               }
             })
             .catch((error) => {

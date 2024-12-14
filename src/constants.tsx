@@ -1,14 +1,13 @@
-// All routes for button URL
 const ROUTES = {
   HOME: "/",
   VOTE: "/vote",
   LEADERBOARD: "/leaderboard",
 };
 
-// Facebook URL
 const SOCIAL = { facebook: "https://www.facebook.com/vnlnr" };
 
-// Start and end time day
+const THANKYOU_KEY = "isVoted";
+
 const TIME_PERIOD = {
   start: {
     year: new Date().getFullYear(),
@@ -390,4 +389,5 @@ export {
   COLLAB_PAGES,
   TIMELINE,
   TIME_PERIOD,
+  THANKYOU_KEY,
 };
