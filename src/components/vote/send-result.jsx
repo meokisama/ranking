@@ -26,7 +26,7 @@ function SendResult({ result }) {
   const [age, setAge] = useState(null);
 
   useEffect(() => {
-    setDone(localStorage.getItem("isVoteDone") === "true");
+    setDone(localStorage.getItem("isVoted") === "true");
     setGender(JSON.parse(localStorage.getItem("bxhlnvn_gender")) ?? null);
     setAge(JSON.parse(localStorage.getItem("bxhlnvn_age")) ?? null);
   }, []);
@@ -115,7 +115,7 @@ function SendResult({ result }) {
               //   console.log(data);
               if (data.message === "created") {
                 setDone(true);
-                localStorage.setItem("isVoteDone", true);
+                localStorage.setItem("isVoted", true);
                 localStorage.setItem("bxhlnvn_result", JSON.stringify(result));
               }
             })

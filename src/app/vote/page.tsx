@@ -60,7 +60,7 @@ function Vote() {
   // Load vote status from local storage
   const [thanks, setThanks] = useState(false);
   useEffect(() => {
-    setThanks(localStorage.getItem("isVoteDone") === "true");
+    setThanks(localStorage.getItem("isVoted") === "true");
   }, []);
 
   const [currentComponent, setCurrentComponent] = useState(0);
