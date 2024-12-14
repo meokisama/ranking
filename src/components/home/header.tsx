@@ -16,10 +16,6 @@ function Header() {
   const imgRef = useRef<any>(null);
 
   useEffect(() => {
-    localStorage.clear();
-  }, []);
-
-  useEffect(() => {
     const bannerElement = bannerRef.current;
     const imgElement = imgRef.current;
 

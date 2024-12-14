@@ -35,10 +35,6 @@ function ListComponent({
     );
   }, [category]);
 
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
-
   //Select item logic
   const handleClick = (id) => {
     const isChosen = chosenItems.find((item) => item.id === id);
