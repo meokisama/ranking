@@ -46,22 +46,19 @@ function ThankYou() {
   ]);
 
   useEffect(() => {
-    // Tạo bản sao của result
     const updatedResult = result.map((item) => {
-      // Lấy dữ liệu từ localStorage
       const localStorageKey = `bxhlnvn_${item.category_short}`;
       const chosenItems =
         JSON.parse(localStorage.getItem(localStorageKey)) || [];
-      // Gán dữ liệu chosenItems
       return {
         ...item,
         chosenItems,
       };
     });
 
-    // Cập nhật state
     setResult(updatedResult);
-  }, []); // Chỉ chạy một lần khi component mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="thankyou-wrapper">
