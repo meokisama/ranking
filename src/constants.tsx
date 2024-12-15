@@ -6,27 +6,21 @@ const ROUTES = {
 
 const SOCIAL = { facebook: "https://www.facebook.com/vnlnr" };
 
-const THANKYOU_KEY = "isVoted";
+const THANKYOU_KEY = "isVoted"; // !!!NOTE: Need to change for every period of voting
 
 const TIME_PERIOD = {
   start: {
-    year: new Date().getFullYear(),
-    month: 11,
     day: 14,
-    hour: 19,
-    minute: 57,
-    second: 0,
-    millisecond: 0,
-  },
+    month: 12,
+    hour: 20,
+    minute: 0,
+  }, // Bắt đầu ngày 14/12 lúc 20:00
   end: {
-    year: new Date().getFullYear(),
-    month: 11,
     day: 24,
+    month: 12,
     hour: 23,
-    minute: 29,
-    second: 0,
-    millisecond: 0,
-  },
+    minute: 30,
+  }, // Kết thúc ngày 24/12 lúc 23:30
 };
 
 const INTRODUCTION_INFO = [

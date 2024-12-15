@@ -10,6 +10,7 @@ import SectionTitle from "./section-title";
 import Image from "next/image";
 import { useNotification } from "@/utils/Notification";
 import DateChecker from "@/utils/date-checker";
+import { VOTING_END_TIME } from "@/utils/date-config";
 
 interface TimeLeft {
   title?: string;
@@ -46,15 +47,7 @@ function Overview() {
   }, []);
 
   const calculateTimeLeft = useCallback((): TimeLeft => {
-    const targetDate = new Date(
-      TIME_PERIOD.end.year,
-      TIME_PERIOD.end.month,
-      TIME_PERIOD.end.day,
-      TIME_PERIOD.end.hour,
-      TIME_PERIOD.end.minute,
-      TIME_PERIOD.end.second,
-      TIME_PERIOD.end.millisecond
-    );
+    const targetDate = VOTING_END_TIME;
     const difference = targetDate.getTime() - new Date().getTime();
 
     if (difference > 0) {

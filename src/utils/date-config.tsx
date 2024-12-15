@@ -1,23 +1,27 @@
 import { TIME_PERIOD } from "@/constants";
 
 export const VOTING_START_TIME = new Date(
-  TIME_PERIOD.start.year,
-  TIME_PERIOD.start.month,
-  TIME_PERIOD.start.day,
-  TIME_PERIOD.start.hour,
-  TIME_PERIOD.start.minute,
-  TIME_PERIOD.start.second,
-  TIME_PERIOD.start.millisecond
+  Date.UTC(
+    new Date().getUTCFullYear(),
+    TIME_PERIOD.start.month - 1,
+    TIME_PERIOD.start.day,
+    TIME_PERIOD.start.hour - 7,
+    TIME_PERIOD.start.minute,
+    0,
+    0
+  )
 );
 
 export const VOTING_END_TIME = new Date(
-  TIME_PERIOD.end.year,
-  TIME_PERIOD.end.month,
-  TIME_PERIOD.end.day,
-  TIME_PERIOD.end.hour,
-  TIME_PERIOD.end.minute,
-  TIME_PERIOD.end.second,
-  TIME_PERIOD.end.millisecond
+  Date.UTC(
+    new Date().getUTCFullYear(),
+    TIME_PERIOD.end.month - 1,
+    TIME_PERIOD.end.day,
+    TIME_PERIOD.end.hour - 7,
+    TIME_PERIOD.end.minute,
+    0,
+    0
+  )
 );
 
 export function isVotingPeriod(currentTime: Date = new Date()): boolean {
