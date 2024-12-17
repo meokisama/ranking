@@ -91,7 +91,7 @@ function LeaderBoardTable({ responseData: allRank }) {
       const allRemainingRookie = filterByIds(
         ranobe,
         [2, 6, 13, 17, 19, 22, 24, 38, 39, 40, 41, 43, 47]
-      ).filter((item) => !votedPublisherIds.includes(item.id));
+      ).filter((item) => !votedRookieIds.includes(item.id));
 
       const allRemainingPublisher = publisher.filter(
         (item) => !votedPublisherIds.includes(item.id)
