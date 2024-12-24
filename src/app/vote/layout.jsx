@@ -8,7 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const shouldRedirect = !isVotingPeriod();
 
-  if (shouldRedirect) {
+  if (true) {
     redirect("/");
   }
 
