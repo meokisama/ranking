@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import "./styles/feedback-content.scss";
-import feedback_data from "./data/feedback_output.json";
+// import feedback_data from "./data/first_half_2024.json";
+import feedback_data from "./data/second_half_2024.json";
 
 const ITEMS_PER_PAGE = 20;
 
