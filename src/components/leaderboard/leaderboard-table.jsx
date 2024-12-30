@@ -4,163 +4,70 @@ import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Table, Button, Input, Space, Popover, Rate } from "antd";
 import Highlighter from "react-highlight-words";
 import "./styles/leaderboard-table.scss";
-import { publisherFilter, handleList, addZeroCount } from "./filter";
-// import allRank from "./data/first-half-2024.json";
-import allRank from "./data/second_half_2024.json";
+import {
+  publisherFilter,
+  handleList,
+  mergeAttribute,
+  filterCategories,
+} from "./filter";
 import Image from "next/image";
-import ranobe from "@/app/vote/data/ranobe.json";
-import publisher from "@/app/vote/data/publisher.json";
+import { PERIOD_CATEGORIES, CURRENT_PERIOD } from "@/constants";
 
-// All categories of all time
-const selectable_categories = [
-  {
-    value: "favoriteRanobe",
-    label: "Light Novel được yêu thích nhất",
-  },
-  {
-    value: "favoriteIllustrator",
-    label: "Họa sĩ minh họa được yêu thích nhất",
-  },
-  {
-    value: "favoritePublisher",
-    label: "Nhà phát hành được yêu thích nhất",
-  },
-  {
-    value: "favoriteOneshot",
-    label: "Oneshot được yêu thích nhất",
-  },
-  {
-    value: "favoriteRookie",
-    label: "Light Novel tân binh của năm",
-  },
-];
-
-// Change format of JSON to fit with antd table
-const mergeAttribute = (array, attribute) => {
-  return array.map((item) => {
-    const { [attribute]: attr, ...rest } = item;
-    return { ...rest, ...attr };
-  });
-};
-// Utility function to filter categories based on selected year
-const filterCategories = (selectedValues) => {
-  return selectable_categories.filter((item) =>
-    selectedValues.includes(item.value)
+function LeaderBoardTable({ period = CURRENT_PERIOD }) {
+  const initDataSource = PERIOD_CATEGORIES[period];
+  const selectArray = filterCategories(initDataSource);
+  const [selectedCategory, setSelectedCategory] = useState(selectArray[0]);
+  const [dataInput, setDataInput] = useState(
+    initDataSource.reduce((acc, key) => {
+      acc[key] = [];
+      return acc;
+    }, {})
   );
-};
-// Filter unvoted ranobe
-function filterByIds(data, ids) {
-  return data.filter((item) => ids.includes(item.id));
-}
-
-const first_half_2024 = [
-  "favoriteRanobe",
-  "favoriteIllustrator",
-  "favoritePublisher",
-];
-const second_half_2024 = [
-  "favoriteRanobe",
-  "favoriteOneshot",
-  "favoritePublisher",
-  "favoriteRookie",
-];
-
-const selectArray = filterCategories(second_half_2024);
-
-function LeaderBoardTable() {
-  // Default category to init table
-  const [selectedCategory, setSelectedCategory] = useState({
-    value: "favoriteRanobe",
-    label: "Light Novel được yêu thích nhất",
-  });
-  // All data can be passed to table
-  const [dataInput, setDataInput] = useState({
-    favoriteRanobe: [],
-    favoriteOneshot: [],
-    favoritePublisher: [],
-    favoriteRookie: [],
-  });
 
   const [data, setData] = useState([]);
 
   const [countVote, setCountVote] = useState(null);
 
   useEffect(() => {
-    if (allRank && allRank.data) {
-      //Processing id list for original list
-      const votedRanobeIds = allRank.data.favoriteRanobes.map(
-        (item) => item._id
-      );
-      const votedOneshotIds = allRank.data.favoriteOneshots.map(
-        (item) => item._id
-      );
-      const votedPublisherIds = allRank.data.favoritePublishers.map(
-        (item) => item._id
-      );
-      const votedRookieIds = allRank.data.favoriteRookies.map(
-        (item) => item._id
-      );
+    const fetchData = async () => {
+      try {
+        const allRank = await import(`./data/${period}.json`);
+        if (allRank && allRank.data) {
+          //Final list
+          const dataKeys = [
+            { key: "favoriteRanobes", attr: "ranobe" },
+            { key: "favoriteIllustrators", attr: "illustrator" },
+            { key: "favoriteOneshots", attr: "ranobe" },
+            { key: "favoriteRookies", attr: "ranobe" },
+            { key: "favoritePublishers", attr: "publisher" },
+          ];
 
-      //Remove voted items from original list
-      const allRemainingRanobe = ranobe.filter(
-        (item) => !votedRanobeIds.includes(item.id)
-      );
+          const customDataInput = dataKeys.reduce((acc, { key, attr }) => {
+            const items = allRank.data[key]?.length
+              ? handleList(mergeAttribute(allRank.data[key], attr))
+              : null;
+            if (items) {
+              const newKey = key.replace(/s$/, ""); // Remove "s" at the end of key
+              acc[newKey] = items;
+            }
+            return acc;
+          }, {});
 
-      const allRemainingOneshot = filterByIds(
-        ranobe,
-        [
-          17, 22, 38, 39, 40, 41, 43, 48, 51, 61, 65, 68, 69, 72, 75, 82, 83,
-          85, 92, 95, 96, 105, 108, 113, 114, 118, 124, 131, 132, 133, 134, 136,
-          137, 138, 139, 141, 142, 143, 145, 147, 148, 149, 152, 153, 155, 156,
-          157, 158, 160, 161, 165, 167, 170, 171, 172, 174, 175, 176, 177, 181,
-          185, 186, 187, 188, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199,
-          200, 201, 202, 204, 205, 206, 209, 210, 211, 213, 214, 215, 216, 217,
-          218,
-        ]
-      ).filter((item) => !votedOneshotIds.includes(item.id));
+          if (Object.keys(customDataInput).length > 0) {
+            setDataInput(customDataInput);
+          }
 
-      const allRemainingRookie = filterByIds(
-        ranobe,
-        [2, 6, 13, 17, 19, 22, 24, 38, 39, 40, 41, 43, 47]
-      ).filter((item) => !votedRookieIds.includes(item.id));
+          //Initial for data for table
+          setData(customDataInput.favoriteRanobe);
+          setCountVote(allRank.data.count);
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
+    };
 
-      const allRemainingPublisher = publisher.filter(
-        (item) => !votedPublisherIds.includes(item.id)
-      );
-
-      //Final list
-      const favoriteRanobe = handleList(
-        mergeAttribute(allRank.data.favoriteRanobes, "ranobe").concat(
-          addZeroCount(allRemainingRanobe)
-        )
-      );
-      const favoriteOneshot = handleList(
-        mergeAttribute(allRank.data.favoriteOneshots, "ranobe").concat(
-          addZeroCount(allRemainingOneshot)
-        )
-      );
-      const favoriteRookie = handleList(
-        mergeAttribute(allRank.data.favoriteRookies, "ranobe").concat(
-          addZeroCount(allRemainingRookie)
-        )
-      );
-      const favoritePublisher = handleList(
-        mergeAttribute(allRank.data.favoritePublishers, "publisher").concat(
-          addZeroCount(allRemainingPublisher)
-        )
-      );
-
-      setDataInput({
-        favoriteRanobe,
-        favoriteOneshot,
-        favoritePublisher,
-        favoriteRookie,
-      });
-      //Initial for data for table
-      setData(favoriteRanobe);
-      setCountVote(allRank.data.count);
-    }
-  }, []);
+    fetchData();
+  }, [period]);
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");

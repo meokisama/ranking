@@ -33,8 +33,10 @@ const LeaderBoard: React.FC<LeaderBoardProps> = ({ responseData: data }) => {
   );
 };
 
-const ProtectedBoard: React.FC = () => {
-  return <ProtectedRoute component={LeaderBoard} />;
-};
+// const ProtectedBoard: React.FC = () => {
+//   return <ProtectedRoute component={LeaderBoard} />;
+// };
 
-export default ProtectedBoard;
+// export default ProtectedBoard;
+
+export default LeaderBoard;

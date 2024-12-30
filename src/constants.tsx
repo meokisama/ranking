@@ -1,11 +1,3 @@
-const ROUTES = {
-  HOME: "/",
-  VOTE: "/vote",
-  LEADERBOARD: "/leaderboard",
-};
-
-const SOCIAL = { facebook: "https://www.facebook.com/vnlnr" };
-
 const THANKYOU_KEY = "isVoted"; // !!!NOTE: Need to change for every period of voting
 
 const TIME_PERIOD = {
@@ -22,6 +14,53 @@ const TIME_PERIOD = {
     minute: 30,
   }, // Kết thúc ngày 24/12 lúc 23:30
 };
+
+const SELECTABLE_CATEGORIES = [
+  {
+    value: "favoriteRanobe",
+    label: "Light Novel được yêu thích nhất",
+  },
+  {
+    value: "favoriteIllustrator",
+    label: "Họa sĩ minh họa được yêu thích nhất",
+  },
+  {
+    value: "favoritePublisher",
+    label: "Nhà phát hành được yêu thích nhất",
+  },
+  {
+    value: "favoriteOneshot",
+    label: "Oneshot được yêu thích nhất",
+  },
+  {
+    value: "favoriteRookie",
+    label: "Light Novel tân binh của năm",
+  },
+];
+
+const PERIOD_CATEGORIES = {
+  first_half_2024: [
+    "favoriteRanobe",
+    "favoriteIllustrator",
+    "favoritePublisher",
+  ],
+  second_half_2024: [
+    "favoriteRanobe",
+    "favoriteOneshot",
+    "favoritePublisher",
+    "favoriteRookie",
+  ],
+};
+
+const CURRENT_PERIOD = "second_half_2024";
+
+const ROUTES = {
+  HOME: "/",
+  VOTE: "/vote",
+  LEADERBOARD: "/leaderboard",
+};
+
+const SOCIAL = { facebook: "https://www.facebook.com/vnlnr" };
 
 const INTRODUCTION_INFO = [
   {
@@ -119,12 +158,9 @@ const AUTHORS = [
   },
 ];
 
-const CATEGORIES = [
-  "Light Novel được yêu thích nhất",
-  "Oneshot được yêu thích nhất",
-  "Nhà phát hành được yêu thích nhất",
-  "Light Novel tân binh của năm",
-];
+const CATEGORIES = SELECTABLE_CATEGORIES.filter(({ value }) =>
+  PERIOD_CATEGORIES[CURRENT_PERIOD].includes(value)
+).map(({ label }) => label);
 
 const TOP10 = [
   { rank: "/gold.png", src: "/images/top10/01.jpg" },
@@ -377,6 +413,9 @@ export {
   SOCIAL,
   INTRODUCTION_INFO,
   AUTHORS,
+  SELECTABLE_CATEGORIES,
+  PERIOD_CATEGORIES,
+  CURRENT_PERIOD,
   CATEGORIES,
   COMMENTS,
   TOP10,

@@ -11,6 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Card, Empty } from "antd";
+import { initialChosenItems } from "@/components/leaderboard/filter";
 
 const cardTitleStyles = {
   fontFamily: "var(--font-lexend)",
@@ -22,33 +23,7 @@ const cardTitleStyles = {
 };
 
 function ThankYou() {
-  const [result, setResult] = useState([
-    {
-      category_name: "Light Novel được yêu thích nhất",
-      category_short: "favoriteRanobe",
-      chosenItems: [],
-    },
-    {
-      category_name: "Oneshot được yêu thích nhất",
-      category_short: "favoriteOneshot",
-      chosenItems: [],
-    },
-    {
-      category_name: "Nhà phát hành được yêu thích nhất",
-      category_short: "favoritePublisher",
-      chosenItems: [],
-    },
-    {
-      category_name: "Light Novel tân binh của năm",
-      category_short: "favoriteRookie",
-      chosenItems: [],
-    },
-    {
-      category_name: "Chia sẻ ý kiến và đề xuất",
-      category_short: "feedback",
-      chosenItems: [],
-    },
-  ]);
+  const [result, setResult] = useState(initialChosenItems());
 
   useEffect(() => {
     const updatedResult = result.map((item) => {

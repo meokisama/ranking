@@ -4,55 +4,33 @@ import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Table, Button, Input, Space, Popover, Rate } from "antd";
 import Highlighter from "react-highlight-words";
 import "./styles/leaderboard-table.scss";
-import { publisherFilter, handleList, addZeroCount } from "./filter";
+import {
+  publisherFilter,
+  handleList,
+  addZeroCount,
+  mergeAttribute,
+  filterCategories,
+  filterByIds,
+} from "./filter";
 import Image from "next/image";
 import ranobe from "@/app/vote/data/ranobe.json";
 import publisher from "@/app/vote/data/publisher.json";
+import { PERIOD_CATEGORIES, CURRENT_PERIOD } from "@/constants";
 
-const selectArray = [
-  {
-    value: "favoriteRanobe",
-    label: "Light Novel được yêu thích nhất",
-  },
-  {
-    value: "favoriteOneshot",
-    label: "Oneshot được yêu thích nhất",
-  },
-  {
-    value: "favoritePublisher",
-    label: "Nhà phát hành được yêu thích nhất",
-  },
-  {
-    value: "favoriteRookie",
-    label: "Light Novel tân binh của năm",
-  },
-];
-
-// Change format of JSON to fit with antd table
-const mergeAttribute = (array, attribute) => {
-  return array.map((item) => {
-    const { [attribute]: attr, ...rest } = item;
-    return { ...rest, ...attr };
-  });
-};
-// Filter unvoted ranobe
-function filterByIds(data, ids) {
-  return data.filter((item) => ids.includes(item.id));
-}
+const initDataSource = PERIOD_CATEGORIES[CURRENT_PERIOD];
+const selectArray = filterCategories(initDataSource);
 
 function LeaderBoardTable({ responseData: allRank }) {
   console.log(allRank);
-  const [selectedCategory, setSelectedCategory] = useState({
-    value: "favoriteRanobe",
-    label: "Light Novel được yêu thích nhất",
-  });
+  const [selectedCategory, setSelectedCategory] = useState(selectArray[0]);
 
-  const [dataInput, setDataInput] = useState({
-    favoriteRanobe: [],
-    favoriteOneshot: [],
-    favoritePublisher: [],
-    favoriteRookie: [],
-  });
+  const [dataInput, setDataInput] = useState(
+    initDataSource.reduce((acc, key) => {
+      acc[key] = [];
+      return acc;
+    }, {})
+  );
+
   const [countVote, setCountVote] = useState(null);
   useEffect(() => {
     if (allRank && allRank.data) {

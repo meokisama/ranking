@@ -14,6 +14,7 @@ import publisher from "./data/publisher.json";
 import ScrollToTop from "@/utils/scroll-to-top";
 import ShortSplashScreen from "@/components/common/short-splash-screen";
 import { THANKYOU_KEY } from "@/constants";
+import { initialChosenItems } from "@/components/leaderboard/filter";
 
 interface RanobeItem {
   id: number;
@@ -67,36 +68,7 @@ function Vote() {
   const [currentComponent, setCurrentComponent] = useState(0);
 
   // Memoize initial state
-  const initialSelectedItems = useMemo(
-    () => [
-      {
-        category_name: "Light Novel được yêu thích nhất",
-        category_short: "favoriteRanobe",
-        chosenItems: [],
-      },
-      {
-        category_name: "Oneshot được yêu thích nhất",
-        category_short: "favoriteOneshot",
-        chosenItems: [],
-      },
-      {
-        category_name: "Nhà phát hành được yêu thích nhất",
-        category_short: "favoritePublisher",
-        chosenItems: [],
-      },
-      {
-        category_name: "Light Novel tân binh của năm",
-        category_short: "favoriteRookie",
-        chosenItems: [],
-      },
-      {
-        category_name: "Chia sẻ ý kiến và đề xuất",
-        category_short: "feedback",
-        chosenItems: [],
-      },
-    ],
-    []
-  );
+  const initialSelectedItems = useMemo(() => initialChosenItems(), []);
 
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
   // Logic for update all selections from all categories

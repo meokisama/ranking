@@ -62,7 +62,13 @@ function Overview() {
       };
     }
 
-    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      title: "Đã hết thời gian bình chọn!",
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
   }, []);
 
   useEffect(() => {

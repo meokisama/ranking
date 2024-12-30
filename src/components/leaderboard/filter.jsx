@@ -1,3 +1,9 @@
+import {
+  SELECTABLE_CATEGORIES,
+  PERIOD_CATEGORIES,
+  CURRENT_PERIOD,
+} from "@/constants";
+
 const publisherFilter = [
   {
     text: "IPM",
@@ -101,4 +107,53 @@ const addZeroCount = (data) => {
   }));
 };
 
-export { publisherFilter, handleList, addZeroCount };
+// Change format of JSON to fit with antd table
+const mergeAttribute = (array, attribute) => {
+  return array.map((item) => {
+    const { [attribute]: attr, ...rest } = item;
+    return { ...rest, ...attr };
+  });
+};
+// Utility function to filter categories based on selected year
+const filterCategories = (selectedValues) => {
+  return SELECTABLE_CATEGORIES.filter((item) =>
+    selectedValues.includes(item.value)
+  );
+};
+// Filter unvoted ranobe
+function filterByIds(data, ids) {
+  return data.filter((item) => ids.includes(item.id));
+}
+
+const initialChosenItems = () => {
+  const periodCategories = PERIOD_CATEGORIES[CURRENT_PERIOD];
+  const initial = periodCategories.map((categoryShort) => {
+    const categoryInfo = SELECTABLE_CATEGORIES.find(
+      (cat) => cat.value === categoryShort
+    );
+
+    return {
+      category_name: categoryInfo.label,
+      category_short: categoryShort,
+      chosenItems: [],
+    };
+  });
+
+  initial.push({
+    category_name: "Chia sẻ ý kiến và đề xuất",
+    category_short: "feedback",
+    chosenItems: [],
+  });
+
+  return initial;
+};
+
+export {
+  publisherFilter,
+  handleList,
+  addZeroCount,
+  mergeAttribute,
+  filterCategories,
+  filterByIds,
+  initialChosenItems,
+};

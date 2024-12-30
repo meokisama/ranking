@@ -18,9 +18,10 @@ function FeedbackResult() {
   );
 }
 
-function ProtectedBoard() {
-  return <ProtectedRoute component={FeedbackResult} />;
-}
+// function ProtectedBoard() {
+//   return <ProtectedRoute component={FeedbackResult} />;
+// }
 
-export default ProtectedBoard;
-// export default FeedbackResult;
+// export default ProtectedBoard;
+
+export default FeedbackResult;

@@ -25,5 +25,8 @@ export const VOTING_END_TIME = new Date(
 );
 
 export function isVotingPeriod(currentTime: Date = new Date()): boolean {
+  console.log("VOTING_START_TIME:", VOTING_START_TIME);
+  console.log("VOTING_END_TIME:", VOTING_END_TIME);
+  console.log("currentTime:", currentTime);
   return currentTime >= VOTING_START_TIME && currentTime <= VOTING_END_TIME;
 }
