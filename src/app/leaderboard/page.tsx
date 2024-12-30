@@ -14,10 +14,11 @@ interface ResponseData {
 }
 
 interface LeaderBoardProps {
-  responseData?: ResponseData;
+  responseData: ResponseData;
 }
 
-const LeaderBoard: React.FC<LeaderBoardProps> = ({ responseData: data }) => {
+const LeaderBoard: React.FC = () => {
+  // const LeaderBoard: React.FC<LeaderBoardProps> = ({ responseData: data }) => {
   return (
     <div>
       <ShortSplashScreen />
