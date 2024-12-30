@@ -14,7 +14,7 @@ interface ResponseData {
 }
 
 interface LeaderBoardProps {
-  responseData: ResponseData;
+  responseData?: ResponseData;
 }
 
 const LeaderBoard: React.FC<LeaderBoardProps> = ({ responseData: data }) => {
