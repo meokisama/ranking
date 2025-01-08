@@ -39,7 +39,7 @@ const LeaderBoard = ({ params }: { params: { period: string } }) => {
           <ShortSplashScreen />
           <div>
             <Banner />
-            <LeaderBoardTable period={convertedPeriod} />
+            <LeaderBoardTable initialPeriod={convertedPeriod} />
             <Footer text="Trang Chủ" to={ROUTES.HOME} />
             <SocialHub />
             <ScrollToTop />

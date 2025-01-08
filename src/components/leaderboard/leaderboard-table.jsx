@@ -13,7 +13,8 @@ import {
 import Image from "next/image";
 import { PERIOD_CATEGORIES, CURRENT_PERIOD } from "@/constants";
 
-function LeaderBoardTable({ period = CURRENT_PERIOD }) {
+function LeaderBoardTable({ initialPeriod = CURRENT_PERIOD }) {
+  const [period, setPeriod] = useState(initialPeriod);
   const initDataSource = PERIOD_CATEGORIES[period];
   const selectArray = filterCategories(initDataSource);
   const [selectedCategory, setSelectedCategory] = useState(selectArray[0]);
@@ -478,6 +479,21 @@ function LeaderBoardTable({ period = CURRENT_PERIOD }) {
     </div>
   );
 
+  const periodPopoverContent = (
+    <div className="popover-content">
+      {Object.keys(PERIOD_CATEGORIES).map((key) => (
+        <p
+          key={key}
+          className={period === key ? "selected-category" : ""}
+          onClick={() => periodHandleChange(key)}
+        >
+          {key.split("_")[0] === "first" ? "Nửa đầu " : "Nửa cuối "}
+          {key.split("_")[2]}
+        </p>
+      ))}
+    </div>
+  );
+
   const [rateValue, setRateValue] = useState(4);
   const rateDesc = [
     "Tốt",
@@ -490,6 +506,10 @@ function LeaderBoardTable({ period = CURRENT_PERIOD }) {
   const handleChange = (value) => {
     setSelectedCategory(selectArray.find((item) => item.value === value));
     setData(dataInput[value]);
+  };
+
+  const periodHandleChange = (value) => {
+    setPeriod(value);
   };
 
   return (
@@ -510,56 +530,109 @@ function LeaderBoardTable({ period = CURRENT_PERIOD }) {
           height={224}
         />
       </div>
-      <div className="ld-table-header">
-        <div className="header-left-panel">
+      <div className="ld-table-header relative">
+        <div className="w-full md:w-[10%] relative flex flex-row-reverse gap-3">
+          <div
+            className="rounded-2xl shadow-[rgb(177_57_57_/_16%)_0px_2px_8px] px-6 flex flex-col justify-center items-center relative w-1/2 md:w-full"
+            style={{
+              background:
+                "linear-gradient(#fbf2f2 0 0) padding-box, linear-gradient(to bottom, transparent, hsl(var(--text-color))) border-box",
+              border: "1px solid transparent",
+            }}
+          >
+            <p className="min-w-max text-[#4b4b4bb0] mb-0 text-[1.3rem] md:text-[1.5rem]">
+              {period.split("_")[0] === "first" ? "Nửa đầu" : "Nửa cuối"}
+            </p>
+            <p
+              style={{
+                WebkitTextFillColor: "transparent",
+              }}
+              className="font-phudu text-center tracking-[-0.5px] text-[2.5rem] bg-[linear-gradient(_90deg,#ff9a8b_0%,#ff6a88_55%,#ff99ac_100%_)] bg-clip-text m-0"
+            >
+              {period.split("_")[2]}
+            </p>
+            <div className="absolute bottom-0 right-2 opacity-80">
+              <Popover
+                placement="bottomLeft"
+                content={periodPopoverContent}
+                trigger="click"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-[#4b4b4bb0] cursor-pointer"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Popover>
+            </div>
+          </div>
+          <div className="w-1/2 md:hidden flex flex-col justify-center items-center shadow-[rgb(177_57_57_/_16%)_0px_2px_8px] px-2.5 py-8 rounded-[10px]">
+            <p className="text-center text-[1.2rem] md:text-[1.5rem] text-[#4b4b4bb0]">
+              Số người bình chọn
+            </p>
+            <div className="flex gap-[5px] items-stretch text-[#3f8600] mt-[-7px]">
+              <UserOutlined />
+              <p className="text-[#3f8600] font-light text-[1.5rem] md:text-[1.9rem] m-0 p-0">
+                {countVote}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="header-left-panel relative">
           <div className="category-title">
             <h1>{selectedCategory.label}</h1>
             {selectedCategory.value === "favoritePublisher" ? (
               <p className="h1-description">
-                Có tổng cộng <strong>{data.length} nhà phát hành</strong> tham
-                gia hạng mục!
+                Hạng mục có tổng cộng
+                <strong> {data.length} nhà phát hành</strong>!
               </p>
             ) : selectedCategory.value === "favoriteIllustrator" ? (
               <p className="h1-description">
-                Hạng mục này có tổng cộng <strong>{data.length} họa sĩ</strong>{" "}
-                tham gia!
+                Hạng mục có tổng cộng <strong>{data.length} họa sĩ</strong> !
               </p>
             ) : (
               <p className="h1-description">
-                Hạng mục này có tổng cộng{" "}
-                <strong>{data.length} tác phẩm</strong> tham gia!
+                Hạng mục có tổng cộng <strong>{data.length} tác phẩm</strong>!
               </p>
             )}
           </div>
-          <Popover
-            placement="bottomRight"
-            content={popoverContent}
-            trigger="click"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-6 h-6"
+          <div className="absolute bottom-0 right-2 opacity-80">
+            <Popover
+              placement="bottomRight"
+              content={popoverContent}
+              trigger="click"
             >
-              <path
-                fillRule="evenodd"
-                d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </Popover>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Popover>
+          </div>
         </div>
         <div className="header-right-panel">
           <div className="vote-container">
-            <p>Số người bình chọn</p>
+            <p className="text-center">Số người bình chọn</p>
             <div className="vote-number">
               <UserOutlined />
               <p>{countVote}</p>
             </div>
           </div>
           <div className="rate-container">
-            <p>Đánh giá bảng xếp hạng</p>
+            <p className="text-center">Đánh giá bảng xếp hạng</p>
             <Rate
               tooltips={rateDesc}
               value={rateValue}

@@ -23,6 +23,7 @@ module.exports = {
       fontFamily: {
         playfair: ["var(--font-playfair_display)"],
         lexend: ["var(--font-lexend)"],
+        phudu: ["var(--font-phudu)"],
       },
       colors: {
         border: "hsl(var(--border))",
