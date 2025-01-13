@@ -509,6 +509,7 @@ function LeaderBoardTable({ initialPeriod = CURRENT_PERIOD }) {
   };
 
   const periodHandleChange = (value) => {
+    handleChange("favoriteRanobe");
     setPeriod(value);
   };
 
