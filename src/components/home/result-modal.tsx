@@ -10,7 +10,7 @@ function ResultModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(showModal, 4000);
+    const timer = setTimeout(showModal, 10000);
     return () => clearTimeout(timer);
   }, []);
 
