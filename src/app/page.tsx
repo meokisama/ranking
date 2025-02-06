@@ -19,7 +19,7 @@ function Home() {
       <div>
         <Header />
         <div className="contentContainer">
-          {/* <ResultModal /> */}
+          <ResultModal />
           <LargeText />
           <Introduction />
           <Overview />

@@ -156,7 +156,7 @@ function Header() {
                 />
               </Link>
             </motion.div>
-            {/* <motion.div
+            <motion.div
               initial={{ opacity: 0, x: "-100px" }}
               animate={{ opacity: 1, x: 0 }}
               transition={{
@@ -181,7 +181,7 @@ function Header() {
                   src="/sakura1.svg"
                 />
               </Link>
-            </motion.div> */}
+            </motion.div>
           </div>
         </div>
         <div className="img-content">
