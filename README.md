@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://vnlnranking.moe">
+  <a href="https://bxh.lightnovel.vn">
     <img src="src/app/favicon.ico" />
   </a>
 </p>
