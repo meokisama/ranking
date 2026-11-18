@@ -75,11 +75,18 @@ export default function Book({
     <div className={`book-stage ${className}`} style={style}>
       <div
         className="book"
-        style={{ "--d": `${depth}px`, "--book-color": color ?? "#24211d" } as CSSProperties}
+        style={
+          {
+            "--d": `${depth}px`,
+            "--book-color": color ?? "#24211d",
+            ...(cover ? { "--cover": `url("${cover}")` } : {}),
+          } as CSSProperties
+        }
       >
         <div className="back" />
         <div className="spine" />
         <div className="pages" />
+        <div className="top" />
         <div className="face">
           <Cover name={name} cover={cover} color={color} sub={sub} eager={eager} />
           {obi}

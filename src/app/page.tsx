@@ -18,7 +18,7 @@ export default function Home() {
   const heroBooks = ranobe
     .filter((b) => b.cover)
     .slice(0, 34)
-    .map((b) => ({ cover: b.cover!, color: b.color ?? "#24211d" }));
+    .map((b) => ({ cover: b.cover!, color: b.color ?? "#24211d", name: b.name, publisher: b.publisher ?? "" }));
 
   const rows: CategoryRow[] = (Object.keys(p.categories) as CategoryKey[]).map((key) => ({
     key,

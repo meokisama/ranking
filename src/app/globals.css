@@ -146,12 +146,25 @@ html.lenis body {
 
   /* ───── Cuốn sách 3D bằng CSS ───── */
   .book-stage {
+    position: relative;
     perspective: 1400px;
+  }
+  /* bóng tiếp đất dưới chân sách */
+  .book-stage::after {
+    content: "";
+    position: absolute;
+    left: 4%;
+    right: -6%;
+    bottom: -6%;
+    height: 9%;
+    background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.6), transparent 70%);
+    filter: blur(9px);
+    z-index: -1;
   }
   .book {
     --d: 26px; /* độ dày gáy */
     --ry: -26deg;
-    --rx: 4deg;
+    --rx: -8deg;
     position: relative;
     aspect-ratio: 400 / 568;
     transform-style: preserve-3d;
@@ -161,7 +174,7 @@ html.lenis body {
   .book-stage:hover .book,
   .book.is-flat {
     --ry: -8deg;
-    --rx: 1deg;
+    --rx: -3deg;
   }
   .book > .face {
     position: absolute;
@@ -194,7 +207,24 @@ html.lenis body {
     left: 0;
     width: var(--d);
     transform: translateX(-50%) rotateY(-90deg);
-    background: linear-gradient(90deg, rgb(0 0 0 / 0.45), transparent 60%), var(--book-color, var(--color-ink-3));
+    /* gáy lấy màu từ mép trái của chính ảnh bìa, như bìa in liền một tờ quấn qua gáy */
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.08) 45%, rgb(255 255 255 / 0.1) 60%, rgb(0 0 0 / 0.35)),
+      var(--cover, none) left center / 3000% 100% no-repeat,
+      var(--book-color, var(--color-ink-3));
+  }
+  /* mặt trên của ruột giấy */
+  .book > .top {
+    position: absolute;
+    left: 2px;
+    right: 3px;
+    top: 0;
+    height: var(--d);
+    transform: translateY(-50%) rotateX(90deg);
+    background:
+      linear-gradient(0deg, rgb(0 0 0 / 0.14), transparent 14%, transparent 86%, rgb(0 0 0 / 0.14)),
+      linear-gradient(90deg, rgb(0 0 0 / 0.2), transparent 10%),
+      repeating-linear-gradient(0deg, #f7f1e4 0 1px, #dcd2bd 1px 2px);
   }
   .book > .pages {
     position: absolute;
@@ -203,7 +233,9 @@ html.lenis body {
     right: 0;
     width: calc(var(--d) - 4px);
     transform: translateX(50%) rotateY(90deg);
-    background: repeating-linear-gradient(90deg, #f6f0e4 0 1px, #d9cfbb 1px 2px);
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 0.3), transparent 18%, transparent 82%, rgb(0 0 0 / 0.3)),
+      repeating-linear-gradient(90deg, #f7f1e4 0 1px, #dcd2bd 1px 2px);
   }
   .book > .back {
     position: absolute;

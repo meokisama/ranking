@@ -1,11 +1,12 @@
 "use client";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Text, useTexture } from "@react-three/drei";
+import { Environment, Lightformer, Text, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { intro } from "@/lib/intro";
+import { backTexture, frontTexture, pageEdgeTexture, spineTexture } from "./bookTextures";
 
-export type HeroBook = { cover: string; color: string };
+export type HeroBook = { cover: string; color: string; name: string; publisher: string };
 
 const INK = "#0c0b0a";
 const PAPER = "#efe9dd";
@@ -14,7 +15,9 @@ const FONT = "/fonts/DTPhudu-Black.otf";
 
 const BOOK_W = 0.92;
 const BOOK_H = 1.3;
-const BOOK_D = 0.13;
+const BOOK_D = 0.125; // độ dày ruột sách
+const CARD = 0.007; // độ dày bìa
+const INSET = 0.012; // bìa nhô ra khỏi ruột giấy
 const RING_TILT = 0.34;
 const RING_Y = -1.0;
 const TITLE_Y = 0.55;
@@ -69,11 +72,32 @@ function useScrollAndDrag() {
 function Books({ books, compact }: { books: HeroBook[]; compact: boolean }) {
   const textures = useTexture(books.map((b) => b.cover));
   const group = useRef<THREE.Group>(null);
-  const refs = useRef<(THREE.Mesh | null)[]>([]);
+  const refs = useRef<(THREE.Group | null)[]>([]);
   const maxAniso = useThree((s) => s.gl.capabilities.getMaxAnisotropy());
 
-  const geometry = useMemo(() => new THREE.BoxGeometry(BOOK_W, BOOK_H, BOOK_D), []);
-  const pageMat = useMemo(() => new THREE.MeshStandardMaterial({ color: "#efe4cc", roughness: 0.95 }), []);
+  // Một cuốn sách = 4 khối: bìa trước, bìa sau, gáy, ruột giấy (thụt vào một chút so với bìa).
+  const geo = useMemo(
+    () => ({
+      cover: new THREE.BoxGeometry(BOOK_W, BOOK_H, CARD),
+      spine: new THREE.BoxGeometry(CARD, BOOK_H, BOOK_D),
+      block: new THREE.BoxGeometry(BOOK_W - CARD - INSET, BOOK_H - INSET * 2, BOOK_D),
+    }),
+    []
+  );
+
+  const shared = useMemo(() => {
+    const aniso = Math.min(8, maxAniso);
+    const paper = new THREE.MeshStandardMaterial({ color: "#efe6d0", roughness: 1 });
+    const edgeU = new THREE.MeshStandardMaterial({ map: pageEdgeTexture("u", aniso), roughness: 1 });
+    const edgeV = new THREE.MeshStandardMaterial({ map: pageEdgeTexture("v", aniso), roughness: 1 });
+    return {
+      aniso,
+      // lõi giấy trắng lộ ra ở mép bìa
+      card: new THREE.MeshStandardMaterial({ color: "#f3efe6", roughness: 0.9 }),
+      // thứ tự mặt của BoxGeometry: +x, -x, +y, -y, +z, -z
+      block: [edgeU, paper, edgeV, edgeV, paper, paper],
+    };
+  }, [maxAniso]);
 
   const items = useMemo(() => {
     const rand = rng(20241224);
@@ -82,14 +106,24 @@ function Books({ books, compact }: { books: HeroBook[]; compact: boolean }) {
       const isInner = i < inner;
       const n = isInner ? inner : books.length - inner;
       const k = isInner ? i : i - inner;
-      const tex = textures[i];
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.anisotropy = Math.min(8, maxAniso);
-      const side = new THREE.MeshStandardMaterial({ color: b.color, roughness: 0.7 });
-      const front = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55, metalness: 0.02 });
+      const image = textures[i].image as CanvasImageSource;
+      const { aniso, card } = shared;
+      // bìa cán bóng: lớp clearcoat bắt ánh đèn môi trường
+      const matte = { roughness: 0.5, envMapIntensity: 0.55 };
+      const front = new THREE.MeshPhysicalMaterial({
+        map: frontTexture(image, aniso),
+        roughness: 0.42,
+        clearcoat: 0.4,
+        clearcoatRoughness: 0.25,
+        envMapIntensity: 0.4,
+      });
+      const back = new THREE.MeshStandardMaterial({ map: backTexture(image, b.color, i, aniso), ...matte });
+      const spine = new THREE.MeshStandardMaterial({ map: spineTexture(b.name, b.publisher, b.color, aniso), ...matte });
       return {
         // thứ tự mặt của BoxGeometry: +x, -x, +y, -y, +z, -z
-        materials: [pageMat, side, pageMat, pageMat, front, side],
+        front: [card, card, card, card, front, card],
+        back: [card, card, card, card, card, back],
+        spine: [card, spine, card, card, card, card],
         angle: (k / n) * Math.PI * 2 + (isInner ? 0 : 0.4) + (rand() - 0.5) * 0.12,
         radius: isInner ? R_INNER + (rand() - 0.5) * 0.25 : R_OUTER + (rand() - 0.5) * 0.9,
         y: isInner ? (rand() - 0.5) * 0.35 : (rand() - 0.5) * 2.6 + 0.5,
@@ -101,7 +135,7 @@ function Books({ books, compact }: { books: HeroBook[]; compact: boolean }) {
         delay: rand() * 0.9,
       };
     });
-  }, [books, textures, compact, pageMat, maxAniso]);
+  }, [books, textures, compact, shared]);
 
   useEffect(() => {
     intro.setReady();
@@ -147,15 +181,18 @@ function Books({ books, compact }: { books: HeroBook[]; compact: boolean }) {
   return (
     <group ref={group}>
       {items.map((it, i) => (
-        <mesh
+        <group
           key={i}
           ref={(el) => {
             refs.current[i] = el;
           }}
-          geometry={geometry}
-          material={it.materials}
           scale={0.001}
-        />
+        >
+          <mesh geometry={geo.cover} material={it.front} position-z={(BOOK_D + CARD) / 2} />
+          <mesh geometry={geo.cover} material={it.back} position-z={-(BOOK_D + CARD) / 2} />
+          <mesh geometry={geo.spine} material={it.spine} position-x={(CARD - BOOK_W) / 2} />
+          <mesh geometry={geo.block} material={shared.block} position-x={(CARD - INSET) / 2} />
+        </group>
       ))}
       {/* quỹ đạo */}
       {[R_INNER, R_OUTER].map((r) => (
@@ -300,9 +337,16 @@ export default function HeroScene({ books, active }: { books: HeroBook[]; active
     >
       <color attach="background" args={[INK]} />
       <fog attach="fog" args={[INK, 8.5, 19]} />
-      <ambientLight intensity={1.5} />
-      <directionalLight position={[-4, 6, 8]} intensity={2.6} />
-      <pointLight position={[0, 0.5, -1.5]} intensity={90} distance={14} color={SHU} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[-4, 6, 8]} intensity={1.7} />
+      {/* "Studio" ảo dựng tại chỗ (không tải HDR): các tấm đèn để bìa bóng có thứ mà phản chiếu */}
+      <Environment resolution={256} frames={1}>
+        <Lightformer form="rect" intensity={1.3} color="#fff4e2" position={[-5, 6, 7]} scale={[10, 6, 1]} target={[0, 0, 0]} />
+        <Lightformer form="rect" intensity={0.8} color="#ffffff" position={[7, 2, 6]} scale={[2, 10, 1]} target={[0, 0, 0]} />
+        <Lightformer form="rect" intensity={0.5} color="#dfe6ff" position={[0, -5, 8]} scale={[14, 3, 1]} target={[0, 0, 0]} />
+        <Lightformer form="circle" intensity={1} color="#f0421c" position={[0, 1, -9]} scale={5} target={[0, 0, 0]} />
+      </Environment>
+      <pointLight position={[0, 0.5, -1.5]} intensity={35} distance={12} color={SHU} />
       <Rig>
         <Suspense fallback={null}>
           <Title compact={compact} />
