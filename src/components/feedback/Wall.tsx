@@ -66,7 +66,7 @@ export default function Wall({ notes, periods }: { notes: Note[]; periods: { slu
           <span className="outline-text">gửi ban tổ chức</span>
         </h1>
         <p className="relative mt-8 max-w-[46ch] text-[15px] leading-relaxed text-ink/70">
-          Mỗi lá phiếu đi kèm một ô trống để độc giả nói điều mình nghĩ — về tác phẩm, nhà phát hành, hay bộ truyện
+          Mỗi lá phiếu đi kèm một ô trống để độc giả nói điều mình nghĩ: về tác phẩm, nhà phát hành, hay bộ truyện
           đang mong có bản quyền. Đây là tất cả những gì đã được gửi về, giữ nguyên văn.
         </p>
 

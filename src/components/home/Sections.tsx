@@ -36,7 +36,7 @@ export function Manifesto({ stats }: { stats: { value: number; label: string; pl
       <span className="label relative text-shu">Lời ngỏ</span>
       <ScrollWords
         text={MANIFESTO}
-        className="relative mt-8 max-w-[22ch] font-serif text-[9vw] leading-[1.08] tracking-[-0.02em] md:max-w-[24ch] md:text-[5.2vw]"
+        className="relative mt-8 serif-display max-w-[22ch] text-[9vw] leading-[1.08] md:max-w-[24ch] md:text-[5.2vw]"
       />
 
       <div className="relative mt-24 grid gap-14 md:mt-36 md:grid-cols-2 md:gap-20">
@@ -108,7 +108,7 @@ export function Voices() {
       <span className="label relative text-shu">Tiếng nói trước giờ G</span>
 
       <FadeUp className="relative mt-10">
-        <blockquote className="max-w-[20ch] font-serif text-[8.4vw] italic leading-[1.1] tracking-[-0.015em] md:text-[4.6vw]">
+        <blockquote className="serif-display max-w-[20ch] text-[8.4vw] italic leading-[1.1] md:text-[4.6vw]">
           {lead.content}
         </blockquote>
         <Byline v={lead} />

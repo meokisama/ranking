@@ -1,5 +1,5 @@
 export const MANIFESTO =
-  "Không chỉ là một cuộc bình chọn. Đây là nơi những tâm hồn đam mê Light Novel hội tụ — cùng nhau tìm ra những tác phẩm vượt trội nhất, những câu chuyện cảm xúc nhất, do chính độc giả Việt Nam gọi tên.";
+  "Không chỉ là một cuộc bình chọn. Đây là nơi những tâm hồn đam mê Light Novel hội tụ, cùng nhau tìm ra những tác phẩm vượt trội nhất, những câu chuyện cảm xúc nhất, do chính độc giả Việt Nam gọi tên.";
 
 export const ABOUT = [
   {
@@ -7,25 +7,25 @@ export const ABOUT = [
     title: "Về bảng xếp hạng",
     body: [
       "Trong cộng đồng độc giả Light Novel, Bảng Xếp Hạng Light Novel Việt Nam là một điểm đến tinh thần, nơi những người yêu văn học Nhật Bản cùng chia sẻ đam mê và khám phá những tác phẩm đình đám nhất.",
-      "Hơn cả một sân chơi dành cho các tác phẩm, bảng xếp hạng góp phần xây dựng cộng đồng — một không gian để giao lưu, trao đổi, lan toả niềm đam mê và tận hưởng sự phong phú của Light Novel.",
+      "Hơn cả một sân chơi dành cho các tác phẩm, bảng xếp hạng góp phần xây dựng cộng đồng: một không gian để giao lưu, trao đổi, lan toả niềm đam mê và tận hưởng sự phong phú của Light Novel.",
     ],
   },
   {
     no: "02",
     title: "Về ban tổ chức",
     body: [
-      "Đứng sau bảng xếp hạng là đội ngũ tổ chức và truyền thông dẫn đầu bởi Baka Hyddyt — anti romcom chúa, chiến thần harem và shitposter chuyên nghiệp — với mục tiêu giúp mọi người có cái nhìn đầy đủ hơn về thị trường Light Novel Việt Nam.",
+      "Đứng sau bảng xếp hạng là đội ngũ tổ chức và truyền thông dẫn đầu bởi Baka Hyddyt (anti romcom chúa, chiến thần harem và shitposter chuyên nghiệp) với mục tiêu giúp mọi người có cái nhìn đầy đủ hơn về thị trường Light Novel Việt Nam.",
       "Từ năm 2018, ban tổ chức bắt đầu hành trình đưa một Konorano/Oricon của riêng thị trường Việt: một bảng xếp hạng công bằng, nơi mọi tác phẩm, mọi đam mê và mọi góp ý của độc giả đều được lắng nghe.",
     ],
   },
 ];
 
 export const TIMELINE = [
-  { date: "10—14.12", title: "Khởi động", text: "Đăng bài phỏng vấn, các fandom lên dần chuẩn bị cho sự kiện." },
+  { date: "10-14.12", title: "Khởi động", text: "Đăng bài phỏng vấn, các fandom lên dần chuẩn bị cho sự kiện." },
   { date: "10.12", title: "Ra mắt banner", text: "Công bố banner Bảng Xếp Hạng Light Novel Việt Nam kỳ II 2024." },
-  { date: "14—24.12", title: "Mở bình chọn", text: "Chính thức mở cổng bình chọn với bốn hạng mục.", key: true },
-  { date: "25—28.12", title: "Kiểm phiếu", text: "Ban tổ chức tổng hợp các lượt bình chọn và xử lý kết quả." },
-  { date: "29—30.12", title: "Công bố", text: "Đăng bài tổng kết và ảnh mừng các tác phẩm đứng đầu." },
+  { date: "14-24.12", title: "Mở bình chọn", text: "Chính thức mở cổng bình chọn với bốn hạng mục.", key: true },
+  { date: "25-28.12", title: "Kiểm phiếu", text: "Ban tổ chức tổng hợp các lượt bình chọn và xử lý kết quả." },
+  { date: "29-30.12", title: "Công bố", text: "Đăng bài tổng kết và ảnh mừng các tác phẩm đứng đầu." },
 ];
 
 export const VOICES = [
@@ -69,9 +69,9 @@ export const PARTNERS = [
   { name: "Zennomi", url: "https://facebook.com/Zennomi", avatar: "zennomi.webp" },
   { name: "Sonako Light Novel", url: "https://facebook.com/SonakoWiki", avatar: "sonako.webp" },
   { name: "Hội những người yêu thích Light Novel", url: "https://www.facebook.com/profile.php?id=100064392503502", avatar: "valvrare.webp" },
-  { name: "Hako — Cộng đồng độc giả LN VN", url: "https://www.facebook.com/hako.group", avatar: "hako_group.webp" },
+  { name: "Hako · Cộng đồng độc giả LN VN", url: "https://www.facebook.com/hako.group", avatar: "hako_group.webp" },
   { name: "Sword Art Online Vietnam", url: "https://www.facebook.com/saovthesurvivors", avatar: "sao.webp" },
-  { name: "Light Novel — Manga Việt Nam 2.0", url: "https://facebook.com/groups/2154767871225294", avatar: "group2_0.webp" },
+  { name: "Light Novel · Manga Việt Nam 2.0", url: "https://facebook.com/groups/2154767871225294", avatar: "group2_0.webp" },
   { name: "Otonari no Tenshi-sama VN", url: "https://www.facebook.com/OtonariVNFP", avatar: "tenshi.webp" },
   { name: "Youjitsu VN Fanpage", url: "https://www.facebook.com/YoujitsuVN", avatar: "youjitsu.webp" },
   { name: "Roshidere Vietnam", url: "https://facebook.com/RoshidereVN", avatar: "roshidere.webp" },

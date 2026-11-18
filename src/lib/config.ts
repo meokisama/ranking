@@ -13,7 +13,7 @@ export const CURRENT_PERIOD = "2-2024";
 export const VOTING = {
   start: "2024-12-14T20:00:00+07:00",
   end: "2024-12-24T23:30:00+07:00",
-  /** Khoá localStorage đánh dấu đã bình chọn — đổi cho mỗi kỳ. */
+  /** Khoá localStorage đánh dấu đã bình chọn, đổi cho mỗi kỳ. */
   storageKey: "bxhlnvn:2-2024",
 };
 
@@ -39,7 +39,7 @@ export const CATEGORIES: Record<
     max: 10,
     unit: "tác phẩm",
     blurb:
-      "Best of the best — ngôi đền văn học, nơi những xúc cảm tuyệt vời nhất thăng hoa.",
+      "Best of the best: ngôi đền văn học, nơi những xúc cảm tuyệt vời nhất thăng hoa.",
   },
   oneshot: {
     label: "Oneshot được yêu thích nhất",
@@ -59,7 +59,7 @@ export const CATEGORIES: Record<
     max: 3,
     unit: "tác phẩm",
     blurb:
-      "Ngọn gió mới thổi vào làng văn học — những gương mặt vừa đặt bước chân đầu tiên vào thị trường.",
+      "Ngọn gió mới thổi vào làng văn học, những gương mặt vừa đặt bước chân đầu tiên vào thị trường.",
   },
   publisher: {
     label: "Nhà phát hành được yêu thích nhất",

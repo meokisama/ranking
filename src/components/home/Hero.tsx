@@ -85,7 +85,7 @@ export default function Hero({
 
         <div className="absolute inset-x-5 bottom-8 flex flex-col gap-6 md:inset-x-16 md:bottom-12 md:flex-row md:items-end md:justify-between">
           <motion.p {...show(1.1)} className="max-w-[34ch] text-[15px] leading-relaxed text-paper/75">
-            <span className="label mb-3 block text-shu">{period} — Kết quả chính thức</span>
+            <span className="label mb-3 block text-shu">{period} · Kết quả chính thức</span>
             Nơi sức sáng tạo của tác giả gặp gỡ đam mê của độc giả.{" "}
             <span className="text-paper">{votes} lá phiếu</span> đã gọi tên {titles} tác phẩm.
           </motion.p>

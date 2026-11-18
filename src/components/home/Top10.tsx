@@ -59,7 +59,7 @@ export default function Top10({
           {/* tấm mở đầu */}
           <div className="flex w-[78vw] shrink-0 flex-col justify-between md:w-[36vw]">
             <div>
-              <span className="label text-shu">Hạng mục 01 — {period}</span>
+              <span className="label text-shu">Hạng mục 01 · {period}</span>
               <h2 className="display mt-5 text-[19vw] leading-[0.9] md:text-[10.5vw]">
                 Top
                 <br />

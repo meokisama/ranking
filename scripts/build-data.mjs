@@ -141,7 +141,7 @@ async function main() {
   const missing = [...coverMeta.values()].filter((v) => !v).length;
   console.log(`Xong. Thiếu ${missing}/${queue.size} bìa.`);
 
-  // Tuổi: gom các giá trị hợp lệ 10–40, phần còn lại coi là nhiễu.
+  // Tuổi: gom các giá trị hợp lệ 10-40, phần còn lại coi là nhiễu.
   const ages = {};
   for (const { _id, count } of h2.age) {
     const a = Math.round(_id);

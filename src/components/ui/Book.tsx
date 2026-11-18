@@ -89,7 +89,7 @@ export default function Book({
   );
 }
 
-/** Obi — dải giấy đỏ quấn quanh sách đoạt giải. */
+/** Obi: dải giấy đỏ quấn quanh sách đoạt giải. */
 export function Obi({ rank, line }: { rank: number; line: string }) {
   return (
     <div className="obi @container">

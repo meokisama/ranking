@@ -78,6 +78,26 @@ html.lenis body {
     line-height: 1.02;
     letter-spacing: -0.01em;
   }
+  /* Fraunces theo kiểu của portfolio: nét mảnh, bo mềm (SOFT), chữ nghiêng bật WONK */
+  .font-serif {
+    font-variation-settings: "SOFT" 60, "WONK" 0;
+    font-optical-sizing: auto;
+  }
+  .font-serif.italic,
+  .font-serif em {
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+  .serif-display {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-variation-settings: "SOFT" 60, "WONK" 0;
+    font-optical-sizing: auto;
+    letter-spacing: -0.035em;
+  }
+  .serif-display.italic {
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    letter-spacing: -0.04em;
+  }
   .label {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
@@ -193,7 +213,7 @@ html.lenis body {
     box-shadow: 0 30px 60px -10px rgb(0 0 0 / 0.55), 0 12px 24px -8px rgb(0 0 0 / 0.5);
   }
 
-  /* Obi — dải giấy quấn quanh sách */
+  /* Obi: dải giấy quấn quanh sách */
   .obi {
     position: absolute;
     left: 0;

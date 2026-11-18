@@ -71,7 +71,7 @@ function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed" | "done"; per
       jp: "投票終了",
       kicker: "Đã khoá hòm phiếu",
       title: ["Cổng bình chọn", "đã đóng"],
-      body: `Bình chọn ${periodLabel} đã kết thúc lúc ${when(VOTING.end)}. Kết quả đã được công bố — hẹn gặp lại bạn ở kỳ tiếp theo.`,
+      body: `Bình chọn ${periodLabel} đã kết thúc lúc ${when(VOTING.end)}. Kết quả đã được công bố, hẹn gặp lại bạn ở kỳ tiếp theo.`,
     },
     done: {
       jp: "ありがとう",
@@ -95,7 +95,7 @@ function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed" | "done"; per
       </motion.div>
 
       <span className="label relative text-shu">
-        {copy.kicker} — {periodLabel}
+        {copy.kicker} · {periodLabel}
       </span>
       <h1 className="display relative mt-5 text-[14vw] leading-[0.92] md:text-[10vw]">
         {copy.title.map((l, i) => (
@@ -207,7 +207,7 @@ function Ballot({
     if (missing.length) return setNotice(`Còn hạng mục chưa chọn: ${missing.join(", ")}.`);
     if (!extra.gender) return setNotice("Vui lòng chọn giới tính của bạn.");
     if (!age || age < 5 || age > 100) return setNotice("Vui lòng nhập tuổi hợp lệ.");
-    if (preview) return setNotice("Đang ở chế độ xem thử — phiếu sẽ không được gửi.");
+    if (preview) return setNotice("Đang ở chế độ xem thử, phiếu sẽ không được gửi.");
     if (!ENDPOINT) return setNotice("Chưa cấu hình máy chủ nhận phiếu (NEXT_PUBLIC_SEND_VOTE).");
     if (!token) return setNotice("Vui lòng hoàn thành captcha trước khi gửi.");
 
@@ -244,7 +244,7 @@ function Ballot({
     <main className="min-h-svh bg-paper pb-36 text-ink">
       <header className="px-5 pt-28 md:px-16 md:pt-36">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <span className="label text-shu">Lá phiếu — {periodLabel}</span>
+          <span className="label text-shu">Lá phiếu · {periodLabel}</span>
           {preview && <span className="label bg-ink px-2 py-1 text-paper">Chế độ xem thử · không gửi phiếu</span>}
         </div>
 
@@ -410,7 +410,7 @@ function Ballot({
                             ))}
                           </ol>
                         ) : (
-                          <p className="mt-3 font-serif text-lg italic text-shu">Chưa chọn — hạng mục này là bắt buộc.</p>
+                          <p className="mt-3 font-serif text-lg italic text-shu">Chưa chọn. Hạng mục này là bắt buộc.</p>
                         )}
                       </div>
                     );

@@ -8,7 +8,7 @@ export default function NotFound() {
         404
       </span>
       <div className="relative bg-paper p-8 text-ink md:p-12">
-        <span className="label text-shu">落丁 — Trang bị thiếu</span>
+        <span className="label text-shu">落丁 · Trang bị thiếu</span>
         <h1 className="display mt-4 max-w-[14ch] text-4xl md:text-6xl">Trang này không có trong cuốn sách</h1>
         <p className="mt-5 max-w-[36ch] font-serif text-lg italic text-ink/70">
           Có thể đường dẫn đã cũ, hoặc trang đã được xếp lại ở một kỳ khác.

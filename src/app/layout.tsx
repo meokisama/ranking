@@ -15,6 +15,7 @@ const bevn = Be_Vietnam_Pro({
 const fraunces = Fraunces({
   subsets: ["latin", "vietnamese"],
   style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
   variable: "--font-fraunces",
   display: "swap",
 });
@@ -32,11 +33,11 @@ const mincho = Shippori_Mincho({
 });
 
 const description =
-  "Bảng xếp hạng Light Novel Việt Nam — nơi sức sáng tạo của tác giả gặp gỡ đam mê của độc giả. Xem kết quả bình chọn qua từng kỳ.";
+  "Bảng xếp hạng Light Novel Việt Nam, nơi sức sáng tạo của tác giả gặp gỡ đam mê của độc giả. Xem kết quả bình chọn qua từng kỳ.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { template: `%s — ${SITE.short}`, default: SITE.name },
+  title: { template: `%s | ${SITE.short}`, default: SITE.name },
   description,
   keywords: ["bảng xếp hạng light novel", "light novel việt nam", "bxh lnvn", "bình chọn light novel", "ranking"],
   openGraph: { title: SITE.name, description, url: SITE.url, siteName: SITE.name, type: "website", locale: "vi_VN" },

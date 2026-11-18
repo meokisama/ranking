@@ -55,7 +55,7 @@ export default function Footer() {
 
       <div className="mt-20 flex items-center justify-between border-t border-paper/15 px-5 py-5 md:mt-28 md:px-16">
         <span className="label text-paper/45">
-          © {SITE.since}—{new Date().getFullYear()} BXH LNVN
+          © {SITE.since}-{new Date().getFullYear()} BXH LNVN
         </span>
         <span className="label font-jp normal-case tracking-[0.3em] text-paper/45">おわり</span>
       </div>

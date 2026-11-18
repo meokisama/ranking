@@ -72,7 +72,7 @@ export default function Board({
         <div className="tategaki pointer-events-none absolute right-6 top-36 hidden text-sm text-paper/40 md:block" aria-hidden>
           総合順位表
         </div>
-        <span className="label relative text-shu">Bảng tổng sắp — {period.long}</span>
+        <span className="label relative text-shu">Bảng tổng sắp · {period.long}</span>
         <h1 className="display relative mt-5 text-[17vw] leading-[0.9] md:text-[11vw]">
           {periods.map((p) =>
             p.slug === period.slug ? (
@@ -201,7 +201,7 @@ export default function Board({
                 >
                   <span className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
                   <span className="label relative transition-colors duration-300 group-hover:text-paper">
-                    Xem thêm — còn {rest.length - limit}
+                    Xem thêm · còn {rest.length - limit}
                   </span>
                 </button>
               </div>
@@ -358,7 +358,7 @@ function Demographics({
         <div>
           <div className="flex items-baseline justify-between">
             <h3 className="label text-paper/50">
-              Độ tuổi ({ages[0].age}—{ages[ages.length - 1].age})
+              Độ tuổi ({ages[0].age}-{ages[ages.length - 1].age})
             </h3>
             <span className="label text-paper/50">
               Đông nhất: <span className="text-shu">{mode.age} tuổi</span>
@@ -389,7 +389,7 @@ function Demographics({
             ))}
           </div>
           <p className="mt-8 max-w-[40ch] font-serif text-xl italic leading-snug text-paper/70">
-            {pct(under22, votes)} người bình chọn từ 22 tuổi trở xuống — Light Novel vẫn là câu chuyện của tuổi trẻ.
+            {pct(under22, votes)} người bình chọn từ 22 tuổi trở xuống. Light Novel vẫn là câu chuyện của tuổi trẻ.
           </p>
         </div>
       </div>
