@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow:
-
-Sitemap: https://bxh.lightnovel.vn/sitemap.xml

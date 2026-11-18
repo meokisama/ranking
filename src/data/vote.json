@@ -1,0 +1,2062 @@
+{
+ "books": [
+  {
+   "id": 218,
+   "name": "5 Centimet Trên Giây",
+   "publisher": "IPM",
+   "cover": "/covers/u2-d4c413c7-c985-4d20-bbed-8f6ebf8a603e.webp",
+   "color": "#516db0",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 158,
+   "name": "5 Centimet Trên Giây - One More Side -",
+   "publisher": "IPM",
+   "cover": "/covers/u2-a90df73c-f0de-479b-956b-fa949bed9901.webp",
+   "color": "#41bae4",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 23,
+   "name": "86 Eighty Six",
+   "publisher": "IPM",
+   "cover": "/covers/71c0f940-a13e-421f-a289-89feb5a6aa5a.webp",
+   "color": "#984f3e",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 33,
+   "name": "Ai Dám Bảo Rom-com Không Có Ngoài Đời Thực?",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/fcda86e1-40b4-4061-bbf0-12a7dd880d39.webp",
+   "color": "#aa8d81",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 182,
+   "name": "Amagi Công Viên Rực Rỡ",
+   "publisher": "Owlbooks",
+   "cover": "/covers/u2-fa57bffb-6e09-421f-9861-0535605c7314.webp",
+   "color": "#3ebfed",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 152,
+   "name": "Amaryllis Ở Xứ Sở Băng Giá",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-f5618d07-f703-4f6b-8e2e-d4e4eb2bcc63.webp",
+   "color": "#9fe1f0",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 216,
+   "name": "Ame Và Yuki - Những Đứa Con Của Sói",
+   "publisher": "IPM",
+   "cover": "/covers/u2-66c3c330-2ae2-4ff4-8579-c8463bbf96ee.webp",
+   "color": "#6eb7e7",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 77,
+   "name": "Anh Hùng Diệt Thần & Bảy Thệ Ước",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-b6a14820-16b4-4d27-baa4-5ff4679b00ce.webp",
+   "color": "#4fa56e",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 211,
+   "name": "Ánh Trăng",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-90f05567-736f-4929-a2d3-881f12505741.webp",
+   "color": "#a8928c",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 134,
+   "name": "Anohana - Đóa Hoa Ngày Ấy",
+   "publisher": "IPM",
+   "cover": "/covers/u2-2204e403-02b1-4f63-8d97-98c9325eff6a.webp",
+   "color": "#f29592",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 217,
+   "name": "Another",
+   "publisher": "IPM",
+   "cover": "/covers/u2-8bcd14e5-83c7-4599-8419-fd2867f02404.webp",
+   "color": "#a86859",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 198,
+   "name": "Another S/O",
+   "publisher": "IPM",
+   "cover": "/covers/u2-f6c20374-a309-4eb6-9955-48b4e1600aff.webp",
+   "color": "#af2920",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 50,
+   "name": "Arifureta - Từ Tầm Thường Đến Bất Khả Chiến Bại",
+   "publisher": "Amak",
+   "cover": "/covers/u2-1899cf80-c27e-43cd-bdfe-35ade28a75c0.webp",
+   "color": "#ee4426",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 35,
+   "name": "Arya Bàn Bên Thỉnh Thoảng Lại Trêu Ghẹo Tôi Bằng Tiếng Nga",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/c1a9536d-d16b-487d-a29e-e74b521db055.webp",
+   "color": "#ce5756",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 124,
+   "name": "Aura - Trận Chiến Cuối Cùng Của Maryuin Koga",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-e0d691dc-9475-4784-a9da-939936c0ed2a.webp",
+   "color": "#ee1059",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 135,
+   "name": "Ẩn tàng thư Dantalian",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-e71b5727-78a4-46ae-a8ad-4e27a987e8cf.webp",
+   "color": "#87505a",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 186,
+   "name": "Ba Ngày Hạnh Phúc",
+   "publisher": "IPM",
+   "cover": "/covers/u2-be25b804-55cd-44be-9597-a0d8c20ce1a3.webp",
+   "color": "#189cd9",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 153,
+   "name": "Bác Sĩ Cuối Cùng Dưới Tán Hoa Anh Đào",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u2-d8d18f29-6d99-4f22-bcd3-ef07ba494ed4.webp",
+   "color": "#af596a",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 99,
+   "name": "Bakemonogatari",
+   "publisher": "IPM",
+   "cover": "/covers/u2-d2fe8598-01cc-43f8-b790-2478429ed3b9.webp",
+   "color": "#40c3d4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 129,
+   "name": "Bạn Gái Vs. Bạn Thời Thơ Ấu",
+   "publisher": "Uranix",
+   "cover": "/covers/u2-f38fc32e-d672-4a5c-940b-d3d39e22e9ce.webp",
+   "color": "#e86e9e",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 12,
+   "name": "Bảo Mẫu Bí Mật Của Tiểu Thư",
+   "publisher": "Amak",
+   "cover": "/covers/ae82fc53-6877-45c5-89f0-411be911aff6.webp",
+   "color": "#d38260",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 48,
+   "name": "Bầu Trời Xanh Của Em",
+   "publisher": "IPM",
+   "cover": "/covers/u2-f4216545-2ae0-45a2-84a1-0b65e0e5e609.webp",
+   "color": "#ae6041",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 174,
+   "name": "Bên Kia Mây Trời, Là Nơi Hẹn Ước",
+   "publisher": "IPM",
+   "cover": "/covers/u2-e37a7644-9854-4b11-881a-79a0a93571b5.webp",
+   "color": "#a77c55",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 110,
+   "name": "Bị Đuổi Khỏi Nhóm Anh Hùng, Tôi Muốn Sống Tự Do Tự Tại Ở Vương Đô",
+   "publisher": "Ichi Light Novel",
+   "cover": "/covers/u2-c0bb8c0e-c2ff-401c-8cea-ab981628ac32.webp",
+   "color": "#bd7d4b",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 210,
+   "name": "Bí Mật Giao Ước Bóng Tối",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-82d3abba-8231-4303-89ca-bfb74f9dabb9.webp",
+   "color": "#cc9880",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 125,
+   "name": "Biên Niên Sử Đế Chế Alexis",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-a3262133-8da8-41ec-ae14-41e3dad11be4.webp",
+   "color": "#aa3c24",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 13,
+   "name": "Bỗng Một Ngày Tôi Có Vị Hôn Thê Là Gal",
+   "publisher": "Shine Novel",
+   "cover": "/covers/9030f9a9-e452-4e91-9ca8-6e070fc8e769.webp",
+   "color": "#4ea8d8",
+   "rookie": true,
+   "oneshot": false
+  },
+  {
+   "id": 38,
+   "name": "Bởi Vì Tôi Sẽ Gọi Tên Em",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/c7fef5e4-5cc9-4e6c-8ae0-c87eb2c2d63d.webp",
+   "color": "#486cb2",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 60,
+   "name": "Cách Sống Của Thiếu Nữ Hành Quyết - Và Rồi, Cô Ấy Được Tái Sinh",
+   "publisher": "Ichi Light Novel",
+   "cover": "/covers/u2-543dcf8c-f20b-4a32-adaa-ded181e3d0a2.webp",
+   "color": "#2163b0",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 204,
+   "name": "Calling You",
+   "publisher": "IPM",
+   "cover": "/covers/u2-082266b4-5dd6-4a82-8d29-65c9289df691.webp",
+   "color": "#cd9171",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 164,
+   "name": "Cấm Thư Ma Thuật Index",
+   "publisher": "IPM",
+   "cover": "/covers/u2-c7bba5ae-33bc-47fe-8dbc-3b56400257ca.webp",
+   "color": "#4888b5",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 165,
+   "name": "Câu Chuyện Về Cô Bé Yêu Bánh Hạnh Nhân Đã Sống Một Nghìn Năm",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-73aaca13-a653-4298-87f9-7e24af5e4d86.webp",
+   "color": "#cbab88",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 212,
+   "name": "Câu Lạc Bộ Giỏi Và Sành Sỏi",
+   "publisher": "Trẻ",
+   "cover": "/covers/u2-326f509a-fecc-4b3d-a115-d52d29a652a0.webp",
+   "color": "#cd976d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 187,
+   "name": "Chàng thẩm định viên và Nữ tác giả tập sự",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u1-05ae3d8a-0e6f-423e-85a1-e86efaebd43f.webp",
+   "color": "#2b94b9",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 36,
+   "name": "Chàng Trai Chuyển Kiếp Và Cô Gái Thiên Tài",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/eec5f26d-eaed-4d73-8b65-b037ff0ce61e.webp",
+   "color": "#4fb1d2",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 4,
+   "name": "Chào Mừng Đến Lớp Học Đề Cao Thực Lực",
+   "publisher": "IPM",
+   "cover": "/covers/fcdac9c8-4e78-42d6-aaba-434b1d1c5328.webp",
+   "color": "#f8c665",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 215,
+   "name": "Chào Mừng Đến Với N.H.K!",
+   "publisher": "IPM",
+   "cover": "/covers/u2-db1a4c62-3484-42ea-bfe1-48fa02e20298.webp",
+   "color": "#2149e8",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 3,
+   "name": "Chén Thánh Của Eris",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/7f87a487-c1a2-4aac-97bc-103f6a90bfe2.webp",
+   "color": "#bf3759",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 119,
+   "name": "Chiếc Hộp Rỗng Và Maria Lần 0",
+   "publisher": "IPM",
+   "cover": "/covers/u2-bf928040-da88-469e-8088-84054ca1aa7d.webp",
+   "color": "#967661",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 9,
+   "name": "Chitose Trong Chai Ramune",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/c8a6d680-31bf-4095-8140-73741e5d4808.webp",
+   "color": "#6bd9f4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 87,
+   "name": "Chủ Tiệm Bánh Chiến Binh Và Cô Phục Vụ Người Máy",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-9a44608b-3f61-473a-9d14-650c6deeeff7.webp",
+   "color": "#fde904",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 27,
+   "name": "Chúa Tể Bóng Tối",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/83fc4f1d-0ed6-4026-bc8d-0319cba30ad2.webp",
+   "color": "#7f2341",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 6,
+   "name": "Chung Một Mái Nhà",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/1c7196d3-88a9-40b7-b583-3f9cdf2fa18c.webp",
+   "color": "#d6797b",
+   "rookie": true,
+   "oneshot": false
+  },
+  {
+   "id": 127,
+   "name": "Chuyển Sinh Làm Người Sói, Tôi Trở Thành Cánh Tay Phải Của Ma Vương",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/u2-9939cae6-05a9-4c83-8019-acbbee7e0cfd.webp",
+   "color": "#5385b1",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 74,
+   "name": "Chuyện Tình Hài Lãng Mạn Không Thể Chê Vào Đâu",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-8aba05ba-a140-4715-babb-658d15afff71.webp",
+   "color": "#77718d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 89,
+   "name": "Chuyện Tình Thanh Xuân Bi Hài Của Tôi Quả Nhiên Là Sai Lầm",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-dd710953-5206-42d3-a4ec-f1cbbd30c899.webp",
+   "color": "#e48165",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 91,
+   "name": "Con Gái Tôi Đã Đến Thủ Đô Và Trở Thành Mạo Hiểm Giả Hạng S",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-0dc6a437-113a-4646-ba05-c8b4f919a33c.webp",
+   "color": "#03b6db",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 64,
+   "name": "Cop Craft - Cảnh Sát Đến Từ Hai Thế Giới",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-f144db84-9055-4cd1-a784-a8381bec667f.webp",
+   "color": "#c72827",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 189,
+   "name": "Cô Gái Văn Chương",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-1ff1ab49-9d3f-46ae-8617-6e6e5dce6ba9.webp",
+   "color": "#0c4ca1",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 49,
+   "name": "Cô Nàng Otaku Nhà Tôi",
+   "publisher": "Amak",
+   "cover": "/covers/u2-afddf033-e217-48df-8997-79dd46dda421.webp",
+   "color": "#f4ca98",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 18,
+   "name": "Cô Nàng Shimotsuki Trót Phải Lòng Nhân Vật Nền",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/f3d84ae5-8163-4a4c-b66f-c1c12e7ee77a.webp",
+   "color": "#b35056",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 105,
+   "name": "Công Chúa Ma Cà Rồng Quyền Năng Chỉ Muốn Có Một Cô Em Gái Mà Thôi",
+   "publisher": "Usagi Light Novel",
+   "cover": "/covers/u2-af98dd6f-e82f-41e4-a784-18e66cb79ec0.webp",
+   "color": "#ee2325",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 109,
+   "name": "Công Cuộc Tái Thiết Vương Quốc Của Anh Hùng Chủ Nghĩa Hiện Thực",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/u2-c7755da3-fe75-432f-9c4d-bcbcc8e5d28e.webp",
+   "color": "#2f93cd",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 81,
+   "name": "Công Việc Của Long Vương",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-b3555458-a7d2-455e-97cb-ae61d9be1486.webp",
+   "color": "#5160a7",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 206,
+   "name": "Cuộc Chiến Luân Hồi - All You Need Is Kill",
+   "publisher": "IPM",
+   "cover": "/covers/u2-63370ef7-8d7f-4b6b-9791-0c125cc5328a.webp",
+   "color": "#cc6b4c",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 151,
+   "name": "Cuộc Chiến Siêu Nhiên Giữa Đời Thường",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-1a0239a9-48ed-4f7e-8882-bfa80562fc12.webp",
+   "color": "#e2a26a",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 32,
+   "name": "Cuộc Nổi Dậy Của Cô Nàng Mọt Sách",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/cdb412c7-5325-4975-a19c-d1d7a52d92d7.webp",
+   "color": "#cf854f",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 208,
+   "name": "Cuốn Sách Của Sự Kết Thúc",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-e167f844-4278-4a57-851a-5b19216580f2.webp",
+   "color": "#61a3b4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 80,
+   "name": "Dã Ngoại Nơi Mặt Sau Của Thế Giới",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-cc09224e-5371-4996-9de1-27ffd2e7b823.webp",
+   "color": "#b94639",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 171,
+   "name": "Dạo Bước Phố Đêm",
+   "publisher": "IPM",
+   "cover": "/covers/u2-e4eb9523-46ec-452a-b2d3-bb18922ac277.webp",
+   "color": "#bb2f2e",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 20,
+   "name": "Date A Live",
+   "publisher": "Amak",
+   "cover": "/covers/b0645af6-7f73-4dd5-8f0d-a48a1e0c971d.webp",
+   "color": "#6c55a6",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 112,
+   "name": "Date A Live Encore",
+   "publisher": "Amak",
+   "cover": "/covers/u2-4c578103-7e9f-483a-bccc-ad9995289d4c.webp",
+   "color": "#ba6e76",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 141,
+   "name": "Dear",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-06bd97d0-f6c1-44d5-869a-f7cc87a9ae0f.webp",
+   "color": "#a16060",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 157,
+   "name": "Death Note - Another Note",
+   "publisher": "IPM",
+   "cover": "/covers/u2-3178949a-88c5-49d4-af7f-c5272c17e92a.webp",
+   "color": "#606265",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 59,
+   "name": "Diệt Slime Suốt 300 Năm, Tôi Level Max Lúc Nào Chẳng Hay",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-25174ec4-ac3d-467c-8fb6-f3d4f5568620.webp",
+   "color": "#4d60ac",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 128,
+   "name": "Durarara!!",
+   "publisher": "IPM",
+   "cover": "/covers/u2-96de4480-a97f-4905-8c4b-cf05a0634988.webp",
+   "color": "#aea65b",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 11,
+   "name": "Dược Sư Tự Sự",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/c78e7601-546e-4fdd-96c0-9a5f81adb21f.webp",
+   "color": "#e09e43",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 201,
+   "name": "Dưới Ánh Sáng Ma Pháp 0.2 Lux",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/u2-faaee3dd-5c87-401b-986c-a8cb8b1b4836.webp",
+   "color": "#b09b8c",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 67,
+   "name": "Đã Bảo Là Cho Tôi Năng Lực Trung Bình Thôi Mà!",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/u2-8f00cf2d-55d4-46ec-ba6b-f0d4b34b78b9.webp",
+   "color": "#d07a8b",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 100,
+   "name": "Đao Ngữ",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-881d721d-bc99-49a8-9d1d-ce06aef58670.webp",
+   "color": "#bd3646",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 114,
+   "name": "Đau Ơi Bay Đi!",
+   "publisher": "IPM",
+   "cover": "/covers/u2-59a2b2e7-b241-4dee-a5f1-785afbaa943f.webp",
+   "color": "#b87f55",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 140,
+   "name": "Đến Thế Giới Mới Với Smartphone",
+   "publisher": "Amak",
+   "cover": "/covers/u2-174cc321-8a9d-478d-8ccb-fc402c50fce8.webp",
+   "color": "#ac8169",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 197,
+   "name": "Đội Bảo An Kyoto",
+   "publisher": "Amak",
+   "cover": "/covers/u2-6427d36f-15b1-463f-9e04-81cd3f8deb7a.webp",
+   "color": "#af3f71",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 22,
+   "name": "Đợi Anh Trong Mùa Xuân Ngày Hôm Qua",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/ffa00372-1b1e-46d9-a819-8e93773444a2.webp",
+   "color": "#9c6d54",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 138,
+   "name": "Đứa Con Của Thời Tiết",
+   "publisher": "IPM",
+   "cover": "/covers/u2-72e22143-e24f-4072-bd45-ef14092d4a9b.webp",
+   "color": "#00b2ea",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 61,
+   "name": "Đường hầm tới mùa hạ - Lối thoát của Biệt ly",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u3855-0404485a-a981-42c2-b53d-62956b6b0d67.webp",
+   "color": "#00aada",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 156,
+   "name": "ECHO - Tiếng vọng",
+   "publisher": "Uranix",
+   "cover": "/covers/u2-4fb44740-5b23-4486-80b1-a74c97d29ebd.webp",
+   "color": "#4e5d76",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 132,
+   "name": "Em Là Ánh Sáng Giữa Đêm Trăng",
+   "publisher": "IPM",
+   "cover": "/covers/u2-6b83ee96-318f-4f7c-9795-43c1709955ac.webp",
+   "color": "#376db6",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 113,
+   "name": "Em Là Người Sống, Tôi Là Người Chết, Thế Giới Đôi Lúc Lại Đảo Ngược",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-11b3ff0e-aac0-4c2d-9013-9ed4c5ef7dec.webp",
+   "color": "#426792",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 159,
+   "name": "Fate/Zero",
+   "publisher": "IPM",
+   "cover": "/covers/u2-03020132-23f2-43e5-8cb4-37b9953b904c.webp",
+   "color": "#d84d44",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 84,
+   "name": "Gamers!",
+   "publisher": "Amak",
+   "cover": "/covers/u2-d13815fd-629d-46e2-8cb7-16ede95f8de0.webp",
+   "color": "#facf32",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 130,
+   "name": "Gate: Lực Lượng Phòng Vệ Chiến Đấu Ở Tân Thế Giới",
+   "publisher": "Amak",
+   "cover": "/covers/u2-9574e27a-8fbf-4bd7-9c69-036cc5a8971f.webp",
+   "color": "#1b9fd6",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 47,
+   "name": "Ghost Hunt",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/93b07dac-f8e8-451f-a6e6-88284f9c196b.webp",
+   "color": "#b94934",
+   "rookie": true,
+   "oneshot": false
+  },
+  {
+   "id": 95,
+   "name": "Gia Sư Của Công Chúa Quỷ",
+   "publisher": "Usagi Light Novel",
+   "cover": "/covers/u2-82129e82-460b-45f6-9c3f-a444aec3a66f.webp",
+   "color": "#953845",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 166,
+   "name": "Gia Tộc Thần Bí",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-50bf2763-b4aa-4d94-8b8f-14c0492d5561.webp",
+   "color": "#b18e4b",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 117,
+   "name": "Gosick",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-0890d839-892b-4c2f-86ea-0a67841fdf56.webp",
+   "color": "#e4c861",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 31,
+   "name": "Grimgar - Ảo Ảnh Và Tro Tàn",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/1760e91c-4ff6-40b9-9d45-9abe4f30e666.webp",
+   "color": "#4a86a7",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 15,
+   "name": "Hành Trình Của Elaina",
+   "publisher": "Amak",
+   "cover": "/covers/7a04d009-c628-460b-81e6-8bbcd8a1e696.webp",
+   "color": "#93c3d4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 200,
+   "name": "Hành Trình Đến Tận Cùng Thế Giới",
+   "publisher": "IPM",
+   "cover": "/covers/u2-9c946de6-442e-4607-abec-57193430aa43.webp",
+   "color": "#00b7f7",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 5,
+   "name": "Hành Trình Trở Thành Nhà Thám Hiểm Của Chàng Lính Đánh Thuê Bần Hàn",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/4b76a4b3-c847-49e7-95e5-7cc7825045e7.webp",
+   "color": "#5ba9c6",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 191,
+   "name": "Hãy Đi Đi, Xanh Biếc",
+   "publisher": "Amak",
+   "cover": "/covers/u2-2d336fe2-7aab-4983-b4bd-52fde9b77f6e.webp",
+   "color": "#408ebf",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 65,
+   "name": "Hello World",
+   "publisher": "IPM",
+   "cover": "/covers/u3855-7e568828-2c4a-4a6d-8201-c99ecb515d95.webp",
+   "color": "#45b2de",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 176,
+   "name": "Hẹn Ước Mùa Hè",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-01d35ac1-2ca0-46c1-af93-64e38fd2fbe0.webp",
+   "color": "#4276ba",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 76,
+   "name": "Hiệp Sĩ Lưu Ban",
+   "publisher": "Amak",
+   "cover": "/covers/u2-6c314e9c-434d-46cc-9d3a-552e069eb91a.webp",
+   "color": "#e42949",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 53,
+   "name": "Hiệp Sĩ Xương Trên Đường Du Hành Đến Thế Giới Khác",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-f8e4863c-22fc-43f5-b2f3-e9d8464fbe16.webp",
+   "color": "#4578a4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 111,
+   "name": "Hoàng Tử Thiên Tài - Hành Trình Gây Dựng Lại Đất Nước Đang Lâm Nguy",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-b6dd7726-025e-45f5-86c4-3a5f0c975fdd.webp",
+   "color": "#bd5a5f",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 93,
+   "name": "Holmes Ở Kyoto",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-88b5a2ca-756f-4d63-9040-2254ff269059.webp",
+   "color": "#a25159",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 1,
+   "name": "Hội Chứng Tuổi Thanh Xuân",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/c1753bb5-c8fb-4630-a662-d1edb7b46a47.webp",
+   "color": "#6bbfac",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 62,
+   "name": "Hôn Nhân Hạnh Phúc Của Tôi",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-0549dc6f-4e42-4611-aa12-597a38c33129.webp",
+   "color": "#ce548d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 133,
+   "name": "Hướng Dẫn Sử Dụng Thiên Sứ Vụng Về",
+   "publisher": "Shine Novel",
+   "cover": "/covers/u2-a747aa3a-52be-4391-9641-e9fa303bea13.webp",
+   "color": "#dcc41e",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 68,
+   "name": "Hướng Dẫn Thư Viện Dành Cho Người Ghét Đọc",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u3855-f884bf12-a14a-4536-84c4-d0de96c309b4.webp",
+   "color": "#be6a68",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 71,
+   "name": "Infinite Dendrogram",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-c8f26e44-4cae-4a7c-9c8d-0e9470b5eee5.webp",
+   "color": "#488fbb",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 170,
+   "name": "Iris Những Ngày Mưa",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-91695acb-a7f1-4211-a7cb-368c40a5beae.webp",
+   "color": "#669db4",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 56,
+   "name": "ISHURA - Tu la dị giới",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-0c80a51e-389c-4fb6-8fcc-89c56b0bad64.webp",
+   "color": "#cf3829",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 195,
+   "name": "Just Be Friends",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-4cf4a6e7-247e-47bc-a0b2-d0dffbf4b576.webp",
+   "color": "#4fa3d5",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 143,
+   "name": "Just Because!",
+   "publisher": "IPM",
+   "cover": "/covers/u2-c1ca6f6a-aa97-4eef-adb0-6a76e7148b60.webp",
+   "color": "#506685",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 102,
+   "name": "Kẻ Dị Biệt Tại Trường Học Phép Thuật",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-2f64aee2-bbc3-4571-8818-eb022fe45d6d.webp",
+   "color": "#52a8b8",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 144,
+   "name": "Kem Đá",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-b0f48d0b-b83d-4f4b-80a6-ca3a7167915a.webp",
+   "color": "#3fa099",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 183,
+   "name": "Khách Sạn Yêu Quái Ở Izumo",
+   "publisher": "Amak",
+   "cover": "/covers/u2-8dc96c3f-4dc6-4fad-ae2b-9292069c13e2.webp",
+   "color": "#f4bd1b",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 72,
+   "name": "Khi Ấy Là Một Đêm Đầy Sao",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-d1b120b2-a519-494c-9b9e-39a074932092.webp",
+   "color": "#3498d4",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 126,
+   "name": "Khi Hikaru Còn Trên Thế Gian Này",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-2bfc80bc-0468-4a88-896b-57327d615b00.webp",
+   "color": "#6aabb8",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 41,
+   "name": "Khi Muốn Khóc Tôi Đeo Mặt Nạ Mèo",
+   "publisher": "IPM",
+   "cover": "/covers/81b1412c-273a-4046-b277-bf68e29ab56b.webp",
+   "color": "#ad9f5a",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 51,
+   "name": "Khóa Chặt Cửa Nào Suzume",
+   "publisher": "IPM",
+   "cover": "/covers/u2-0fa6d015-07da-4832-a9eb-59da83fd9e1b.webp",
+   "color": "#1ba9df",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 214,
+   "name": "Khu vườn ngôn từ",
+   "publisher": "IPM",
+   "cover": "/covers/u2-c8441bf6-93aa-4214-83c2-611054fa4948.webp",
+   "color": "#abc759",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 179,
+   "name": "Khúc Nguyền Ca Của Thánh Kiếm Sĩ",
+   "publisher": "Uranix",
+   "cover": "/covers/u2-401b2d92-37b5-42c5-a006-19dcb7f702cb.webp",
+   "color": "#c4a279",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 180,
+   "name": "Kino Du Ký",
+   "publisher": "Trẻ",
+   "cover": "/covers/u2-b91b252e-b2b6-4eab-8960-26f1aac11dd0.webp",
+   "color": "#b9786d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 184,
+   "name": "Kỵ Sĩ Rồng Bất Bại",
+   "publisher": "Uranix",
+   "cover": "/covers/u2-3b83bae8-19b8-4f82-85bf-b3042ec9063c.webp",
+   "color": "#ead98e",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 172,
+   "name": "Ký Ức Bầu Trời",
+   "publisher": "IPM",
+   "cover": "/covers/u2-660ccfdc-077d-49d0-8800-3e2157301a63.webp",
+   "color": "#317cbd",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 70,
+   "name": "Làm Bạn Thân Có Khó Không?",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-5cf674ba-fb51-4b68-9336-f773bff9d44a.webp",
+   "color": "#d06291",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 97,
+   "name": "Lãnh Chúa Vùng Đất Không Cư Dân",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-b10c0090-f8c8-4bb7-b16d-c9393bab70ea.webp",
+   "color": "#52acdd",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 44,
+   "name": "Liệu Có Sai Lầm Khi Tìm Kiếm Cuộc Gặp Gỡ Định Mệnh Trong Dungeon",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/0bb1396d-296e-4911-adc0-aae4bad4449d.webp",
+   "color": "#abc681",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 57,
+   "name": "Lời Nói Đùa",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-fe2de981-ab83-4f97-a2c5-7bd3f14ce1ad.webp",
+   "color": "#c77524",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 122,
+   "name": "Lũ Ngốc, Bài Thi Và Linh Thú Triệu Hồi",
+   "publisher": "IPM",
+   "cover": "/covers/u2-19c5e228-c28a-43e7-852e-ddf3bf4087b9.webp",
+   "color": "#e7445f",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 16,
+   "name": "Ma Pháp Thiếu Nữ",
+   "publisher": "Usagi Light Novel",
+   "cover": "/covers/84f59234-20f9-41f0-8e4d-5e9a7a75420c.webp",
+   "color": "#ab4748",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 104,
+   "name": "Ma Vương Đi Làm!",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-bc34d671-f0c2-423b-aad3-70b082ef718c.webp",
+   "color": "#c28846",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 123,
+   "name": "Ma Vương Kiến Tạo - Hầm Ngục Kiên Cố Nhất Chính Là Thành Phố Hiện Đại",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-a5248f03-ab69-4600-a2d9-3824d9fbbdd9.webp",
+   "color": "#c5a94b",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 55,
+   "name": "Ma Vương Tôi Đây Nên Yêu Cô Dâu Elf Của Mình Như Thế Nào?",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/u2-fba89f79-0ca9-46f1-8714-ae88d6b66914.webp",
+   "color": "#d42b4d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 118,
+   "name": "Mê Cung Thư Viện",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-180094fa-98b0-4c81-87d6-34022681e405.webp",
+   "color": "#595f95",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 213,
+   "name": "Mimizuku Và Vua Bóng Đêm",
+   "publisher": "Owlbooks",
+   "cover": "/covers/u2-9ba27679-7648-4555-8d26-cada46eeef30.webp",
+   "color": "#d6b841",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 92,
+   "name": "Mùa Hè Thứ Hai, Mất Em Mãi Mãi",
+   "publisher": "IPM",
+   "cover": "/covers/u2-9c1f2dad-537a-4728-8b0a-01be823ccf49.webp",
+   "color": "#2395d3",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 46,
+   "name": "Nàng Cựu Idol Lớp Tôi Lại Có Hành Động Đáng Ngờ Nữa Rồi",
+   "publisher": "Shine Novel",
+   "cover": "/covers/228de1ce-5bd2-4bd0-bd42-6297178cea97.webp",
+   "color": "#20b2cc",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 2,
+   "name": "Nàng Idol Đói Bụng Gặp Được Chàng Nội Trợ Đảm Đang",
+   "publisher": "Shine Novel",
+   "cover": "/covers/b5fba1a1-fce6-4ef6-bc01-ad593309d6e1.webp",
+   "color": "#6ab1d0",
+   "rookie": true,
+   "oneshot": false
+  },
+  {
+   "id": 83,
+   "name": "Nàng Thợ May Tinh Linh",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-7cf283b9-8b63-4719-8a8a-f4fb6e41999d.webp",
+   "color": "#c5a249",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 161,
+   "name": "Narcissu",
+   "publisher": "IPM",
+   "cover": "/covers/u2-3c1e738b-5cd9-4396-8b29-932fe21f9643.webp",
+   "color": "#c66473",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 45,
+   "name": "Này Cậu Có Muốn Hẹn Hò Với Tớ Không?",
+   "publisher": "Ichi Light Novel",
+   "cover": "/covers/82428ea5-3285-4c9d-b870-8aad8f5e9f18.webp",
+   "color": "#347bb8",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 40,
+   "name": "Nếu Gặp Lại Em Trên Ngọn Đồi Hoa Nở",
+   "publisher": "Ai Novel",
+   "cover": "/covers/6a23048f-9f97-4cbe-a4ef-3bbeb152395f.webp",
+   "color": "#f0c06b",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 163,
+   "name": "Ngày Mai, Tôi Biến Mất, Cậu Sẽ Hồi Sinh",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-a18ee140-abff-4990-b42f-1940850c1f29.webp",
+   "color": "#f7b096",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 42,
+   "name": "Nguyệt Đạo Dị Giới",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/0b00339f-837c-4282-bac3-a9bd5c328282.webp",
+   "color": "#c9b766",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 149,
+   "name": "Nhắn Gửi Một Tôi, Người Đã Yêu Em",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-60dfccb5-81c5-4d2c-881e-7fb575262c2d.webp",
+   "color": "#d89ba6",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 148,
+   "name": "Nhắn Gửi Tất Cả Các Em, Những Người Tôi Đã Yêu",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-63d6ca01-0b21-4448-a7da-d8fee6a77fa3.webp",
+   "color": "#6accef",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 28,
+   "name": "Nhân Vật Hạ Cấp Tomozaki",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/2bfca82c-c21f-4394-8497-8cca95afdfbc.webp",
+   "color": "#d5925c",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 199,
+   "name": "Nhật Ký Giấc Mơ – Trong Giấc Mơ Của Bạn, Tôi Không Tồn Tại",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-99b04f65-3b0d-4eae-a500-3e21105f5133.webp",
+   "color": "#a0616e",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 196,
+   "name": "Nhật Ký Kẻ Cô Đơn",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-5a127494-aa54-4ba9-872a-b4c2bfb5eef3.webp",
+   "color": "#d12b27",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 167,
+   "name": "Những Đứa Trẻ Đuổi Theo Tinh Tú",
+   "publisher": "IPM",
+   "cover": "/covers/u2-70171c12-e9c9-4332-9096-90fb260464ed.webp",
+   "color": "#a07152",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 131,
+   "name": "Những Lời Chúng Tôi Nói Ở Bệnh Viện Bên Bờ Biển",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-9b794ab1-dd7e-4619-9dda-1f3a42bbbccb.webp",
+   "color": "#168bb1",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 147,
+   "name": "Những Ngày Mai Đến Không Có Cậu Kề Bên",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u2-db69dd0b-dc69-464d-8d73-79a12e67fdb3.webp",
+   "color": "#006cba",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 162,
+   "name": "NO.6",
+   "publisher": "IPM",
+   "cover": "/covers/u2-2e6f6a66-2d85-4937-9de5-3a9152571918.webp",
+   "color": "#3c72b4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 30,
+   "name": "Nữ Chính Sinh Tồn Mạnh Mẽ Trong Thế Giới Otome Game",
+   "publisher": "Ichi Light Novel",
+   "cover": "/covers/d38d150a-02f5-4e34-ae3f-0333173b3a31.webp",
+   "color": "#c37433",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 90,
+   "name": "Okitegami Kyoko",
+   "publisher": "IPM",
+   "cover": "/covers/u2-bfd072dd-0335-4e66-bfda-09db0ad4b678.webp",
+   "color": "#a44b5c",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 207,
+   "name": "Orange - Lá Thư Từ Tương Lai",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-52a214b4-0c14-49cd-a264-d5645f13b5a8.webp",
+   "color": "#d46843",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 58,
+   "name": "OVERLORD",
+   "publisher": "IPM",
+   "cover": "/covers/u2-333362c5-9840-45d9-8bc1-707699b8646c.webp",
+   "color": "#978853",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 21,
+   "name": "Phá Đảo Dị Giới Cùng Nữ Thần Không Tín Đồ",
+   "publisher": "Orion Books",
+   "cover": "/covers/dc996194-77d2-49da-8f31-23cb79c8d873.webp",
+   "color": "#61cce6",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 136,
+   "name": "Pháo Hoa, Ngắm Từ Dưới Hay Bên Cạnh",
+   "publisher": "IPM",
+   "cover": "/covers/u2-0446f339-3a6f-4e9f-b6b0-665cd66c8322.webp",
+   "color": "#1944ca",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 168,
+   "name": "Pháp Sư Tokyo",
+   "publisher": "TA Books",
+   "cover": "/covers/u2-a1180241-76f6-421e-9913-65e4682256c9.webp",
+   "color": "#788cb1",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 82,
+   "name": "Phép Thuật Chỉ Chạm Tới Bán Kính Của Anh Và Em",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u3855-b4fb267c-c3a8-4cbd-a811-666964559ce7.webp",
+   "color": "#a87859",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 145,
+   "name": "Phù Thủy Thế Hệ Satori",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u2-bea81517-b5d7-4d16-9691-49958ee53ae9.webp",
+   "color": "#ec8654",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 178,
+   "name": "Phù Thủy Trắng Định Tội",
+   "publisher": "TA Books",
+   "cover": "/covers/u2-0a87f4aa-aef6-4b5b-861c-2bd8b15548c3.webp",
+   "color": "#6f97c0",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 78,
+   "name": "Phương Pháp \"Đào Tạo\" Nữ Chính Nhạt Nhòa",
+   "publisher": "IPM",
+   "cover": "/covers/u3855-7a3f2c3e-035d-4bcb-8ffa-6a6acb30dad5.webp",
+   "color": "#e45995",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 177,
+   "name": "Quái Vật Trong Đêm",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-e0daee70-44fa-4257-a002-4863276a8b45.webp",
+   "color": "#6c838f",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 194,
+   "name": "Quán Ăn Xuyên Không",
+   "publisher": "Amak",
+   "cover": "/covers/u2-b334045e-d62d-4f67-8d18-dc9f9335824e.webp",
+   "color": "#deab2a",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 150,
+   "name": "Re:Monster - Hồi Sinh Thành Quái Vật",
+   "publisher": "Amak",
+   "cover": "/covers/u2-385f7a89-5224-4049-89ef-341c908ac04d.webp",
+   "color": "#ca712e",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 73,
+   "name": "Re:Zero - Bắt Đầu Lại Ở Thế Giới Khác",
+   "publisher": "IPM",
+   "cover": "/covers/u2-1c46e6c8-f2ab-4eee-a1f3-95b16aa7a40e.webp",
+   "color": "#af4d60",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 175,
+   "name": "Riku và Chise - Chàng Trai Phân Chia Thế Giới Và Cô Gái Trong Biệt Thự -",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-3d8f3eff-3072-427d-ac60-1369a06e0fe6.webp",
+   "color": "#47bbc3",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 19,
+   "name": "Riviere Và Đất Nước Của Lời Cầu Nguyện",
+   "publisher": "Amak",
+   "cover": "/covers/c8a5d61c-26ad-4d70-88c4-120c08ec7a86.webp",
+   "color": "#43a9bd",
+   "rookie": true,
+   "oneshot": false
+  },
+  {
+   "id": 169,
+   "name": "Rừng Taiga",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-68b15fba-1fe2-4620-a401-345785a68a8c.webp",
+   "color": "#b5be75",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 115,
+   "name": "Sakurako Và Bộ Xương Dưới Gốc Anh Đào",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-91fef45d-bfb5-4fcb-b03b-b0aedb357ce0.webp",
+   "color": "#fb3f3d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 121,
+   "name": "Sói Và Gia Vị",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-6a2714f0-05c3-4954-8396-53f3bd2d82cf.webp",
+   "color": "#c7921a",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 86,
+   "name": "Số Phận Của Vị Hôn Thê",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-cf44502b-5e4f-49f9-9675-7754d960e4ee.webp",
+   "color": "#45aae1",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 34,
+   "name": "Spy Room - Lớp Học Điệp Viên",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/19a61092-0c96-49c3-9cc1-d384a057c39b.webp",
+   "color": "#672733",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 88,
+   "name": "Subaru Và Vì Tinh Tú Thứ 7",
+   "publisher": "Amak",
+   "cover": "/covers/u2-dc6b8a1a-1641-4eaf-b347-e71d2f3a98b3.webp",
+   "color": "#e9de83",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 203,
+   "name": "Suzumiya Haruhi",
+   "publisher": "IPM",
+   "cover": "/covers/u2-ee3a8979-a49b-40f5-bd58-d8c660abfc88.webp",
+   "color": "#00ace5",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 24,
+   "name": "Sứ Giả Bốn Mùa",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/d16b1bc0-1233-4c6a-9ab0-a341b9653a83.webp",
+   "color": "#df9d7d",
+   "rookie": true,
+   "oneshot": false
+  },
+  {
+   "id": 63,
+   "name": "Sword Art Online",
+   "publisher": "IPM",
+   "cover": "/covers/u2-0396c145-e413-41c2-9186-72a18a22d108.webp",
+   "color": "#e46422",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 101,
+   "name": "Sword Art Online Progressive",
+   "publisher": "IPM",
+   "cover": "/covers/u2-4f0236c5-3d54-4c35-bed7-190b8c200b4e.webp",
+   "color": "#dd7348",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 137,
+   "name": "Tạm Biệt Pháo Hoa",
+   "publisher": "IPM",
+   "cover": "/covers/u2-98e29df4-03ff-4708-9b23-2ac5848c0004.webp",
+   "color": "#374da1",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 98,
+   "name": "Tanya Chiến Ký",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-a6675c22-3300-4857-861c-443c54332037.webp",
+   "color": "#9c6b48",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 39,
+   "name": "Tặng Hoa Cho Quái Vật Trong Rừng",
+   "publisher": "IPM",
+   "cover": "/covers/303fce14-a85b-4c98-9ece-53c3d7f1b2be.webp",
+   "color": "#f0c16c",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 120,
+   "name": "Tận Thế Nếu Không Bận, Anh Cứu Chúng Em Nhé?",
+   "publisher": "IPM",
+   "cover": "/covers/u2-21f8f20a-fa91-427b-baf9-b49b4f9f3b46.webp",
+   "color": "#5e93b8",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 79,
+   "name": "Tập Tỏ Tình",
+   "publisher": "IPM",
+   "cover": "/covers/u3855-5e1e30c3-c57c-4b4c-a7d5-0ee28cfb7a69.webp",
+   "color": "#24add9",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 26,
+   "name": "Thám Tử Đã Chết",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/5b5f5212-7988-4954-8f43-d5ccd499a31b.webp",
+   "color": "#42bcf4",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 219,
+   "name": "Thám Tử Lừng Danh Conan",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/u2-8d6d28f7-4725-4ebb-afc3-d2f44e38399b.webp",
+   "color": "#b48f2c",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 108,
+   "name": "Tháng 8 Cùng Em Và Những Ký Ức Vụn Vỡ",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u3855-6227c01f-24fc-4a6b-be6b-e1c213adb8f3.webp",
+   "color": "#ae759a",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 37,
+   "name": "Thánh Hiệp Sĩ Nơi Tận Cùng Thế Giới",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/35e0c1f6-8816-42cf-a011-ac5ddc3e7e86.webp",
+   "color": "#f78022",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 185,
+   "name": "Thần Chết Làm Thêm 300 Yên/Giờ",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-7a07b764-7233-44bd-a8b5-507e9564b51d.webp",
+   "color": "#3f6ab4",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 54,
+   "name": "Thất Kiếm Ma Thuật Thống Trị Thế Giới",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-a27c9c86-0e13-4950-bd1b-965b0798901c.webp",
+   "color": "#ccb51c",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 173,
+   "name": "The Dungeon Seeker",
+   "publisher": "Amak",
+   "cover": "/covers/u2-9fa68ac6-86d7-4e28-87c7-5d3935043409.webp",
+   "color": "#5c889f",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 192,
+   "name": "The Tatami Galaxy - Truyền Kỳ Phòng Bốn Chiếu Rưỡi",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-fea3a30d-e35f-4164-b192-7d5835b91d63.webp",
+   "color": "#c2713e",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 142,
+   "name": "Thế Giới Đầy「Khoảng Trống」",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u2-1f40a655-d26e-4d66-a6ee-b925178b28a3.webp",
+   "color": "#4972ab",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 10,
+   "name": "Thế Giới Otome Game Thật Khắc Nghiệt Với Nhân Vật Quần Chúng",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/573e1359-7cc4-4f19-99bd-5a5b99ac2eb4.webp",
+   "color": "#a26f6a",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 29,
+   "name": "Thiên Sứ Nhà Bên",
+   "publisher": "Kim Đồng",
+   "cover": "/covers/3eab6937-5ef1-4416-8b7d-698df2a38876.webp",
+   "color": "#c8bb6c",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 154,
+   "name": "Thiếu Nữ & Chiến Xa",
+   "publisher": "Owlbooks",
+   "cover": "/covers/u2-37f8ed42-de89-4783-956d-9cf630f03ed0.webp",
+   "color": "#ab535d",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 193,
+   "name": "Thọ Mệnh Thế Giới Và Bảy Ngày Đầu Tiên",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-cc77322e-9d48-40d5-be4e-3219b948cba6.webp",
+   "color": "#cc956e",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 107,
+   "name": "Thuần Thú Sư Ở Dị Giới",
+   "publisher": "Usagi Light Novel",
+   "cover": "/covers/u2-8fb6930b-214d-47d4-a50c-a86bf45892c2.webp",
+   "color": "#3e90c5",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 106,
+   "name": "Tiệm Sách Cũ Biblia",
+   "publisher": "IPM",
+   "cover": "/covers/u2-58f6ba9d-5e74-4873-8f1d-e4ce529ad923.webp",
+   "color": "#4e66b9",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 209,
+   "name": "Tiếng gọi từ vì sao xa",
+   "publisher": "IPM",
+   "cover": "/covers/u2-1a42b1fb-e00e-424d-96bd-b2e90a66e97d.webp",
+   "color": "#0971e0",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 181,
+   "name": "Tình Đầu Lúc Lâm Chung Với Thiếu Nữ Thần Chết",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-79498bdd-8e79-459a-bbd3-54128ebdd49e.webp",
+   "color": "#b7853b",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 103,
+   "name": "Tinh Linh Huyễn Tưởng Ký",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/u2-b0bed045-62f7-45d1-b6b5-32c488ce174a.webp",
+   "color": "#ffdda0",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 188,
+   "name": "Torinoko City - Thành phố bị bỏ rơi",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-0d758a19-984b-4fd3-9f92-0eabc1f5a990.webp",
+   "color": "#326298",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 94,
+   "name": "Tôi Là Nhện Đấy, Có Sao Không?",
+   "publisher": "Quảng Văn",
+   "cover": "/covers/u2-5f81ccbe-2793-4a3f-8a34-102ee41b4f8e.webp",
+   "color": "#c25e5e",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 139,
+   "name": "Tôi Thích Một Cô Gái Nhưng Chẳng Dám Ngỏ Lời",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u2-87d0a6c8-116c-47d6-92ad-1d04bae8f572.webp",
+   "color": "#786ea4",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 52,
+   "name": "Tôi Yêu Nữ Phản Diện",
+   "publisher": "Amak",
+   "cover": "/covers/u2-bf3c5b77-126a-402f-9a6f-b21ba35d50d6.webp",
+   "color": "#cc8b69",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 202,
+   "name": "Tớ Muốn Ăn Tụy Của Cậu",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/u2-e53b14af-9a7a-4962-94ca-c0a1c6301c1e.webp",
+   "color": "#de8b9f",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 69,
+   "name": "Tớ Sẽ Mãi Mãi Không Quên Cậu, Người Từng Sống Trong Khoảnh Khắc",
+   "publisher": "Shine Novel",
+   "cover": "/covers/u2-7c351755-b221-4400-8991-2477b9f76363.webp",
+   "color": "#54a1d0",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 17,
+   "name": "Tớ Sẽ Trú Mưa Cùng Cậu",
+   "publisher": "Shine Novel",
+   "cover": "/covers/f5c92e71-193e-410b-88ee-fc5a7fbcc8b1.webp",
+   "color": "#60b0d9",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 85,
+   "name": "Truyền Kỳ Về Tình Yêu Của Quỷ",
+   "publisher": "Tsuki Light Novel",
+   "cover": "/covers/u3855-612cceba-228e-4ffb-b44b-4d062dbbfdd7.webp",
+   "color": "#cf433c",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 146,
+   "name": "Từ Tân Thế Giới",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/u2-ad1fd9e3-3b67-4730-9164-5c3a950de654.webp",
+   "color": "#887869",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 7,
+   "name": "Unnamed Memory - Hồi Ức Không Tên",
+   "publisher": "Thái Hà Books",
+   "cover": "/covers/cfc96306-0c12-42a2-a255-390a08530584.webp",
+   "color": "#6c85bf",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 160,
+   "name": "Và Rồi, Tháng 9 Không Có Cậu Đã Tới",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u2-8fcbb06d-5909-4bf3-8c86-f8395ee95a7e.webp",
+   "color": "#b6926f",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 155,
+   "name": "Vào Đêm Trăng Xanh, Tôi Lại Yêu Em Thêm Lần Nữa",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u2-2b374222-3c5a-442b-97f9-61a7e7119011.webp",
+   "color": "#02bbea",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 14,
+   "name": "Văn Hào Lưu Lạc",
+   "publisher": "IPM",
+   "cover": "/covers/41507fa7-d445-4c88-968a-b712013743fe.webp",
+   "color": "#479ecc",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 8,
+   "name": "Về Chuyện Tôi Chuyển Sinh Thành Slime",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/11b1a749-e9fc-487c-a63f-5192e2db0576.webp",
+   "color": "#af9149",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 25,
+   "name": "Vì Con Gái Tôi Có Thể Đánh Bại Cả Ma Vương",
+   "publisher": "Sky Light Novel",
+   "cover": "/covers/201dffeb-ce2a-4288-a0a1-1368a1d9c52d.webp",
+   "color": "#7b9cd2",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 66,
+   "name": "Vợ Trong Game Của Tôi Là Idol Nổi Tiếng Ngoài Đời",
+   "publisher": "Shine Novel",
+   "cover": "/covers/u3855-db27f40b-5008-4850-95eb-139c0dc623d5.webp",
+   "color": "#b96751",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 116,
+   "name": "World Teacher",
+   "publisher": "Amak",
+   "cover": "/covers/u2-e17a1409-31eb-4f94-9cee-a8a2e8482933.webp",
+   "color": "#b8c532",
+   "rookie": false,
+   "oneshot": false
+  },
+  {
+   "id": 190,
+   "name": "Xa Lộ Chim Cánh Cụt",
+   "publisher": "IPM",
+   "cover": "/covers/u2-ae1a77c6-f211-48f0-9f24-491ff3fa77c2.webp",
+   "color": "#6758a6",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 43,
+   "name": "Xa Một Chút Hơn Một Triệu Năm Ánh Sáng",
+   "publisher": "Nhã Nam",
+   "cover": "/covers/d1147c95-6721-462a-ad85-4e3c672907e6.webp",
+   "color": "#327cb8",
+   "rookie": true,
+   "oneshot": true
+  },
+  {
+   "id": 96,
+   "name": "Yokohama Station SF",
+   "publisher": "IPM",
+   "cover": "/covers/u2-35afa31d-73b7-4ad7-a9aa-2c36b26ced77.webp",
+   "color": "#939972",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 205,
+   "name": "Your Name",
+   "publisher": "IPM",
+   "cover": "/covers/u2-4a4f8ba3-eeb7-4515-8029-b0b5a1654d72.webp",
+   "color": "#f2cf85",
+   "rookie": false,
+   "oneshot": true
+  },
+  {
+   "id": 75,
+   "name": "Your Story",
+   "publisher": "Ai Novel",
+   "cover": "/covers/u3855-0fb7495e-15bf-4114-aa64-25db51eeb63d.webp",
+   "color": "#ada1c8",
+   "rookie": false,
+   "oneshot": true
+  }
+ ],
+ "publishers": [
+  {
+   "id": 1,
+   "name": "IPM",
+   "logo": "/images/publisher/ipm.webp"
+  },
+  {
+   "id": 2,
+   "name": "Hikari Light Novel (Thái Hà Books)",
+   "logo": "/images/publisher/hikari.webp"
+  },
+  {
+   "id": 3,
+   "name": "Sakura Light Novel (Quảng Văn)",
+   "logo": "/images/publisher/sakuraln.webp"
+  },
+  {
+   "id": 4,
+   "name": "Amak",
+   "logo": "/images/publisher/amak.webp"
+  },
+  {
+   "id": 5,
+   "name": "Sky Light Novel",
+   "logo": "/images/publisher/sky.webp"
+  },
+  {
+   "id": 6,
+   "name": "Tsuki Light Novel",
+   "logo": "/images/publisher/tsuki.webp"
+  },
+  {
+   "id": 7,
+   "name": "Nhã Nam",
+   "logo": "/images/publisher/nhanam.webp"
+  },
+  {
+   "id": 8,
+   "name": "Owlbooks",
+   "logo": "/images/publisher/owlbooks.webp"
+  },
+  {
+   "id": 9,
+   "name": "Wingsbooks (Kim Đồng)",
+   "logo": "/images/publisher/wingsbooks.webp"
+  },
+  {
+   "id": 10,
+   "name": "NXB Trẻ",
+   "logo": "/images/publisher/tre.webp"
+  },
+  {
+   "id": 11,
+   "name": "TA Books",
+   "logo": "/images/publisher/tabooks.webp"
+  },
+  {
+   "id": 12,
+   "name": "Ai Novel",
+   "logo": "/images/publisher/ainovel.webp"
+  },
+  {
+   "id": 13,
+   "name": "Uranix",
+   "logo": "/images/publisher/uranix.webp"
+  },
+  {
+   "id": 14,
+   "name": "Shine Novel",
+   "logo": "/images/publisher/shine.webp"
+  },
+  {
+   "id": 15,
+   "name": "Usagi Light Novel",
+   "logo": "/images/publisher/usagi.webp"
+  },
+  {
+   "id": 16,
+   "name": "Ichi Light Novel",
+   "logo": "/images/publisher/ichi.webp"
+  },
+  {
+   "id": 17,
+   "name": "Orion Books",
+   "logo": "/images/publisher/orion.webp"
+  }
+ ]
+}

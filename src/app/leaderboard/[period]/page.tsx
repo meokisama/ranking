@@ -1,54 +1,24 @@
-"use client";
-import Footer from "@/components/common/footer";
-import SocialHub from "@/components/common/social-hub";
-import ShortSplashScreen from "@/components/common/short-splash-screen";
-import Banner from "@/components/leaderboard/banner";
-import LeaderBoardTable from "@/components/leaderboard/leaderboard-table";
-import { CURRENT_PERIOD, ROUTES } from "@/constants";
-import ScrollToTop from "@/utils/scroll-to-top";
-import Custom404 from "@/app/not-found";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
+import LeaderboardView from "@/components/leaderboard/view";
+import { CURRENT_PERIOD } from "@/lib/config";
+import { getPeriod, periods } from "@/lib/data";
 
-interface ConvertPeriodParams {
-  period: string;
+type Props = { params: Promise<{ period: string }> };
+
+export const dynamicParams = false;
+export const generateStaticParams = () =>
+  periods.filter((p) => p.slug !== CURRENT_PERIOD).map((p) => ({ period: p.slug }));
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const p = getPeriod((await params).period);
+  return p ? { title: `Bảng tổng sắp ${p.label}`, description: `Kết quả đầy đủ ${p.long}.` } : {};
 }
 
-const convertPeriod = ({ period }: ConvertPeriodParams): string | null => {
-  const [half, year] = period.split("-");
-  if (half === "1") return `first_half_${year}`;
-  if (half === "2") return `second_half_${year}`;
-  return null;
-};
-
-const LeaderBoard = ({ params }: { params: { period: string } }) => {
-  const { period } = params;
-  const convertedPeriod = convertPeriod({ period });
-  const router = useRouter();
-
-  useEffect(() => {
-    if (convertedPeriod === CURRENT_PERIOD) {
-      router.push(ROUTES.LEADERBOARD);
-    }
-  }, [convertedPeriod, router]);
-
-  return (
-    <div>
-      {convertedPeriod ? (
-        <div>
-          <ShortSplashScreen />
-          <div>
-            <Banner />
-            <LeaderBoardTable initialPeriod={convertedPeriod} />
-            <Footer text="Trang Chủ" to={ROUTES.HOME} />
-            <SocialHub />
-            <ScrollToTop />
-          </div>
-        </div>
-      ) : (
-        <Custom404 />
-      )}
-    </div>
-  );
-};
-export default LeaderBoard;
+export default async function Page({ params }: Props) {
+  const { period } = await params;
+  if (period === CURRENT_PERIOD) redirect("/leaderboard");
+  const p = getPeriod(period);
+  if (!p) notFound();
+  return <LeaderboardView period={p} />;
+}

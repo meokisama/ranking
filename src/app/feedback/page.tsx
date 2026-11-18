@@ -1,27 +1,20 @@
-"use client";
-import FeedbackHero from "@/components/feedback/feedback-hero";
-import FeedbackContent from "@/components/feedback/feedback-content";
-// import FeedbackContent from "@/components/feedback/api";
-import Footer from "@/components/common/footer";
-import SocialHub from "@/components/common/social-hub";
-import ProtectedRoute from "@/components/common/protected-route";
-import { ROUTES } from "@/constants";
+import type { Metadata } from "next";
+import Wall from "@/components/feedback/Wall";
+import type { Note } from "@/components/feedback/Wall";
+import Footer from "@/components/ui/Footer";
+import feedback from "@/data/feedback.json";
+import { periods } from "@/lib/data";
 
-function FeedbackResult() {
+export const metadata: Metadata = {
+  title: "Góp ý của độc giả",
+  description: "Những lời nhắn độc giả gửi tới ban tổ chức Bảng Xếp Hạng Light Novel Việt Nam.",
+};
+
+export default function Page() {
   return (
-    <div>
-      <FeedbackHero />
-      <FeedbackContent />
-      <SocialHub />
-      <Footer text="Trang Chủ" to={ROUTES.HOME} />
-    </div>
+    <>
+      <Wall notes={feedback as Note[]} periods={periods.map((p) => ({ slug: p.slug, label: p.label }))} />
+      <Footer />
+    </>
   );
 }
-
-// function ProtectedBoard() {
-//   return <ProtectedRoute component={FeedbackResult} />;
-// }
-
-// export default ProtectedBoard;
-
-export default FeedbackResult;

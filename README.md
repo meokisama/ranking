@@ -1,35 +1,52 @@
-<p align="center">
-  <a href="https://bxh.lightnovel.vn">
-    <img src="src/app/favicon.ico" />
-  </a>
-</p>
+# Bảng Xếp Hạng Light Novel Việt Nam
 
-<h2 align="center"> Vietnam Light Novel Ranking </h2>
+Trang kết quả và bình chọn của [bxh.lightnovel.vn](https://bxh.lightnovel.vn) — bản dựng lại từ đầu (v2).
 
-<h4 align="center"> A modern voting platform with a clean yet expressive design. </h4>
+Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · three.js / React Three Fiber · Motion · Lenis.
 
-##
+## Chạy
 
-## About Ranking
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # toàn bộ trang được xuất tĩnh
+```
 
-In the Vietnamese Light Novel reader community, the **Vietnamese Light Novel Ranking** shines as a spiritual destination, where passionate souls of Japanese literature gather, share their passion, and discover the most popular works. This journey is not just a vote, but also an adventure, a journey of cultural and spiritual exploration, intertwined with the author's creativity and the reader's passion.
+## Cấu trúc
 
-Each year, when the **Vietnamese Light Novel Ranking** kicks off, a grand voting event opens up, inviting the entire community to embark on a journey to find the most outstanding works, the most emotional stories, and the most fascinating characters.
+| Đường dẫn | Nội dung |
+| --- | --- |
+| `/` | Trang chủ: hero 3D, lời ngỏ, Top 10, hạng mục, hành trình, tiếng nói, đối tác |
+| `/leaderboard`, `/leaderboard/1-2024` | Bảng tổng sắp từng kỳ, `?cat=` chọn hạng mục |
+| `/feedback` | Tường góp ý của độc giả |
+| `/vote` | Lá phiếu (tự khoá ngoài thời gian bình chọn; thêm `?preview` để xem thử) |
 
-More than that, the **Vietnamese Light Novel Ranking** is not just a playground for works, but also contributes to building the community, creating a cultural space where people can connect, exchange, spread their passion and enjoy the richness of Light Novel literature.
+- `src/lib/config.ts` — kỳ hiện tại, thời gian mở/đóng bình chọn, định nghĩa hạng mục.
+- `src/lib/content.ts` — nội dung chữ: lời ngỏ, dòng thời gian, trích dẫn, đối tác.
+- `src/data/*.json` — dữ liệu đã chuẩn hoá, **được sinh ra**, không sửa tay.
+- `data/raw/` — dữ liệu gốc từ back-end (đã bỏ IP ở phần góp ý).
+- `public/covers/` — ảnh bìa đã tải về và nén (400×568 webp).
 
-##
+## Cập nhật dữ liệu / mở kỳ mới
 
-![](preview/demo.jpg)
+1. Đặt file kết quả mới vào `data/raw/`, khai báo kỳ trong `scripts/build-data.mjs`.
+2. `npm run data` — tải bìa còn thiếu, tính màu nhấn, ghi lại `src/data`.
+3. Sửa `CURRENT_PERIOD` và `VOTING` trong `src/lib/config.ts`.
+4. Khi mở bình chọn: sao chép `.env.example` thành `.env.local` và điền endpoint + hCaptcha site key.
 
-## About Committee
+Phiếu được gửi dạng `POST` JSON:
 
-And at the heart of the **Vietnamese Light Novel Ranking** is the organizing and communications team, a passionate and dedicated team led by Baka Hyddyt, who are willing to sacrifice their time and effort to create the fairest and highest quality playground for the Light Novel community.
+```json
+{
+  "favoriteRanobe": [1, 2], "favoriteOneshot": [3], "favoritePublisher": [4], "favoriteRookie": [5],
+  "feedback": { "topic": "", "content": "", "title": "", "publisher": "" },
+  "userInfo": { "gender": "male", "age": 20 },
+  "token": "<hcaptcha>"
+}
+```
 
-They are not just organizers, but also representatives of the reader community, inspiring and planting seeds of dreams, leading new souls to wander through the fascinating worlds of literature.
+Máy chủ trả `{ "message": "created" }` khi thành công; `rateLimit` / `invalidCaptcha` khi từ chối.
 
-Since 2018, the organizing committee of the **Vietnamese Light Novel Ranking** has embarked on this ambitious journey. Through many ups and downs, overcoming all challenges to create a colorful space for the Light Novel community. With their passion and continuous efforts, they are building a strong and vibrant community, where every work and every passion is honored and spread.
+## Thực hiện
 
-##
-
-![](preview/publisher.jpg)
+Hyddyt (tổ chức) · Zennomi (back-end) · Meoki (front-end)
