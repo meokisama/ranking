@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import { VOTING } from "@/lib/config";
 import { EASE } from "@/lib/motion";
 
@@ -71,7 +72,10 @@ export default function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed
       <div className="relative mt-10 flex flex-wrap items-center gap-6">
         <Link href="/leaderboard" className="group relative inline-flex h-14 items-center gap-4 overflow-hidden bg-paper px-6 text-ink">
           <span className="absolute inset-0 origin-bottom scale-y-0 bg-shu transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
-          <span className="label relative transition-colors duration-300 group-hover:text-paper">Xem bảng tổng sắp →</span>
+          <span className="label relative inline-flex items-center gap-2 transition-colors duration-300 group-hover:text-paper">
+            Xem bảng tổng sắp
+            <ArrowRight className="size-3.5" aria-hidden />
+          </span>
         </Link>
         <Link href="/feedback" className="label link-underline pb-1">
           Đọc góp ý của độc giả

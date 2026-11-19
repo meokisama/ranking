@@ -51,7 +51,7 @@ export default function Categories({ rows }: { rows: CategoryRow[] }) {
                 <span className="label relative text-ink/50 transition-colors duration-300 group-hover:text-shu md:pl-4">
                   {pad(i + 1)} <span className="font-jp normal-case tracking-normal">{c.jp}</span>
                 </span>
-                <span className="display relative text-[8.5vw] leading-none transition-[color,transform] duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:text-paper md:text-[4.4vw]">
+                <span className="display relative text-[8.5vw] leading-none transition-[color,translate] duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:text-paper md:text-[4.4vw]">
                   {c.short}
                 </span>
                 <span className="relative col-start-2 mt-3 transition-colors duration-300 group-hover:text-paper md:col-start-3 md:mt-0">

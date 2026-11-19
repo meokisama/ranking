@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import { intro } from "@/lib/intro";
 import { EASE } from "@/lib/motion";
 import type { HeroBook } from "./shared";
@@ -99,7 +100,7 @@ export default function Hero({
                 Xem bảng tổng sắp
               </span>
               <span className="relative grid size-7 place-items-center rounded-full bg-ink text-paper transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1 group-hover:bg-paper group-hover:text-ink">
-                →
+                <ArrowRight className="size-4" aria-hidden />
               </span>
             </Link>
             <span className="label hidden text-paper/45 lg:block">

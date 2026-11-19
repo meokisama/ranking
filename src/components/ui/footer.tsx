@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import Marquee from "./marquee";
 import { CREDITS } from "@/lib/content";
 import { SITE } from "@/lib/config";
@@ -16,9 +17,10 @@ export default function Footer() {
             href={SITE.facebook}
             target="_blank"
             rel="noreferrer"
-            className="label link-underline mt-8 inline-block pb-1 text-paper"
+            className="label link-underline mt-8 inline-flex items-center gap-2 pb-1 text-paper"
           >
-            Theo dõi trên Facebook ↗
+            Theo dõi trên Facebook
+            <ArrowUpRight className="size-3.5" aria-hidden />
           </a>
         </div>
         <nav aria-label="Liên kết chân trang">

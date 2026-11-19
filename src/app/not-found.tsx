@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -13,8 +14,9 @@ export default function NotFound() {
         <p className="mt-5 max-w-[36ch] font-serif text-lg italic text-ink/70">
           Có thể đường dẫn đã cũ, hoặc trang đã được xếp lại ở một kỳ khác.
         </p>
-        <Link href="/" className="label link-underline mt-8 inline-block pb-1">
-          ← Về trang bìa
+        <Link href="/" className="label link-underline mt-8 inline-flex items-center gap-2 pb-1">
+          <ArrowLeft className="size-3.5" aria-hidden />
+          Về trang bìa
         </Link>
       </div>
     </main>

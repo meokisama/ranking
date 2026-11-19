@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import Book from "@/components/ui/book";
 import Eclipse from "@/components/ui/eclipse";
 import type { Entry } from "@/lib/data";
@@ -127,7 +128,7 @@ export default function TopTen({
                 <span className="text-shu">bảng tổng sắp</span>
               </span>
               <span className="mt-8 grid size-20 place-items-center rounded-full border border-paper/30 text-2xl transition-all duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:border-shu group-hover:bg-shu">
-                →
+                <ArrowRight className="size-7" strokeWidth={1.5} aria-hidden />
               </span>
             </Link>
           </div>

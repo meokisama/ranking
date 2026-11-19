@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Cover } from "@/components/ui/book";
 import { CATEGORIES, VOTING } from "@/lib/config";
 import { fold, pad } from "@/lib/format";
@@ -218,7 +219,7 @@ export default function Ballot({
                     <li key={it.id}>
                       <button onClick={() => toggle(it.id)} aria-pressed={on} className="group block w-full text-left">
                         <div
-                          className={`relative overflow-hidden transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] ${
+                          className={`relative overflow-hidden transition-[translate,box-shadow] duration-500 ease-[var(--ease-out-expo)] ${
                             it.logo ? "aspect-square bg-white" : "aspect-[400/568] bg-paper-2"
                           } ${on ? "-translate-y-2 shadow-[0_18px_30px_-12px_rgb(0_0_0/0.45)] ring-[3px] ring-shu" : "group-hover:-translate-y-1"}`}
                         >
@@ -369,15 +370,17 @@ export default function Ballot({
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-paper/15 bg-ink text-paper">
         <div className="flex items-center justify-between gap-4 px-5 py-3 md:px-16 md:py-4">
-          <button onClick={() => go(step - 1)} disabled={step === 0} className="label py-2 disabled:opacity-30">
-            ← Quay lại
+          <button onClick={() => go(step - 1)} disabled={step === 0} className="label inline-flex items-center gap-2 py-2 disabled:opacity-30">
+            <ArrowLeft className="size-3.5" aria-hidden />
+            Quay lại
           </button>
           <span className="label hidden text-paper/55 sm:block">
             {meta ? `Đã chọn ${chosen.length} / ${meta.max} ${meta.unit}` : `Bước ${step + 1} / ${total}`}
           </span>
           {step < total - 1 ? (
-            <button onClick={() => go(step + 1)} className="label bg-paper px-5 py-3 text-ink transition-colors hover:bg-shu hover:text-paper">
-              Tiếp tục →
+            <button onClick={() => go(step + 1)} className="label inline-flex items-center gap-2 bg-paper px-5 py-3 text-ink transition-colors hover:bg-shu hover:text-paper">
+              Tiếp tục
+              <ArrowRight className="size-3.5" aria-hidden />
             </button>
           ) : (
             <span className="label text-paper/55">Bước cuối</span>
