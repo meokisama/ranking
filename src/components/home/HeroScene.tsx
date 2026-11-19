@@ -235,9 +235,42 @@ const ECHOES = 3;
 type TroikaText = THREE.Mesh & {
   fillOpacity: number;
   strokeOpacity: number;
+  outlineOpacity: number;
   clipRect: number[] | null;
   textRenderInfo?: { blockBounds: number[] };
 };
+
+/**
+ * Chất liệu cho "VIỆT NAM": kim loại nung, vàng ở đỉnh chữ rồi chuyển dần về đỏ son,
+ * kèm một vệt sáng chéo. Dịch texture theo trục ngang là vệt sáng quét qua cả dòng chữ.
+ */
+function emberTexture() {
+  const W = 1024;
+  const H = 256;
+  const c = document.createElement("canvas");
+  c.width = W;
+  c.height = H;
+  const ctx = c.getContext("2d")!;
+  const heat = ctx.createLinearGradient(0, 0, 0, H);
+  heat.addColorStop(0, "#ffe2ad");
+  heat.addColorStop(0.22, "#ffab52");
+  heat.addColorStop(0.55, "#f6501f");
+  heat.addColorStop(1, "#d62c0a");
+  ctx.fillStyle = heat;
+  ctx.fillRect(0, 0, W, H);
+  ctx.transform(1, 0, -0.5, 1, H * 0.25, 0);
+  const streak = ctx.createLinearGradient(W * 0.45, 0, W * 0.55, 0);
+  streak.addColorStop(0, "rgba(255,244,214,0)");
+  streak.addColorStop(0.5, "rgba(255,244,214,0.95)");
+  streak.addColorStop(1, "rgba(255,244,214,0)");
+  ctx.fillStyle = streak;
+  ctx.fillRect(0, 0, W, H);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = THREE.RepeatWrapping;
+  t.repeat.x = 0.5;
+  return t;
+}
 
 /**
  * Tiêu đề dựng theo thứ bậc: dòng serif nghiêng nhỏ → "LIGHT NOVEL" khổng lồ → "VIỆT NAM" đỏ son.
@@ -252,6 +285,7 @@ function Title({ compact }: { compact: boolean }) {
 
   const rows = compact ? ROWS_TALL : ROWS_WIDE;
   const clips = useMemo(() => rows.map(() => [-100, 0, 100, 0]), [rows]);
+  const ember = useMemo(() => emberTexture(), []);
   const total = rows.reduce((sum, r) => sum + r.size * r.lead, 0);
 
   useFrame((state) => {
@@ -259,6 +293,8 @@ function Title({ compact }: { compact: boolean }) {
     const since = live.introAt < 0 ? 0 : t - live.introAt;
     const p = live.scroll;
     const fade = 1 - clamp01(p * 1.6);
+    // vệt sáng quét qua "VIỆT NAM" mỗi ~5,5 giây (phần lớn chu kỳ nó nằm ngoài dòng chữ)
+    ember.offset.x = -((t * 0.18) % 1);
 
     // bề ngang khối chữ = dòng khổng lồ rộng nhất (đo từ glyph thật sau khi troika dựng xong)
     let block = 0;
@@ -288,6 +324,7 @@ function Title({ compact }: { compact: boolean }) {
       const main = mains.current[i];
       if (main) {
         main.fillOpacity = e * fade;
+        if (r.kind === "shu") main.outlineOpacity = e * fade * (0.5 + 0.12 * Math.sin(t * 1.3));
         // màn che kéo từ dưới lên
         const c = clips[i];
         c[1] = -r.size * 1.1;
@@ -330,14 +367,17 @@ function Title({ compact }: { compact: boolean }) {
             letterSpacing={r.kind === "serif" ? -0.03 : -0.012}
             anchorX={r.align}
             anchorY="middle"
-            color={r.kind === "shu" ? SHU : PAPER}
+            color={r.kind === "shu" ? "#ffffff" : PAPER}
             fillOpacity={0}
+            {...(r.kind === "shu"
+              ? { outlineWidth: 0, outlineBlur: r.size * 0.22, outlineColor: SHU, outlineOpacity: 0 }
+              : {})}
             renderOrder={2}
           >
             {r.text}
-            <meshBasicMaterial transparent fog={false} toneMapped={false} />
+            <meshBasicMaterial transparent fog={false} toneMapped={false} map={r.kind === "shu" ? ember : null} />
           </Text>
-          {r.kind === "giant" &&
+          {r.kind !== "serif" &&
             Array.from({ length: ECHOES }, (_, k) => (
               <Text
                 key={k}
@@ -351,7 +391,7 @@ function Title({ compact }: { compact: boolean }) {
                 anchorY="middle"
                 fillOpacity={0}
                 strokeWidth={0.011}
-                strokeColor={k === 0 ? PAPER : SHU}
+                strokeColor={k === 0 && r.kind === "giant" ? PAPER : SHU}
                 strokeOpacity={0}
                 renderOrder={1}
               >
@@ -382,6 +422,8 @@ const BACKDROP_FRAG = /* glsl */ `
   uniform float uAspect;
   uniform float uScroll;
   uniform float uIntro;
+  uniform float uWrap;
+  uniform float uBead;
   uniform vec2 uPointer;
 
   float hash(vec2 p) {
@@ -422,17 +464,20 @@ const BACKDROP_FRAG = /* glsl */ `
     col = mix(col, night, smoothstep(0.38, 0.8, n1) * smoothstep(-0.55, 0.45, p.y - p.x * 0.25) * 0.85);
     col = mix(col, ember, smoothstep(0.4, 0.85, n2) * smoothstep(0.35, -0.55, p.y + p.x * 0.12) * 0.8);
 
-    // nhật thực
+    // nhật thực: khi cuộn, đĩa nở to tới lúc nuốt trọn khung hình
     vec2 c = vec2(0.0, 0.065) - uPointer * 0.014;
-    float R = 0.335 * min(1.0, uAspect * 1.25) * (1.0 + uScroll * 0.3) * mix(0.72, 1.0, uIntro);
+    float R = 0.335 * min(1.0, uAspect * 1.25) * (1.0 + 4.8 * uScroll * uScroll) * mix(0.72, 1.0, uIntro);
     vec2 d = p - c;
     float r = length(d);
     float ang = atan(d.y, d.x);
     float o = max(r - R, 0.0) / R;
     float outside = smoothstep(R - 0.003, R + 0.003, r);
     float flare = fbm(vec2(ang * 2.4 + 1.3, r * 2.5 - t * 0.07));
-    float side = 0.5 + 0.5 * dot(d / max(r, 1e-4), normalize(vec2(-0.55, 0.83)));
-    float power = uIntro * (1.0 - uScroll * 0.45) * mix(0.42, 1.25, side * side);
+    vec2 beadDir = normalize(vec2(-0.55, 0.83));
+    float side = 0.5 + 0.5 * dot(d / max(r, 1e-4), beadDir);
+    // quầng sáng lan quanh đĩa, bắt đầu từ điểm "nhẫn kim cương"
+    float wrap = smoothstep(-0.3, 0.05, uWrap * 1.35 - (1.0 - side));
+    float power = uIntro * wrap * (1.0 - uScroll * 0.3) * mix(0.42, 1.25, side * side);
     float glow = (exp(-o * 3.1) * (0.28 + 1.15 * flare) + exp(-o * 9.0) * 0.8) * power * outside;
 
     // hạt tram: càng xa vầng sáng hạt càng nhỏ
@@ -451,9 +496,17 @@ const BACKDROP_FRAG = /* glsl */ `
 
     // lòng đĩa tối + viền sáng mảnh
     float inside = 1.0 - outside;
-    col = mix(col, ink * 0.5, inside * uIntro);
+    col = mix(col, ink, inside);
     col += shu * 0.11 * inside * smoothstep(R * 0.55, R, r) * power;
     col += mix(shu, foil, 0.75) * exp(-abs(r - R) * 520.0) * power * 1.1;
+
+    // nhẫn kim cương: hạt sáng loé ở rìa đĩa lúc mở màn, sau đó còn le lói
+    vec2 bp = p - (c + beadDir * R);
+    float bd = length(bp);
+    float core = 0.0007 / (bd * bd + 0.00009);
+    float rayA = 0.0035 / (abs(bp.x * beadDir.y - bp.y * beadDir.x) + 0.0035) * exp(-bd * 7.0);
+    float rayB = 0.0025 / (abs(dot(bp, beadDir)) + 0.0025) * exp(-bd * 13.0);
+    col += vec3(1.0, 0.92, 0.78) * (core + rayA * 0.55 + rayB * 0.4) * uBead * mix(0.3, 1.0, outside);
 
     // tối góc + khử sọc màu
     col *= 1.0 - 0.5 * smoothstep(0.42, 1.05, length(p * vec2(0.78, 1.0)));
@@ -470,6 +523,8 @@ function Backdrop() {
       uAspect: { value: 1 },
       uScroll: { value: 0 },
       uIntro: { value: 0 },
+      uWrap: { value: 0 },
+      uBead: { value: 0 },
       uPointer: { value: new THREE.Vector2() },
     }),
     []
@@ -484,6 +539,12 @@ function Backdrop() {
     u.uAspect.value = state.size.width / state.size.height;
     u.uScroll.value = easeInOut(live.scroll);
     u.uIntro.value = easeOutExpo(clamp01(since / 3.2));
+    u.uWrap.value = easeInOut(clamp01((since - 0.7) / 2.4));
+    // loé nhanh rồi tắt dần về một hạt sáng nhỏ nhấp nháy
+    const rise = easeInOut(clamp01((since - 0.45) / 0.3));
+    const decay = Math.exp(-Math.max(0, since - 0.75) * 1.25);
+    const rest = 0.13 * (0.82 + 0.18 * Math.sin(t * 2.1));
+    u.uBead.value = rise * Math.max(decay, rest) * (1 - clamp01(live.scroll * 2.5));
     u.uPointer.value.lerp(state.pointer, 1 - Math.pow(0.02, dt));
   });
   return (
@@ -554,9 +615,13 @@ export default function HeroScene({ books, active }: { books: HeroBook[]; active
       style={{ pointerEvents: "none" }}
     >
       <color attach="background" args={[INK]} />
-      <fog attach="fog" args={[INK, 8.5, 19]} />
+      {/* sương dày hơn: sách ở xa thành bóng đen cắt lên quầng sáng */}
+      <fog attach="fog" args={[INK, 8.5, 16.5]} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[-4, 6, 8]} intensity={1.7} />
+      {/* đèn ngược từ phía nhật thực: viền đỏ son ở mép sách */}
+      <directionalLight position={[-5, 7, -9]} intensity={4} color="#ff7a3c" />
+      <directionalLight position={[6, -2, -8]} intensity={1.6} color={SHU} />
       {/* "Studio" ảo dựng tại chỗ (không tải HDR): các tấm đèn để bìa bóng có thứ mà phản chiếu */}
       <Environment resolution={256} frames={1}>
         <Lightformer form="rect" intensity={1.3} color="#fff4e2" position={[-5, 6, 7]} scale={[10, 6, 1]} target={[0, 0, 0]} />

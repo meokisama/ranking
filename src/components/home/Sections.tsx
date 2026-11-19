@@ -101,7 +101,7 @@ export function Timeline({ period }: { period: string }) {
 export function Voices() {
   const [lead, ...rest] = VOICES;
   return (
-    <section className="relative overflow-hidden bg-ink px-5 py-28 text-paper md:px-16 md:py-40">
+    <section className="haze relative overflow-hidden bg-ink px-5 py-28 text-paper md:px-16 md:py-40">
       <span className="display pointer-events-none absolute -top-[0.12em] right-4 select-none text-[52vw] leading-none text-shu md:text-[30vw]" aria-hidden>
         ”
       </span>

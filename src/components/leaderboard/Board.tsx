@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
-import Book, { Cover, Obi } from "@/components/ui/Book";
+import Book, { Cover } from "@/components/ui/Book";
+import Eclipse from "@/components/ui/Eclipse";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
 import type { Entry, Period } from "@/lib/data";
@@ -68,7 +69,7 @@ export default function Board({
     <main className="bg-ink text-paper">
       {/* ───── Đầu trang ───── */}
       <header className="relative overflow-hidden px-5 pb-10 pt-32 md:px-16 md:pb-14 md:pt-44">
-        <div className="pointer-events-none absolute -right-20 -top-20 size-[46vw] rounded-full text-shu/30 tone-lg" aria-hidden />
+        <Eclipse className="-right-[22vw] -top-[30vw] w-[78vw] md:-right-[16vw] md:-top-[24vw] md:w-[62vw]" />
         <div className="tategaki pointer-events-none absolute right-6 top-36 hidden text-sm text-paper/40 md:block" aria-hidden>
           総合順位表
         </div>
@@ -218,6 +219,7 @@ export default function Board({
 function PodiumItem({ e, votes, first, order }: { e: Entry; votes: number; first: boolean; order: string }) {
   return (
     <li className={`relative ${order}`}>
+      {first && <Eclipse className="left-[64%] top-[-22%] w-[170%] -translate-x-1/2" />}
       <span
         className={`display pointer-events-none absolute -top-[0.3em] left-0 select-none leading-none ${
           first ? "text-[38vw] text-shu md:text-[17vw]" : "outline-text text-[30vw] text-paper/35 md:text-[12vw]"
@@ -241,7 +243,6 @@ function PodiumItem({ e, votes, first, order }: { e: Entry; votes: number; first
           eager
           depth={first ? 34 : 26}
           className={`relative ml-auto ${first ? "w-[72%]" : "w-[62%]"}`}
-          obi={first ? <Obi rank={1} line="Quán quân" /> : undefined}
         />
       )}
 

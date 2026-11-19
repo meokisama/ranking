@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import Book, { Obi } from "@/components/ui/Book";
+import Book from "@/components/ui/Book";
+import Eclipse from "@/components/ui/Eclipse";
 import type { Entry } from "@/lib/data";
 import { nf, pad } from "@/lib/data";
 
@@ -50,7 +51,7 @@ export default function Top10({
       style={pinned ? { height: `calc(100svh + ${distance}px)` } : undefined}
       aria-label="Top 10 Light Novel được yêu thích nhất"
     >
-      <div className={pinned ? "sticky top-0 flex h-svh flex-col justify-center overflow-hidden" : "overflow-x-auto py-24"}>
+      <div className={pinned ? "haze sticky top-0 flex h-svh flex-col justify-center overflow-hidden" : "haze relative overflow-x-auto py-24"}>
         <motion.div
           ref={track}
           style={pinned ? { x } : undefined}
@@ -73,6 +74,7 @@ export default function Top10({
 
           {items.map((it, i) => (
             <article key={it.id} className="group relative flex w-[72vw] shrink-0 flex-col md:w-[27vw] lg:w-[23vw]">
+              {i === 0 && <Eclipse className="left-[62%] top-[-9%] z-0 w-[185%] -translate-x-1/2" />}
               <span
                 className={`display pointer-events-none absolute -left-[0.06em] -top-[0.2em] z-0 select-none text-[42vw] leading-none md:text-[17vw] ${
                   i === 0 ? "text-shu" : "outline-text text-paper/35"
@@ -89,7 +91,6 @@ export default function Top10({
                 eager={i < 3}
                 depth={30}
                 className="relative z-10 ml-auto mt-[20%] w-[76%]"
-                obi={i === 0 ? <Obi rank={1} line="Quán quân" /> : undefined}
               />
               <div className="relative z-10 mt-10">
                 <div className="label flex items-center justify-between text-paper/50">

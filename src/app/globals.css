@@ -279,3 +279,82 @@ html.lenis body {
     animation: none !important;
   }
 }
+
+/* ───── Nhật thực (bản CSS của vầng sáng trong hero) ───── */
+.eclipse {
+  position: absolute;
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+.eclipse > span {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+/* quầng sáng: gắt ở mép đĩa, loãng dần; sáng lệch về phía trên bên trái */
+.eclipse-halo {
+  background: radial-gradient(
+    circle closest-side,
+    transparent 49.2%,
+    rgb(255 196 138 / 0.95) 50%,
+    rgb(240 66 28 / 0.8) 52.5%,
+    rgb(240 66 28 / 0.3) 63%,
+    rgb(240 66 28 / 0.08) 78%,
+    transparent 92%
+  );
+  mask-image: linear-gradient(135deg, #000 25%, rgb(0 0 0 / 0.38) 85%);
+  animation: eclipse-breathe 7s ease-in-out infinite;
+}
+/* hạt tram tan ra ngoài */
+.eclipse-tone {
+  color: var(--color-shu);
+  opacity: 0.75;
+  background-image: radial-gradient(currentColor 1.3px, transparent 1.7px);
+  background-size: 8px 8px;
+  transform: rotate(45deg);
+  mask-image: radial-gradient(circle closest-side, transparent 50%, #000 55%, rgb(0 0 0 / 0.5) 72%, transparent 97%);
+}
+.eclipse > .eclipse-disc {
+  inset: 25%;
+  background: var(--eclipse-disc, var(--color-ink));
+  box-shadow:
+    0 0 0 1px rgb(255 205 160 / 0.75),
+    0 0 22px 2px rgb(240 66 28 / 0.65),
+    inset 0 0 60px rgb(240 66 28 / 0.14);
+}
+@keyframes eclipse-breathe {
+  50% {
+    opacity: 0.78;
+  }
+}
+
+/* Khói mực + hạt tram rất nhạt cho các vùng nền tối, cùng ngôn ngữ với hero */
+.haze {
+  isolation: isolate;
+}
+.haze::before,
+.haze::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.haze::before {
+  background:
+    radial-gradient(ellipse 55% 60% at 94% 6%, rgb(24 38 84 / 0.5), transparent 70%),
+    radial-gradient(ellipse 65% 62% at 3% 100%, rgb(122 30 10 / 0.42), transparent 70%);
+}
+.haze::after {
+  color: var(--color-shu);
+  opacity: 0.2;
+  background-image: radial-gradient(currentColor 1.1px, transparent 1.5px);
+  background-size: 8px 8px;
+  mask-image: radial-gradient(ellipse 58% 70% at 0% 100%, #000, transparent 72%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eclipse-halo {
+    animation: none;
+  }
+}
