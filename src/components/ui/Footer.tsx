@@ -60,7 +60,7 @@ export default function Footer() {
         <span className="label font-jp normal-case tracking-[0.3em] text-paper/45">おわり</span>
       </div>
 
-      <Marquee duration={50} className="-mb-[3.2vw] select-none text-paper" >
+      <Marquee duration={50} pauseOnHover={false} className="-mb-[3.2vw] select-none text-paper">
         <span className="display whitespace-nowrap pr-[4vw] text-[22vw] leading-[0.95]" aria-hidden>
           Light Novel <span className="text-shu">Việt Nam</span> <span className="outline-text">ライトノベル</span>
         </span>

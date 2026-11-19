@@ -11,7 +11,8 @@ export type HeroBook = { cover: string; color: string; name: string; publisher: 
 const INK = "#0c0b0a";
 const PAPER = "#efe9dd";
 const SHU = "#f0421c";
-const FONT = "/fonts/DTPhudu-Black.otf";
+const FONT_DISPLAY = "/fonts/DTPhudu-Black.otf";
+const FONT_SERIF = "/fonts/Fraunces-Hero-Italic.ttf";
 
 const BOOK_W = 0.92;
 const BOOK_H = 1.3;
@@ -209,78 +210,295 @@ function Books({ books, compact }: { books: HeroBook[]; compact: boolean }) {
   );
 }
 
-type Line = { text: string; kind: "fill" | "stroke" | "shu" };
-const LINES_WIDE: Line[] = [
-  { text: "BẢNG XẾP HẠNG", kind: "fill" },
-  { text: "LIGHT NOVEL", kind: "stroke" },
-  { text: "VIỆT NAM", kind: "shu" },
+type Row = {
+  text: string;
+  kind: "serif" | "giant" | "shu";
+  /** cỡ chữ so với dòng lớn nhất */
+  size: number;
+  /** chiều cao dòng chiếm chỗ, so với cỡ chữ */
+  lead: number;
+  align: "left" | "center" | "right";
+};
+const ROWS_WIDE: Row[] = [
+  { text: "Bảng xếp hạng", kind: "serif", size: 0.4, lead: 1.3, align: "left" },
+  { text: "LIGHT NOVEL", kind: "giant", size: 1, lead: 1.02, align: "center" },
+  { text: "VIỆT NAM", kind: "shu", size: 0.66, lead: 1.22, align: "right" },
 ];
-const LINES_TALL: Line[] = [
-  { text: "BẢNG", kind: "fill" },
-  { text: "XẾP HẠNG", kind: "fill" },
-  { text: "LIGHT", kind: "stroke" },
-  { text: "NOVEL", kind: "stroke" },
-  { text: "VIỆT NAM", kind: "shu" },
+const ROWS_TALL: Row[] = [
+  { text: "Bảng xếp hạng", kind: "serif", size: 0.4, lead: 1.3, align: "left" },
+  { text: "LIGHT", kind: "giant", size: 1, lead: 0.9, align: "center" },
+  { text: "NOVEL", kind: "giant", size: 1, lead: 0.96, align: "center" },
+  { text: "VIỆT NAM", kind: "shu", size: 0.62, lead: 1.2, align: "right" },
 ];
+const ECHOES = 3;
 
+type TroikaText = THREE.Mesh & {
+  fillOpacity: number;
+  strokeOpacity: number;
+  clipRect: number[] | null;
+  textRenderInfo?: { blockBounds: number[] };
+};
+
+/**
+ * Tiêu đề dựng theo thứ bậc: dòng serif nghiêng nhỏ → "LIGHT NOVEL" khổng lồ → "VIỆT NAM" đỏ son.
+ * Dòng khổng lồ kéo theo các "bóng viền" lùi dần vào chiều sâu, lệch nhau khi rê chuột.
+ */
 function Title({ compact }: { compact: boolean }) {
   const group = useRef<THREE.Group>(null);
-  const mats = useRef<THREE.MeshBasicMaterial[]>([]);
-  const width = useThree((s) => s.viewport.width);
+  const rowRefs = useRef<(THREE.Group | null)[]>([]);
+  const mains = useRef<(TroikaText | null)[]>([]);
+  const echoes = useRef<(TroikaText | null)[][]>([]);
+  const viewport = useThree((s) => s.viewport);
 
-  const lines = compact ? LINES_TALL : LINES_WIDE;
-  const size = 1.34;
-  const lh = size * 1.02;
-  const natural = compact ? 6.6 : 10.6;
-  const fit = Math.min(1, (width * (compact ? 0.9 : 0.8)) / natural);
+  const rows = compact ? ROWS_TALL : ROWS_WIDE;
+  const clips = useMemo(() => rows.map(() => [-100, 0, 100, 0]), [rows]);
+  const total = rows.reduce((sum, r) => sum + r.size * r.lead, 0);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     const since = live.introAt < 0 ? 0 : t - live.introAt;
     const p = live.scroll;
-    for (let i = 0; i < lines.length; i++) {
-      const e = easeOutExpo(clamp01((since - 0.15 - i * 0.12) / 1.6));
-      const m = mats.current[i];
-      const o = e * (1 - clamp01(p * 1.6));
-      if (m) m.opacity = o;
-      const mesh = group.current?.children[i] as (THREE.Object3D & { strokeOpacity?: number }) | undefined;
-      if (mesh && lines[i].kind === "stroke") mesh.strokeOpacity = o;
-      if (mesh) mesh.position.y = ((lines.length - 1) / 2 - i) * lh - (1 - e) * 0.6;
+    const fade = 1 - clamp01(p * 1.6);
+
+    // bề ngang khối chữ = dòng khổng lồ rộng nhất (đo từ glyph thật sau khi troika dựng xong)
+    let block = 0;
+    for (let i = 0; i < rows.length; i++) {
+      const bb = rows[i].kind === "giant" ? mains.current[i]?.textRenderInfo?.blockBounds : undefined;
+      if (bb) block = Math.max(block, bb[2] - bb[0]);
+    }
+    if (!block) block = compact ? 4.2 : 8.6;
+    const fit = Math.min(
+      (viewport.width * (compact ? 0.9 : 0.84)) / block,
+      (viewport.height * (compact ? 0.42 : 0.56)) / total,
+      compact ? 9 : 1.5
+    );
+
+    let y = total / 2;
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i];
+      const h = r.size * r.lead;
+      const e = easeOutExpo(clamp01((since - 0.1 - i * 0.14) / 1.7));
+      const row = rowRefs.current[i];
+      if (row) {
+        row.position.x = r.align === "left" ? -block / 2 : r.align === "right" ? block / 2 : 0;
+        row.position.y = y - h / 2 - (1 - e) * r.size * 0.55;
+      }
+      y -= h;
+
+      const main = mains.current[i];
+      if (main) {
+        main.fillOpacity = e * fade;
+        // màn che kéo từ dưới lên
+        const c = clips[i];
+        c[1] = -r.size * 1.1;
+        c[3] = -r.size * 1.1 + e * r.size * 2.4;
+        main.clipRect = c;
+      }
+      const list = echoes.current[i];
+      if (list) {
+        const eo = easeOutExpo(clamp01((since - 0.9 - i * 0.14) / 2.2));
+        for (let k = 0; k < list.length; k++) {
+          const m = list[k];
+          if (!m) continue;
+          m.position.z = -(k + 1) * (0.34 * eo + p * 1.3);
+          m.strokeOpacity = (eo * fade * 0.55) / (k + 1);
+        }
+      }
     }
     if (group.current) {
       group.current.position.z = -p * 3;
-      group.current.position.y = TITLE_Y * fit;
+      group.current.position.y = TITLE_Y * (compact ? 1.8 : 0.75);
       group.current.scale.setScalar(fit);
     }
   });
 
   return (
     <group ref={group}>
-      {lines.map((l, i) => (
-        <Text
-          key={l.text}
-          font={FONT}
-          fontSize={size}
-          letterSpacing={-0.005}
-          anchorX="center"
-          anchorY="middle"
-          position-y={((lines.length - 1) / 2 - i) * lh}
-          {...(l.kind === "stroke" ? { fillOpacity: 0, strokeWidth: 0.018, strokeColor: PAPER } : {})}
+      {rows.map((r, i) => (
+        <group
+          key={r.text}
+          ref={(el) => {
+            rowRefs.current[i] = el;
+          }}
         >
-          {l.text}
-          <meshBasicMaterial
-            ref={(m) => {
-              if (m) mats.current[i] = m;
+          <Text
+            ref={(el: TroikaText | null) => {
+              mains.current[i] = el;
             }}
-            color={l.kind === "shu" ? SHU : PAPER}
-            transparent
-            opacity={0}
-            fog={false}
-            toneMapped={false}
-          />
-        </Text>
+            font={r.kind === "serif" ? FONT_SERIF : FONT_DISPLAY}
+            fontSize={r.size}
+            letterSpacing={r.kind === "serif" ? -0.03 : -0.012}
+            anchorX={r.align}
+            anchorY="middle"
+            color={r.kind === "shu" ? SHU : PAPER}
+            fillOpacity={0}
+            renderOrder={2}
+          >
+            {r.text}
+            <meshBasicMaterial transparent fog={false} toneMapped={false} />
+          </Text>
+          {r.kind === "giant" &&
+            Array.from({ length: ECHOES }, (_, k) => (
+              <Text
+                key={k}
+                ref={(el: TroikaText | null) => {
+                  (echoes.current[i] ??= [])[k] = el;
+                }}
+                font={FONT_DISPLAY}
+                fontSize={r.size}
+                letterSpacing={-0.012}
+                anchorX={r.align}
+                anchorY="middle"
+                fillOpacity={0}
+                strokeWidth={0.011}
+                strokeColor={k === 0 ? PAPER : SHU}
+                strokeOpacity={0}
+                renderOrder={1}
+              >
+                {r.text}
+                <meshBasicMaterial transparent fog={false} toneMapped={false} depthWrite={false} />
+              </Text>
+            ))}
+        </group>
       ))}
     </group>
+  );
+}
+
+const BACKDROP_VERT = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = vec4(position.xy, 0.0, 1.0);
+  }
+`;
+
+// Nền: khói mực hai tông nóng/lạnh + một vầng "nhật thực" đỏ son tan dần thành hạt tram manga.
+// Màu viết thẳng ở sRGB (không qua tone mapping) để khớp tuyệt đối với --color-ink của trang.
+const BACKDROP_FRAG = /* glsl */ `
+  precision highp float;
+  varying vec2 vUv;
+  uniform float uTime;
+  uniform float uAspect;
+  uniform float uScroll;
+  uniform float uIntro;
+  uniform vec2 uPointer;
+
+  float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+  }
+  float noise(vec2 p) {
+    vec2 i = floor(p), f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+  }
+  float fbm(vec2 p) {
+    float a = 0.5, s = 0.0;
+    for (int i = 0; i < 5; i++) {
+      s += a * noise(p);
+      p = p * 2.03 + vec2(17.1, 9.2);
+      a *= 0.5;
+    }
+    return s;
+  }
+
+  void main() {
+    vec2 p = (vUv - 0.5) * vec2(uAspect, 1.0);
+    float t = uTime;
+    vec3 ink = vec3(0.047, 0.043, 0.039);
+    vec3 shu = vec3(0.941, 0.259, 0.110);
+    vec3 foil = vec3(1.0, 0.78, 0.50);
+    vec3 ember = vec3(0.36, 0.075, 0.03);
+    vec3 night = vec3(0.05, 0.075, 0.15);
+
+    // khói mực trôi chậm
+    vec2 q = p * 1.5 + uPointer * 0.04;
+    vec2 warp = vec2(fbm(q + vec2(0.0, t * 0.035)), fbm(q + vec2(5.2, -t * 0.03)));
+    float n1 = fbm(q * 1.2 + warp * 1.7 + vec2(t * 0.012, 0.0));
+    float n2 = fbm(q * 1.0 - warp * 1.4 + vec2(3.7, t * 0.01));
+    vec3 col = ink;
+    col = mix(col, night, smoothstep(0.38, 0.8, n1) * smoothstep(-0.55, 0.45, p.y - p.x * 0.25) * 0.85);
+    col = mix(col, ember, smoothstep(0.4, 0.85, n2) * smoothstep(0.35, -0.55, p.y + p.x * 0.12) * 0.8);
+
+    // nhật thực
+    vec2 c = vec2(0.0, 0.065) - uPointer * 0.014;
+    float R = 0.335 * min(1.0, uAspect * 1.25) * (1.0 + uScroll * 0.3) * mix(0.72, 1.0, uIntro);
+    vec2 d = p - c;
+    float r = length(d);
+    float ang = atan(d.y, d.x);
+    float o = max(r - R, 0.0) / R;
+    float outside = smoothstep(R - 0.003, R + 0.003, r);
+    float flare = fbm(vec2(ang * 2.4 + 1.3, r * 2.5 - t * 0.07));
+    float side = 0.5 + 0.5 * dot(d / max(r, 1e-4), normalize(vec2(-0.55, 0.83)));
+    float power = uIntro * (1.0 - uScroll * 0.45) * mix(0.42, 1.25, side * side);
+    float glow = (exp(-o * 3.1) * (0.28 + 1.15 * flare) + exp(-o * 9.0) * 0.8) * power * outside;
+
+    // hạt tram: càng xa vầng sáng hạt càng nhỏ
+    mat2 rot = mat2(0.7071, -0.7071, 0.7071, 0.7071);
+    vec2 g = rot * p * 118.0;
+    float cell = length(fract(g) - 0.5);
+    float tone = clamp(glow * 0.85, 0.0, 1.0);
+    float rad = sqrt(tone) * 0.66;
+    float aa = fwidth(cell) * 1.2;
+    float dots = (1.0 - smoothstep(rad - aa, rad + aa, cell)) * step(0.012, tone);
+    float soft = smoothstep(0.42, 0.0, o);
+    float lit = mix(dots * (0.4 + 0.6 * tone), tone, soft * 0.85);
+    vec3 hot = mix(shu, foil, smoothstep(0.7, 1.6, glow) * soft);
+    col += hot * lit * 0.95;
+    col += shu * glow * 0.1;
+
+    // lòng đĩa tối + viền sáng mảnh
+    float inside = 1.0 - outside;
+    col = mix(col, ink * 0.5, inside * uIntro);
+    col += shu * 0.11 * inside * smoothstep(R * 0.55, R, r) * power;
+    col += mix(shu, foil, 0.75) * exp(-abs(r - R) * 520.0) * power * 1.1;
+
+    // tối góc + khử sọc màu
+    col *= 1.0 - 0.5 * smoothstep(0.42, 1.05, length(p * vec2(0.78, 1.0)));
+    col += (hash(gl_FragCoord.xy + fract(t)) - 0.5) / 160.0;
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+function Backdrop() {
+  const mat = useRef<THREE.ShaderMaterial>(null);
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uAspect: { value: 1 },
+      uScroll: { value: 0 },
+      uIntro: { value: 0 },
+      uPointer: { value: new THREE.Vector2() },
+    }),
+    []
+  );
+  useFrame((state, dt) => {
+    const t = state.clock.elapsedTime;
+    const since = live.introAt < 0 ? 0 : t - live.introAt;
+    // đọc uniforms từ chính material: R3F có thể không giữ nguyên object truyền qua prop
+    const u = mat.current?.uniforms;
+    if (!u) return;
+    u.uTime.value = t;
+    u.uAspect.value = state.size.width / state.size.height;
+    u.uScroll.value = easeInOut(live.scroll);
+    u.uIntro.value = easeOutExpo(clamp01(since / 3.2));
+    u.uPointer.value.lerp(state.pointer, 1 - Math.pow(0.02, dt));
+  });
+  return (
+    <mesh frustumCulled={false} renderOrder={-10}>
+      <planeGeometry args={[2, 2]} />
+      <shaderMaterial
+        ref={mat}
+        vertexShader={BACKDROP_VERT}
+        fragmentShader={BACKDROP_FRAG}
+        uniforms={uniforms}
+        depthTest={false}
+        depthWrite={false}
+        toneMapped={false}
+      />
+    </mesh>
   );
 }
 
@@ -347,6 +565,7 @@ export default function HeroScene({ books, active }: { books: HeroBook[]; active
         <Lightformer form="circle" intensity={1} color="#f0421c" position={[0, 1, -9]} scale={5} target={[0, 0, 0]} />
       </Environment>
       <pointLight position={[0, 0.5, -1.5]} intensity={35} distance={12} color={SHU} />
+      <Backdrop />
       <Rig>
         <Suspense fallback={null}>
           <Title compact={compact} />
