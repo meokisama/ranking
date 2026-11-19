@@ -2,16 +2,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
-import { Cover } from "@/components/ui/Book";
-import { FadeUp, LineRise } from "@/components/ui/Reveal";
+import { Cover } from "@/components/ui/book";
+import { FadeUp, LineRise } from "@/components/ui/reveal";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
 import type { Entry } from "@/lib/data";
-import { nf, pad } from "@/lib/data";
+import { nf, pad } from "@/lib/format";
 
 export type CategoryRow = { key: CategoryKey; winner: Entry; total: number };
 
-/** Danh sách hạng mục; rê chuột vào một dòng thì bìa/logo quán quân bám theo con trỏ. */
+/** Category list. Hovering a row makes the winner's cover or logo follow the cursor. */
 export default function Categories({ rows }: { rows: CategoryRow[] }) {
   const [hover, setHover] = useState<number | null>(null);
   const mx = useMotionValue(0);
@@ -72,7 +72,6 @@ export default function Categories({ rows }: { rows: CategoryRow[] }) {
         })}
       </ul>
 
-      {/* ảnh bám theo con trỏ */}
       <motion.div
         className="pointer-events-none fixed left-0 top-0 z-30 hidden md:block"
         style={{ x, y }}

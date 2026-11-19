@@ -1,9 +1,9 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 
 const FALLBACKS = ["#b8432b", "#1f4b5c", "#6b5a2e", "#4a2f4f", "#2f4a36", "#7a3b1f"];
 const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
 
-/** Bìa: ảnh thật, hoặc bìa chữ tự dàn khi không có ảnh. */
+/** Cover: the real image, or a typeset fallback when there is none. */
 export function Cover({
   name,
   cover,
@@ -49,13 +49,12 @@ export function Cover({
   );
 }
 
-/** Cuốn sách 3D dựng bằng CSS: bìa, gáy, ruột giấy. Tự nghiêng khi rê chuột. */
+/** CSS 3D book: cover, spine and page block. Straightens on hover. */
 export default function Book({
   name,
   cover,
   color,
   sub,
-  obi,
   depth = 26,
   eager,
   className = "",
@@ -65,7 +64,6 @@ export default function Book({
   cover?: string | null;
   color?: string | null;
   sub?: string;
-  obi?: ReactNode;
   depth?: number;
   eager?: boolean;
   className?: string;
@@ -89,19 +87,8 @@ export default function Book({
         <div className="top" />
         <div className="face">
           <Cover name={name} cover={cover} color={color} sub={sub} eager={eager} />
-          {obi}
         </div>
       </div>
-    </div>
-  );
-}
-
-/** Obi: dải giấy đỏ quấn quanh sách đoạt giải. */
-export function Obi({ rank, line }: { rank: number; line: string }) {
-  return (
-    <div className="obi @container">
-      <span className="font-jp text-[5.2cqw] leading-none opacity-90">第{rank}位</span>
-      <span className="display mt-[2%] text-[8.4cqw] leading-none">{line}</span>
     </div>
   );
 }

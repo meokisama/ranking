@@ -7,7 +7,7 @@ import { intro } from "@/lib/intro";
 const MIN_MS = 1500;
 const MAX_MS = 6000;
 
-/** Màn chờ: đếm tới 100 trong lúc cảnh 3D nạp bìa sách, rồi kéo màn lên. */
+/** Loading screen: counts to 100 while the 3D scene loads the covers, then lifts the curtain. */
 export default function Preloader({ period }: { period: string }) {
   const [n, setN] = useState(0);
   const [done, setDone] = useState(false);
@@ -23,7 +23,7 @@ export default function Preloader({ period }: { period: string }) {
     let raf = 0;
     const tick = (now: number) => {
       const elapsed = now - start;
-      // Chạy tới 90 theo thời gian, 10 cuối chờ cảnh sẵn sàng.
+      // Time drives the count to 90; the last 10 wait for the scene to be ready.
       const timed = Math.min(1, elapsed / MIN_MS);
       const ready = intro.ready || elapsed > MAX_MS || reduce;
       const target = ready ? timed * 100 : Math.min(90, timed * 90);

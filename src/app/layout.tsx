@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Fraunces, JetBrains_Mono, Phudu, Shippori_Mincho } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/config";
-import SmoothScroll from "@/components/ui/SmoothScroll";
-import Nav from "@/components/ui/Nav";
+import SmoothScroll from "@/components/ui/smooth-scroll";
+import Nav from "@/components/ui/nav";
 
 const phudu = Phudu({ subsets: ["latin", "vietnamese"], variable: "--font-phudu", display: "swap" });
 const bevn = Be_Vietnam_Pro({

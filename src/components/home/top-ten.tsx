@@ -2,16 +2,16 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import Book from "@/components/ui/Book";
-import Eclipse from "@/components/ui/Eclipse";
+import Book from "@/components/ui/book";
+import Eclipse from "@/components/ui/eclipse";
 import type { Entry } from "@/lib/data";
-import { nf, pad } from "@/lib/data";
+import { nf, pad, percent } from "@/lib/format";
 
 /**
- * Top 10 dạng "kệ sách" cuộn ngang: cuộn dọc trang sẽ kéo cả dải sang trái.
- * Trên màn hình cảm ứng hẹp thì dùng cuộn ngang gốc của trình duyệt.
+ * Top 10 as a horizontal shelf: scrolling the page vertically drags the strip to the left.
+ * Narrow touch screens fall back to native horizontal scrolling.
  */
-export default function Top10({
+export default function TopTen({
   items,
   votes,
   total,
@@ -57,7 +57,6 @@ export default function Top10({
           style={pinned ? { x } : undefined}
           className="flex w-max items-stretch gap-[6vw] px-5 md:gap-[5vw] md:px-16"
         >
-          {/* tấm mở đầu */}
           <div className="flex w-[78vw] shrink-0 flex-col justify-between md:w-[36vw]">
             <div>
               <span className="label text-shu">Hạng mục 01 · {period}</span>
@@ -103,7 +102,7 @@ export default function Top10({
                   <span className="label text-right text-paper/50">
                     phiếu
                     <br />
-                    {((it.count / votes) * 100).toFixed(1).replace(".", ",")}% người bình chọn
+                    {percent(it.count, votes)} người bình chọn
                   </span>
                 </div>
                 <div className="mt-3 h-[3px] bg-paper/10">
@@ -119,7 +118,6 @@ export default function Top10({
             </article>
           ))}
 
-          {/* tấm kết */}
           <div className="flex w-[78vw] shrink-0 flex-col justify-center md:w-[34vw]">
             <span className="label text-paper/50">Còn {total - items.length} tác phẩm nữa</span>
             <Link href="/leaderboard" className="group mt-5 block">

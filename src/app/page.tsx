@@ -1,20 +1,25 @@
-import Hero from "@/components/home/Hero";
-import Preloader from "@/components/home/Preloader";
-import Top10 from "@/components/home/Top10";
-import Categories from "@/components/home/Categories";
-import type { CategoryRow } from "@/components/home/Categories";
-import { Manifesto, ObiBand, Partners, Timeline, Voices } from "@/components/home/Sections";
-import Footer from "@/components/ui/Footer";
+import Hero from "@/components/home/hero/hero";
+import Preloader from "@/components/home/preloader";
+import TopTen from "@/components/home/top-ten";
+import Categories from "@/components/home/categories";
+import type { CategoryRow } from "@/components/home/categories";
+import Manifesto from "@/components/home/manifesto";
+import ObiBand from "@/components/home/obi-band";
+import Partners from "@/components/home/partners";
+import Timeline from "@/components/home/timeline";
+import Voices from "@/components/home/voices";
+import Footer from "@/components/ui/footer";
 import { SITE } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
-import { currentPeriod, nf } from "@/lib/data";
+import { currentPeriod } from "@/lib/data";
+import { nf } from "@/lib/format";
 
 export default function Home() {
   const p = currentPeriod;
   const ranobe = p.categories.ranobe!;
   const top10 = ranobe.slice(0, 10);
 
-  // Sách bay ở hero: 34 tác phẩm đứng đầu có ảnh bìa.
+  // Books orbiting in the hero: the top 34 titles that have a cover.
   const heroBooks = ranobe
     .filter((b) => b.cover)
     .slice(0, 34)
@@ -49,7 +54,7 @@ export default function Home() {
           { value: SITE.since, label: "Năm khởi đầu", plain: true },
         ]}
       />
-      <Top10 items={top10} votes={p.votes} total={ranobe.length} period={p.label} />
+      <TopTen items={top10} votes={p.votes} total={ranobe.length} period={p.label} />
       <Categories rows={rows} />
       <Timeline period={p.label} />
       <Voices />

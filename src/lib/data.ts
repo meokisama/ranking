@@ -28,6 +28,3 @@ export const periods = periodsJson as unknown as Period[];
 
 export const getPeriod = (slug: string) => periods.find((p) => p.slug === slug);
 export const currentPeriod = getPeriod(CURRENT_PERIOD)!;
-
-export const nf = new Intl.NumberFormat("vi-VN");
-export const pad = (n: number) => String(n).padStart(2, "0");

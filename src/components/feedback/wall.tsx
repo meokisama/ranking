@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { nf } from "@/lib/data";
+import { fold, nf } from "@/lib/format";
+import { EASE } from "@/lib/motion";
 
 export type Note = {
   period: string;
@@ -13,13 +14,6 @@ export type Note = {
 };
 
 const PAGE = 36;
-const EASE = [0.16, 1, 0.3, 1] as const;
-const fold = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/đ/g, "d");
 const date = (iso: string) =>
   new Date(iso).toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Asia/Ho_Chi_Minh" });
 

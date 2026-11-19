@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 
 /**
- * Vầng nhật thực đỏ son, mô-típ của hero, dựng lại bằng CSS thuần để đặt sau các điểm nhấn khác của trang.
- * Khung vuông: đĩa tối chiếm nửa bề ngang, phần còn lại là quầng sáng và hạt tram.
+ * Vermilion eclipse, the hero's motif, rebuilt in plain CSS to sit behind other highlights.
+ * Square frame: the dark disc spans half the width, the rest is corona and halftone.
  */
 export default function Eclipse({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (

@@ -4,11 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import { intro } from "@/lib/intro";
-import type { HeroBook } from "./HeroScene";
+import { EASE } from "@/lib/motion";
+import type { HeroBook } from "./shared";
 
-const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+const HeroScene = dynamic(() => import("./scene"), { ssr: false });
 
 export default function Hero({
   books,
@@ -50,15 +49,15 @@ export default function Hero({
           <HeroScene books={books} active={active} />
         </div>
 
-        {/* h1 thật cho trình đọc màn hình & SEO; bản hiển thị nằm trong cảnh 3D */}
+        {/* The real h1 for screen readers and SEO; the visible title lives in the 3D scene. */}
         <h1 className="sr-only">Bảng Xếp Hạng Light Novel Việt Nam</h1>
 
-        {/* viền tối để chữ ở mép luôn đọc được */}
+        {/* dark edges keep text near the borders readable */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_0%_100%,rgb(12_11_10/0.95)_25%,transparent_100%),radial-gradient(ellipse_50%_45%_at_100%_100%,rgb(12_11_10/0.95)_25%,transparent_100%),radial-gradient(ellipse_at_center,transparent_55%,rgb(12_11_10/0.7)_100%)]" />
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink via-ink/70 to-transparent md:hidden" />
 
-        {/* dấu xén giấy ở 4 góc */}
+        {/* crop marks in the four corners */}
         <div className="pointer-events-none absolute inset-4 md:inset-7" aria-hidden>
           {["left-0 top-0 border-l border-t", "right-0 top-0 border-r border-t", "left-0 bottom-0 border-l border-b", "right-0 bottom-0 border-r border-b"].map(
             (c) => (

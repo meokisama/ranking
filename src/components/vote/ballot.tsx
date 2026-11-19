@@ -1,133 +1,25 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { Cover } from "@/components/ui/Book";
-import { CATEGORIES, VOTING, votingState } from "@/lib/config";
-import type { CategoryKey, VotingState } from "@/lib/config";
-import { pad } from "@/lib/data";
+import { Cover } from "@/components/ui/book";
+import { CATEGORIES, VOTING } from "@/lib/config";
+import { fold, pad } from "@/lib/format";
+import { EASE } from "@/lib/motion";
+import Field from "./field";
+import type { Extra, Picks, VoteStep } from "./types";
 
-type Item = { id: number; name: string; publisher?: string; cover?: string | null; color?: string | null; logo?: string };
-export type VoteStep = { key: CategoryKey; items: Item[] };
-type Picks = Partial<Record<CategoryKey, number[]>>;
-type Extra = { topic: string; content: string; title: string; publisher: string; gender: string; age: string };
-
-const EASE = [0.16, 1, 0.3, 1] as const;
 const ENDPOINT = process.env.NEXT_PUBLIC_SEND_VOTE;
 const SITEKEY = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY;
 const DRAFT_KEY = `${VOTING.storageKey}:draft`;
 const EMPTY: Extra = { topic: "", content: "", title: "", publisher: "", gender: "", age: "" };
-
-const fold = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/đ/g, "d");
-const when = (iso: string) =>
-  new Date(iso).toLocaleString("vi-VN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "Asia/Ho_Chi_Minh",
-  });
 
 const ERRORS: Record<string, string> = {
   rateLimit: "Bạn đã bình chọn trước đó. Mỗi địa chỉ IP chỉ có một lá phiếu.",
   invalidCaptcha: "Captcha không hợp lệ. Hãy xác minh lại, hoặc tải lại trang nếu cần.",
 };
 
-export default function VoteFlow({ steps, periodLabel }: { steps: VoteStep[]; periodLabel: string }) {
-  const [state, setState] = useState<VotingState | null>(null);
-  const [preview, setPreview] = useState(false);
-  const [voted, setVoted] = useState(false);
-
-  useEffect(() => {
-    setState(votingState());
-    setPreview(new URLSearchParams(window.location.search).has("preview"));
-    setVoted(localStorage.getItem(VOTING.storageKey) === "done");
-  }, []);
-
-  if (state === null) return <main className="min-h-svh bg-ink" />;
-  if (voted) return <Gate tone="done" periodLabel={periodLabel} />;
-  if (state !== "open" && !preview) return <Gate tone={state} periodLabel={periodLabel} />;
-  return <Ballot steps={steps} periodLabel={periodLabel} preview={state !== "open"} onDone={() => setVoted(true)} />;
-}
-
-/* ───────── Màn cổng: chưa mở / đã đóng / đã bỏ phiếu ───────── */
-
-function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed" | "done"; periodLabel: string }) {
-  const copy = {
-    upcoming: {
-      jp: "準備中",
-      kicker: "Sắp mở cổng",
-      title: ["Cổng bình chọn", "chưa mở"],
-      body: `Bình chọn ${periodLabel} sẽ mở lúc ${when(VOTING.start)}. Hẹn gặp bạn khi đó.`,
-    },
-    closed: {
-      jp: "投票終了",
-      kicker: "Đã khoá hòm phiếu",
-      title: ["Cổng bình chọn", "đã đóng"],
-      body: `Bình chọn ${periodLabel} đã kết thúc lúc ${when(VOTING.end)}. Kết quả đã được công bố, hẹn gặp lại bạn ở kỳ tiếp theo.`,
-    },
-    done: {
-      jp: "ありがとう",
-      kicker: "Đã ghi nhận lá phiếu",
-      title: ["Cảm ơn bạn", "đã bình chọn"],
-      body: "Lá phiếu của bạn đã nằm trong hòm. Kết quả sẽ được công bố sau khi ban tổ chức kiểm phiếu xong.",
-    },
-  }[tone];
-
-  return (
-    <main className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-ink px-5 pb-14 pt-32 text-paper md:px-16 md:pb-20">
-      <div className="pointer-events-none absolute -right-[10vw] -top-[10vw] size-[60vw] rounded-full text-shu/35 tone-lg" aria-hidden />
-      <motion.div
-        className="tategaki pointer-events-none absolute right-6 top-32 text-[9vw] leading-none text-shu md:right-16 md:text-[6.5vw]"
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4, ease: EASE }}
-        aria-hidden
-      >
-        {copy.jp}
-      </motion.div>
-
-      <span className="label relative text-shu">
-        {copy.kicker} · {periodLabel}
-      </span>
-      <h1 className="display relative mt-5 text-[14vw] leading-[0.92] md:text-[10vw]">
-        {copy.title.map((l, i) => (
-          <span key={l} className="block overflow-hidden pt-[0.14em]">
-            <motion.span
-              className={`block ${i === 1 ? "outline-text" : ""}`}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1.2, delay: 0.1 + i * 0.1, ease: EASE }}
-            >
-              {l}
-            </motion.span>
-          </span>
-        ))}
-      </h1>
-      <p className="relative mt-8 max-w-[44ch] text-[15px] leading-relaxed text-paper/70">{copy.body}</p>
-      <div className="relative mt-10 flex flex-wrap items-center gap-6">
-        <Link href="/leaderboard" className="group relative inline-flex h-14 items-center gap-4 overflow-hidden bg-paper px-6 text-ink">
-          <span className="absolute inset-0 origin-bottom scale-y-0 bg-shu transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
-          <span className="label relative transition-colors duration-300 group-hover:text-paper">Xem bảng tổng sắp →</span>
-        </Link>
-        <Link href="/feedback" className="label link-underline pb-1">
-          Đọc góp ý của độc giả
-        </Link>
-      </div>
-    </main>
-  );
-}
-
-/* ───────── Lá phiếu ───────── */
-
-function Ballot({
+export default function Ballot({
   steps,
   periodLabel,
   preview,
@@ -138,7 +30,7 @@ function Ballot({
   preview: boolean;
   onDone: () => void;
 }) {
-  const total = steps.length + 2; // + góp ý + gửi phiếu
+  const total = steps.length + 2; // + feedback + submit
   const [step, setStep] = useState(0);
   const [picks, setPicks] = useState<Picks>({});
   const [extra, setExtra] = useState<Extra>(EMPTY);
@@ -149,7 +41,7 @@ function Ballot({
   const [sending, setSending] = useState(false);
   const loaded = useRef(false);
 
-  // Khôi phục / lưu bản nháp để lỡ tải lại trang không mất lựa chọn.
+  // Restore and save a draft so a reload does not lose the selection.
   useEffect(() => {
     try {
       const d = JSON.parse(localStorage.getItem(DRAFT_KEY) ?? "null");
@@ -248,7 +140,6 @@ function Ballot({
           {preview && <span className="label bg-ink px-2 py-1 text-paper">Chế độ xem thử · không gửi phiếu</span>}
         </div>
 
-        {/* thanh bước */}
         <ol className="mt-6 flex gap-1 overflow-x-auto" aria-label="Các bước">
           {stepLabels.map((l, i) => {
             const count = steps[i] ? (picks[steps[i].key]?.length ?? 0) : null;
@@ -476,7 +367,6 @@ function Ballot({
         </motion.section>
       </AnimatePresence>
 
-      {/* thanh điều hướng đáy */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-paper/15 bg-ink text-paper">
         <div className="flex items-center justify-between gap-4 px-5 py-3 md:px-16 md:py-4">
           <button onClick={() => go(step - 1)} disabled={step === 0} className="label py-2 disabled:opacity-30">
@@ -495,7 +385,6 @@ function Ballot({
         </div>
       </div>
 
-      {/* thông báo */}
       <AnimatePresence>
         {notice && (
           <motion.div
@@ -512,37 +401,5 @@ function Ballot({
         )}
       </AnimatePresence>
     </main>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  max,
-  area,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  max: number;
-  area?: boolean;
-}) {
-  const cls =
-    "mt-2 w-full border-b border-ink bg-transparent pb-2 font-serif text-xl outline-none transition-colors focus:border-shu";
-  return (
-    <label className="block">
-      <span className="label flex justify-between text-ink/55">
-        {label}
-        <span>
-          {value.length}/{max}
-        </span>
-      </span>
-      {area ? (
-        <textarea rows={5} maxLength={max} value={value} onChange={(e) => onChange(e.target.value)} className={`${cls} resize-y`} />
-      ) : (
-        <input maxLength={max} value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
   );
 }

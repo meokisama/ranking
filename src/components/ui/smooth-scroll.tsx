@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 import { ReactLenis, useLenis } from "lenis/react";
 
 /**
- * Đưa trang về đầu mỗi khi chuyển route.
- * Lenis giữ vị trí cuộn riêng của nó: nếu Next đưa trang về đầu trong lúc Lenis còn đang trượt,
- * khung hình kế tiếp Lenis sẽ kéo trang ngược về chỗ cũ. Vì vậy phải bảo chính Lenis nhảy về 0.
- * Riêng nút lùi/tiến của trình duyệt thì để nguyên cho trình duyệt khôi phục vị trí cũ.
+ * Returns to the top on every route change.
+ * Lenis keeps its own scroll position: if Next resets the page while Lenis is still gliding,
+ * the next frame Lenis drags it back. So Lenis itself has to be told to jump to 0.
+ * Browser back/forward is left alone so the previous position is restored.
  */
 function ScrollReset() {
   const pathname = usePathname();

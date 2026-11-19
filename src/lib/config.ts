@@ -6,14 +6,14 @@ export const SITE = {
   since: 2018,
 };
 
-/** Kỳ đang hiển thị mặc định (khớp slug trong src/data/periods.json). */
+/** Period shown by default (matches a slug in src/data/periods.json). */
 export const CURRENT_PERIOD = "2-2024";
 
-/** Thời gian mở bình chọn (giờ Việt Nam). Đổi 2 mốc này cho mỗi kỳ. */
+/** Voting window (Vietnam time). Change both for each period. */
 export const VOTING = {
   start: "2024-12-14T20:00:00+07:00",
   end: "2024-12-24T23:30:00+07:00",
-  /** Khoá localStorage đánh dấu đã bình chọn, đổi cho mỗi kỳ. */
+  /** localStorage key marking that the visitor has voted; change it for each period. */
   storageKey: "bxhlnvn:2-2024",
 };
 

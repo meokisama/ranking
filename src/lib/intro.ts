@@ -1,4 +1,4 @@
-// Cầu nối nhỏ giữa màn chờ và cảnh 3D: cảnh báo "đã sẵn sàng", màn chờ báo "đã mở màn".
+// Small bridge between the preloader and the 3D scene: the scene reports "ready", the preloader reports "revealed".
 type Listener = () => void;
 const state = { ready: false, revealed: false };
 const listeners = new Set<Listener>();

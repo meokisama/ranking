@@ -1,11 +1,10 @@
 import * as THREE from "three";
+import { rng } from "./shared";
 
 /**
- * Các texture vẽ bằng canvas để cuốn sách 3D trông như sách thật:
- * gáy có tựa in dọc, bìa sau có mã vạch, ruột giấy có vân từng tờ.
+ * Canvas-drawn textures that make the 3D books read as real ones:
+ * a vertical title on the spine, a barcode on the back, individual sheets on the page edges.
  */
-
-const PAPER = "#f1e8d3";
 
 const canvas = (w: number, h: number) => {
   const c = document.createElement("canvas");
@@ -21,17 +20,12 @@ const toTexture = (c: HTMLCanvasElement, aniso: number) => {
   return t;
 };
 
-function rng(seed: number) {
-  let s = seed;
-  return () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
-}
-
 const luminance = (hex: string) => {
   const n = parseInt(hex.slice(1), 16);
   return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
 };
 
-/** Làm dịu màu nhấn của bìa để dùng cho gáy và bìa sau. */
+/** Mutes the cover's accent color for use on the spine and back cover. */
 function shade(hex: string, amount: number) {
   const c = new THREE.Color(hex);
   const hsl = { h: 0, s: 0, l: 0 };
@@ -45,13 +39,13 @@ const cssFont = (name: string, fallback: string) => {
   return v || fallback;
 };
 
-/** Vân mép giấy. `along` = hướng các tờ giấy xếp chồng trên texture. */
+/** Page-edge grain. `along` is the axis the sheets stack along on the texture. */
 export function pageEdgeTexture(along: "u" | "v", aniso: number) {
   const N = 128;
   const [c, ctx] = along === "u" ? canvas(N, 8) : canvas(8, N);
   const rand = rng(along === "u" ? 11 : 23);
   for (let i = 0; i < N; i++) {
-    // mỗi "tờ" lệch sáng tối một chút, hai mép sát bìa tối hơn (bóng đổ của bìa)
+    // each sheet varies slightly in brightness; the edges next to the covers are darker (cover shadow)
     const edge = Math.min(i, N - 1 - i) / N;
     const ao = Math.min(1, 0.72 + edge * 5);
     const v = (0.86 + rand() * 0.14) * ao;
@@ -64,7 +58,7 @@ export function pageEdgeTexture(along: "u" | "v", aniso: number) {
   return t;
 }
 
-/** Gáy sách: tựa in dọc, nhãn nhà phát hành ở chân gáy. */
+/** Spine: vertical title, publisher label at the foot. */
 export function spineTexture(name: string, publisher: string, color: string, aniso: number) {
   const W = 112;
   const H = 1000;
@@ -76,11 +70,11 @@ export function spineTexture(name: string, publisher: string, color: string, ani
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
-  // dải màu ở đầu gáy
+  // color band at the head of the spine
   ctx.fillStyle = light ? shade(color, -0.1) : shade(color, 0.16);
   ctx.fillRect(0, 0, W, 46);
 
-  // tựa sách xoay dọc, đọc từ trên xuống
+  // title rotated to read top to bottom
   const display = cssFont("--font-phudu", "sans-serif");
   const text = name.toUpperCase();
   const room = H - 46 - 190;
@@ -101,7 +95,7 @@ export function spineTexture(name: string, publisher: string, color: string, ani
   ctx.fillText(shown, 0, 4);
   ctx.restore();
 
-  // nhãn nhà phát hành ở chân gáy
+  // publisher label at the foot
   ctx.fillStyle = fg;
   ctx.globalAlpha = 0.9;
   ctx.fillRect(18, H - 132, W - 36, 3);
@@ -112,7 +106,7 @@ export function spineTexture(name: string, publisher: string, color: string, ani
   const words = publisher.toUpperCase().split(/\s+/).slice(0, 3);
   words.forEach((w, i) => ctx.fillText(w.slice(0, 7), W / 2, H - 96 + i * 24));
 
-  // bóng nhẹ ở hai mép gáy cho cảm giác bo cong
+  // soft shading on both edges to suggest a rounded spine
   const g = ctx.createLinearGradient(0, 0, W, 0);
   g.addColorStop(0, "rgba(0,0,0,0.28)");
   g.addColorStop(0.18, "rgba(0,0,0,0)");
@@ -124,12 +118,12 @@ export function spineTexture(name: string, publisher: string, color: string, ani
   return toTexture(c, aniso);
 }
 
-/** Bìa sau: nền màu, ảnh bìa mờ làm hoạ tiết, khối chữ giới thiệu, mã vạch. */
+/** Back cover: solid color, the faded cover as a pattern, a blurb block and a barcode. */
 export function backTexture(image: CanvasImageSource | null, color: string, seed: number, aniso: number) {
   const W = 320;
   const H = 454;
   const [c, ctx] = canvas(W, H);
-  // nhiều bìa sau ngoài đời là nền trắng: cho xen kẽ để vòng sách không bị một màu
+  // many real back covers are white: alternate so the ring is not one flat color
   const light = luminance(color) > 0.62 || seed % 2 === 0;
   const bg = light ? "#efe9dc" : shade(color, -0.1);
   const fg = light ? "rgba(30,26,22,0.5)" : "rgba(255,250,240,0.6)";
@@ -148,14 +142,14 @@ export function backTexture(image: CanvasImageSource | null, color: string, seed
     ctx.restore();
   }
 
-  // khối chữ giới thiệu
+  // blurb block
   ctx.fillStyle = fg;
   for (let i = 0; i < 9; i++) {
     const last = i === 8;
     ctx.fillRect(34, 70 + i * 15, last ? 90 + rand() * 80 : W - 68 - rand() * 26, 4);
   }
 
-  // mã vạch
+  // barcode
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(W - 138, H - 102, 104, 68);
   ctx.fillStyle = "#111111";
@@ -167,12 +161,12 @@ export function backTexture(image: CanvasImageSource | null, color: string, seed
   }
   ctx.fillRect(W - 130, H - 46, 60, 3);
 
-  // giá bìa
+  // price
   ctx.fillStyle = fg;
   ctx.fillRect(34, H - 52, 54, 4);
   ctx.fillRect(34, H - 42, 34, 4);
 
-  // nếp gấp sát gáy (ở bìa sau, gáy nằm bên phải khi nhìn từ sau)
+  // crease next to the spine (seen from behind, the spine is on the right)
   const g = ctx.createLinearGradient(W - 16, 0, W, 0);
   g.addColorStop(0, "rgba(0,0,0,0)");
   g.addColorStop(0.55, "rgba(255,255,255,0.1)");
@@ -183,7 +177,7 @@ export function backTexture(image: CanvasImageSource | null, color: string, seed
   return toTexture(c, aniso);
 }
 
-/** Vẽ lại ảnh bìa trước kèm nếp gấp sát gáy, cho bìa có "bản lề" như sách thật. */
+/** Redraws the front cover with a crease next to the spine, giving it a hinge like a real book. */
 export function frontTexture(image: CanvasImageSource, aniso: number) {
   const W = 400;
   const H = 568;
@@ -198,5 +192,3 @@ export function frontTexture(image: CanvasImageSource, aniso: number) {
   ctx.fillRect(0, 0, 22, H);
   return toTexture(c, aniso);
 }
-
-export { PAPER };

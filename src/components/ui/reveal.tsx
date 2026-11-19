@@ -3,10 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { animate, motion, useInView, useScroll, useTransform } from "motion/react";
 import type { MotionValue } from "motion/react";
+import { EASE } from "@/lib/motion";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-/** Hiện dần + trượt lên khi vào khung nhìn. */
+/** Fades in and slides up when entering the viewport. */
 export function FadeUp({
   children,
   delay = 0,
@@ -29,9 +28,9 @@ export function FadeUp({
   );
 }
 
-/** Tiêu đề lớn: từng dòng trồi lên từ sau mặt nạ. */
+/** Large heading: each line rises from behind a mask. */
 export function LineRise({ lines, className = "" }: { lines: ReactNode[]; className?: string }) {
-  // Quan sát phần tử bọc ngoài: dòng chữ bên trong bị mặt nạ che nên không tự "thấy" được.
+  // Observe the wrapper: the masked line inside is clipped, so it never counts as in view itself.
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
   return (
@@ -57,7 +56,7 @@ function Word({ children, range, progress }: { children: string; range: [number,
   return <motion.span style={{ opacity }}>{children} </motion.span>;
 }
 
-/** Đoạn văn sáng dần từng chữ theo tiến độ cuộn. */
+/** Paragraph that lights up word by word with scroll progress. */
 export function ScrollWords({ text, className }: { text: string; className?: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
@@ -73,7 +72,7 @@ export function ScrollWords({ text, className }: { text: string; className?: str
   );
 }
 
-/** Số đếm lên khi vào khung nhìn. */
+/** Number that counts up when entering the viewport. */
 export function CountUp({ to, className }: { to: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });

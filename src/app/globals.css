@@ -70,7 +70,7 @@ html.lenis body {
 }
 
 @layer components {
-  /* Chữ hiển thị: Phudu, viết hoa, dấu tiếng Việt cần line-height thoáng */
+  /* Display type: Phudu, uppercase. Vietnamese diacritics need a generous line-height. */
   .display {
     font-family: var(--font-display);
     font-weight: 900;
@@ -78,7 +78,7 @@ html.lenis body {
     line-height: 1.02;
     letter-spacing: -0.01em;
   }
-  /* Fraunces theo kiểu của portfolio: nét mảnh, bo mềm (SOFT), chữ nghiêng bật WONK */
+  /* Fraunces: light weight with soft terminals (SOFT); italics switch on WONK. */
   .font-serif {
     font-variation-settings: "SOFT" 60, "WONK" 0;
     font-optical-sizing: auto;
@@ -114,7 +114,7 @@ html.lenis body {
     letter-spacing: 0.3em;
   }
 
-  /* Nền chấm screentone kiểu manga */
+  /* Manga screentone dots */
   .tone {
     background-image: radial-gradient(currentColor 1px, transparent 1.4px);
     background-size: 7px 7px;
@@ -124,7 +124,7 @@ html.lenis body {
     background-size: 12px 12px;
   }
 
-  /* Hạt giấy phủ toàn trang */
+  /* Paper grain over the whole page */
   .grain {
     position: fixed;
     inset: -50%;
@@ -144,12 +144,12 @@ html.lenis body {
     100% { transform: translate(0, 0); }
   }
 
-  /* ───── Cuốn sách 3D bằng CSS ───── */
+  /* CSS 3D book */
   .book-stage {
     position: relative;
     perspective: 1400px;
   }
-  /* bóng tiếp đất dưới chân sách */
+  /* contact shadow under the book */
   .book-stage::after {
     content: "";
     position: absolute;
@@ -162,7 +162,7 @@ html.lenis body {
     z-index: -1;
   }
   .book {
-    --d: 26px; /* độ dày gáy */
+    --d: 26px; /* spine thickness */
     --ry: -26deg;
     --rx: -8deg;
     position: relative;
@@ -185,7 +185,7 @@ html.lenis body {
     background: var(--book-color, var(--color-ink-3));
   }
   .book > .face::after {
-    /* ánh sáng lướt + nếp gấp bìa */
+    /* light sweep + cover crease */
     content: "";
     position: absolute;
     inset: 0;
@@ -207,13 +207,13 @@ html.lenis body {
     left: 0;
     width: var(--d);
     transform: translateX(-50%) rotateY(-90deg);
-    /* gáy lấy màu từ mép trái của chính ảnh bìa, như bìa in liền một tờ quấn qua gáy */
+    /* the spine samples the left edge of the cover image, like a jacket printed as one sheet */
     background:
       linear-gradient(90deg, rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.08) 45%, rgb(255 255 255 / 0.1) 60%, rgb(0 0 0 / 0.35)),
       var(--cover, none) left center / 3000% 100% no-repeat,
       var(--book-color, var(--color-ink-3));
   }
-  /* mặt trên của ruột giấy */
+  /* top of the page block */
   .book > .top {
     position: absolute;
     left: 2px;
@@ -245,22 +245,6 @@ html.lenis body {
     box-shadow: 0 30px 60px -10px rgb(0 0 0 / 0.55), 0 12px 24px -8px rgb(0 0 0 / 0.5);
   }
 
-  /* Obi: dải giấy quấn quanh sách */
-  .obi {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 24%;
-    background: var(--color-shu);
-    color: var(--color-paper);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 9%;
-    box-shadow: 0 -1px 0 rgb(0 0 0 / 0.25);
-  }
-
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;
@@ -280,7 +264,7 @@ html.lenis body {
   }
 }
 
-/* ───── Nhật thực (bản CSS của vầng sáng trong hero) ───── */
+/* Eclipse: CSS counterpart of the hero's WebGL corona */
 .eclipse {
   position: absolute;
   aspect-ratio: 1;
@@ -291,7 +275,7 @@ html.lenis body {
   inset: 0;
   border-radius: 50%;
 }
-/* quầng sáng: gắt ở mép đĩa, loãng dần; sáng lệch về phía trên bên trái */
+/* corona: sharp at the disc edge, fading outward, brighter toward the top left */
 .eclipse-halo {
   background: radial-gradient(
     circle closest-side,
@@ -305,7 +289,7 @@ html.lenis body {
   mask-image: linear-gradient(135deg, #000 25%, rgb(0 0 0 / 0.38) 85%);
   animation: eclipse-breathe 7s ease-in-out infinite;
 }
-/* hạt tram tan ra ngoài */
+/* halftone dots dissolving outward */
 .eclipse-tone {
   color: var(--color-shu);
   opacity: 0.75;
@@ -328,7 +312,7 @@ html.lenis body {
   }
 }
 
-/* Khói mực + hạt tram rất nhạt cho các vùng nền tối, cùng ngôn ngữ với hero */
+/* Faint ink haze + halftone for dark sections, matching the hero */
 .haze {
   isolation: isolate;
 }

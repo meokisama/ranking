@@ -1,52 +1,61 @@
-# Bảng Xếp Hạng Light Novel Việt Nam
+<p align="center">
+  <a href="https://bxh.lightnovel.vn">
+    <img src=".github/assets/banner.svg" alt="Bảng Xếp Hạng Light Novel Việt Nam" width="100%" />
+  </a>
+</p>
 
-Trang kết quả và bình chọn của [bxh.lightnovel.vn](https://bxh.lightnovel.vn), bản dựng lại từ đầu (v2).
+<p align="center">
+  <em>Nơi sức sáng tạo của tác giả gặp gỡ đam mê của độc giả.</em>
+</p>
 
-Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · three.js / React Three Fiber · Motion · Lenis.
+<p align="center">
+  <a href="https://bxh.lightnovel.vn"><strong>bxh.lightnovel.vn</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://bxh.lightnovel.vn/leaderboard">Bảng tổng sắp</a>
+  &nbsp;·&nbsp;
+  <a href="https://bxh.lightnovel.vn/feedback">Góp ý của độc giả</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.facebook.com/vnlnr">Facebook</a>
+</p>
 
-## Chạy
+<br />
 
-```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # toàn bộ trang được xuất tĩnh
-```
+## Về bảng xếp hạng
 
-## Cấu trúc
+**Bảng Xếp Hạng Light Novel Việt Nam** là cuộc bình chọn do chính độc giả Việt Nam cầm phiếu. Mỗi kỳ, cộng đồng cùng gọi tên những tác phẩm và nhà phát hành được yêu thích nhất.
 
-| Đường dẫn | Nội dung |
-| --- | --- |
-| `/` | Trang chủ: hero 3D, lời ngỏ, Top 10, hạng mục, hành trình, tiếng nói, đối tác |
-| `/leaderboard`, `/leaderboard/1-2024` | Bảng tổng sắp từng kỳ, `?cat=` chọn hạng mục |
-| `/feedback` | Tường góp ý của độc giả |
-| `/vote` | Lá phiếu (tự khoá ngoài thời gian bình chọn; thêm `?preview` để xem thử) |
+Không chỉ là một cuộc bình chọn, đây là nơi những người yêu Light Novel hội tụ: để giao lưu, chia sẻ và cùng nhìn lại thị trường qua từng kỳ. Ban tổ chức khởi động hành trình này từ năm 2018, với mong muốn xây dựng một bảng xếp hạng công bằng, nơi mọi tác phẩm và mọi góp ý của độc giả đều được lắng nghe.
 
-- `src/lib/config.ts`: kỳ hiện tại, thời gian mở/đóng bình chọn, định nghĩa hạng mục.
-- `src/lib/content.ts`: nội dung chữ: lời ngỏ, dòng thời gian, trích dẫn, đối tác.
-- `src/data/*.json`: dữ liệu đã chuẩn hoá, **được sinh ra**, không sửa tay.
-- `data/raw/`: dữ liệu gốc từ back-end (đã bỏ IP ở phần góp ý).
-- `public/covers/`: ảnh bìa đã tải về và nén (400×568 webp).
+<br />
 
-## Cập nhật dữ liệu / mở kỳ mới
+<p align="center">
+  <img src=".github/assets/stats.svg" alt="Kỳ II 2024: 3.018 lượt bình chọn hợp lệ, 219 tác phẩm được gọi tên, 17 nhà phát hành, khởi đầu từ năm 2018" width="100%" />
+</p>
 
-1. Đặt file kết quả mới vào `data/raw/`, khai báo kỳ trong `scripts/build-data.mjs`.
-2. `npm run data`: tải bìa còn thiếu, tính màu nhấn, ghi lại `src/data`.
-3. Sửa `CURRENT_PERIOD` và `VOTING` trong `src/lib/config.ts`.
-4. Khi mở bình chọn: sao chép `.env.example` thành `.env.local` và điền endpoint + hCaptcha site key.
+<br />
 
-Phiếu được gửi dạng `POST` JSON:
+## Bốn hạng mục
 
-```json
-{
-  "favoriteRanobe": [1, 2], "favoriteOneshot": [3], "favoritePublisher": [4], "favoriteRookie": [5],
-  "feedback": { "topic": "", "content": "", "title": "", "publisher": "" },
-  "userInfo": { "gender": "male", "age": 20 },
-  "token": "<hcaptcha>"
-}
-```
+| | Hạng mục | Quán quân kỳ II · 2024 |
+| :-: | --- | --- |
+| **01** | **Light Novel được yêu thích nhất**<br /><sub>Ngôi đền văn học, nơi những xúc cảm tuyệt vời nhất thăng hoa.</sub> | Arya Bàn Bên Thỉnh Thoảng Lại Trêu Ghẹo Tôi Bằng Tiếng Nga |
+| **02** | **Oneshot được yêu thích nhất**<br /><sub>Những tác phẩm chỉ cần một tập để chinh phục trái tim độc giả.</sub> | Đường hầm tới mùa hạ - Lối thoát của Biệt ly |
+| **03** | **Light Novel tân binh của năm**<br /><sub>Ngọn gió mới, những gương mặt vừa đặt bước chân đầu tiên vào thị trường.</sub> | Chung Một Mái Nhà |
+| **04** | **Nhà phát hành được yêu thích nhất**<br /><sub>Những người giữ lửa cho cộng đồng Light Novel nước nhà.</sub> | Wingsbooks (Kim Đồng) |
 
-Máy chủ trả `{ "message": "created" }` khi thành công; `rateLimit` / `invalidCaptcha` khi từ chối.
+## Trên trang có gì
+
+- **[Trang chủ](https://bxh.lightnovel.vn)**: Top 10 của kỳ mới nhất, quán quân từng hạng mục và hành trình của kỳ bình chọn.
+- **[Bảng tổng sắp](https://bxh.lightnovel.vn/leaderboard)**: kết quả đầy đủ của từng kỳ, kèm chân dung những người đã bỏ phiếu.
+- **[Góp ý của độc giả](https://bxh.lightnovel.vn/feedback)**: bức tường lời nhắn gửi tới tác phẩm, nhà phát hành và ban tổ chức.
+- **[Bình chọn](https://bxh.lightnovel.vn/vote)**: lá phiếu của bạn, mở trong thời gian diễn ra mỗi kỳ.
 
 ## Thực hiện
 
-Hyddyt (tổ chức) · Zennomi (back-end) · Meoki (front-end)
+Ban tổ chức **Hyddyt** · phát triển **Zennomi** và **Meoki**.
+
+Cảm ơn mọi lá phiếu, mọi lời góp ý, mọi cuốn sách đã được gọi tên.
+
+<p align="center">
+  <sub>© 2018 - nay · BXH LNVN · おわり</sub>
+</p>

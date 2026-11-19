@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 
-/** Dải chữ chạy vô tận. Nội dung được nhân đôi, bản sao ẩn với trình đọc màn hình. */
+/** Endless marquee. The content is duplicated; the copy is hidden from screen readers. */
 export default function Marquee({
   children,
   duration = 40,
@@ -11,7 +11,6 @@ export default function Marquee({
   children: ReactNode;
   duration?: number;
   reverse?: boolean;
-  /** Dừng khi rê chuột (mặc định bật). */
   pauseOnHover?: boolean;
   className?: string;
 }) {

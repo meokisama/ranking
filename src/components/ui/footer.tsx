@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Marquee from "./Marquee";
+import Marquee from "./marquee";
 import { CREDITS } from "@/lib/content";
 import { SITE } from "@/lib/config";
 

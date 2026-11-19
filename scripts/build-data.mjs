@@ -1,5 +1,5 @@
-// Chuẩn hoá dữ liệu thô (data/raw) -> src/data, tải ảnh bìa về public/covers.
-// Chạy: npm run data
+// Normalizes raw data (data/raw) into src/data and downloads covers to public/covers.
+// Run: npm run data
 import fs from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
@@ -11,7 +11,7 @@ const COVERS = path.join(ROOT, "public/covers");
 
 const readJson = async (p) => JSON.parse(await fs.readFile(path.join(RAW, p), "utf8"));
 
-// i.docln.net đã ngừng hoạt động, i.hako.vip phục vụ cùng đường dẫn.
+// i.docln.net is gone; i.hako.vip serves the same paths.
 const fixHost = (url) => url.replace(/\/\/i\d?\.docln\.net\//, "//i.hako.vip/");
 const coverKey = (url) => path.basename(new URL(url).pathname).replace(/\.\w+$/, "");
 
@@ -28,7 +28,7 @@ const want = (url) => {
 const toHex = ({ r, g, b }) =>
   "#" + [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("");
 
-// Màu nhấn của bìa: điểm ảnh rực nhất (bỏ qua vùng quá sáng / quá tối).
+// Cover accent color: the most vivid pixel (skipping very bright and very dark areas).
 async function accent(buf) {
   const { data } = await sharp(buf).resize(12, 16, { fit: "fill" }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   let best = { r: 120, g: 110, b: 100 };
@@ -141,7 +141,7 @@ async function main() {
   const missing = [...coverMeta.values()].filter((v) => !v).length;
   console.log(`Xong. Thiếu ${missing}/${queue.size} bìa.`);
 
-  // Tuổi: gom các giá trị hợp lệ 10-40, phần còn lại coi là nhiễu.
+  // Age: keep valid values 10-40 and treat the rest as noise.
   const ages = {};
   for (const { _id, count } of h2.age) {
     const a = Math.round(_id);
@@ -192,7 +192,7 @@ async function main() {
     })),
   };
 
-  // Góp ý: bỏ IP và id, chỉ giữ nội dung.
+  // Feedback: drop IP and id, keep the content only.
   const feedback = [];
   for (const [file, period] of [
     ["feedback/second_half_2024.json", "2-2024"],

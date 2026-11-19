@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Wall from "@/components/feedback/Wall";
-import type { Note } from "@/components/feedback/Wall";
-import Footer from "@/components/ui/Footer";
+import Wall from "@/components/feedback/wall";
+import type { Note } from "@/components/feedback/wall";
+import Footer from "@/components/ui/footer";
 import feedback from "@/data/feedback.json";
 import { periods } from "@/lib/data";
 

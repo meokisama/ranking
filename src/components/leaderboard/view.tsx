@@ -1,5 +1,5 @@
-import Board from "./Board";
-import Footer from "@/components/ui/Footer";
+import Board from "./board";
+import Footer from "@/components/ui/footer";
 import { CURRENT_PERIOD } from "@/lib/config";
 import { periods } from "@/lib/data";
 import type { Period } from "@/lib/data";
