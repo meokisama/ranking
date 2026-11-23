@@ -13,7 +13,6 @@ export default function NotFound() {
         <Lines
           as="h1"
           className="display mt-6 text-[14vw] md:text-[9.5vw]"
-
           label="Trang này không có trong cuốn sách"
         >
           {"Trang này không có"}

@@ -1,5 +1,6 @@
 import Rise, { Kicker, Lines, Rule } from "@/components/ui/reveal";
 import { TIMELINE } from "@/lib/content";
+import { pad } from "@/lib/format";
 
 /** The calendar of a period, set out like the running order of a programme. */
 export default function Timeline({ period }: { period: string }) {
@@ -22,7 +23,7 @@ export default function Timeline({ period }: { period: string }) {
               aria-hidden
             />
             <Rise delay={i * 0.08}>
-              <p className="label text-mute">{String(i + 1).padStart(2, "0")}</p>
+              <p className="label text-mute">{pad(i + 1)}</p>
               <p className={`num mt-4 text-[2.6rem] leading-none md:text-[3vw] ${t.key ? "text-shu" : ""}`}>{t.date}</p>
               <h3 className="display mt-5 text-2xl">
                 <i>{t.title}</i>

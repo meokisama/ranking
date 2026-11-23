@@ -7,6 +7,7 @@ import Rise, { Kicker, Rule } from "@/components/ui/reveal";
 import { ABOUT, MANIFESTO } from "@/lib/content";
 import type { Entry } from "@/lib/data";
 import { nf } from "@/lib/format";
+import { EASE } from "@/lib/motion";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
   const opacity = useTransform(progress, range, [0.14, 1]);
@@ -22,7 +23,7 @@ function Count({ value, plain }: { value: number; plain?: boolean }) {
     const el = ref.current;
     const c = animate(plain ? value - 40 : 0, value, {
       duration: 2.2,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE,
       onUpdate: (v) => (el.textContent = fmt(v)),
     });
     return () => c.stop();

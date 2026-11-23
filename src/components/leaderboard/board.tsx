@@ -175,7 +175,6 @@ export default function Board({ period, periods }: { period: Period; periods: { 
               href={p.href}
               scroll={false}
               aria-current={p.slug === period.slug ? "page" : undefined}
-              aria-selected={p.slug === period.slug}
               className="btn-ghost !h-9 shrink-0 !px-4 !text-[0.8rem]"
             >
               {p.label}

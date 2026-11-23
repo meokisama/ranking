@@ -66,7 +66,6 @@ export default function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed
         <Lines
           as="h1"
           className="display mt-6 text-[16vw] md:text-[11vw]"
-
           label={copy.lines.join(" ")}
         >
           {copy.lines[0]}

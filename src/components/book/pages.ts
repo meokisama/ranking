@@ -14,7 +14,7 @@ const MUTE = "#7a7062";
 const SHU = "#c9351c";
 export const SPINE = "#9c8870"; // a soft warm taupe cloth on the spine and over the joint, a few shades under the linen
 const LINEN = "#e2d5ba";
-export const RATIO = 568 / 400;
+const RATIO = 568 / 400;
 
 const cssFont = (name: string, fallback: string) =>
   getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;

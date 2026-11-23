@@ -29,12 +29,11 @@ export type CategoryKey = "ranobe" | "oneshot" | "rookie" | "publisher" | "illus
 
 export const CATEGORIES: Record<
   CategoryKey,
-  { label: string; short: string; jp: string; api: string; max: number; unit: string; blurb: string }
+  { label: string; short: string; api: string; max: number; unit: string; blurb: string }
 > = {
   ranobe: {
     label: "Light Novel được yêu thích nhất",
     short: "Light Novel",
-    jp: "作品",
     api: "favoriteRanobe",
     max: 10,
     unit: "tác phẩm",
@@ -44,7 +43,6 @@ export const CATEGORIES: Record<
   oneshot: {
     label: "Oneshot được yêu thích nhất",
     short: "Oneshot",
-    jp: "単巻",
     api: "favoriteOneshot",
     max: 5,
     unit: "tác phẩm",
@@ -54,7 +52,6 @@ export const CATEGORIES: Record<
   rookie: {
     label: "Light Novel tân binh của năm",
     short: "Tân binh",
-    jp: "新作",
     api: "favoriteRookie",
     max: 3,
     unit: "tác phẩm",
@@ -64,7 +61,6 @@ export const CATEGORIES: Record<
   publisher: {
     label: "Nhà phát hành được yêu thích nhất",
     short: "Nhà phát hành",
-    jp: "出版社",
     api: "favoritePublisher",
     max: 3,
     unit: "nhà phát hành",
@@ -74,7 +70,6 @@ export const CATEGORIES: Record<
   illustrator: {
     label: "Họa sĩ minh họa được yêu thích nhất",
     short: "Họa sĩ",
-    jp: "絵師",
     api: "favoriteIllustrator",
     max: 5,
     unit: "họa sĩ",

@@ -47,7 +47,7 @@ const NAV = [
 /**
  * The end of the book, in two parts. On paper: the closing line and the shelf the period left behind,
  * one spine per title, thicker for more votes, drawn out and turned to its cover under the pointer.
- * Then the back cover, in the red cloth of the book in the hero: the blurb, the contents, the periods, the makers,
+ * Then the back cover, in red cloth with a gold frame: the blurb, the contents, the periods, the makers,
  * and the imprint box with its bar code.
  */
 export default function Footer() {
@@ -129,7 +129,7 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* ---- the back cover: the same red cloth as the book in the hero, a gold frame, the blurb, the imprint ---- */}
+      {/* ---- the back cover: red cloth, a gold frame, the blurb, the imprint ---- */}
       <section className="back-cover relative overflow-hidden px-5 py-14 text-paper md:px-10 md:py-20">
         <div className="pointer-events-none absolute inset-3 border border-gold/55 md:inset-6" aria-hidden />
         <div className="pointer-events-none absolute inset-[18px] border border-gold/25 md:inset-[30px]" aria-hidden />
