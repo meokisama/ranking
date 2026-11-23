@@ -3,25 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import type { MotionValue } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import Cover from "@/components/ui/cover";
-import { Lines } from "@/components/ui/reveal";
+import { Mark } from "@/components/ui/cover";
+import { Dot, Lines } from "@/components/ui/reveal";
+import { labelParts } from "@/lib/data";
 import type { Entry, Period } from "@/lib/data";
 import { nf, pad, percent } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 
 const COUNT = 10;
 const AUTO_MS = 5200;
-
-/** A cover, or for a publisher its logo laid on a white board of the same size. */
-function Face({ e }: { e: Entry }) {
-  return e.logo ? (
-    <span className="grid aspect-[400/568] w-full place-items-center rounded-[2px] bg-white p-[16%] shadow-[0_0_0_1px_rgb(22_18_14/0.1)]">
-      <img src={e.logo} alt="" className="max-h-full max-w-full object-contain" draggable={false} />
-    </span>
-  ) : (
-    <Cover name={e.name} cover={e.cover} color={e.color} className="w-full" eager />
-  );
-}
 
 /**
  * One book on the wheel. The outer box turns about the wheel's hub, far below the stage; the inner box
@@ -83,7 +73,7 @@ function Spoke({
           aria-hidden
         />
         <span className="relative block">
-          <Face e={e} />
+          <Mark e={e} tall eager className="w-full" />
         </span>
       </motion.button>
     </motion.div>
@@ -179,12 +169,13 @@ export default function CoverArc({
 
   const e = items[active];
   const max = items[0].count;
+  const [name, year] = labelParts(period.label);
 
   return (
     <header className="relative isolate overflow-hidden pb-10 pt-[4.5rem] md:h-[100svh] md:max-h-[1000px] md:min-h-[680px] md:pb-0 md:pt-24">
       <div className="label relative z-10 flex items-center gap-4 px-5 text-mute md:px-10">
         <span className="shrink-0">
-          <span className="mr-2 inline-block size-1.5 -translate-y-px rounded-full bg-shu" />
+          <Dot />
           Bảng tổng sắp · {period.long}
         </span>
         <span className="h-px flex-1 bg-ink/15" />
@@ -193,9 +184,9 @@ export default function CoverArc({
 
       <div className="relative z-10 mt-6 px-5 md:absolute md:left-10 md:top-32 md:mt-0 md:px-0">
         <Lines as="h1" className="display text-[17vw] leading-[0.86] md:text-[min(8.6vw,15svh)]" label={`Bảng tổng sắp ${period.label}`}>
-          {period.label.split(" · ")[0]}
+          {name}
           <>
-            <i className="text-shu">{period.label.split(" · ")[1]}</i>
+            <i className="text-shu">{year}</i>
             <span className="text-shu">.</span>
           </>
         </Lines>

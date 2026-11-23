@@ -12,6 +12,7 @@
   --color-mute: #71695c;
   --color-shu: #d6361b;
   --color-gold: #e2c07a;
+  --color-cloth: #b02c17; /* the red cloth of the back cover */
 
   --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-bevn), system-ui, sans-serif;
@@ -191,6 +192,13 @@ body::after {
       background-color 0.5s var(--ease-out-expo),
       color 0.5s var(--ease-out-expo),
       border-color 0.5s var(--ease-out-expo);
+  }
+  /* The small ghost pill of the filter bars. */
+  .btn-ghost.chip {
+    flex-shrink: 0;
+    height: 2.25rem;
+    padding: 0 1rem;
+    font-size: 0.8rem;
   }
   .btn-ghost:hover,
   .btn-ghost[aria-pressed="true"],
@@ -627,7 +635,7 @@ body::after {
 
 /* The back cover (components/ui/footer.tsx): a red book cloth, its weave and its worn edges. */
 .back-cover {
-  background-color: #b02c17;
+  background-color: var(--color-cloth);
   background-image:
     radial-gradient(120% 90% at 50% 40%, transparent 55%, rgb(60 10 0 / 0.35)),
     repeating-linear-gradient(0deg, rgb(0 0 0 / 0.05) 0 1px, transparent 1px 3px),

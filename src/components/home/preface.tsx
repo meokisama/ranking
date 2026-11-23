@@ -4,6 +4,7 @@ import { animate, motion, useInView, useScroll, useTransform } from "motion/reac
 import type { MotionValue } from "motion/react";
 import Cover from "@/components/ui/cover";
 import Rise, { Kicker, Rule } from "@/components/ui/reveal";
+import { SITE } from "@/lib/config";
 import { ABOUT, MANIFESTO } from "@/lib/content";
 import type { Entry } from "@/lib/data";
 import { nf } from "@/lib/format";
@@ -63,7 +64,7 @@ export default function Preface({ stats, covers }: { stats: { value: number; lab
 
   return (
     <section className="px-5 pb-20 pt-24 md:px-10 md:pb-28 md:pt-32">
-      <Kicker no="01" right="Từ năm 2018">
+      <Kicker no="01" right={`Từ năm ${SITE.since}`}>
         Lời tựa
       </Kicker>
       <Rule className="mt-4" />

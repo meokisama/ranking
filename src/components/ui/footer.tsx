@@ -1,21 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { CREDITS } from "@/lib/content";
-import { CATEGORIES, CURRENT_PERIOD, SITE } from "@/lib/config";
-import type { CategoryKey } from "@/lib/config";
-import { currentPeriod, periods } from "@/lib/data";
+import { SITE } from "@/lib/config";
+import { currentPeriod, labelParts, periodHref, periods, periodYear } from "@/lib/data";
 import { nf, pad } from "@/lib/format";
 import BackToTop from "./back-to-top";
-import Cover from "./cover";
+import Cover, { FALLBACK, hash, inkOn } from "./cover";
 import Logo from "./logo";
-import { Lines } from "./reveal";
-
-const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
-const ink = (hex?: string | null) => {
-  if (!hex) return "#f8f4ea";
-  const n = parseInt(hex.replace("#", ""), 16);
-  return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255 > 0.6 ? "#16120e" : "#f8f4ea";
-};
+import { Kicker, Lines } from "./reveal";
 
 /** Bars drawn from a seed: the same code for the same period, every time. Decorative, so hidden from readers. */
 function Barcode({ seed }: { seed: string }) {
@@ -59,9 +51,7 @@ export default function Footer() {
     <footer>
       {/* ---- the last page ---- */}
       <section className="hair overflow-x-clip border-t px-5 pb-20 pt-24 md:px-10 md:pb-28 md:pt-32">
-        <span className="label text-mute">
-          <span className="mr-3 text-shu">●</span>Lời cuối sách
-        </span>
+        <Kicker no="●">Lời cuối sách</Kicker>
         <div className="mt-6 grid items-end gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
             <Lines className="display text-[14vw] lg:text-[6.4vw]">
@@ -94,7 +84,7 @@ export default function Footer() {
                 // Heights scattered from the title, the same each time; thickness from the votes.
                 const short = ((hash(`h${e.name}`) % 1000) / 1000) * 3.2;
                 const thick = Math.round(40 + 34 * (e.count / max));
-                const bg = e.color ?? "#8a3b2a";
+                const bg = e.color ?? FALLBACK;
                 return (
                   <div key={e.id} className="shelf-slot">
                     <Link
@@ -107,7 +97,7 @@ export default function Footer() {
                         <span className="shelf-cover" aria-hidden>
                           <Cover name={e.name} cover={e.cover} color={e.color} sub={e.publisher} className="!aspect-auto h-full !rounded-none !shadow-none" />
                         </span>
-                        <span className="shelf-face" style={{ background: bg, color: ink(bg) }}>
+                        <span className="shelf-face" style={{ background: bg, color: inkOn(bg) }}>
                           <span className="num shrink-0 text-[0.95rem] leading-none">{pad(e.rank)}</span>
                           <span className="h-px w-full shrink-0 bg-current opacity-25" />
                           <span className="shelf-title display text-[0.92rem] leading-none tracking-[0.02em]">{e.name}</span>
@@ -190,16 +180,19 @@ export default function Footer() {
             <div>
               <span className="label text-gold">Các kỳ bình chọn</span>
               <ul className="mt-5 space-y-4">
-                {periods.map((p) => (
+                {periods.map((p) => {
+                  const [name, year] = labelParts(p.label);
+                  return (
                   <li key={p.slug}>
-                    <Link href={p.slug === CURRENT_PERIOD ? "/leaderboard" : `/leaderboard/${p.slug}`} className="group block">
+                    <Link href={periodHref(p.slug)} className="group block">
                       <span className="display block text-[1.6rem] leading-none transition-colors duration-500 group-hover:text-gold">
-                        {p.label.split(" · ")[0]} <i>{p.label.split(" · ")[1]}</i>
+                        {name} <i>{year}</i>
                       </span>
                       <span className="label mt-1.5 block text-paper/55">{nf.format(p.votes)} lá phiếu</span>
                     </Link>
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </div>
 
@@ -235,7 +228,7 @@ export default function Footer() {
 
           <div className="mt-16 flex flex-col justify-between gap-3 border-t border-gold/30 pb-4 pt-5 text-paper/55 md:mt-20 md:flex-row">
             <span className="label">
-              {/* the year of the latest period, not of the build: the page is static */}© {SITE.since} – {currentPeriod.slug.split("-")[1]} · {SITE.short}
+              {/* the year of the latest period, not of the build: the page is static */}© {SITE.since} – {periodYear(currentPeriod)} · {SITE.short}
             </span>
             <span className="text-[0.8rem] font-light">Mọi tên sách và hình bìa thuộc về tác giả và nhà phát hành.</span>
           </div>

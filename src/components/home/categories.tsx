@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import Cover from "@/components/ui/cover";
+import { Mark } from "@/components/ui/cover";
 import Rise, { Kicker, Lines } from "@/components/ui/reveal";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
@@ -66,13 +66,7 @@ export default function Categories({ rows }: { rows: CategoryRow[] }) {
                           className="block transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-3"
                           style={{ transitionDelay: `${k * 50}ms` }}
                         >
-                          {e.logo ? (
-                            <span className="grid aspect-square place-items-center rounded-[2px] bg-white p-2 shadow-[0_0_0_1px_rgb(22_18_14/0.12)]">
-                              <img src={e.logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
-                            </span>
-                          ) : (
-                            <Cover name={e.name} cover={e.cover} color={e.color} />
-                          )}
+                          <Mark e={e} />
                         </span>
                       </span>
                     ))}

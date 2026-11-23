@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import Cover from "./cover";
+import Cover, { FALLBACK } from "./cover";
 
 /**
  * A book in CSS 3D: the cover, a spine in the book's own colour, and the block of pages. Straightens on hover.
@@ -43,7 +43,7 @@ export default function Book3D({
 
   return (
     <div className={`book3d ${className}`} onPointerMove={tilt ? move : undefined} onPointerLeave={tilt ? leave : undefined}>
-      <div ref={body} className="book3d-body" style={{ ["--t" as string]: `${thickness}px`, ["--c" as string]: color ?? "#8a3b2a" }}>
+      <div ref={body} className="book3d-body" style={{ ["--t" as string]: `${thickness}px`, ["--c" as string]: color ?? FALLBACK }}>
         <div className="book3d-back" />
         <div className="book3d-pages" />
         <div className="book3d-spine" />

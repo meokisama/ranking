@@ -2,10 +2,11 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import Book3D from "@/components/ui/book3d";
-import Cover from "@/components/ui/cover";
+import { LogoBoard, Mark } from "@/components/ui/cover";
 import { Kicker } from "@/components/ui/reveal";
+import SearchField from "@/components/ui/search-field";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
 import type { Entry, Period } from "@/lib/data";
@@ -19,20 +20,10 @@ const PAGE = 30;
 /** Secondary line of an entry: its publisher, or the works an illustrator is known for. */
 const subOf = (e: Entry) => e.publisher ?? e.works?.join(" · ") ?? "";
 
-function Thumb({ e, className = "" }: { e: Entry; className?: string }) {
-  return e.logo ? (
-    <span className={`grid aspect-square place-items-center rounded-[2px] bg-white p-[14%] shadow-[0_0_0_1px_rgb(22_18_14/0.12)] ${className}`}>
-      <img src={e.logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
-    </span>
-  ) : (
-    <Cover name={e.name} cover={e.cover} color={e.color} sub={subOf(e)} className={className} />
-  );
-}
-
 /** A podium book: in 3D, turning under the pointer. A publisher keeps its flat logo board. */
 function Podium({ e, thickness, className = "" }: { e: Entry; thickness: number; className?: string }) {
   return e.logo ? (
-    <Thumb e={e} className={className} />
+    <LogoBoard src={e.logo} className={className} />
   ) : (
     <Book3D name={e.name} cover={e.cover} color={e.color} sub={subOf(e)} thickness={thickness} tilt className={`pr-[6%] ${className}`} />
   );
@@ -114,7 +105,7 @@ function Row({ e, max, votes }: { e: Entry; max: number; votes: number }) {
       className="hair group grid grid-cols-[2.4rem_2.6rem_1fr_auto] items-center gap-x-3 border-b py-3.5 transition-colors duration-700 hover:bg-card md:grid-cols-[4rem_2.8rem_minmax(0,1.3fr)_minmax(0,1.2fr)_5.5rem_4rem] md:gap-x-6"
     >
       <span className={`num pl-1 text-2xl md:text-[1.9rem] ${e.rank <= 3 ? "text-shu" : ""}`}>{pad(e.rank)}</span>
-      <Thumb e={e} className="w-full" />
+      <Mark e={e} sub={subOf(e)} className="w-full" />
       <div className="min-w-0">
         <p className="display line-clamp-2 text-[1.12rem] leading-[1.12] md:text-[1.35rem]">{e.name}</p>
         <p className="label mt-1 truncate text-mute">{subOf(e)}</p>
@@ -175,7 +166,7 @@ export default function Board({ period, periods }: { period: Period; periods: { 
               href={p.href}
               scroll={false}
               aria-current={p.slug === period.slug ? "page" : undefined}
-              className="btn-ghost !h-9 shrink-0 !px-4 !text-[0.8rem]"
+              className="btn-ghost chip"
             >
               {p.label}
             </Link>
@@ -184,7 +175,7 @@ export default function Board({ period, periods }: { period: Period; periods: { 
           <span className="label shrink-0 pr-1 text-mute">Hạng mục</span>
           <div className="flex shrink-0 gap-2" role="tablist" aria-label="Hạng mục">
             {keys.map((k) => (
-              <button key={k} role="tab" aria-selected={k === cat} onClick={() => choose(k)} className="btn-ghost !h-9 shrink-0 !px-4 !text-[0.8rem]">
+              <button key={k} role="tab" aria-selected={k === cat} onClick={() => choose(k)} className="btn-ghost chip">
                 {CATEGORIES[k].short}
                 <span className="num text-[0.95rem] opacity-60">{period.categories[k]!.length}</span>
               </button>
@@ -237,23 +228,21 @@ export default function Board({ period, periods }: { period: Period; periods: { 
                   </>
                 )}
               </h2>
-              <label className="flex h-12 w-full items-center gap-3 rounded-full border border-ink/25 px-5 transition-colors focus-within:border-ink md:w-96">
-                <Search className="size-4 shrink-0 text-mute" aria-hidden />
-                <input
-                  value={q}
-                  onChange={(e) => {
-                    setQ(e.target.value);
-                    setLimit(PAGE);
-                  }}
-                  placeholder={`Tìm theo tên ${meta.unit}…`}
-                  className="w-full bg-transparent text-[0.95rem] outline-none placeholder:text-mute"
-                />
+              <SearchField
+                value={q}
+                onChange={(v) => {
+                  setQ(v);
+                  setLimit(PAGE);
+                }}
+                placeholder={`Tìm theo tên ${meta.unit}…`}
+                className="h-12 text-[0.95rem] md:w-96"
+              >
                 {q && (
                   <button onClick={() => setQ("")} aria-label="Xoá tìm kiếm" className="text-mute hover:text-shu">
                     <X className="size-4" />
                   </button>
                 )}
-              </label>
+              </SearchField>
             </div>
 
             <div className="label mt-10 hidden grid-cols-[4rem_2.8rem_minmax(0,1.3fr)_minmax(0,1.2fr)_5.5rem_4rem] gap-x-6 text-mute md:grid">

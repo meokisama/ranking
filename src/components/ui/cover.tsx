@@ -1,5 +1,7 @@
-const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+export const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
 const FALLBACKS = ["#8a3b2a", "#2f4a5c", "#5d5230", "#4a3552", "#2f4a3a", "#6a4326"];
+/** The cloth of a book with no colour of its own. */
+export const FALLBACK = FALLBACKS[0];
 
 /** A book cover: the real image, or a typeset one when there is none. */
 export default function Cover({
@@ -43,6 +45,42 @@ export default function Cover({
         </div>
       )}
     </div>
+  );
+}
+
+/** A publisher's logo on a white board: square, or `tall` to stand in a row of covers. */
+export function LogoBoard({ src, tall, eager, className = "" }: { src: string; tall?: boolean; eager?: boolean; className?: string }) {
+  return (
+    <span
+      className={`grid place-items-center rounded-[2px] bg-white shadow-[0_0_0_1px_rgb(22_18_14/0.12)] ${
+        tall ? "aspect-[400/568] p-[16%]" : "aspect-square p-[14%]"
+      } ${className}`}
+    >
+      <img src={src} alt="" loading={eager ? "eager" : "lazy"} draggable={false} className="max-h-full max-w-full object-contain" />
+    </span>
+  );
+}
+
+type Marked = { name: string; cover?: string | null; color?: string | null; logo?: string };
+
+/** What stands for an entry: its cover, or for a publisher its logo board. */
+export function Mark({
+  e,
+  sub,
+  tall,
+  eager,
+  className = "",
+}: {
+  e: Marked;
+  sub?: string;
+  tall?: boolean;
+  eager?: boolean;
+  className?: string;
+}) {
+  return e.logo ? (
+    <LogoBoard src={e.logo} tall={tall} eager={eager} className={className} />
+  ) : (
+    <Cover name={e.name} cover={e.cover} color={e.color} sub={sub} eager={eager} className={className} />
   );
 }
 

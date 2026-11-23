@@ -4,17 +4,8 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Kicker, Lines } from "@/components/ui/reveal";
 import { VOTING } from "@/lib/config";
-import { EASE } from "@/lib/motion";
-
-const when = (iso: string) =>
-  new Date(iso).toLocaleString("vi-VN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "Asia/Ho_Chi_Minh",
-  });
+import { dateVN } from "@/lib/format";
+import { EASE, fadeUp } from "@/lib/motion";
 
 /** Shown instead of the ballot: voting not open yet, already closed, or already voted. */
 export default function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed" | "done"; periodLabel: string }) {
@@ -22,12 +13,12 @@ export default function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed
     upcoming: {
       kicker: "Sắp mở hòm phiếu",
       lines: ["Hòm phiếu", "chưa mở"],
-      body: `Bình chọn ${periodLabel} sẽ mở lúc ${when(VOTING.start)}. Hẹn gặp bạn khi đó.`,
+      body: `Bình chọn ${periodLabel} sẽ mở lúc ${dateVN(VOTING.start, true)}. Hẹn gặp bạn khi đó.`,
     },
     closed: {
       kicker: "Đã niêm phong hòm phiếu",
       lines: ["Hòm phiếu", "đã niêm phong"],
-      body: `Bình chọn ${periodLabel} đã kết thúc lúc ${when(VOTING.end)}. Kết quả đã được công bố, hẹn gặp lại bạn ở kỳ tiếp theo.`,
+      body: `Bình chọn ${periodLabel} đã kết thúc lúc ${dateVN(VOTING.end, true)}. Kết quả đã được công bố, hẹn gặp lại bạn ở kỳ tiếp theo.`,
     },
     done: {
       kicker: "Đã ghi nhận lá phiếu",
@@ -74,11 +65,7 @@ export default function Gate({ tone, periodLabel }: { tone: "upcoming" | "closed
             <span className="text-shu">.</span>
           </>
         </Lines>
-        <motion.div
-          initial={{ opacity: 0, transform: "translateY(20px)" }}
-          animate={{ opacity: 1, transform: "translateY(0px)" }}
-          transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
-        >
+        <motion.div {...fadeUp(0.5, 20)}>
           <p className="mt-8 max-w-[46ch] text-[0.95rem] font-light text-ink/75">{copy.body}</p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link href="/leaderboard" className="btn">

@@ -66,7 +66,7 @@ export default function Splash() {
     };
 
     if (first.current === "/") {
-      if ((window as unknown as { __bookReady?: boolean }).__bookReady) ready();
+      if (window.__bookReady) ready();
       else window.addEventListener("book:ready", ready, { once: true });
     } else if (document.readyState === "complete") ready();
     else window.addEventListener("load", ready, { once: true });

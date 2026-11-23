@@ -2,8 +2,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { ArrowLeft, ArrowRight, Check, Search } from "lucide-react";
-import Cover from "@/components/ui/cover";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { Mark } from "@/components/ui/cover";
+import { Kicker } from "@/components/ui/reveal";
+import SearchField from "@/components/ui/search-field";
 import { CATEGORIES, VOTING } from "@/lib/config";
 import { fold, pad } from "@/lib/format";
 import { EASE } from "@/lib/motion";
@@ -162,12 +164,9 @@ export default function Ballot({
   return (
     <main className="min-h-svh pb-32">
       <header className="px-5 pt-24 md:px-10 md:pt-28">
-        <div className="label flex flex-wrap items-center gap-x-5 gap-y-2 text-mute">
-          <span>
-            <span className="mr-3 text-shu">●</span>Lá phiếu · {periodLabel}
-          </span>
-          {preview && <span className="rounded-full bg-ink px-3 py-1 text-paper">Chế độ xem thử · không gửi phiếu</span>}
-        </div>
+        <Kicker no="●" right={preview && <span className="rounded-full bg-ink px-3 py-1 text-paper">Chế độ xem thử · không gửi phiếu</span>}>
+          Lá phiếu · {periodLabel}
+        </Kicker>
 
         <ol className="no-scrollbar mt-6 flex gap-1.5 overflow-x-auto" aria-label="Các bước">
           {stepLabels.map((l, i) => {
@@ -212,16 +211,8 @@ export default function Ballot({
                   </p>
                 </div>
                 <div className="flex w-full flex-col gap-2 md:w-80">
-                  <label className="flex h-11 items-center gap-3 rounded-full border border-ink/25 px-4 focus-within:border-ink">
-                    <Search className="size-4 shrink-0 text-mute" aria-hidden />
-                    <input
-                      value={q}
-                      onChange={(e) => setQ(e.target.value)}
-                      placeholder={`Tìm theo tên ${meta.unit}…`}
-                      className="w-full bg-transparent text-[0.9rem] outline-none placeholder:text-mute"
-                    />
-                  </label>
-                  <button onClick={() => setOnlyPicked((v) => !v)} aria-pressed={onlyPicked} className="btn-ghost !h-9 self-start !px-4 !text-[0.8rem]">
+                  <SearchField value={q} onChange={setQ} placeholder={`Tìm theo tên ${meta.unit}…`} className="h-11 text-[0.9rem]" />
+                  <button onClick={() => setOnlyPicked((v) => !v)} aria-pressed={onlyPicked} className="btn-ghost chip self-start">
                     Chỉ hiện đã chọn ({chosen.length})
                   </button>
                 </div>
@@ -246,13 +237,7 @@ export default function Ballot({
                               on ? "opacity-30 grayscale" : "group-hover:-translate-y-1"
                             }`}
                           >
-                            {it.logo ? (
-                              <div className="relative aspect-square rounded-[2px] bg-white shadow-[0_0_0_1px_rgb(22_18_14/0.1),0_14px_28px_-18px_rgb(22_18_14/0.45)]">
-                                <img src={it.logo} alt="" loading="lazy" className="absolute inset-[14%] size-[72%] object-contain" />
-                              </div>
-                            ) : (
-                              <Cover name={it.name} cover={it.cover} color={it.color} sub={it.publisher} />
-                            )}
+                            <Mark e={it} sub={it.publisher} />
                           </div>
                           <AnimatePresence>{on && <Stamp n={order + 1} />}</AnimatePresence>
                         </div>

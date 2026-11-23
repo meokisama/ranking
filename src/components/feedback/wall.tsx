@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { Search } from "lucide-react";
 import { Kicker, Lines } from "@/components/ui/reveal";
-import { fold, nf } from "@/lib/format";
+import SearchField from "@/components/ui/search-field";
+import { dateVN, fold, nf } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 
 export type Note = {
@@ -16,8 +16,6 @@ export type Note = {
 };
 
 const PAGE = 36;
-const date = (iso: string) =>
-  new Date(iso).toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Asia/Ho_Chi_Minh" });
 
 /** The letterbox: every note readers attached to their ballots, pinned up as loose pages. */
 export default function Wall({ notes, periods }: { notes: Note[]; periods: { slug: string; label: string }[] }) {
@@ -94,7 +92,7 @@ export default function Wall({ notes, periods }: { notes: Note[]; periods: { slu
                   animate={{ opacity: 1, transform: `translateY(0px) rotate(${[-6, 5, -2][i]}deg)` }}
                   transition={{ duration: 1.3, delay: 0.3 + i * 0.15, ease: EASE }}
                 >
-                  <span className="label text-mute">{date(n.at)}</span>
+                  <span className="label text-mute">{dateVN(n.at)}</span>
                   {n.topic && <p className="display mt-2 line-clamp-1 text-xl">{n.topic}</p>}
                   <p className="mt-2 line-clamp-3 text-[0.9rem] font-light">{n.content}</p>
                   {i === 2 && <span className="absolute -right-2 -top-2 size-4 rounded-full bg-shu" />}
@@ -116,25 +114,23 @@ export default function Wall({ notes, periods }: { notes: Note[]; periods: { slu
                   setLimit(PAGE);
                 }}
                 aria-pressed={period === c.slug}
-                className="btn-ghost !h-9 shrink-0 !px-4 !text-[0.8rem]"
+                className="btn-ghost chip"
               >
                 {c.label}
               </button>
             ))}
           </div>
-          <label className="flex h-9 w-full items-center gap-3 rounded-full border border-ink/25 px-4 focus-within:border-ink md:w-80">
-            <Search className="size-3.5 shrink-0 text-mute" aria-hidden />
-            <input
-              value={q}
-              onChange={(e) => {
-                setQ(e.target.value);
-                setLimit(PAGE);
-              }}
-              placeholder="Từ khoá, tên truyện, nhà phát hành…"
-              className="w-full bg-transparent text-[0.85rem] outline-none placeholder:text-mute"
-            />
+          <SearchField
+            value={q}
+            onChange={(v) => {
+              setQ(v);
+              setLimit(PAGE);
+            }}
+            placeholder="Từ khoá, tên truyện, nhà phát hành…"
+            className="h-9 text-[0.85rem] md:w-80"
+          >
             <span className="label shrink-0 text-mute">{nf.format(filtered.length)}</span>
-          </label>
+          </SearchField>
         </div>
       </div>
 
@@ -161,7 +157,7 @@ function Slip({ n, i }: { n: Note; i: number }) {
       transition={{ duration: 0.9, delay: Math.min((i % PAGE) * 0.015, 0.3), ease: EASE }}
       className="mb-5 break-inside-avoid rounded-[2px] bg-card p-6 shadow-[0_0_0_1px_rgb(22_18_14/0.08),0_18px_30px_-24px_rgb(22_18_14/0.45)] transition-[box-shadow,translate] duration-500 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgb(22_18_14/0.12),0_26px_36px_-22px_rgb(22_18_14/0.5)]"
     >
-      <span className="label text-mute">{date(n.at)}</span>
+      <span className="label text-mute">{dateVN(n.at)}</span>
       {n.topic && <h2 className="display mt-3 break-words text-[1.5rem] leading-[1.08]">{n.topic}</h2>}
       {n.content && <p className="mt-3 whitespace-pre-line break-words text-[0.95rem] font-light leading-relaxed">{n.content}</p>}
       {(n.title || n.publisher) && (

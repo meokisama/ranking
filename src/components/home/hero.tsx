@@ -7,9 +7,11 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { progressOfEntry } from "@/components/book/scene";
 import type { BookScene } from "@/components/book/scene";
 import Cover from "@/components/ui/cover";
+import { Dot } from "@/components/ui/reveal";
 import type { Entry } from "@/lib/data";
 import { nf, pad, percent } from "@/lib/format";
-import { EASE } from "@/lib/motion";
+import { SITE } from "@/lib/config";
+import { EASE, fadeUp } from "@/lib/motion";
 
 const RAIL = 300; // px kept free for each side column on wide screens
 
@@ -167,7 +169,7 @@ export default function Hero({
         >
           <div className="label flex items-center gap-4 text-mute">
             <span className="shrink-0">
-              <span className="mr-2 inline-block size-1.5 -translate-y-px rounded-full bg-shu" />
+              <Dot />
               {period}
             </span>
             <span className="h-px flex-1 bg-ink/15" />
@@ -176,7 +178,7 @@ export default function Hero({
 
           <div className="mt-auto pb-[24svh] md:my-auto md:pb-[6svh]">
             <motion.p className="label mb-6 text-mute" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.2 }}>
-              Ấn bản độc giả · từ năm 2018
+              Ấn bản độc giả · từ năm {SITE.since}
             </motion.p>
             <h1
               className="display text-[clamp(3rem,min(9.4vw,15.5svh),12.5rem)] leading-[0.9] tracking-[-0.05em]"
@@ -207,9 +209,7 @@ export default function Hero({
           <div className="grid items-end gap-6 md:grid-cols-[minmax(0,1fr)_auto_auto] md:gap-12">
             <motion.p
               className="hidden max-w-[36ch] text-[0.92rem] text-ink/75 md:block"
-              initial={{ opacity: 0, transform: "translateY(16px)" }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              transition={{ duration: 1.2, delay: 0.7, ease: EASE }}
+              {...fadeUp(0.7)}
             >
               Mỗi kỳ, hàng nghìn độc giả cùng gọi tên những cuốn sách đã ở lại với mình. Tất cả được đóng thành một cuốn.
               <span className="mt-3 flex items-center gap-2 text-mute">
@@ -219,9 +219,7 @@ export default function Hero({
             </motion.p>
             <motion.dl
               className="hair grid grid-cols-3 border-t pt-3 md:gap-10 md:border-t-0 md:pt-0"
-              initial={{ opacity: 0, transform: "translateY(16px)" }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              transition={{ duration: 1.2, delay: 0.85, ease: EASE }}
+              {...fadeUp(0.85)}
             >
               {[
                 [nf.format(votes), "Lá phiếu"],
@@ -236,9 +234,7 @@ export default function Hero({
             </motion.dl>
             <motion.div
               className="hidden items-center gap-4 rounded-[3px] bg-card p-2.5 pr-5 shadow-[0_0_0_1px_rgb(22_18_14/0.08),0_20px_40px_-28px_rgb(22_18_14/0.5)] lg:flex"
-              initial={{ opacity: 0, transform: "translateY(16px)" }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              transition={{ duration: 1.2, delay: 1, ease: EASE }}
+              {...fadeUp(1)}
             >
               <Cover name={first.name} cover={first.cover} color={first.color} className="w-14 shrink-0" eager />
               <div className="max-w-[15rem]">
@@ -254,7 +250,7 @@ export default function Hero({
         <motion.div className="pointer-events-none absolute inset-0" style={{ opacity: readOpacity, visibility: readVisibility }}>
           <div className="label absolute inset-x-5 top-[4.5rem] flex justify-between text-mute md:inset-x-10 md:top-24">
             <span>
-              <span className="mr-2 inline-block size-1.5 -translate-y-px rounded-full bg-shu" />
+              <Dot />
               {n} tác phẩm dẫn đầu · {period}
             </span>
             <span className="hidden sm:block">{e ? `Trang ${pad(spread + 1)} / ${pad(n)}` : "Mục lục"}</span>

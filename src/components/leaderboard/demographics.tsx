@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "motion/react";
-import Rise, { Kicker, Lines } from "@/components/ui/reveal";
-import { nf, percent } from "@/lib/format";
+import Rise, { Kicker, Lines } from "@/components/ui/reveal";import { nf, percent } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 
 /** Who held the ballots: the split by gender, and one stack of pages per year of age. */
@@ -14,12 +13,9 @@ export default function Demographics({ gender, ages }: { gender: { male: number;
 
   return (
     <section className="overflow-hidden bg-ink px-5 py-24 text-paper md:px-10 md:py-36" aria-label="Chân dung người bình chọn">
-      <div className="label flex justify-between text-paper/55">
-        <span>
-          <span className="mr-3 text-shu">C</span>Chân dung người bình chọn
-        </span>
-        <span>{nf.format(total)} người</span>
-      </div>
+      <Kicker no="C" dark right={`${nf.format(total)} người`}>
+        Chân dung người bình chọn
+      </Kicker>
       <Lines className="display mt-6 text-[13vw] md:text-[8vw]">
         <>
           Ai đã <i className="text-shu">cầm lá phiếu?</i>

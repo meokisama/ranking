@@ -81,6 +81,14 @@ async function downloadAll() {
   await Promise.all(Array.from({ length: 10 }, worker));
 }
 
+const logoPath = (name) => `/images/publisher/${name}.webp`;
+
+/** Swaps a queued cover key for the downloaded file and its accent colour. */
+const withCover = ({ coverKey: key, ...rest }) => {
+  const meta = key ? coverMeta.get(key) : null;
+  return { ...rest, cover: meta?.file ?? null, color: meta?.color ?? null };
+};
+
 const book = (e) => ({
   id: e._id,
   name: e.ranobe.seriesName.trim(),
@@ -92,7 +100,7 @@ const book = (e) => ({
 const publisher = (e) => ({
   id: e._id,
   name: e.publisher.publisherName.trim(),
-  logo: `/images/publisher/${e.publisher.publisherLogo}.webp`,
+  logo: logoPath(e.publisher.publisherLogo),
   count: e.count,
 });
 
@@ -107,10 +115,7 @@ const illustrator = (e) => ({
 const byCount = (a, b) => b.count - a.count;
 
 const resolve = (list) =>
-  list.sort(byCount).map(({ coverKey: key, ...rest }, i) => {
-    const meta = key ? coverMeta.get(key) : null;
-    return { rank: i + 1, ...rest, cover: meta?.file ?? null, color: meta?.color ?? null };
-  });
+  list.sort(byCount).map((e, i) => ({ rank: i + 1, ...withCover(e) }));
 
 async function main() {
   const h1 = (await readJson("first_half_2024.json")).data;
@@ -174,21 +179,12 @@ async function main() {
   const ONESHOT = new Set(h2.favoriteOneshots.map((e) => e._id));
   const vote = {
     books: voteBooks
-      .map(({ coverKey: key, ...rest }) => {
-        const meta = key ? coverMeta.get(key) : null;
-        return {
-          ...rest,
-          cover: meta?.file ?? null,
-          color: meta?.color ?? null,
-          rookie: ROOKIE.includes(rest.id),
-          oneshot: ONESHOT.has(rest.id),
-        };
-      })
+      .map((b) => ({ ...withCover(b), rookie: ROOKIE.includes(b.id), oneshot: ONESHOT.has(b.id) }))
       .sort((a, b) => a.name.localeCompare(b.name, "vi")),
     publishers: votePublisher.map((p) => ({
       id: p.id,
       name: p.publisherName,
-      logo: `/images/publisher/${p.publisherLogo}.webp`,
+      logo: logoPath(p.publisherLogo),
     })),
   };
 

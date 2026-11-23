@@ -92,10 +92,27 @@ export function Rule({ className = "", delay = 0 }: { className?: string; delay?
   );
 }
 
-/** The small numbered kicker above every section. */
-export function Kicker({ no, children, right }: { no: string; children: React.ReactNode; right?: React.ReactNode }) {
+/** The small vermilion dot that marks a running head. */
+export function Dot() {
+  return <span className="mr-2 inline-block size-1.5 -translate-y-px rounded-full bg-shu" aria-hidden />;
+}
+
+/** The small numbered kicker above every section. `dark` sets it for a section printed in ink. */
+export function Kicker({
+  no,
+  children,
+  right,
+  dark,
+  className = "",
+}: {
+  no: string;
+  children: React.ReactNode;
+  right?: React.ReactNode;
+  dark?: boolean;
+  className?: string;
+}) {
   return (
-    <div className="label flex items-baseline justify-between gap-6 text-mute">
+    <div className={`label flex items-baseline justify-between gap-6 ${dark ? "text-paper/55" : "text-mute"} ${className}`}>
       <span>
         <span className="mr-3 text-shu">{no}</span>
         {children}

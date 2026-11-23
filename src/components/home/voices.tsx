@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { Kicker } from "@/components/ui/reveal";
 import { VOICES } from "@/lib/content";
 import { pad } from "@/lib/format";
 import { EASE } from "@/lib/motion";
@@ -11,14 +12,9 @@ export default function Voices() {
   const v = VOICES[i];
   return (
     <section className="bg-ink px-5 py-20 text-paper md:px-10 md:py-28">
-      <div className="label flex items-baseline justify-between gap-6 text-paper/55">
-        <span>
-          <span className="mr-3 text-shu">05</span>Tiếng nói trước giờ kiểm phiếu
-        </span>
-        <span>
-          {pad(i + 1)} / {pad(VOICES.length)}
-        </span>
-      </div>
+      <Kicker no="05" dark right={`${pad(i + 1)} / ${pad(VOICES.length)}`}>
+        Tiếng nói trước giờ kiểm phiếu
+      </Kicker>
       <div className="mt-4 h-px bg-paper/20" />
 
       <div className="mt-12 grid gap-12 md:mt-20 md:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)] md:gap-16">

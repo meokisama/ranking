@@ -470,7 +470,7 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
       // Tell the splash the cover is on screen, once the frame that draws it has gone out.
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
-          (window as unknown as { __bookReady?: boolean }).__bookReady = true;
+          window.__bookReady = true;
           window.dispatchEvent(new Event("book:ready"));
         })
       );
