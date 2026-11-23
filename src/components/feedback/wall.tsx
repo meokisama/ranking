@@ -33,13 +33,16 @@ export default function Wall({ notes, periods }: { notes: Note[]; periods: { slu
     );
   }, [notes, period, q]);
 
+  // Observed afresh whenever the list or the page changes: an observer only reports a change of state, so a
+  // sentinel that stays in view after a filter or a load would otherwise never ask for the next page.
+  const more = limit < filtered.length;
   useEffect(() => {
     const el = sentinel.current;
-    if (!el) return;
+    if (!el || !more) return;
     const io = new IntersectionObserver(([e]) => e.isIntersecting && setLimit((l) => l + PAGE), { rootMargin: "600px" });
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [filtered, limit, more]);
 
   const shown = filtered.slice(0, limit);
   const chips = [{ slug: "all", label: "Tất cả" }, ...periods];

@@ -7,6 +7,7 @@ import Cover from "@/components/ui/cover";
 import { CATEGORIES, VOTING } from "@/lib/config";
 import { fold, pad } from "@/lib/format";
 import { EASE } from "@/lib/motion";
+import { store } from "@/lib/storage";
 import Field from "./field";
 import type { Extra, Picks, VoteStep } from "./types";
 
@@ -70,14 +71,14 @@ export default function Ballot({
   // Restore and save a draft so a reload does not lose the selection.
   useEffect(() => {
     try {
-      const d = JSON.parse(localStorage.getItem(DRAFT_KEY) ?? "null");
+      const d = JSON.parse(store.get(DRAFT_KEY) ?? "null");
       if (d?.picks) setPicks(d.picks);
       if (d?.extra) setExtra({ ...EMPTY, ...d.extra });
     } catch {}
     loaded.current = true;
   }, []);
   useEffect(() => {
-    if (loaded.current) localStorage.setItem(DRAFT_KEY, JSON.stringify({ picks, extra }));
+    if (loaded.current) store.set(DRAFT_KEY, JSON.stringify({ picks, extra }));
   }, [picks, extra]);
 
   useEffect(() => {
@@ -145,8 +146,8 @@ export default function Ballot({
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || data.message !== "created") throw new Error(data.message ?? "unknown");
-      localStorage.setItem(VOTING.storageKey, "done");
-      localStorage.removeItem(DRAFT_KEY);
+      store.set(VOTING.storageKey, "done");
+      store.remove(DRAFT_KEY);
       onDone();
     } catch (err) {
       const code = err instanceof Error ? err.message : "";

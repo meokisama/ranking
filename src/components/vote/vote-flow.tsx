@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { VOTING, votingState } from "@/lib/config";
 import type { VotingState } from "@/lib/config";
+import { store } from "@/lib/storage";
 import Ballot from "./ballot";
 import Gate from "./gate";
 import type { VoteStep } from "./types";
@@ -14,7 +15,7 @@ export default function VoteFlow({ steps, periodLabel }: { steps: VoteStep[]; pe
   useEffect(() => {
     setState(votingState());
     setPreview(new URLSearchParams(window.location.search).has("preview"));
-    setVoted(localStorage.getItem(VOTING.storageKey) === "done");
+    setVoted(store.get(VOTING.storageKey) === "done");
   }, []);
 
   if (state === null) return <main className="min-h-svh" />;

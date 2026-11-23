@@ -235,7 +235,7 @@ export default function Footer() {
 
           <div className="mt-16 flex flex-col justify-between gap-3 border-t border-gold/30 pb-4 pt-5 text-paper/55 md:mt-20 md:flex-row">
             <span className="label">
-              © {SITE.since} – {new Date().getFullYear()} · {SITE.short}
+              {/* the year of the latest period, not of the build: the page is static */}© {SITE.since} – {currentPeriod.slug.split("-")[1]} · {SITE.short}
             </span>
             <span className="text-[0.8rem] font-light">Mọi tên sách và hình bìa thuộc về tác giả và nhà phát hành.</span>
           </div>
