@@ -50,13 +50,22 @@ export default function Splash() {
 
     const leave = () => {
       el.current?.setAttribute("data-state", "out");
-      root.dataset.splash = "off"; // lets the page's own entrance play as the sheet lifts
+      root.dataset.splash = "lifting"; // lets the page's own entrance play as the sheet lifts
       try {
         sessionStorage.setItem("splash", "1");
       } catch {}
       lenisRef.current?.start();
-      window.dispatchEvent(new Event("splash:out")); // work held back for the sheet can start
-      timers.push(window.setTimeout(() => setGone(true), reduced ? 400 : OUT));
+      timers.push(
+        window.setTimeout(
+          () => {
+            root.dataset.splash = "off";
+            // Heavy work held back for the sheet starts only now: started during the slide, it made the slide stutter.
+            window.dispatchEvent(new Event("splash:gone"));
+            setGone(true);
+          },
+          reduced ? 400 : OUT,
+        ),
+      );
     };
     const ready = () => {
       if (done) return;

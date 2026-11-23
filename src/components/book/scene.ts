@@ -410,14 +410,14 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   let pumping = false;
   const idle: (cb: () => void) => void =
     "requestIdleCallback" in window ? (cb) => window.requestIdleCallback(cb, { timeout: 400 }) : (cb) => setTimeout(cb, 16);
-  // While the splash covers the page only the cover is wanted (the splash waits for it); the inside pages
-  // would only compete with its animation, so they wait until it lifts.
-  const covered = () => document.documentElement.dataset.splash === "on";
+  // While the splash is up or sliding away only the cover is wanted (the splash waits for it); the inside pages
+  // would only compete with its animation, so they wait until it is gone.
+  const covered = () => ["on", "lifting"].includes(document.documentElement.dataset.splash ?? "");
   let coverPrinted = false;
   const pump = () => {
     if (dead) return;
     if (coverPrinted && covered()) {
-      window.addEventListener("splash:out", () => idle(pump), { once: true });
+      window.addEventListener("splash:gone", () => idle(pump), { once: true });
       return;
     }
     const job = queue.shift();
