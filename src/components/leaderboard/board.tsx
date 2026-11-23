@@ -2,17 +2,17 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useLenis } from "lenis/react";
 import { Search, X } from "lucide-react";
+import Book3D from "@/components/ui/book3d";
 import Cover from "@/components/ui/cover";
-import Rise, { Kicker, Lines } from "@/components/ui/reveal";
+import { Kicker } from "@/components/ui/reveal";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
 import type { Entry, Period } from "@/lib/data";
 import { fold, nf, pad, percent } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 import Demographics from "./demographics";
-import Shelf from "./shelf";
+import CoverArc from "./arc";
 
 const PAGE = 30;
 
@@ -29,7 +29,16 @@ function Thumb({ e, className = "" }: { e: Entry; className?: string }) {
   );
 }
 
-/** A bar in the book's own colour, the same colour as its spine on the shelf: as long as its votes go. */
+/** A podium book: in 3D, turning under the pointer. A publisher keeps its flat logo board. */
+function Podium({ e, thickness, className = "" }: { e: Entry; thickness: number; className?: string }) {
+  return e.logo ? (
+    <Thumb e={e} className={className} />
+  ) : (
+    <Book3D name={e.name} cover={e.cover} color={e.color} sub={subOf(e)} thickness={thickness} tilt className={`pr-[6%] ${className}`} />
+  );
+}
+
+/** A bar in the book's own colour: as long as its votes go. */
 function Thickness({ e, max, delay = 0, className = "" }: { e: Entry; max: number; delay?: number; className?: string }) {
   return (
     <div className={`relative h-3.5 rounded-[2px] bg-ink/[0.07] ${className}`} aria-hidden>
@@ -45,32 +54,29 @@ function Thickness({ e, max, delay = 0, className = "" }: { e: Entry; max: numbe
   );
 }
 
-function Medal({ e, votes, max, place }: { e: Entry; votes: number; max: number; place: number }) {
+const rise = (i: number) => ({
+  initial: { opacity: 0, transform: "translateY(36px)" },
+  whileInView: { opacity: 1, transform: "translateY(0px)" },
+  viewport: { once: true, margin: "0px 0px -8% 0px" },
+  transition: { duration: 1.1, delay: 0.05 + i * 0.1, ease: EASE },
+});
+
+/** The winner: a full-height cover beside its number, name and count. */
+function Champion({ e, votes }: { e: Entry; votes: number }) {
   return (
     <motion.li
-      className="group grid grid-cols-[5.5rem_1fr] items-end gap-5 md:block"
-      initial={{ opacity: 0, transform: "translateY(40px)" }}
-      animate={{ opacity: 1, transform: "translateY(0px)" }}
-      transition={{ duration: 1.1, delay: 0.08 + place * 0.1, ease: EASE }}
+      className="group grid grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] items-end gap-5 py-8 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-10 md:py-12 md:pr-12"
+      {...rise(0)}
     >
-      <div className="md:flex md:items-end md:justify-between">
-        <span
-          className={`num hidden leading-[0.78] md:block ${place === 0 ? "text-[clamp(6rem,10vw,13rem)] text-shu" : "text-[clamp(4.5rem,7.4vw,10rem)]"}`}
-        >
-          {pad(e.rank)}
-        </span>
-        <Thumb
-          e={e}
-          className={`w-full transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-2 ${place === 0 ? "md:w-[42%] md:max-w-64" : "md:w-[34%] md:max-w-52"}`}
-        />
-      </div>
-      <div className="min-w-0 md:mt-6">
-        <span className={`num text-4xl md:hidden ${place === 0 ? "text-shu" : ""}`}>{pad(e.rank)}</span>
-        <h3 className="display mt-1 line-clamp-3 text-[1.5rem] leading-[1.04] md:mt-0 md:text-[2.1vw]">{e.name}</h3>
-        <p className="label mt-2 truncate text-mute">{subOf(e)}</p>
-        <Thickness e={e} max={max} delay={0.3 + place * 0.1} className="mt-4" />
-        <p className="mt-2 flex items-baseline justify-between">
-          <span className="num text-3xl">{nf.format(e.count)}</span>
+      <Podium e={e} thickness={30} className="w-full max-w-[22rem]" />
+      <div className="min-w-0">
+        <span className="label text-mute">Quán quân</span>
+        <p className="num mt-1 text-[clamp(5rem,11vw,12rem)] leading-[0.78] text-shu">01</p>
+        <h3 className="display mt-5 line-clamp-4 text-[1.55rem] leading-[1.04] md:text-[clamp(1.8rem,2.6vw,2.8rem)]">{e.name}</h3>
+        <p className="label mt-3 truncate text-mute">{subOf(e)}</p>
+        <Thickness e={e} max={e.count} delay={0.3} className="mt-6" />
+        <p className="mt-3 flex items-baseline justify-between gap-3">
+          <span className="num text-4xl md:text-5xl">{nf.format(e.count)}</span>
           <span className="label text-mute">phiếu · {percent(e.count, votes)}</span>
         </p>
       </div>
@@ -78,13 +84,34 @@ function Medal({ e, votes, max, place }: { e: Entry; votes: number; max: number;
   );
 }
 
-function Row({ e, max, votes, lit }: { e: Entry; max: number; votes: number; lit: boolean }) {
+/** Second and third: a smaller cover, and how far each stands from the top. */
+function Runner({ e, votes, max, place }: { e: Entry; votes: number; max: number; place: number }) {
+  return (
+    <motion.li
+      className={`hair group grid flex-1 grid-cols-[6.5rem_minmax(0,1fr)] items-center gap-5 border-t py-8 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-8 md:pl-12 ${place === 1 ? "md:border-t-0" : ""}`}
+      {...rise(place)}
+    >
+      <Podium e={e} thickness={18} className="w-full" />
+      <div className="min-w-0">
+        <p className="num text-[clamp(3.2rem,5.5vw,5.5rem)] leading-[0.8]">{pad(e.rank)}</p>
+        <h3 className="display mt-3 line-clamp-3 text-[1.25rem] leading-[1.06] md:text-[clamp(1.3rem,1.7vw,1.8rem)]">{e.name}</h3>
+        <p className="label mt-2 truncate text-mute">{subOf(e)}</p>
+        <Thickness e={e} max={max} delay={0.3 + place * 0.1} className="mt-4" />
+        <p className="mt-2 flex items-baseline justify-between gap-3">
+          <span className="num text-2xl md:text-3xl">{nf.format(e.count)}</span>
+          <span className="label text-right text-mute">
+            {percent(e.count, votes)} · kém {nf.format(max - e.count)}
+          </span>
+        </p>
+      </div>
+    </motion.li>
+  );
+}
+
+function Row({ e, max, votes }: { e: Entry; max: number; votes: number }) {
   return (
     <li
-      id={`e-${e.id}`}
-      className={`hair group grid scroll-mt-40 grid-cols-[2.4rem_2.6rem_1fr_auto] items-center gap-x-3 border-b py-3.5 transition-colors duration-700 md:grid-cols-[4rem_2.8rem_minmax(0,1.3fr)_minmax(0,1.2fr)_5.5rem_4rem] md:gap-x-6 ${
-        lit ? "bg-shu/10" : "hover:bg-card"
-      }`}
+      className="hair group grid grid-cols-[2.4rem_2.6rem_1fr_auto] items-center gap-x-3 border-b py-3.5 transition-colors duration-700 hover:bg-card md:grid-cols-[4rem_2.8rem_minmax(0,1.3fr)_minmax(0,1.2fr)_5.5rem_4rem] md:gap-x-6"
     >
       <span className={`num pl-1 text-2xl md:text-[1.9rem] ${e.rank <= 3 ? "text-shu" : ""}`}>{pad(e.rank)}</span>
       <Thumb e={e} className="w-full" />
@@ -105,8 +132,6 @@ export default function Board({ period, periods }: { period: Period; periods: { 
   const [cat, setCat] = useState<CategoryKey>(keys[0]);
   const [q, setQ] = useState("");
   const [limit, setLimit] = useState(PAGE);
-  const [lit, setLit] = useState<number | null>(null);
-  const lenis = useLenis();
 
   // Read ?cat= after mount so the page stays fully static.
   useEffect(() => {
@@ -119,7 +144,6 @@ export default function Board({ period, periods }: { period: Period; periods: { 
     setCat(c);
     setQ("");
     setLimit(PAGE);
-    setLit(null);
     const url = new URL(window.location.href);
     url.searchParams.set("cat", c);
     window.history.replaceState(null, "", url);
@@ -128,70 +152,18 @@ export default function Board({ period, periods }: { period: Period; periods: { 
   const list = period.categories[cat]!;
   const meta = CATEGORIES[cat];
   const max = list[0].count;
+  const searching = q.trim().length > 0;
+  // The top three have the podium; the list carries on from fourth, unless a search wants the whole field.
   const rows = useMemo(() => {
-    if (!q.trim()) return list;
+    if (!searching) return list.slice(3);
     const needle = fold(q.trim());
     return list.filter((e) => fold(e.name).includes(needle) || fold(subOf(e)).includes(needle));
-  }, [list, q]);
+  }, [list, q, searching]);
   const shown = rows.slice(0, limit);
-
-  // A spine on the shelf leads to its line in the list.
-  const pick = (e: Entry) => {
-    setQ("");
-    setLimit((l) => Math.max(l, e.rank + 5));
-    setLit(e.id);
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        const el = document.getElementById(`e-${e.id}`);
-        if (!el) return;
-        if (lenis) lenis.scrollTo(el, { offset: -window.innerHeight * 0.35, duration: 1.4 });
-        else el.scrollIntoView({ block: "center" });
-      }),
-    );
-  };
 
   return (
     <main>
-      <header className="relative overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-14 md:pt-36">
-        <Kicker no="●" right={`${nf.format(period.votes)} lượt bình chọn hợp lệ`}>
-          Bảng tổng sắp · {period.long}
-        </Kicker>
-        <div className="mt-6 grid items-end gap-10 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-          <div>
-            <Lines as="h1" className="display text-[17vw] md:text-[11vw]" label={period.label}>
-              {period.label.split(" · ")[0]}
-              <>
-                <i className="text-shu">{period.label.split(" · ")[1]}</i>
-                <span className="text-shu">.</span>
-              </>
-            </Lines>
-            <dl className="hair mt-8 grid max-w-xl grid-cols-3 border-t pt-4">
-              {keys.map((k) => (
-                <div key={k}>
-                  <dd className="num text-3xl md:text-4xl">{period.categories[k]!.length}</dd>
-                  <dt className="label mt-1 text-mute">{CATEGORIES[k].short}</dt>
-                </div>
-              )).slice(0, 3)}
-            </dl>
-          </div>
-          {/* The three that lead the first category, fanned out like books laid on a table. */}
-          <div className="relative hidden h-[24rem] md:block" aria-hidden>
-            {period.categories[keys[0]]!.slice(0, 3).map((e, i) => (
-              <motion.div
-                key={e.id}
-                className="absolute bottom-0 w-[38%]"
-                style={{ left: `${[31, 4, 58][i]}%`, zIndex: 3 - i }}
-                initial={{ opacity: 0, transform: `translateY(60px) rotate(${[0, -14, 14][i] * 1.6}deg)` }}
-                animate={{ opacity: 1, transform: `translateY(${[0, 26, 34][i]}px) rotate(${[0, -9, 9][i]}deg)` }}
-                transition={{ duration: 1.4, delay: 0.25 + i * 0.12, ease: EASE }}
-              >
-                <Thumb e={e} className="w-full shadow-[0_30px_50px_-30px_rgb(22_18_14/0.7)]" />
-                <span className={`num absolute -left-3 -top-8 text-6xl ${i === 0 ? "text-shu" : "text-ink"}`}>{pad(e.rank)}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </header>
+      <CoverArc period={period} list={list} unit={meta.unit} catLabel={meta.short} sub={subOf} />
 
       {/* Controls: which period, which category. Always in reach. */}
       <div className="hair sticky top-14 z-40 border-y bg-paper/85 backdrop-blur-md md:top-16">
@@ -230,42 +202,41 @@ export default function Board({ period, periods }: { period: Period; periods: { 
           exit={{ opacity: 0, transition: { duration: 0.2 } }}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <section className="px-5 pt-14 md:px-10 md:pt-20" aria-label="Ba hạng đầu">
-            <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-              <h2 className="display max-w-[16ch] text-4xl leading-[1.02] md:text-[4vw]">{meta.label}</h2>
-              <p className="max-w-[42ch] text-[0.95rem] font-light text-ink/75">{meta.blurb}</p>
+          <section className="px-5 pt-16 md:px-10 md:pt-24" aria-label="Ba hạng đầu">
+            <Kicker no="A" right={`${nf.format(list[0].count + (list[1]?.count ?? 0) + (list[2]?.count ?? 0))} phiếu cho ba cái tên`}>
+              Ba hạng đầu
+            </Kicker>
+            <div className="mt-5 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+              <h2 className="display max-w-[18ch] text-[11vw] leading-[0.98] md:text-[4.6vw]">{meta.label}</h2>
+              <p className="max-w-[40ch] text-[0.95rem] font-light text-ink/75">{meta.blurb}</p>
             </div>
-            <ol className="hair mt-12 grid gap-10 border-t pt-10 md:mt-16 md:grid-cols-3 md:gap-12 md:pt-12">
-              {list.slice(0, 3).map((e, i) => (
-                <Medal key={e.id} e={e} votes={period.votes} max={max} place={i} />
-              ))}
+            <ol className="mt-10 grid border-t border-ink md:mt-14 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+              <Champion e={list[0]} votes={period.votes} />
+              <li className="hair md:border-l">
+                <ol className="flex h-full flex-col" start={2}>
+                  {list.slice(1, 3).map((e, i) => (
+                    <Runner key={e.id} e={e} votes={period.votes} max={max} place={i + 1} />
+                  ))}
+                </ol>
+              </li>
             </ol>
           </section>
 
-          <section className="mt-24 bg-card px-5 py-16 md:mt-36 md:px-10 md:py-24" aria-label="Kệ sách">
-            <Kicker no="A" right="Chạm vào một gáy sách để tới dòng của nó">
-              Toàn cảnh
-            </Kicker>
-            <div className="mt-5 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-              <h2 className="display text-[11vw] md:text-[5.4vw]">
-                Cả kệ sách, <i className="text-shu">trong một cái nhìn</i>
-              </h2>
-              <p className="max-w-[40ch] text-[0.9rem] font-light text-ink/75">
-                {list.length} {meta.unit}, xếp từ hạng nhất. Gáy càng dày, càng nhiều độc giả gọi tên.
-              </p>
-            </div>
-            <Rise className="mt-12 md:mt-16">
-              <Shelf list={list} votes={period.votes} sub={subOf} onPick={pick} />
-            </Rise>
-          </section>
-
-          <section className="px-5 pb-28 pt-20 md:px-10 md:pb-40 md:pt-28" aria-label="Danh sách đầy đủ">
-            <Kicker no="B" right={`${nf.format(rows.length)} / ${nf.format(list.length)}`}>
+          <section className="px-5 pb-28 pt-20 md:px-10 md:pb-40 md:pt-32" aria-label="Danh sách đầy đủ">
+            <Kicker no="B" right={searching ? `${nf.format(rows.length)} / ${nf.format(list.length)}` : `Hạng 04 – ${pad(list.length)}`}>
               Từng dòng một
             </Kicker>
             <div className="mt-5 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <h2 className="display text-[11vw] md:text-[5.4vw]">
-                Toàn bộ <i className="text-shu">{list.length}</i> {meta.unit}
+                {searching ? (
+                  <>
+                    Tìm trong <i className="text-shu">{list.length}</i> {meta.unit}
+                  </>
+                ) : (
+                  <>
+                    Và <i className="text-shu">{list.length - 3}</i> {meta.unit} nữa
+                  </>
+                )}
               </h2>
               <label className="flex h-12 w-full items-center gap-3 rounded-full border border-ink/25 px-5 transition-colors focus-within:border-ink md:w-96">
                 <Search className="size-4 shrink-0 text-mute" aria-hidden />
@@ -290,13 +261,13 @@ export default function Board({ period, periods }: { period: Period; periods: { 
               <span className="pl-1">Hạng</span>
               <span />
               <span>{meta.unit}</span>
-              <span>Độ dày · so với hạng nhất</span>
+              <span>So với hạng nhất</span>
               <span className="text-right">Phiếu</span>
               <span className="pr-1 text-right">Tỉ lệ</span>
             </div>
             <ol className="mt-3 border-t border-ink">
               {shown.map((e) => (
-                <Row key={e.id} e={e} max={max} votes={period.votes} lit={lit === e.id} />
+                <Row key={e.id} e={e} max={max} votes={period.votes} />
               ))}
             </ol>
 

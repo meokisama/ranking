@@ -20,6 +20,30 @@ const ERRORS: Record<string, string> = {
   invalidCaptcha: "Captcha không hợp lệ. Hãy xác minh lại, hoặc tải lại trang nếu cần.",
 };
 
+/**
+ * The mark of a choice: a vermilion seal pressed onto the cover, which fades back under it like a book already
+ * set aside. It comes down hard, a little crooked, as a hand-held stamp does.
+ */
+function Stamp({ n }: { n: number }) {
+  return (
+    <motion.span
+      className="pointer-events-none absolute left-1/2 top-1/2 z-10 -ml-[min(34%,4.75rem)] -mt-[min(34%,4.75rem)] grid aspect-square w-[min(68%,9.5rem)] place-items-center rounded-full border-[4px] border-shu text-shu"
+      initial={{ opacity: 0, transform: "scale(1.9) rotate(4deg)" }}
+      animate={{ opacity: 1, transform: "scale(1) rotate(-14deg)" }}
+      exit={{ opacity: 0, transform: "scale(1.15) rotate(-14deg)", transition: { duration: 0.2 } }}
+      transition={{ duration: 0.32, ease: [0.5, 0, 0.75, 0] }}
+      aria-hidden
+    >
+      <span className="absolute inset-[8%] rounded-full border-[1.5px] border-shu" />
+      <span className="flex flex-col items-center">
+        <span className="font-mono text-[clamp(0.5rem,1.6vw,0.68rem)] font-medium uppercase tracking-[0.18em]">Đã chọn</span>
+        <span className="num -my-0.5 text-[clamp(1.8rem,5vw,2.8rem)] font-medium leading-none">{pad(n)}</span>
+        <span className="h-[1.5px] w-8 bg-shu" />
+      </span>
+    </motion.span>
+  );
+}
+
 /** The ballot: one sheet per category, then a note to the organisers, then the hand-in. */
 export default function Ballot({
   steps,
@@ -205,7 +229,7 @@ export default function Ballot({
               <ul
                 className={`mt-12 grid gap-x-5 gap-y-9 ${
                   current.key === "publisher"
-                    ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+                    ? "grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
                     : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
                 }`}
               >
@@ -215,30 +239,29 @@ export default function Ballot({
                   return (
                     <li key={it.id}>
                       <button onClick={() => toggle(it.id)} aria-pressed={on} className="group block w-full text-left">
-                        <div
-                          className={`relative rounded-[3px] outline outline-2 outline-offset-4 transition-[translate,outline-color] duration-500 ease-[var(--ease-out-expo)] ${
-                            on ? "-translate-y-2 outline-shu" : "outline-transparent group-hover:-translate-y-1"
+                        <div className="relative">
+                          <div
+                            className={`transition-[opacity,filter,translate] duration-500 ease-[var(--ease-out-expo)] ${
+                              on ? "opacity-30 grayscale" : "group-hover:-translate-y-1"
+                            }`}
+                          >
+                            {it.logo ? (
+                              <div className="relative aspect-square rounded-[2px] bg-white shadow-[0_0_0_1px_rgb(22_18_14/0.1),0_14px_28px_-18px_rgb(22_18_14/0.45)]">
+                                <img src={it.logo} alt="" loading="lazy" className="absolute inset-[14%] size-[72%] object-contain" />
+                              </div>
+                            ) : (
+                              <Cover name={it.name} cover={it.cover} color={it.color} sub={it.publisher} />
+                            )}
+                          </div>
+                          <AnimatePresence>{on && <Stamp n={order + 1} />}</AnimatePresence>
+                        </div>
+                        <span
+                          className={`display mt-4 line-clamp-2 block text-[1.1rem] leading-[1.12] transition-colors duration-500 ${
+                            on ? "text-shu" : ""
                           }`}
                         >
-                          {it.logo ? (
-                            <div className="grid aspect-square place-items-center rounded-[2px] bg-white p-5 shadow-[0_0_0_1px_rgb(22_18_14/0.12)]">
-                              <img src={it.logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
-                            </div>
-                          ) : (
-                            <Cover name={it.name} cover={it.cover} color={it.color} sub={it.publisher} />
-                          )}
-                          {on && (
-                            <motion.span
-                              initial={{ transform: "scale(0)" }}
-                              animate={{ transform: "scale(1)" }}
-                              transition={{ duration: 0.5, ease: EASE }}
-                              className="num absolute -right-3 -top-3 grid size-9 place-items-center rounded-full bg-shu text-lg text-paper shadow-lg"
-                            >
-                              {order + 1}
-                            </motion.span>
-                          )}
-                        </div>
-                        <span className="display mt-4 line-clamp-2 block text-[1.1rem] leading-[1.12]">{it.name}</span>
+                          {it.name}
+                        </span>
                         {it.publisher && <span className="label mt-1 block truncate text-mute">{it.publisher}</span>}
                       </button>
                     </li>

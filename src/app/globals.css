@@ -257,32 +257,6 @@ body::after {
     box-shadow: inset 0 0 0 1px rgb(22 18 14 / 0.22);
   }
 
-  /* The bookshelf (see components/leaderboard/shelf.tsx): a board under every row of spines. */
-  .shelf {
-    background-repeat: repeat-y;
-    background-size: 100% calc(var(--h) + 2.25rem);
-    background-image: linear-gradient(
-      to bottom,
-      transparent 0 var(--h),
-      rgb(22 18 14 / 0.85) var(--h) calc(var(--h) + 2px),
-      transparent calc(var(--h) + 2px)
-    );
-    background-position: 0 0;
-    padding-bottom: 2px;
-  }
-  .spine {
-    box-shadow:
-      inset 2px 0 0 rgb(255 255 255 / 0.14),
-      inset -2px 0 0 rgb(0 0 0 / 0.16);
-    animation: shelve 0.9s var(--ease-out-expo) backwards;
-  }
-  @keyframes shelve {
-    from {
-      opacity: 0;
-      transform: translateY(-46px) rotate(-5deg);
-    }
-  }
-
   /* A book in CSS 3D: cover, spine, page block (see components/ui/book3d.tsx). */
   .book3d {
     perspective: 1400px;
