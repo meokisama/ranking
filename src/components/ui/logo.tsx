@@ -1,5 +1,6 @@
 /**
- * The mark: an open book with a ribbon marking its place, the place being the point of a ranking.
+ * The mark: three books on a shelf, standing as a podium. The tallest, in the middle, is the first place,
+ * vermilion with a ribbon marking it; the last leans against the end, as books on a real shelf do.
  * The same drawing as src/app/icon.svg. `tone` sets the colours for each surface it sits on.
  */
 export default function Logo({
@@ -11,15 +12,20 @@ export default function Logo({
 }) {
   const t =
     tone === "gold"
-      ? { tile: "none", page: "#e2c07a", seam: "#b02c17", ribbon: "#e2c07a", stroke: "#e2c07a" }
-      : { tile: "#d6361b", page: "#f6f1e5", seam: "#b02c17", ribbon: "#16120e", stroke: "none" };
+      ? { tile: "none", stroke: "#e2c07a", book: "#e2c07a", band: "#b02c17", first: "#16120e", ribbon: "#e2c07a", shelf: "#e2c07a" }
+      : { tile: "#16120e", stroke: "none", book: "#f1ebde", band: "#16120e", first: "#d6361b", ribbon: "#f1ebde", shelf: "#f1ebde" };
   return (
     <svg viewBox="0 0 64 64" className={className} aria-hidden>
-      <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="15" fill={t.tile} stroke={t.stroke} strokeWidth="1.5" />
-      <path d="M9 19.5c8-3 16-2.6 23 1.8v27.4c-7-4-15-4.4-23-1.6z" fill={t.page} />
-      <path d="M55 19.5c-8-3-16-2.6-23 1.8v27.4c7-4 15-4.4 23-1.6z" fill={t.page} />
-      <path d="M32 21.3v27.4" stroke={t.seam} strokeWidth="1.4" />
-      <path d="M39 18.6h6.4v29.6l-3.2-3.3-3.2 3.3z" fill={t.ribbon} stroke={tone === "gold" ? "#b02c17" : "none"} strokeWidth="1.2" />
+      <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="14" fill={t.tile} stroke={t.stroke} strokeWidth="1.5" />
+      <rect x="11" y="25" width="12" height="27" rx="1" fill={t.book} />
+      <rect x="11" y="29" width="12" height="2" fill={t.band} />
+      <rect x="25" y="13" width="13" height="39" rx="1" fill={t.first} />
+      <path d="M28.5 13h6v12l-3-2.6-3 2.6z" fill={t.ribbon} />
+      <g transform="rotate(14 40 52)">
+        <rect x="40" y="31" width="11" height="21" rx="1" fill={t.book} />
+        <rect x="40" y="35" width="11" height="2" fill={t.band} />
+      </g>
+      <rect x="8" y="52" width="48" height="2.5" rx="1" fill={t.shelf} />
     </svg>
   );
 }

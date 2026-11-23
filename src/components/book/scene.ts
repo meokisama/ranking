@@ -154,7 +154,7 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.75 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NeutralToneMapping;
-  renderer.toneMappingExposure = 1.0;
+  renderer.toneMappingExposure = 0.94;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.setClearColor(0x000000, 0);
@@ -170,7 +170,7 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 60);
 
   // A warm window light raking in low from the upper left, so the curve of every page shows.
-  const sun = new THREE.DirectionalLight(0xfff0da, 3.0);
+  const sun = new THREE.DirectionalLight(0xfff0da, 2.3);
   sun.castShadow = true;
   sun.shadow.mapSize.set(small ? 1024 : 2048, small ? 1024 : 2048);
   const sc = sun.shadow.camera;
@@ -255,7 +255,7 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   const sidesMat = new THREE.MeshStandardMaterial({ map: edgeTex, roughness: 0.95, side: THREE.DoubleSide });
   const capsMat = new THREE.MeshStandardMaterial({ map: capTex, roughness: 0.95, side: THREE.DoubleSide });
   const pageMat = (map: THREE.Texture, side: THREE.Side) =>
-    new THREE.MeshStandardMaterial({ map, roughness: 0.82, bumpMap: tooth, bumpScale: 0.35, side });
+    new THREE.MeshStandardMaterial({ map, roughness: 0.94, bumpMap: tooth, bumpScale: 0.35, side });
 
   // ---- the book ----
   const book = new THREE.Group();

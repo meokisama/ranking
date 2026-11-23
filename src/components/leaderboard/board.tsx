@@ -207,7 +207,7 @@ export default function Board({ period, periods }: { period: Period; periods: { 
               Ba hạng đầu
             </Kicker>
             <div className="mt-5 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-              <h2 className="display max-w-[18ch] text-[11vw] leading-[0.98] md:text-[4.6vw]">{meta.label}</h2>
+              <h2 className="display max-w-[24ch] text-[11vw] leading-[0.98] md:text-[4.2vw]">{meta.label}</h2>
               <p className="max-w-[40ch] text-[0.95rem] font-light text-ink/75">{meta.blurb}</p>
             </div>
             <ol className="mt-10 grid border-t border-ink md:mt-14 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">

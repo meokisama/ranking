@@ -173,7 +173,7 @@ export default function CoverArc({
   const max = items[0].count;
 
   return (
-    <header className="relative overflow-hidden pb-10 pt-[4.5rem] md:h-[100svh] md:max-h-[1000px] md:min-h-[680px] md:pb-0 md:pt-24">
+    <header className="relative isolate overflow-hidden pb-10 pt-[4.5rem] md:h-[100svh] md:max-h-[1000px] md:min-h-[680px] md:pb-0 md:pt-24">
       <div className="label relative z-10 flex items-center gap-4 px-5 text-mute md:px-10">
         <span className="shrink-0">
           <span className="mr-2 inline-block size-1.5 -translate-y-px rounded-full bg-shu" />
