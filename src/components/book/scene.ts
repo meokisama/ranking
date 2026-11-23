@@ -12,7 +12,7 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import { loadFaces, paintBlank, paintContents, paintCover, paintEdge, paintEntry, paintPlate, paintTitle, paintTooth } from "./pages";
+import { loadFaces, paintBlank, paintContents, paintCover, paintEdge, paintEntry, paintPlate, paintTitle, paintTooth, releasePaper } from "./pages";
 import type { Faces, Leafed } from "./pages";
 
 export type BookScene = {
@@ -151,14 +151,19 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
 
   const small = Math.min(window.innerWidth, window.innerHeight) < 700;
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.75 : 2));
+  // The canvas fills the viewport, so on a large screen the device pixel ratio alone can mean seven or eight
+  // million pixels a frame. Hold it to a budget, and step it down further if frames come in slow.
+  const BUDGET = small ? 2.2e6 : 4.8e6;
+  let quality = 1;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 0.94;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.setClearColor(0x000000, 0);
-  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  /** Set whenever something on screen changes outside the scroll and pointer: a page printed, a resize. */
+  let dirty = true;
 
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
@@ -220,12 +225,15 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
     const c = document.createElement("canvas");
     c.width = c.height = 64;
     const ctx = c.getContext("2d")!;
+    const img = ctx.createImageData(64, 64);
     for (let y = 0; y < 64; y++)
       for (let x = 0; x < 64; x++) {
         const v = 128 + ((x + y) % 2 ? 22 : -22) + (Math.random() - 0.5) * 30;
-        ctx.fillStyle = `rgb(${v},${v},${v})`;
-        ctx.fillRect(x, y, 1, 1);
+        const k = (y * 64 + x) * 4;
+        img.data[k] = img.data[k + 1] = img.data[k + 2] = v;
+        img.data[k + 3] = 255;
       }
+    ctx.putImageData(img, 0, 0);
     const t = new THREE.CanvasTexture(c);
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.repeat.set(40, 40);
@@ -250,8 +258,16 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
 
   // ---- materials ----
   const cloth = new THREE.MeshStandardMaterial({ color: 0xb02c17, roughness: 0.88, bumpMap: weave, bumpScale: 0.6 });
+  // The cover starts with stand-in maps of every kind it will have, so printing it later does not rebuild the shader.
+  const pixel = (r: number, g: number, b: number) => {
+    const t = new THREE.DataTexture(new Uint8Array([r, g, b, 255]), 1, 1);
+    t.needsUpdate = true;
+    return t;
+  };
   const coverMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1, metalness: 1, bumpScale: 0.8 });
   coverMat.map = tex(paintBlank(64));
+  coverMat.roughnessMap = coverMat.metalnessMap = pixel(0, 255, 0);
+  coverMat.bumpMap = pixel(128, 128, 128);
   const sidesMat = new THREE.MeshStandardMaterial({ map: edgeTex, roughness: 0.95, side: THREE.DoubleSide });
   const capsMat = new THREE.MeshStandardMaterial({ map: capTex, roughness: 0.95, side: THREE.DoubleSide });
   const pageMat = (map: THREE.Texture, side: THREE.Side) =>
@@ -365,39 +381,79 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   const max = Math.max(...items.map((e) => e.count));
   let faces: Faces | null = null;
   const images: (HTMLImageElement | null)[] = order.map(() => null);
+  // Swapping one map for another of the same kind keeps the shader, so no needsUpdate on the material.
   const setMap = (m: THREE.MeshStandardMaterial, t: THREE.Texture) => {
     if (m.map && m.map !== blankL && m.map !== blankR) m.map.dispose();
     m.map = t;
-    m.needsUpdate = true;
+    dirty = true;
   };
-  const printPlate = (i: number) => {
+  /** Sends a freshly painted texture to the GPU now, in its own slot, rather than in the next frame that draws it. */
+  const upload = (t: THREE.Texture) => {
+    renderer.initTexture(t);
+    return t;
+  };
+
+  // Each page takes tens of milliseconds to typeset, so they are printed one at a time in the browser's idle
+  // slots, in the order the reader meets them: the cover first, the last place's leaves last.
+  const queue: (() => void)[] = [];
+  const queued = new Set<string>();
+  let pumping = false;
+  const idle: (cb: () => void) => void =
+    "requestIdleCallback" in window ? (cb) => window.requestIdleCallback(cb, { timeout: 400 }) : (cb) => setTimeout(cb, 16);
+  const pump = () => {
     if (dead) return;
-    setMap(leaves[i].back, mirrored(tex(paintPlate(TEXT, faces, order[i], images[i], 4 + i * 2))));
+    const job = queue.shift();
+    if (!job) return void (pumping = false);
+    job();
+    idle(pump);
   };
+  const print = (key: string, job: () => void) => {
+    if (queued.has(key)) return;
+    queued.add(key);
+    queue.push(() => {
+      queued.delete(key);
+      if (!dead) job();
+    });
+    if (!pumping) {
+      pumping = true;
+      idle(pump);
+    }
+  };
+
+  const printPlate = (i: number) =>
+    print(`plate${i}`, () => setMap(leaves[i].back, upload(mirrored(tex(paintPlate(TEXT, faces, order[i], images[i], 4 + i * 2))))));
   order.forEach((e, i) => {
-    printPlate(i);
     if (!e.cover) return;
     const img = new Image();
-    img.onload = () => {
-      images[i] = img;
-      printPlate(i);
-    };
     img.src = e.cover;
+    // Decoded off the main thread; printed once the type is in, or now if it already is.
+    img.decode().then(
+      () => {
+        if (dead) return;
+        images[i] = img;
+        if (faces) printPlate(i);
+      },
+      () => {}
+    );
   });
   loadFaces(items.map((e) => e.name).join(" ") + " Bảng xếp hạng Việt Nam Mục lục PHIẾU ĐỘC GIẢ HẠNG Ấn bản").then((f) => {
     if (dead) return;
     faces = f;
-    const c = paintCover(TEXT, f, meta.period, meta.votes);
-    coverMat.map?.dispose();
-    coverMat.map = tex(c.color);
-    coverMat.roughnessMap = coverMat.metalnessMap = tex(c.orm, false);
-    coverMat.bumpMap = tex(c.bump, false);
-    coverMat.needsUpdate = true;
-    titleMat.map = tex(paintTitle(TEXT, f, meta.period, meta.votes, N));
-    titleMat.needsUpdate = true;
-    setMap(leaves[0].front, tex(paintContents(TEXT, f, order, meta.period)));
+    print("cover", () => {
+      const c = paintCover(TEXT, f, meta.period, meta.votes);
+      for (const t of [coverMat.map, coverMat.roughnessMap, coverMat.bumpMap]) t?.dispose();
+      coverMat.map = upload(tex(c.color));
+      coverMat.roughnessMap = coverMat.metalnessMap = upload(tex(c.orm, false));
+      coverMat.bumpMap = upload(tex(c.bump, false));
+      dirty = true;
+    });
+    print("title", () => {
+      titleMat.map = upload(tex(paintTitle(TEXT, f, meta.period, meta.votes, N)));
+      dirty = true;
+    });
+    print("contents", () => setMap(leaves[0].front, upload(tex(paintContents(TEXT, f, order, meta.period)))));
     order.forEach((e, i) => {
-      setMap(leaves[i + 1].front, tex(paintEntry(TEXT, f, e, meta.votes, max, meta.period, 5 + i * 2)));
+      print(`entry${i}`, () => setMap(leaves[i + 1].front, upload(tex(paintEntry(TEXT, f, e, meta.votes, max, meta.period, 5 + i * 2)))));
       printPlate(i);
     });
   });
@@ -408,14 +464,20 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
     const r = canvas.getBoundingClientRect();
     w = Math.max(1, r.width);
     h = Math.max(1, r.height);
+    const dpr = Math.min(window.devicePixelRatio || 1, small ? 1.75 : 2);
+    renderer.setPixelRatio(Math.max(1, Math.min(dpr, Math.sqrt(BUDGET / (w * h))) * quality));
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
+    dirty = true;
   };
   resize();
   const ro = new ResizeObserver(resize);
   ro.observe(canvas);
   let visible = true;
-  const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
+  const io = new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+    dirty = true;
+  });
   io.observe(canvas);
 
   const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
@@ -432,12 +494,17 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   let last = performance.now();
   let reported = -3;
   let curved = -1;
+  let lastShown = -1;
+  let lastPx = NaN;
+  let lastPy = NaN;
+  const SUN = new THREE.Vector3(-3.2, 3.6, 1.6);
 
   const api: BookScene = {
     setProgress(p) {
       progress = clamp01(p);
     },
     setInset(px) {
+      if (px !== inset) dirty = true;
       inset = px;
     },
     onSpread: null,
@@ -459,6 +526,7 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
       scene.environment?.dispose();
       pmrem.dispose();
       renderer.dispose();
+      releasePaper();
     },
   };
 
@@ -469,14 +537,47 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   const up = new THREE.Vector3();
   const euler = new THREE.Euler(0, 0, 0, "YXZ");
 
-  renderer.setAnimationLoop((now: number) => {
-    const dt = Math.min(0.05, (now - last) / 1000);
+  // Frame pacing, for stepping the resolution down on a machine that cannot keep up.
+  let slowSum = 0;
+  let slowCount = 0;
+
+  const frame = (now: number) => {
+    const raw = (now - last) / 1000;
+    const dt = Math.min(0.05, raw);
     last = now;
     if (!visible || document.hidden) return;
     time += reduced ? 0 : dt;
     shown = reduced ? progress : damp(shown, progress, 7, dt);
+    if (Math.abs(progress - shown) < 1e-5) shown = progress;
     ptr.x = damp(ptr.x, ptr.tx, 3, dt);
     ptr.y = damp(ptr.y, ptr.ty, 3, dt);
+    if (Math.abs(ptr.tx - ptr.x) < 1e-4) ptr.x = ptr.tx;
+    if (Math.abs(ptr.ty - ptr.y) < 1e-4) ptr.y = ptr.ty;
+
+    // Nothing moves once the scroll and the pointer have caught up, except the closed book's slow float:
+    // leave the last frame on screen instead of drawing it again.
+    const floating = !reduced && smooth(0, INTRO * 0.92, shown) < 1;
+    const still = shown === lastShown && ptr.x === lastPx && ptr.y === lastPy;
+    if (!dirty && !floating && still) {
+      slowCount = slowSum = 0;
+      return;
+    }
+    dirty = false;
+    lastShown = shown;
+    lastPx = ptr.x;
+    lastPy = ptr.y;
+
+    // Only frames drawn back to back say anything about speed.
+    if (raw < 0.1) {
+      slowSum += raw;
+      if (++slowCount === 45) {
+        if (slowSum / slowCount > 0.024 && quality > 0.6) {
+          quality = Math.max(0.6, quality - 0.15);
+          resize();
+        }
+        slowSum = slowCount = 0;
+      }
+    }
 
     const p = shown;
     // The pages turn straight on from one another: no rest between them, one leaf per stretch of scroll.
@@ -562,10 +663,21 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
     blob.scale.set((1.5 + 1.25 * qc * settle) * s, 1, 1.85 * s);
     (blob.material as THREE.MeshBasicMaterial).opacity = 0.32 * settle;
     sun.target.position.copy(book.position);
-    sun.position.copy(book.position).add(new THREE.Vector3(-3.2, 3.6, 1.6));
+    sun.position.copy(book.position).add(SUN);
 
     renderer.render(scene, camera);
-  });
+  };
+
+  // Build every shader before the first frame (in parallel where the driver allows), so the first frame
+  // does not stall on compiling them.
+  renderer
+    .compileAsync(scene, camera)
+    .catch(() => {})
+    .then(() => {
+      if (dead) return;
+      last = performance.now();
+      renderer.setAnimationLoop(frame);
+    });
 
   return api;
 }

@@ -401,6 +401,9 @@ body::after {
     animation: shelf-drift linear infinite;
     will-change: transform;
   }
+  .shelves[style*="hidden"] .shelf-col {
+    animation-play-state: paused;
+  }
   @keyframes shelf-drift {
     to {
       transform: translateY(-50%);

@@ -54,6 +54,24 @@ const tracked = (ctx: CanvasRenderingContext2D, px: number) => {
  * `spine` says which edge of the image is bound.
  */
 function paper(ctx: CanvasRenderingContext2D, w: number, h: number, spine: "left" | "right") {
+  // Every page of a size and side shares one sheet: painting it costs tens of milliseconds, copying it almost nothing.
+  const key = `${w}x${h}|${spine}`;
+  let cached = papers.get(key);
+  if (!cached) {
+    cached = document.createElement("canvas");
+    cached.width = w;
+    cached.height = h;
+    paintPaper(cached.getContext("2d")!, w, h, spine);
+    papers.set(key, cached);
+  }
+  ctx.drawImage(cached, 0, 0);
+}
+
+const papers = new Map<string, HTMLCanvasElement>();
+/** Lets go of the shared sheets once the book is gone. */
+export const releasePaper = () => papers.clear();
+
+function paintPaper(ctx: CanvasRenderingContext2D, w: number, h: number, spine: "left" | "right") {
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, w, h);
   for (let i = 0; i < 26; i++) {
@@ -64,15 +82,20 @@ function paper(ctx: CanvasRenderingContext2D, w: number, h: number, spine: "left
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
   }
+  // The fibres, stroked as two paths (dark and light) rather than one stroke each.
   ctx.lineWidth = Math.max(0.6, w / 1600);
+  const dark = new Path2D();
+  const light = new Path2D();
   for (let i = 0; i < (w * h) / 2600; i++) {
     const x = Math.random() * w, y = Math.random() * h, a = Math.random() * Math.PI, l = 2 + Math.random() * (w / 140);
-    ctx.strokeStyle = Math.random() > 0.35 ? "rgba(120,96,60,0.07)" : "rgba(255,255,255,0.18)";
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l);
-    ctx.stroke();
+    const p = Math.random() > 0.35 ? dark : light;
+    p.moveTo(x, y);
+    p.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l);
   }
+  ctx.strokeStyle = "rgba(120,96,60,0.07)";
+  ctx.stroke(dark);
+  ctx.strokeStyle = "rgba(255,255,255,0.18)";
+  ctx.stroke(light);
   const e = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.42, w / 2, h / 2, Math.max(w, h) * 0.78);
   e.addColorStop(0, "rgba(255,250,238,0)");
   e.addColorStop(1, "rgba(170,140,90,0.16)");
@@ -425,13 +448,22 @@ export function paintTooth(size: number) {
   const c = document.createElement("canvas");
   c.width = c.height = size;
   const ctx = c.getContext("2d")!;
-  ctx.fillStyle = "#808080";
-  ctx.fillRect(0, 0, size, size);
+  // Written straight into the pixels: tens of thousands of fillRect calls took longer than the rest of the book.
+  const img = ctx.createImageData(size, size);
+  const d = img.data;
+  d.fill(128);
   for (let i = 0; i < size * size * 0.6; i++) {
     const v = 128 + (Math.random() - 0.5) * 40;
-    ctx.fillStyle = `rgb(${v},${v},${v})`;
-    ctx.fillRect(Math.random() * size, Math.random() * size, 1 + Math.random() * 2, 1);
+    const y = (Math.random() * size) | 0;
+    const x0 = (Math.random() * size) | 0;
+    const len = 1 + ((Math.random() * 2) | 0);
+    for (let x = x0; x < Math.min(size, x0 + len); x++) {
+      const k = (y * size + x) * 4;
+      d[k] = d[k + 1] = d[k + 2] = v;
+    }
   }
+  for (let k = 3; k < d.length; k += 4) d[k] = 255;
+  ctx.putImageData(img, 0, 0);
   return c;
 }
 

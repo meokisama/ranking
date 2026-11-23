@@ -131,6 +131,8 @@ export default function Hero({
   const introVisibility = useTransform(introOpacity, (v) => (v < 0.02 ? "hidden" : "visible"));
   const shelfOpacity = useTransform(p, [0, 0.03, 0.11], [1, 1, 0]);
   const shelfScale = useTransform(p, [0, 0.11], [1, 1.12]);
+  // Once the shelves have faded out, stop their drift and take them out of compositing.
+  const shelfVisibility = useTransform(shelfOpacity, (v) => (v < 0.01 ? "hidden" : "visible"));
   const readOpacity = useTransform(p, [0.1, 0.15], [0, 1]);
   const readVisibility = useTransform(readOpacity, (v) => (v < 0.02 ? "hidden" : "visible"));
   const bar = useTransform(p, [0.12, 1], [0, 1]);
@@ -150,7 +152,7 @@ export default function Hero({
       </ol>
 
       <div className="sticky top-0 h-svh overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ opacity: shelfOpacity, scale: shelfScale }}>
+        <motion.div className="shelves absolute inset-0" style={{ opacity: shelfOpacity, scale: shelfScale, visibility: shelfVisibility }}>
           <Shelves covers={shelf} />
         </motion.div>
         <div

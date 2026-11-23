@@ -48,15 +48,15 @@ function Spoke({
     return `perspective(1400px) rotateY(${Math.max(-40, Math.min(40, -d * 14))}deg) scale(${0.84 + near * 0.32})`;
   });
   const opacity = useTransform(pos, (p) => 1 - Math.min(1, Math.max(0, Math.abs(i - p) - 2.6) / 1.2));
-  const zIndex = useTransform(pos, (p) => 100 - Math.round(Math.abs(i - p) * 10));
-  const shadow = useTransform(pos, (p) => {
-    const near = Math.max(0, 1 - Math.abs(i - p));
-    return `drop-shadow(0 ${18 + near * 22}px ${22 + near * 20}px rgb(22 18 14 / ${0.22 + near * 0.2}))`;
-  });
+  // Coarse steps: the stacking order only needs to change as a book passes the one beside it, and every change repaints.
+  const zIndex = useTransform(pos, (p) => 100 - Math.round(Math.abs(i - p) * 2));
+  // The shadow deepens as the book reaches the top. An animated drop-shadow is re-rasterised every frame, so instead
+  // two fixed shadows are painted once and only the opacity of the deeper one moves.
+  const deep = useTransform(pos, (p) => Math.max(0, 1 - Math.abs(i - p)));
 
   return (
     <motion.div
-      className="absolute"
+      className="absolute will-change-transform"
       style={{
         left: geo.cx - geo.w / 2,
         top: geo.cy - h / 2,
@@ -73,10 +73,18 @@ function Spoke({
         onClick={onClick}
         aria-label={`Hạng ${e.rank}: ${e.name}`}
         tabIndex={-1}
-        className="block w-full cursor-pointer select-none"
-        style={{ transform: face, filter: shadow }}
+        className="relative block w-full cursor-pointer select-none will-change-transform"
+        style={{ transform: face }}
       >
-        <Face e={e} />
+        <span className="pointer-events-none absolute inset-0 rounded-[2px] shadow-[0_18px_44px_rgb(22_18_14/0.22)]" aria-hidden />
+        <motion.span
+          className="pointer-events-none absolute inset-0 rounded-[2px] shadow-[0_40px_84px_rgb(22_18_14/0.3)] will-change-[opacity]"
+          style={{ opacity: deep }}
+          aria-hidden
+        />
+        <span className="relative block">
+          <Face e={e} />
+        </span>
       </motion.button>
     </motion.div>
   );
