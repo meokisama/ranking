@@ -4,6 +4,10 @@ import "./globals.css";
 import { SITE } from "@/lib/config";
 import SmoothScroll from "@/components/ui/smooth-scroll";
 import Nav from "@/components/ui/nav";
+import Splash from "@/components/ui/splash";
+
+/** Runs before the first paint, so a reader who has already seen the splash this session never sees it flash. */
+const SPLASH_SCRIPT = `try{document.documentElement.dataset.splash=sessionStorage.getItem("splash")?"seen":"on"}catch(e){document.documentElement.dataset.splash="seen"}`;
 
 const fraunces = Fraunces({
   subsets: ["latin", "vietnamese"],
@@ -41,9 +45,13 @@ export const viewport: Viewport = { themeColor: "#f1ebde" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={`${fraunces.variable} ${bevn.variable} ${jbmono.variable}`}>
+    <html lang="vi" className={`${fraunces.variable} ${bevn.variable} ${jbmono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SPLASH_SCRIPT }} />
+      </head>
       <body>
         <SmoothScroll>
+          <Splash />
           <Nav />
           {children}
         </SmoothScroll>

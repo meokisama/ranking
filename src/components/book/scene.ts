@@ -400,8 +400,16 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   let pumping = false;
   const idle: (cb: () => void) => void =
     "requestIdleCallback" in window ? (cb) => window.requestIdleCallback(cb, { timeout: 400 }) : (cb) => setTimeout(cb, 16);
+  // While the splash covers the page only the cover is wanted (the splash waits for it); the inside pages
+  // would only compete with its animation, so they wait until it lifts.
+  const covered = () => document.documentElement.dataset.splash === "on";
+  let coverPrinted = false;
   const pump = () => {
     if (dead) return;
+    if (coverPrinted && covered()) {
+      window.addEventListener("splash:out", () => idle(pump), { once: true });
+      return;
+    }
     const job = queue.shift();
     if (!job) return void (pumping = false);
     job();
@@ -446,6 +454,14 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
       coverMat.roughnessMap = coverMat.metalnessMap = upload(tex(c.orm, false));
       coverMat.bumpMap = upload(tex(c.bump, false));
       dirty = true;
+      coverPrinted = true;
+      // Tell the splash the cover is on screen, once the frame that draws it has gone out.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          (window as unknown as { __bookReady?: boolean }).__bookReady = true;
+          window.dispatchEvent(new Event("book:ready"));
+        })
+      );
     });
     print("title", () => {
       titleMat.map = upload(tex(paintTitle(TEXT, f, meta.period, meta.votes, N)));
@@ -556,7 +572,8 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
 
     // Nothing moves once the scroll and the pointer have caught up, except the closed book's slow float:
     // leave the last frame on screen instead of drawing it again.
-    const floating = !reduced && smooth(0, INTRO * 0.92, shown) < 1;
+    // Under the splash nobody sees the float, so only draw what has changed (the cover being printed).
+    const floating = !reduced && smooth(0, INTRO * 0.92, shown) < 1 && !covered();
     const still = shown === lastShown && ptr.x === lastPx && ptr.y === lastPy;
     if (!dirty && !floating && still) {
       slowCount = slowSum = 0;

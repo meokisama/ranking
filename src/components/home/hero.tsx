@@ -139,7 +139,6 @@ export default function Hero({
 
   const e = spread >= 0 ? order[spread] : null;
   const first = items.find((x) => x.rank === 1)!;
-  const max = first.count;
 
   return (
     <section ref={track} className="relative" style={{ height: `${(n + 2) * 95 + 120}svh` }} aria-label={`${n} tác phẩm dẫn đầu`}>
@@ -270,17 +269,12 @@ export default function Hero({
                   <button
                     onClick={() => jump(i)}
                     aria-current={on ? "true" : undefined}
-                    className={`group grid w-full grid-cols-[3rem_1fr] items-baseline gap-2 border-t py-3 text-left transition-colors duration-500 ${
-                      on ? "border-shu text-shu" : "hair text-ink/70 hover:text-ink"
+                    className={`group grid w-full grid-cols-[3rem_1fr] items-baseline gap-2 py-2.5 text-left transition-colors duration-500 ${
+                      on ? "text-shu" : "text-ink/70 hover:text-ink"
                     }`}
                   >
                     <span className="num text-3xl">{pad(it.rank)}</span>
-                    <span className="min-w-0">
-                      <span className="display block truncate text-[1.05rem]">{it.name}</span>
-                      <span className="mt-1.5 block h-[3px] bg-ink/[0.07]">
-                        <span className={`block h-full transition-colors duration-500 ${on ? "bg-shu" : "bg-ink/25"}`} style={{ width: `${(it.count / max) * 100}%` }} />
-                      </span>
-                    </span>
+                    <span className="display min-w-0 truncate text-[1.05rem]">{it.name}</span>
                   </button>
                 </li>
               );

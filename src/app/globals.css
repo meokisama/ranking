@@ -431,6 +431,199 @@ body::after {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  /*
+   * The flyleaf (components/ui/splash.tsx). A sheet of paper over the first page while it gets ready: the mark
+   * stands up, the title rises word by word, and the sheet slides up and away. Transform and opacity only,
+   * so it runs on the compositor. If the script never runs, the sheet clears itself.
+   */
+  .splash {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--color-paper);
+    animation: splash-bail 0.6s 7s forwards;
+    transition: transform 1.2s var(--ease-in-out-quart);
+  }
+  .splash[data-state="out"] {
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+  /*
+   * The endpaper: asanoha, the hemp-leaf lattice, in ink hairlines (the same tile as the library page of
+   * tmw-archive), laid still under the sheet and faded in as it comes up.
+   */
+  .splash::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='69.28' viewBox='0 0 40 69.28'%3E%3Cpath fill='none' stroke='%2316120e' stroke-opacity='.07' stroke-width='.7' d='M0 0H40M0 34.64H40M0 0 40 69.28M40 0 0 69.28M20 11.55 0 0M20 11.55 40 0M20 11.55V34.64M20 57.74V34.64M20 57.74 0 69.28M20 57.74 40 69.28M0 23.09V0M0 23.09 20 34.64M0 23.09-20 34.64M40 23.09V0M40 23.09 20 34.64M40 23.09 60 34.64M0 46.19-20 34.64M0 46.19 20 34.64M0 46.19V69.28M40 46.19 20 34.64M40 46.19 60 34.64M40 46.19V69.28'/%3E%3C/svg%3E");
+    background-size: 40px 69.28px;
+    background-position: center;
+    /* strongest at the edges of the sheet, thinning steadily to nothing under the mark and the title */
+    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, transparent 15%, rgb(0 0 0 / 0.35) 55%, #000 100%);
+    animation: splash-fade 1.4s ease backwards;
+  }
+  .splash-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 1.5rem;
+    transition:
+      transform 1.2s var(--ease-in-out-quart),
+      opacity 0.7s ease;
+  }
+  /* what is printed on the sheet lags a little behind it and fades, so the slide has depth */
+  .splash[data-state="out"] .splash-inner {
+    transform: translateY(18svh);
+    opacity: 0;
+  }
+
+  /* ---- the mark ---- */
+  .splash-mark {
+    position: relative;
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+  .splash-mark span {
+    position: absolute;
+    display: block;
+    will-change: transform;
+  }
+  .splash-shelf {
+    border-radius: 2px;
+    background: var(--color-ink);
+    animation: splash-scale-x 0.6s var(--ease-out-expo) 0.05s backwards;
+  }
+  /* the books spring up off the shelf, overshoot a little and settle */
+  .splash-rise {
+    border-radius: 2px;
+    transform-origin: 50% 100%;
+    animation: splash-scale-y 0.7s cubic-bezier(0.34, 1.5, 0.5, 1) backwards;
+  }
+  .splash-mark .splash-band {
+    left: 0;
+    right: 0;
+    background: var(--color-paper);
+    will-change: auto;
+  }
+  /* a ribbon with a notched tail, let down over the first-place book */
+  .splash-ribbon {
+    background: var(--color-paper);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78.3%, 0 100%);
+    transform-origin: 50% 0;
+    animation: splash-drop 0.8s var(--ease-out-expo) 0.75s backwards;
+  }
+  /* the last book stands up straight, then tips against the end of the shelf (its foot, 40 and 52 on the grid) */
+  .splash-mark .splash-lean {
+    inset: 0;
+    transform-origin: 62.5% 81.25%;
+    transform: rotate(14deg);
+    animation: splash-lean 0.8s cubic-bezier(0.5, 0, 0.3, 1.25) 0.85s backwards;
+  }
+
+  /* ---- the title, word by word, set as the front page sets its own ---- */
+  .splash-title {
+    margin-top: 2.4rem;
+    font-size: clamp(2.2rem, 5.4vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    /* the display cut of Fraunces, as at the size of the front page title, not the text cut its size would pick */
+    font-variation-settings: "SOFT" 50, "WONK" 0, "opsz" 144;
+  }
+  /* each word is a window it rises through, tall enough for stacked Vietnamese marks; the gap between two
+     windows comes to one word space */
+  .splash-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding: 0.3em 0.06em 0.22em;
+    margin: -0.3em 0.16em -0.22em -0.06em;
+  }
+  .splash-word:last-child {
+    margin-right: -0.06em;
+  }
+  /* kept on their own layers for the life of the sheet: dropping a layer as its animation ends re-rasterises
+     the glyphs and snaps them to the pixel grid, which shows as a twitch */
+  .splash-word > span {
+    display: inline-block;
+    transform-origin: 0 100%;
+    will-change: transform;
+    animation: splash-rise-in 1.2s var(--ease-out-expo) backwards;
+  }
+  /* the vermilion full stop, pressed in last like a seal */
+  .splash-word > .splash-stop {
+    transform-origin: 50% 85%;
+    animation: splash-stamp 0.7s cubic-bezier(0.3, 1.8, 0.5, 1) backwards;
+  }
+
+  /* while the sheet is down the page stays still, its headings waiting to rise */
+  html[data-splash="on"] {
+    overflow: hidden;
+  }
+  html[data-splash="on"] .line-mask > span {
+    animation-play-state: paused;
+  }
+  html[data-splash="seen"] .splash {
+    display: none;
+  }
+
+  @keyframes splash-scale-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes splash-scale-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+  /* the ribbon falls past its length and swings back */
+  @keyframes splash-drop {
+    0% {
+      transform: scaleY(0);
+    }
+    55% {
+      transform: scaleY(1.12);
+    }
+    80% {
+      transform: scaleY(0.97);
+    }
+  }
+  @keyframes splash-lean {
+    from {
+      transform: rotate(0deg);
+    }
+  }
+  @keyframes splash-rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(118%) rotate(6deg);
+    }
+  }
+  @keyframes splash-stamp {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+  @keyframes splash-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes splash-bail {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
