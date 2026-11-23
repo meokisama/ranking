@@ -12,7 +12,7 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import { loadFaces, paintBlank, paintContents, paintCover, paintEdge, paintEntry, paintPlate, paintTitle, paintTooth, releasePaper } from "./pages";
+import { SPINE, loadFaces, paintBlank, paintContents, paintCover, paintEdge, paintEntry, paintPlate, paintSpine, paintTitle, paintTooth, releasePaper } from "./pages";
 import type { Faces, Leafed } from "./pages";
 
 export type BookScene = {
@@ -257,7 +257,16 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   })();
 
   // ---- materials ----
-  const cloth = new THREE.MeshStandardMaterial({ color: 0xb02c17, roughness: 0.88, bumpMap: weave, bumpScale: 0.6 });
+  // Quarter-bound: taupe cloth on the spine, sand linen on the boards. The front board's face and the spine's
+  // lettering are printed in pages.ts; the spine starts on a plain stand-in of the same kind, so printing it keeps the shader.
+  const cloth = new THREE.MeshStandardMaterial({ color: SPINE, roughness: 0.86, bumpMap: weave, bumpScale: 0.5 });
+  const plainSpine = document.createElement("canvas");
+  plainSpine.width = plainSpine.height = 2;
+  const plainCtx = plainSpine.getContext("2d")!;
+  plainCtx.fillStyle = SPINE;
+  plainCtx.fillRect(0, 0, 2, 2);
+  const spineMat = new THREE.MeshStandardMaterial({ map: tex(plainSpine), roughness: 0.86, bumpMap: weave, bumpScale: 0.5 });
+  const linen = new THREE.MeshStandardMaterial({ color: 0xd9cbad, roughness: 0.92, bumpMap: weave, bumpScale: 0.5 });
   // The cover starts with stand-in maps of every kind it will have, so printing it later does not rebuild the shader.
   const pixel = (r: number, g: number, b: number) => {
     const t = new THREE.DataTexture(new Uint8Array([r, g, b, 255]), 1, 1);
@@ -284,7 +293,7 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
     return m;
   };
 
-  const back = shadowy(new THREE.Mesh(new RoundedBoxGeometry(W + 0.034, BOARD, D + 0.05, 2, 0.006), cloth));
+  const back = shadowy(new THREE.Mesh(new RoundedBoxGeometry(W + 0.034, BOARD, D + 0.05, 2, 0.006), linen));
   back.position.set((W + 0.034) / 2 - 0.006, -BOARD / 2, 0);
   body.add(back);
 
@@ -297,12 +306,13 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
   const stack = BLOCK + (LEAVES + 1) * LAYER;
   const topClosed = stack + BLOCK + 0.001;
   const spineH = topClosed + 2 * BOARD;
-  const spine = shadowy(new THREE.Mesh(new RoundedBoxGeometry(0.034, spineH, D + 0.05, 2, 0.012), cloth));
+  // faces +x, -x (the outer spine, lettered), +y, -y, +z, -z
+  const spine = shadowy(new THREE.Mesh(new RoundedBoxGeometry(0.034, spineH, D + 0.05, 2, 0.012), [cloth, spineMat, cloth, cloth, cloth, cloth]));
   body.add(spine);
 
   const hinge = new THREE.Group();
   body.add(hinge);
-  const cover = shadowy(new THREE.Mesh(new THREE.BoxGeometry(W + 0.034, BOARD, D + 0.05), [cloth, cloth, coverMat, cloth, cloth, cloth]));
+  const cover = shadowy(new THREE.Mesh(new THREE.BoxGeometry(W + 0.034, BOARD, D + 0.05), [linen, cloth, coverMat, linen, linen, linen])); // faces +x (fore-edge), -x (joint), +y, -y, +z, -z
   cover.position.set((W + 0.034) / 2 - 0.006, BOARD / 2, 0);
   hinge.add(cover);
   const left = blockGeometry(BLOCK);
@@ -448,6 +458,8 @@ export function createBookScene(canvas: HTMLCanvasElement, items: Leafed[], meta
     if (dead) return;
     faces = f;
     print("cover", () => {
+      spineMat.map?.dispose();
+      spineMat.map = upload(tex(paintSpine(small ? 1024 : 2048, spineH / (D + 0.05), f, meta.period)));
       const c = paintCover(TEXT, f, meta.period, meta.votes);
       for (const t of [coverMat.map, coverMat.roughnessMap, coverMat.bumpMap]) t?.dispose();
       coverMat.map = upload(tex(c.color));

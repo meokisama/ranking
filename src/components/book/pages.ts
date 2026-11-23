@@ -12,8 +12,8 @@ const PAPER = "#f4eee0";
 const INK = "#1d1813";
 const MUTE = "#7a7062";
 const SHU = "#c9351c";
-const CLOTH = "#b52d18";
-const GOLD = "#e2c07a";
+export const SPINE = "#9c8870"; // a soft warm taupe cloth on the spine and over the joint, a few shades under the linen
+const LINEN = "#e2d5ba";
 export const RATIO = 568 / 400;
 
 const cssFont = (name: string, fallback: string) =>
@@ -177,8 +177,10 @@ function furniture(ctx: CanvasRenderingContext2D, f: Faces, u: number, w: number
 }
 
 /**
- * The front board: red book cloth, the title stamped in gold foil.
- * Returns the colour, a roughness/metalness map (G and B channels, as three.js reads them) and a bump map.
+ * The front board, quarter-bound: the taupe cloth of the spine turned over onto the board along the joint,
+ * the rest of it covered in a sand linen. Title and rules are blind-stamped into the linen in ink; only the full
+ * stop is vermilion. Returns the colour, a roughness/metalness map (G and B channels, as three.js reads them)
+ * and a bump map.
  */
 export function paintCover(w: number, f: Faces, period: string, votes: number) {
   const [color, c] = sheet(w);
@@ -186,10 +188,21 @@ export function paintCover(w: number, f: Faces, period: string, votes: number) {
   const [bump, b] = sheet(w);
   const h = color.height;
   const u = w / 100;
+  const S = u * 11; // how far the spine cloth comes over onto the board
+  const L = S + u * 10; // the left of the type, clear of the cloth
 
-  c.fillStyle = CLOTH;
+  // The linen, with the faint warp and weft of the cloth in its colour.
+  c.fillStyle = LINEN;
   c.fillRect(0, 0, w, h);
-  o.fillStyle = "rgb(0,235,0)";
+  for (let y = 0; y < h; y += 3) {
+    c.fillStyle = `rgba(110,86,50,${(0.025 + Math.random() * 0.04).toFixed(3)})`;
+    c.fillRect(0, y, w, 1);
+  }
+  for (let x = 0; x < w; x += 3) {
+    c.fillStyle = `rgba(255,250,238,${(0.03 + Math.random() * 0.05).toFixed(3)})`;
+    c.fillRect(x, 0, 1, h);
+  }
+  o.fillStyle = "rgb(0,232,0)";
   o.fillRect(0, 0, w, h);
   b.fillStyle = "#808080";
   b.fillRect(0, 0, w, h);
@@ -205,49 +218,84 @@ export function paintCover(w: number, f: Faces, period: string, votes: number) {
     b.fillRect(x, 0, 1, h);
   }
   b.globalAlpha = 1;
-  const wear = c.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.45, w / 2, h / 2, Math.max(w, h) * 0.72);
+
+  // The spine cloth over the joint: a little proud of the linen, its edge catching the light and throwing a shadow.
+  c.fillStyle = SPINE;
+  c.fillRect(0, 0, S, h);
+  // the cloth rounding over the joint, darker where it bends
+  const turn = c.createLinearGradient(0, 0, S, 0);
+  turn.addColorStop(0, "rgba(40,25,10,0.16)");
+  turn.addColorStop(0.45, "rgba(0,0,0,0)");
+  turn.addColorStop(1, "rgba(255,240,220,0.04)");
+  c.fillStyle = turn;
+  c.fillRect(0, 0, S, h);
+  // its turned edge lies flat on the linen: only a soft shadow, no ridge
+  const shade = c.createLinearGradient(S, 0, S + u * 1.2, 0);
+  shade.addColorStop(0, "rgba(50,35,20,0.16)");
+  shade.addColorStop(1, "rgba(50,35,20,0)");
+  c.fillStyle = shade;
+  c.fillRect(S, 0, u * 1.2, h);
+  o.fillStyle = "rgb(0,205,0)";
+  o.fillRect(0, 0, S, h);
+  b.fillStyle = "rgba(255,255,255,0.06)";
+  b.fillRect(0, 0, S, h);
+
+  // Handling: the board darkens a little toward its edges.
+  const wear = c.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.45, w / 2, h / 2, Math.max(w, h) * 0.74);
   wear.addColorStop(0, "rgba(0,0,0,0)");
-  wear.addColorStop(1, "rgba(60,10,0,0.28)");
+  wear.addColorStop(1, "rgba(90,60,25,0.2)");
   c.fillStyle = wear;
   c.fillRect(0, 0, w, h);
 
-  const stamp = (draw: (ctx: CanvasRenderingContext2D) => void) => {
-    c.fillStyle = c.strokeStyle = GOLD;
+  // Blind stamping: pressed into the board (darker in the bump), the ink a satin a little smoother than the cloth.
+  const press = (ink: string, draw: (ctx: CanvasRenderingContext2D) => void) => {
+    c.fillStyle = c.strokeStyle = ink;
     draw(c);
-    o.fillStyle = o.strokeStyle = "rgb(0,90,255)";
+    o.fillStyle = o.strokeStyle = "rgb(0,170,0)";
     draw(o);
-    b.fillStyle = b.strokeStyle = "#3a3a3a";
+    b.fillStyle = b.strokeStyle = "#4a4a4a";
     draw(b);
   };
-  stamp((ctx) => {
-    ctx.lineWidth = Math.max(1, u * 0.32);
-    ctx.strokeRect(u * 7, u * 7, w - u * 14, h - u * 14);
-    ctx.lineWidth = Math.max(1, u * 0.12);
-    ctx.strokeRect(u * 8.4, u * 8.4, w - u * 16.8, h - u * 16.8);
+  press("rgba(60,44,24,0.3)", (ctx) => {
+    ctx.lineWidth = Math.max(1, u * 0.28);
+    ctx.strokeRect(S + u * 5, u * 6, w - S - u * 11, h - u * 12);
+    ctx.lineWidth = Math.max(1, u * 0.1);
+    ctx.strokeRect(S + u * 6.3, u * 7.3, w - S - u * 13.6, h - u * 14.6);
   });
-  stamp((ctx) => {
-    label(ctx, f, u, "Ấn bản độc giả", u * 13, u * 17);
-    label(ctx, f, u, period, w - u * 13, u * 17, "right");
+  press(MUTE, (ctx) => {
+    label(ctx, f, u, "Ấn bản độc giả", L, u * 16.5);
+    label(ctx, f, u, period, w - u * 11, u * 16.5, "right");
   });
-  stamp((ctx) => {
-    let y = h * 0.36;
-    const size = u * 12.5;
-    for (const [text, italic] of [
-      ["Bảng xếp hạng", false],
-      ["Light Novel", true],
-      ["Việt Nam.", false],
-    ] as const) {
+  const size = u * 10.2;
+  let y = h * 0.37;
+  for (const [text, italic] of [
+    ["Bảng xếp hạng", false],
+    ["Light Novel", true],
+    ["Việt Nam", false],
+  ] as const) {
+    press(INK, (ctx) => {
       ctx.font = `${italic ? "italic 300" : "320"} ${size}px ${f.serif}`;
-      tracked(ctx, -size * 0.045);
-      ctx.fillText(text, u * 12, y);
-      y += size * 0.98;
+      tracked(ctx, -size * (italic ? 0.045 : 0.04));
+      ctx.fillText(text, L, y);
+    });
+    if (text === "Việt Nam") {
+      c.font = `320 ${size}px ${f.serif}`;
+      tracked(c, -size * 0.04);
+      const end = L + c.measureText(text).width;
+      press(SHU, (ctx) => {
+        ctx.font = `320 ${size}px ${f.serif}`;
+        ctx.fillText(".", end, y);
+      });
     }
-    tracked(ctx, 0);
+    y += size * 1.0;
+  }
+  [c, o, b].forEach((ctx) => tracked(ctx, 0));
+  press(INK, (ctx) => {
+    ctx.fillRect(L, h - u * 25, u * 9, Math.max(1, u * 0.28));
   });
-  stamp((ctx) => {
-    ctx.fillRect(u * 13, h - u * 25, u * 10, Math.max(1, u * 0.3));
-    label(ctx, f, u, `${nf.format(votes)} lá phiếu`, u * 13, h - u * 18.5);
-    label(ctx, f, u, "Do độc giả Việt Nam bình chọn", u * 13, h - u * 14.2);
+  press(MUTE, (ctx) => {
+    label(ctx, f, u, `${nf.format(votes)} lá phiếu`, L, h - u * 18.5);
+    label(ctx, f, u, "Do độc giả Việt Nam bình chọn", L, h - u * 14.2);
   });
   return { color, orm, bump };
 }
@@ -418,6 +466,95 @@ export function paintPlate(w: number, f: Faces | null, e: Leafed, img: HTMLImage
     ctx.fillText(wrap(ctx, e.name, dw, 1)[0], dx, top + dh + u * 10.5);
     furniture(ctx, f, u, w, h, "right", "Bảng xếp hạng Light Novel", folio);
   }
+  return cv;
+}
+
+/**
+ * The spine, as the outer face of the spine box sees it: head on the left, tail on the right, its top the top
+ * of the book lying down. Taupe cloth rounded over the back, a pair of raised bands near each end, and in the
+ * middle a vermilion lettering piece with the title set on it in paper, as old bindings carried a label.
+ */
+export function paintSpine(w: number, ratio: number, f: Faces, period: string) {
+  const cv = document.createElement("canvas");
+  cv.width = w;
+  cv.height = Math.max(16, Math.round(w * ratio));
+  const ctx = cv.getContext("2d")!;
+  const h = cv.height;
+
+  ctx.fillStyle = SPINE;
+  ctx.fillRect(0, 0, w, h);
+  for (let x = 0; x < w; x += 3) {
+    ctx.fillStyle = `rgba(255,248,235,${(0.03 + Math.random() * 0.05).toFixed(3)})`;
+    ctx.fillRect(x, 0, 1, h);
+  }
+  for (let y = 0; y < h; y += 3) {
+    ctx.fillStyle = `rgba(70,50,30,${(0.03 + Math.random() * 0.05).toFixed(3)})`;
+    ctx.fillRect(0, y, w, 1);
+  }
+  // rounded over the back: light along the crown, falling off toward the joints
+  const round = ctx.createLinearGradient(0, 0, 0, h);
+  round.addColorStop(0, "rgba(40,25,10,0.22)");
+  round.addColorStop(0.35, "rgba(255,245,230,0.06)");
+  round.addColorStop(0.65, "rgba(255,245,230,0.04)");
+  round.addColorStop(1, "rgba(40,25,10,0.26)");
+  ctx.fillStyle = round;
+  ctx.fillRect(0, 0, w, h);
+
+  // raised bands, a pair near each end: a lit edge over a shaded one
+  const band = (x: number) => {
+    for (const dx of [0, h * 0.16]) {
+      ctx.fillStyle = "rgba(255,246,230,0.28)";
+      ctx.fillRect(x + dx, h * 0.12, Math.max(1, h * 0.025), h * 0.76);
+      ctx.fillStyle = "rgba(45,30,15,0.38)";
+      ctx.fillRect(x + dx + h * 0.025, h * 0.12, Math.max(1, h * 0.04), h * 0.76);
+    }
+  };
+  band(w * 0.045);
+  band(w * 0.955 - h * 0.2);
+
+  // the label, about the middle of the spine
+  const x0 = w * 0.3;
+  const x1 = w * 0.7;
+  const y0 = h * 0.2;
+  const y1 = h * 0.8;
+  ctx.save();
+  ctx.shadowColor = "rgba(40,20,5,0.35)";
+  ctx.shadowBlur = h * 0.04;
+  ctx.shadowOffsetY = h * 0.02;
+  ctx.fillStyle = SHU;
+  ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+  ctx.restore();
+  ctx.strokeStyle = "rgba(244,238,224,0.55)";
+  ctx.lineWidth = Math.max(1, h * 0.012);
+  ctx.strokeRect(x0 + h * 0.06, y0 + h * 0.06, x1 - x0 - h * 0.12, y1 - y0 - h * 0.12);
+  const title = "Bảng xếp hạng Light Novel Việt Nam.";
+  let size = h * 0.3;
+  ctx.font = `320 ${size}px ${f.serif}`;
+  tracked(ctx, -size * 0.03);
+  const room = (x1 - x0) * 0.84;
+  const wide = ctx.measureText(title).width;
+  if (wide > room) {
+    size *= room / wide;
+    ctx.font = `320 ${size}px ${f.serif}`;
+    tracked(ctx, -size * 0.03);
+  }
+  ctx.fillStyle = PAPER;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(title, (x0 + x1) / 2, h * 0.52);
+  tracked(ctx, 0);
+
+  // the imprint either side of the label, in the ink of the stamping
+  const lu = h * 0.075;
+  ctx.fillStyle = "rgba(36,26,16,0.72)";
+  ctx.textBaseline = "middle";
+  ctx.font = `400 ${lu * 2}px ${f.mono}`;
+  tracked(ctx, lu * 0.28);
+  ctx.fillText("ẤN BẢN ĐỘC GIẢ", (w * 0.05 + h * 0.2 + x0) / 2 + h * 0.05, h * 0.52);
+  ctx.fillText(period.toUpperCase(), (x1 + w * 0.955 - h * 0.2) / 2, h * 0.52);
+  tracked(ctx, 0);
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
   return cv;
 }
 
