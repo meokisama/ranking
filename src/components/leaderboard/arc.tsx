@@ -11,7 +11,7 @@ import { nf, pad, percent } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 
 const COUNT = 10;
-const AUTO_MS = 5200;
+const AUTO_MS = 3000;
 
 /**
  * One book on the wheel. The outer box turns about the wheel's hub, far below the stage; the inner box
@@ -30,7 +30,7 @@ function Spoke({
   geo: { cx: number; cy: number; r: number; w: number; step: number };
   onClick: () => void;
 }) {
-  const h = geo.w * (568 / 400);
+  const h = e.logo ? geo.w : geo.w * (568 / 400);
   const turn = useTransform(pos, (p) => `rotate(${(i - p) * geo.step}deg)`);
   const face = useTransform(pos, (p) => {
     const d = i - p;
@@ -73,7 +73,7 @@ function Spoke({
           aria-hidden
         />
         <span className="relative block">
-          <Mark e={e} tall eager className="w-full" />
+          <Mark e={e} eager className="w-full" />
         </span>
       </motion.button>
     </motion.div>
@@ -103,7 +103,8 @@ export default function CoverArc({
   const stage = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [active, setActive] = useState(0);
-  const [held, setHeld] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [poke, setPoke] = useState(0);
   const src = useMotionValue(0);
   const pos = useSpring(src, { stiffness: 90, damping: 20, mass: 0.9 });
   const drag = useRef<{ x: number; from: number; moved: boolean } | null>(null);
@@ -123,18 +124,21 @@ export default function CoverArc({
     src.set(k);
   };
 
+  // Restarts the countdown, even when the reader lands on the book already shown.
+  const touch = () => setPoke((p) => p + 1);
+
   // A new category starts again from its leader.
   useEffect(() => {
     setActive(0);
     src.set(0);
   }, [list, src]);
 
-  // The wheel turns by itself until someone takes hold of it.
+  // Paused only while the wheel is being dragged.
   useEffect(() => {
-    if (held || n < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (dragging || n < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setTimeout(() => go(active + 1 >= n ? 0 : active + 1), AUTO_MS);
     return () => window.clearTimeout(t);
-  }, [active, held, n]);
+  }, [active, dragging, n, poke]);
 
   const wide = size.w >= 640;
   const w = wide ? Math.min(size.h * 0.4, 300) : Math.min(size.w * 0.44, 180);
@@ -154,6 +158,8 @@ export default function CoverArc({
       if (!d) return;
       drag.current = null;
       dragged.current = d.moved;
+      setDragging(false);
+      touch();
       go(Math.round(src.get()));
       setTimeout(() => (dragged.current = false), 0);
     };
@@ -199,13 +205,12 @@ export default function CoverArc({
         onPointerDown={(ev) => {
           if (ev.pointerType === "mouse" && ev.button !== 0) return;
           drag.current = { x: ev.clientX, from: src.get(), moved: false };
-          setHeld(true);
+          setDragging(true);
         }}
-        onPointerEnter={(ev) => ev.pointerType === "mouse" && setHeld(true)}
-        onPointerLeave={(ev) => ev.pointerType === "mouse" && !drag.current && setHeld(false)}
         onKeyDown={(ev) => {
-          if (ev.key === "ArrowRight") go(active + 1);
-          if (ev.key === "ArrowLeft") go(active - 1);
+          if (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft") return;
+          touch();
+          go(active + (ev.key === "ArrowRight" ? 1 : -1));
         }}
         tabIndex={0}
         role="group"
@@ -247,6 +252,7 @@ export default function CoverArc({
               geo={geo}
               onClick={() => {
                 if (dragged.current) return;
+                touch();
                 go(i);
               }}
             />
@@ -302,7 +308,7 @@ export default function CoverArc({
                 <button
                   key={label as string}
                   onClick={() => {
-                    setHeld(true);
+                    touch();
                     go(active + (d as number));
                   }}
                   disabled={active + (d as number) < 0 || active + (d as number) >= n}
@@ -319,7 +325,7 @@ export default function CoverArc({
               <li key={it.id} className="flex-1">
                 <button
                   onClick={() => {
-                    setHeld(true);
+                    touch();
                     go(i);
                   }}
                   aria-label={`Hạng ${it.rank}`}

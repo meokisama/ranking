@@ -48,14 +48,10 @@ export default function Cover({
   );
 }
 
-/** A publisher's logo on a white board: square, or `tall` to stand in a row of covers. */
-export function LogoBoard({ src, tall, eager, className = "" }: { src: string; tall?: boolean; eager?: boolean; className?: string }) {
+/** A publisher's logo on a square white board. */
+export function LogoBoard({ src, eager, className = "" }: { src: string; eager?: boolean; className?: string }) {
   return (
-    <span
-      className={`grid place-items-center rounded-[2px] bg-white shadow-[0_0_0_1px_rgb(22_18_14/0.12)] ${
-        tall ? "aspect-[400/568] p-[16%]" : "aspect-square p-[14%]"
-      } ${className}`}
-    >
+    <span className={`grid aspect-square place-items-center rounded-[2px] bg-white p-[14%] shadow-[0_0_0_1px_rgb(22_18_14/0.12)] ${className}`}>
       <img src={src} alt="" loading={eager ? "eager" : "lazy"} draggable={false} className="max-h-full max-w-full object-contain" />
     </span>
   );
@@ -67,18 +63,16 @@ type Marked = { name: string; cover?: string | null; color?: string | null; logo
 export function Mark({
   e,
   sub,
-  tall,
   eager,
   className = "",
 }: {
   e: Marked;
   sub?: string;
-  tall?: boolean;
   eager?: boolean;
   className?: string;
 }) {
   return e.logo ? (
-    <LogoBoard src={e.logo} tall={tall} eager={eager} className={className} />
+    <LogoBoard src={e.logo} eager={eager} className={className} />
   ) : (
     <Cover name={e.name} cover={e.cover} color={e.color} sub={sub} eager={eager} className={className} />
   );

@@ -32,7 +32,7 @@ export default function Book3D({
     const x = (ev.clientX - r.left) / r.width - 0.5;
     const y = (ev.clientY - r.top) / r.height - 0.5;
     el.style.transition = "transform 0.45s var(--ease-out-expo)";
-    el.style.transform = `rotateY(${(-12 + x * 44).toFixed(2)}deg) rotateX(${(-y * 20).toFixed(2)}deg) translateY(-10px)`;
+    el.style.transform = `rotateY(${(-12 + x * 16).toFixed(2)}deg) rotateX(${(-y * 8).toFixed(2)}deg) translateY(-10px)`;
   };
   const leave = () => {
     const el = body.current;
