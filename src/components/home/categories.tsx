@@ -1,106 +1,92 @@
-"use client";
 import Link from "next/link";
-import { useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
-import { Cover } from "@/components/ui/book";
-import { FadeUp, LineRise } from "@/components/ui/reveal";
+import { ArrowUpRight } from "lucide-react";
+import Cover from "@/components/ui/cover";
+import Rise, { Kicker, Lines } from "@/components/ui/reveal";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
 import type { Entry } from "@/lib/data";
 import { nf, pad } from "@/lib/format";
 
-export type CategoryRow = { key: CategoryKey; winner: Entry; total: number };
+export type CategoryRow = { key: CategoryKey; top: Entry[]; total: number };
 
-/** Category list. Hovering a row makes the winner's cover or logo follow the cursor. */
+/**
+ * The categories as a table of contents. A row floods with vermilion under the pointer
+ * and fans out the three covers (or marks) that lead it.
+ */
 export default function Categories({ rows }: { rows: CategoryRow[] }) {
-  const [hover, setHover] = useState<number | null>(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const x = useSpring(mx, { stiffness: 180, damping: 22, mass: 0.5 });
-  const y = useSpring(my, { stiffness: 180, damping: 22, mass: 0.5 });
-  const active = hover === null ? null : rows[hover];
-
   return (
-    <section className="relative bg-paper px-5 py-28 text-ink md:px-16 md:py-40">
-      <div className="mb-14 flex flex-col justify-between gap-8 md:mb-20 md:flex-row md:items-end">
-        <h2 className="display text-[13vw] leading-[0.95] md:text-[7vw]">
-          <LineRise lines={["Bốn hạng mục,", <span key="b" className="text-shu">bốn quán quân</span>]} />
-        </h2>
-        <FadeUp className="max-w-[36ch] text-[15px] leading-relaxed text-ink/70">
-          Mỗi độc giả có tối đa mười phiếu cho Light Novel, năm cho Oneshot, ba cho Tân binh và ba cho Nhà phát hành.
-          Đây là những cái tên đứng đầu.
-        </FadeUp>
-      </div>
+    <section className="px-5 py-20 md:px-10 md:py-28">
+      <Kicker no="03" right={`${rows.length} hạng mục`}>
+        Mục lục
+      </Kicker>
+      <Lines className="display mt-6 text-[13vw] md:text-[8vw]">
+        <span>
+          Mỗi hạng mục, <i className="text-shu">một cái tên</i>
+        </span>
+      </Lines>
 
-      <ul
-        onPointerMove={(e) => {
-          mx.set(e.clientX);
-          my.set(e.clientY);
-        }}
-        onPointerLeave={() => setHover(null)}
-      >
+      <ol className="hair mt-14 border-t md:mt-20">
         {rows.map((r, i) => {
           const c = CATEGORIES[r.key];
+          const w = r.top[0];
           return (
-            <li key={r.key} onPointerEnter={(e) => e.pointerType === "mouse" && setHover(i)}>
-              <Link
-                href={`/leaderboard?cat=${r.key}`}
-                className="group relative grid grid-cols-[auto_1fr] items-baseline gap-x-5 border-t border-ink/20 py-7 last:border-b md:grid-cols-[5rem_1.3fr_1fr_auto] md:gap-x-8 md:py-9"
-              >
-                <span className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
-                <span className="label relative text-ink/50 transition-colors duration-300 group-hover:text-shu md:pl-4">
-                  {pad(i + 1)} <span className="font-jp normal-case tracking-normal">{c.jp}</span>
-                </span>
-                <span className="display relative text-[8.5vw] leading-none transition-[color,translate] duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-3 group-hover:text-paper md:text-[4.4vw]">
-                  {c.short}
-                </span>
-                <span className="relative col-start-2 mt-3 transition-colors duration-300 group-hover:text-paper md:col-start-3 md:mt-0">
-                  <span className="label block text-ink/50 transition-colors duration-300 group-hover:text-paper/50">
-                    Quán quân
+            <li key={r.key} className="hair border-b">
+              <Rise delay={i * 0.06} y={18}>
+                <Link
+                  href={`/leaderboard?cat=${r.key}`}
+                  className="group relative grid grid-cols-[2.5rem_1fr_auto] items-center gap-x-4 px-0 py-7 transition-[padding,color] duration-700 ease-[var(--ease-out-expo)] hover:px-4 hover:text-paper md:grid-cols-[7rem_minmax(0,1.5fr)_minmax(0,1fr)_auto_5rem] md:gap-x-8 md:py-9 md:hover:px-8"
+                >
+                  <span
+                    className="absolute inset-0 origin-bottom scale-y-0 bg-shu transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-y-100"
+                    aria-hidden
+                  />
+                  <span className="label relative text-shu transition-colors duration-500 group-hover:text-paper">Chương {pad(i + 1)}</span>
+                  <span className="relative min-w-0">
+                    <span className="display block text-[9vw] leading-[1] md:text-[4.4vw]">{c.short}</span>
+                    <span className="mt-2 block max-w-[52ch] text-[0.85rem] font-light opacity-70">{c.blurb}</span>
                   </span>
-                  <span className="mt-1 block font-serif text-xl italic leading-snug md:text-2xl">{r.winner.name}</span>
-                </span>
-                <span className="relative col-start-2 mt-3 text-left transition-colors duration-300 group-hover:text-paper md:col-start-4 md:mt-0 md:pr-4 md:text-right">
-                  <span className="display text-3xl tabular-nums md:text-[2.4vw]">{nf.format(r.winner.count)}</span>
-                  <span className="label ml-2 text-ink/50 transition-colors duration-300 group-hover:text-paper/50">
-                    phiếu
+                  <span className="relative hidden min-w-0 md:block">
+                    <span className="label block opacity-60">Hạng nhất · {nf.format(w.count)} phiếu</span>
+                    <span className="display mt-1 line-clamp-2 block text-2xl leading-[1.05]">
+                      <i>{w.name}</i>
+                    </span>
                   </span>
-                </span>
-              </Link>
+                  <span className="relative hidden h-24 w-44 md:block" aria-hidden>
+                    {r.top.slice(0, 3).map((e, k) => (
+                      <span
+                        key={e.id}
+                        className="absolute bottom-0 w-16 origin-bottom transition-transform duration-700 ease-[var(--ease-out-expo)]"
+                        style={{
+                          left: `${k * 2.4}rem`,
+                          zIndex: 3 - k,
+                          transform: `rotate(${(k - 1) * 5}deg)`,
+                        }}
+                      >
+                        <span
+                          className="block transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-3"
+                          style={{ transitionDelay: `${k * 50}ms` }}
+                        >
+                          {e.logo ? (
+                            <span className="grid aspect-square place-items-center rounded-[2px] bg-white p-2 shadow-[0_0_0_1px_rgb(22_18_14/0.12)]">
+                              <img src={e.logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
+                            </span>
+                          ) : (
+                            <Cover name={e.name} cover={e.cover} color={e.color} />
+                          )}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                  <span className="relative flex items-center justify-end gap-3">
+                    <span className="num text-3xl md:text-4xl">{pad(r.total)}</span>
+                    <ArrowUpRight className="size-5 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
+                  </span>
+                </Link>
+              </Rise>
             </li>
           );
         })}
-      </ul>
-
-      <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-30 hidden md:block"
-        style={{ x, y }}
-        aria-hidden
-      >
-        <AnimatePresence mode="popLayout">
-          {active && (
-            <motion.div
-              key={active.key}
-              className="absolute -translate-y-1/2 translate-x-10 overflow-hidden shadow-2xl"
-              style={{ width: active.winner.logo ? 220 : 210 }}
-              initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
-              animate={{ opacity: 1, scale: 1, rotate: 4 }}
-              exit={{ opacity: 0, scale: 0.7, rotate: 12 }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {active.winner.logo ? (
-                <div className="grid aspect-square place-items-center bg-white p-6">
-                  <img src={active.winner.logo} alt="" className="max-h-full max-w-full object-contain" />
-                </div>
-              ) : (
-                <div className="aspect-[400/568]">
-                  <Cover name={active.winner.name} cover={active.winner.cover} color={active.winner.color} eager />
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+      </ol>
     </section>
   );
 }

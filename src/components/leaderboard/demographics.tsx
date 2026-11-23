@@ -1,94 +1,95 @@
 "use client";
 import { motion } from "motion/react";
+import Rise, { Kicker, Lines } from "@/components/ui/reveal";
 import { nf, percent } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 
-export default function Demographics({
-  gender,
-  ages,
-  votes,
-}: {
-  gender: { male: number; female: number };
-  ages: { age: number; count: number }[];
-  votes: number;
-}) {
+/** Who held the ballots: the split by gender, and one stack of pages per year of age. */
+export default function Demographics({ gender, ages }: { gender: { male: number; female: number }; ages: { age: number; count: number }[] }) {
   const total = gender.male + gender.female;
   const peak = Math.max(...ages.map((a) => a.count));
   const mode = ages.find((a) => a.count === peak)!;
   const under22 = ages.filter((a) => a.age <= 22).reduce((s, a) => s + a.count, 0);
+  const all = ages.reduce((s, a) => s + a.count, 0);
 
   return (
-    <section className="relative overflow-hidden bg-ink px-5 py-24 text-paper md:px-16 md:py-36" aria-label="Chân dung người bình chọn">
-      <span className="label text-shu">Chân dung người bình chọn</span>
-      <h2 className="display mt-5 text-[12vw] leading-[0.95] md:text-[6.4vw]">
-        Ai đã <span className="outline-text">bỏ phiếu?</span>
-      </h2>
+    <section className="overflow-hidden bg-ink px-5 py-24 text-paper md:px-10 md:py-36" aria-label="Chân dung người bình chọn">
+      <div className="label flex justify-between text-paper/55">
+        <span>
+          <span className="mr-3 text-shu">C</span>Chân dung người bình chọn
+        </span>
+        <span>{nf.format(total)} người</span>
+      </div>
+      <Lines className="display mt-6 text-[13vw] md:text-[8vw]">
+        <>
+          Ai đã <i className="text-shu">cầm lá phiếu?</i>
+        </>
+      </Lines>
 
-      <div className="mt-16 grid gap-16 md:mt-24 md:grid-cols-[1fr_1.5fr] md:gap-20">
-        <div>
-          <h3 className="label text-paper/50">Giới tính</h3>
-          <div className="mt-6 flex h-28 w-full overflow-hidden md:h-36">
+      <div className="mt-16 grid gap-16 md:mt-24 md:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] md:gap-20">
+        <Rise>
+          <h3 className="label text-paper/55">Giới tính</h3>
+          <div className="mt-6 flex h-16 overflow-hidden rounded-[2px]">
             <motion.div
-              className="relative flex items-end bg-paper p-3 text-ink"
+              className="bg-paper"
               initial={{ width: "0%" }}
               whileInView={{ width: `${(gender.male / total) * 100}%` }}
               viewport={{ once: true }}
-              transition={{ duration: 1.6, ease: EASE }}
-            >
-              <span className="display text-4xl md:text-5xl">{percent(gender.male, total)}</span>
-            </motion.div>
-            <div className="relative flex-1 bg-shu">
-              <div className="absolute inset-0 text-ink/25 tone" />
-            </div>
+              transition={{ duration: 1.8, ease: EASE }}
+            />
+            <div className="flex-1 bg-shu" />
           </div>
-          <dl className="mt-4 flex justify-between">
+          <dl className="mt-5 flex justify-between">
             <div>
-              <dt className="label text-paper/50">Nam</dt>
-              <dd className="mt-1 font-serif text-xl italic">{nf.format(gender.male)} người</dd>
+              <dd className="num text-6xl md:text-7xl">{percent(gender.male, total)}</dd>
+              <dt className="label mt-2 text-paper/55">Nam · {nf.format(gender.male)}</dt>
             </div>
             <div className="text-right">
-              <dt className="label text-shu">Nữ · {percent(gender.female, total)}</dt>
-              <dd className="mt-1 font-serif text-xl italic">{nf.format(gender.female)} người</dd>
+              <dd className="num text-6xl text-shu md:text-7xl">{percent(gender.female, total)}</dd>
+              <dt className="label mt-2 text-paper/55">Nữ · {nf.format(gender.female)}</dt>
             </div>
           </dl>
-        </div>
+        </Rise>
 
         <div>
           <div className="flex items-baseline justify-between">
-            <h3 className="label text-paper/50">
-              Độ tuổi ({ages[0].age}-{ages[ages.length - 1].age})
-            </h3>
-            <span className="label text-paper/50">
-              Đông nhất: <span className="text-shu">{mode.age} tuổi</span>
-            </span>
+            <h3 className="label text-paper/55">Độ tuổi</h3>
+            <span className="label text-paper/55">Mỗi cột là một tuổi</span>
           </div>
-          <div className="mt-6 flex h-52 items-end gap-[3px] md:h-64" role="img" aria-label={`Phân bố độ tuổi, đông nhất là ${mode.age} tuổi với ${mode.count} người`}>
+          <div className="mt-10 flex h-56 items-end gap-1 md:h-72 md:gap-1.5">
             {ages.map((a, i) => (
-              <div key={a.age} className="group relative flex h-full flex-1 items-end">
-                <motion.div
-                  className={`w-full origin-bottom ${a.count === peak ? "bg-shu" : "bg-paper/85 group-hover:bg-paper"}`}
-                  style={{ height: `${Math.max(0.6, (a.count / peak) * 100)}%` }}
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.1, delay: i * 0.025, ease: EASE }}
-                />
-                <span className="label pointer-events-none absolute -top-1 left-1/2 z-10 hidden -translate-x-1/2 -translate-y-full whitespace-nowrap bg-paper px-2 py-1 text-ink group-hover:block">
+              <div key={a.age} className="group relative flex h-full flex-1 flex-col items-center justify-end">
+                <span className="label pointer-events-none absolute -top-7 whitespace-nowrap text-paper opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {a.age} tuổi · {nf.format(a.count)}
                 </span>
+                <motion.span
+                  className={`w-full origin-bottom rounded-t-[1px] transition-colors duration-300 group-hover:bg-shu ${a.age === mode.age ? "bg-shu" : "bg-paper"}`}
+                  style={{ height: `${Math.max(1, (a.count / peak) * 100)}%` }}
+                  initial={{ transform: "scaleY(0)" }}
+                  whileInView={{ transform: "scaleY(1)" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.3, delay: i * 0.03, ease: EASE }}
+                />
               </div>
             ))}
           </div>
-          <div className="mt-2 flex justify-between border-t border-paper/20 pt-2">
-            {[ages[0].age, 15, 20, 25, 30, 35, ages[ages.length - 1].age].map((t) => (
-              <span key={t} className="label text-paper/45">
-                {t}
+          <div className="mt-3 flex gap-1 border-t border-paper/25 pt-2 md:gap-1.5">
+            {ages.map((a, i) => (
+              <span key={a.age} className="label flex-1 text-center text-[0.56rem] text-paper/55">
+                {i % 2 === 0 ? a.age : ""}
               </span>
             ))}
           </div>
-          <p className="mt-8 max-w-[40ch] font-serif text-xl italic leading-snug text-paper/70">
-            {percent(under22, votes)} người bình chọn từ 22 tuổi trở xuống. Light Novel vẫn là câu chuyện của tuổi trẻ.
-          </p>
+          <Rise className="mt-12 grid grid-cols-2 gap-8">
+            <div>
+              <p className="num text-6xl text-shu">{mode.age}</p>
+              <p className="label mt-2 text-paper/55">Độ tuổi đông nhất</p>
+            </div>
+            <div>
+              <p className="num text-6xl">{percent(under22, all)}</p>
+              <p className="label mt-2 text-paper/55">Từ 22 tuổi trở xuống</p>
+            </div>
+          </Rise>
         </div>
       </div>
     </section>

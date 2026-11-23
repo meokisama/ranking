@@ -12,10 +12,10 @@ export default function Field({
   area?: boolean;
 }) {
   const cls =
-    "mt-2 w-full border-b border-ink bg-transparent pb-2 font-serif text-xl outline-none transition-colors focus:border-shu";
+    "mt-2 w-full border-b border-ink/30 bg-transparent pb-2 font-[family-name:var(--font-display)] text-xl outline-none transition-colors duration-500 focus:border-shu";
   return (
     <label className="block">
-      <span className="label flex justify-between text-ink/55">
+      <span className="label flex justify-between text-mute">
         {label}
         <span>
           {value.length}/{max}

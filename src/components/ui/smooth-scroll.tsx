@@ -47,7 +47,7 @@ function ScrollReset() {
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   return (
-    <ReactLenis root options={{ lerp: 0.09, wheelMultiplier: 0.9, anchors: true }}>
+    <ReactLenis root options={{ lerp: 0.085, wheelMultiplier: 0.9, anchors: true }}>
       <ScrollReset />
       {children}
     </ReactLenis>

@@ -2,8 +2,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Cover } from "@/components/ui/book";
+import { ArrowLeft, ArrowRight, Check, Search } from "lucide-react";
+import Cover from "@/components/ui/cover";
 import { CATEGORIES, VOTING } from "@/lib/config";
 import { fold, pad } from "@/lib/format";
 import { EASE } from "@/lib/motion";
@@ -20,6 +20,7 @@ const ERRORS: Record<string, string> = {
   invalidCaptcha: "Captcha không hợp lệ. Hãy xác minh lại, hoặc tải lại trang nếu cần.",
 };
 
+/** The ballot: one sheet per category, then a note to the organisers, then the hand-in. */
 export default function Ballot({
   steps,
   periodLabel,
@@ -93,7 +94,7 @@ export default function Ballot({
     );
   }, [current, q, onlyPicked, chosen]);
 
-  const missing = steps.filter((s) => !(picks[s.key]?.length)).map((s) => CATEGORIES[s.key].short);
+  const missing = steps.filter((s) => !picks[s.key]?.length).map((s) => CATEGORIES[s.key].short);
 
   const submit = async () => {
     const age = Number(extra.age);
@@ -134,14 +135,16 @@ export default function Ballot({
   const stepLabels = [...steps.map((s) => CATEGORIES[s.key].short), "Góp ý", "Gửi phiếu"];
 
   return (
-    <main className="min-h-svh bg-paper pb-36 text-ink">
-      <header className="px-5 pt-28 md:px-16 md:pt-36">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <span className="label text-shu">Lá phiếu · {periodLabel}</span>
-          {preview && <span className="label bg-ink px-2 py-1 text-paper">Chế độ xem thử · không gửi phiếu</span>}
+    <main className="min-h-svh pb-32">
+      <header className="px-5 pt-24 md:px-10 md:pt-28">
+        <div className="label flex flex-wrap items-center gap-x-5 gap-y-2 text-mute">
+          <span>
+            <span className="mr-3 text-shu">●</span>Lá phiếu · {periodLabel}
+          </span>
+          {preview && <span className="rounded-full bg-ink px-3 py-1 text-paper">Chế độ xem thử · không gửi phiếu</span>}
         </div>
 
-        <ol className="mt-6 flex gap-1 overflow-x-auto" aria-label="Các bước">
+        <ol className="no-scrollbar mt-6 flex gap-1.5 overflow-x-auto" aria-label="Các bước">
           {stepLabels.map((l, i) => {
             const count = steps[i] ? (picks[steps[i].key]?.length ?? 0) : null;
             return (
@@ -149,15 +152,15 @@ export default function Ballot({
                 <button
                   onClick={() => go(i)}
                   aria-current={i === step ? "step" : undefined}
-                  className={`w-full border-t-[3px] pt-3 text-left transition-colors duration-300 ${
-                    i === step ? "border-shu" : i < step ? "border-ink" : "border-ink/20 text-ink/45 hover:text-ink"
+                  className={`w-full border-t-2 pt-3 text-left transition-colors duration-500 ${
+                    i === step ? "border-shu" : i < step ? "border-ink" : "border-ink/15 text-mute hover:text-ink"
                   }`}
                 >
                   <span className="label block">
                     {pad(i + 1)}
                     {count !== null && steps[i] && ` · ${count}/${CATEGORIES[steps[i].key].max}`}
                   </span>
-                  <span className="display mt-1 block whitespace-nowrap text-sm md:text-base">{l}</span>
+                  <span className="display mt-1 block whitespace-nowrap text-xl">{l}</span>
                 </button>
               </li>
             );
@@ -168,45 +171,39 @@ export default function Ballot({
       <AnimatePresence mode="wait">
         <motion.section
           key={step}
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.45, ease: EASE }}
-          className="px-5 pt-12 md:px-16 md:pt-16"
+          initial={{ opacity: 0, transform: "translateY(24px)" }}
+          animate={{ opacity: 1, transform: "translateY(0px)" }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="px-5 pt-12 md:px-10 md:pt-16"
         >
           {current && meta && (
             <>
               <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
                 <div>
-                  <h1 className="display max-w-[16ch] text-[10vw] leading-[0.98] md:text-[5vw]">{meta.label}</h1>
-                  <p className="mt-4 max-w-[52ch] font-serif text-lg italic leading-snug text-ink/65">
-                    “{meta.blurb}” Bạn có tối đa <strong className="not-italic text-shu">{meta.max} phiếu</strong>.
+                  <h1 className="display max-w-[16ch] text-[11vw] md:text-[5.6vw]">{meta.label}</h1>
+                  <p className="mt-4 max-w-[56ch] text-[0.95rem] font-light text-ink/75">
+                    {meta.blurb} Bạn có tối đa <strong className="font-medium text-shu">{meta.max} phiếu</strong>.
                   </p>
                 </div>
-                <div className="flex w-full flex-col gap-3 md:w-80">
-                  <label className="flex items-center gap-3 border-b border-ink pb-2">
-                    <span className="label text-ink/50">Tìm</span>
+                <div className="flex w-full flex-col gap-2 md:w-80">
+                  <label className="flex h-11 items-center gap-3 rounded-full border border-ink/25 px-4 focus-within:border-ink">
+                    <Search className="size-4 shrink-0 text-mute" aria-hidden />
                     <input
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
-                      placeholder={`Tên ${meta.unit}…`}
-                      className="w-full bg-transparent font-serif text-lg italic outline-none placeholder:text-ink/35"
+                      placeholder={`Tìm theo tên ${meta.unit}…`}
+                      className="w-full bg-transparent text-[0.9rem] outline-none placeholder:text-mute"
                     />
                   </label>
-                  <button
-                    onClick={() => setOnlyPicked((v) => !v)}
-                    aria-pressed={onlyPicked}
-                    className={`label self-start border px-3 py-2 transition-colors ${
-                      onlyPicked ? "border-ink bg-ink text-paper" : "border-ink/30 hover:border-ink"
-                    }`}
-                  >
+                  <button onClick={() => setOnlyPicked((v) => !v)} aria-pressed={onlyPicked} className="btn-ghost !h-9 self-start !px-4 !text-[0.8rem]">
                     Chỉ hiện đã chọn ({chosen.length})
                   </button>
                 </div>
               </div>
 
               <ul
-                className={`mt-10 grid gap-x-4 gap-y-8 ${
+                className={`mt-12 grid gap-x-5 gap-y-9 ${
                   current.key === "publisher"
                     ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
                     : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"
@@ -219,12 +216,12 @@ export default function Ballot({
                     <li key={it.id}>
                       <button onClick={() => toggle(it.id)} aria-pressed={on} className="group block w-full text-left">
                         <div
-                          className={`relative overflow-hidden transition-[translate,box-shadow] duration-500 ease-[var(--ease-out-expo)] ${
-                            it.logo ? "aspect-square bg-white" : "aspect-[400/568] bg-paper-2"
-                          } ${on ? "-translate-y-2 shadow-[0_18px_30px_-12px_rgb(0_0_0/0.45)] ring-[3px] ring-shu" : "group-hover:-translate-y-1"}`}
+                          className={`relative rounded-[3px] outline outline-2 outline-offset-4 transition-[translate,outline-color] duration-500 ease-[var(--ease-out-expo)] ${
+                            on ? "-translate-y-2 outline-shu" : "outline-transparent group-hover:-translate-y-1"
+                          }`}
                         >
                           {it.logo ? (
-                            <div className="grid size-full place-items-center p-5">
+                            <div className="grid aspect-square place-items-center rounded-[2px] bg-white p-5 shadow-[0_0_0_1px_rgb(22_18_14/0.12)]">
                               <img src={it.logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
                             </div>
                           ) : (
@@ -232,41 +229,38 @@ export default function Ballot({
                           )}
                           {on && (
                             <motion.span
-                              initial={{ y: "100%" }}
-                              animate={{ y: 0 }}
-                              transition={{ duration: 0.4, ease: EASE }}
-                              className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-shu px-3 py-2 text-paper"
+                              initial={{ transform: "scale(0)" }}
+                              animate={{ transform: "scale(1)" }}
+                              transition={{ duration: 0.5, ease: EASE }}
+                              className="num absolute -right-3 -top-3 grid size-9 place-items-center rounded-full bg-shu text-lg text-paper shadow-lg"
                             >
-                              <span className="label">Đã chọn</span>
-                              <span className="display text-lg leading-none">{pad(order + 1)}</span>
+                              {order + 1}
                             </motion.span>
                           )}
                         </div>
-                        <span className="mt-3 line-clamp-2 block font-serif text-[15px] leading-snug">{it.name}</span>
-                        {it.publisher && <span className="label mt-1 block truncate text-ink/45">{it.publisher}</span>}
+                        <span className="display mt-4 line-clamp-2 block text-[1.1rem] leading-[1.12]">{it.name}</span>
+                        {it.publisher && <span className="label mt-1 block truncate text-mute">{it.publisher}</span>}
                       </button>
                     </li>
                   );
                 })}
               </ul>
-              {visible.length === 0 && (
-                <p className="py-20 text-center font-serif text-2xl italic text-ink/50">Không có kết quả phù hợp.</p>
-              )}
+              {visible.length === 0 && <p className="display py-20 text-center text-3xl text-mute">Không có kết quả phù hợp.</p>}
             </>
           )}
 
           {step === steps.length && (
             <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-20">
               <div>
-                <h1 className="display text-[10vw] leading-[0.98] md:text-[5vw]">
-                  Chia sẻ <span className="text-shu">ý kiến</span> và đề xuất
+                <h1 className="display text-[11vw] md:text-[5.6vw]">
+                  Đôi dòng gửi <i className="text-shu">ban tổ chức</i>
                 </h1>
-                <p className="mt-5 max-w-[44ch] text-[15px] leading-relaxed text-ink/70">
-                  Nơi bạn tự do đóng góp ý kiến về tác phẩm, nhà phát hành, dịch giả, series muốn có bản quyền hoặc bất
-                  kỳ điều gì liên quan. Phần này không bắt buộc và sẽ được hiển thị ẩn danh ở trang Góp ý.
+                <p className="mt-5 max-w-[46ch] text-[0.95rem] font-light text-ink/75">
+                  Nơi bạn tự do đóng góp ý kiến về tác phẩm, nhà phát hành, dịch giả, series muốn có bản quyền hoặc bất kỳ điều
+                  gì liên quan. Phần này không bắt buộc và sẽ được hiển thị ẩn danh ở trang Góp ý.
                 </p>
               </div>
-              <div className="space-y-8">
+              <div className="space-y-9 rounded-[3px] bg-card p-6 shadow-[0_0_0_1px_rgb(22_18_14/0.08)] md:p-10">
                 <Field label="Chủ đề" value={extra.topic} max={120} onChange={(v) => setExtra({ ...extra, topic: v })} />
                 <Field label="Nội dung" value={extra.content} max={500} area onChange={(v) => setExtra({ ...extra, content: v })} />
                 <Field label="Bộ truyện bạn mong có bản quyền" value={extra.title} max={160} onChange={(v) => setExtra({ ...extra, title: v })} />
@@ -278,31 +272,31 @@ export default function Ballot({
           {step === steps.length + 1 && (
             <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:gap-20">
               <div>
-                <h1 className="display text-[10vw] leading-[0.98] md:text-[5vw]">
-                  Soát lại <span className="text-shu">lá phiếu</span>
+                <h1 className="display text-[11vw] md:text-[5.6vw]">
+                  Soát lại <i className="text-shu">lá phiếu</i>
                 </h1>
                 <div className="mt-10 space-y-8">
                   {steps.map((s, i) => {
                     const ids = picks[s.key] ?? [];
                     return (
-                      <div key={s.key} className="border-t border-ink pt-4">
+                      <div key={s.key} className="hair border-t pt-4">
                         <div className="flex items-baseline justify-between">
-                          <h2 className="display text-xl">{CATEGORIES[s.key].short}</h2>
-                          <button onClick={() => go(i)} className="label link-underline pb-0.5 text-ink/60">
+                          <h2 className="display text-2xl">{CATEGORIES[s.key].short}</h2>
+                          <button onClick={() => go(i)} className="label link text-mute">
                             Sửa · {ids.length}/{CATEGORIES[s.key].max}
                           </button>
                         </div>
                         {ids.length ? (
-                          <ol className="mt-3 space-y-1 font-serif text-lg">
+                          <ol className="mt-3 space-y-1">
                             {ids.map((id, n) => (
                               <li key={id} className="flex gap-3">
-                                <span className="label w-6 shrink-0 pt-1.5 text-shu">{pad(n + 1)}</span>
+                                <span className="num w-6 shrink-0 text-shu">{pad(n + 1)}</span>
                                 {s.items.find((x) => x.id === id)?.name}
                               </li>
                             ))}
                           </ol>
                         ) : (
-                          <p className="mt-3 font-serif text-lg italic text-shu">Chưa chọn. Hạng mục này là bắt buộc.</p>
+                          <p className="mt-3 text-shu">Chưa chọn. Hạng mục này là bắt buộc.</p>
                         )}
                       </div>
                     );
@@ -310,30 +304,24 @@ export default function Ballot({
                 </div>
               </div>
 
-              <div className="h-fit space-y-8 border border-ink p-6 md:sticky md:top-28 md:p-8">
-                <h2 className="display text-2xl">Đôi nét về bạn</h2>
+              <div className="h-fit space-y-8 rounded-[3px] bg-card p-6 shadow-[0_0_0_1px_rgb(22_18_14/0.08)] md:sticky md:top-24 md:p-9">
+                <h2 className="display text-3xl">Đôi nét về bạn</h2>
                 <fieldset>
-                  <legend className="label text-ink/55">Giới tính</legend>
+                  <legend className="label text-mute">Giới tính</legend>
                   <div className="mt-3 flex gap-2">
                     {[
                       ["male", "Nam"],
                       ["female", "Nữ"],
                     ].map(([v, l]) => (
-                      <button
-                        key={v}
-                        onClick={() => setExtra({ ...extra, gender: v })}
-                        aria-pressed={extra.gender === v}
-                        className={`display flex-1 border py-3 text-lg transition-colors ${
-                          extra.gender === v ? "border-shu bg-shu text-paper" : "border-ink/30 hover:border-ink"
-                        }`}
-                      >
+                      <button key={v} onClick={() => setExtra({ ...extra, gender: v })} aria-pressed={extra.gender === v} className="btn-ghost flex-1 justify-center">
+                        {extra.gender === v && <Check className="size-4" aria-hidden />}
                         {l}
                       </button>
                     ))}
                   </div>
                 </fieldset>
                 <label className="block">
-                  <span className="label text-ink/55">Tuổi</span>
+                  <span className="label text-mute">Tuổi</span>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -341,25 +329,23 @@ export default function Ballot({
                     max={100}
                     value={extra.age}
                     onChange={(e) => setExtra({ ...extra, age: e.target.value })}
-                    className="display mt-2 w-full border-b border-ink bg-transparent pb-1 text-5xl outline-none"
+                    className="num mt-2 w-full border-b border-ink/30 bg-transparent pb-1 text-5xl outline-none focus:border-shu"
                   />
                 </label>
                 {SITEKEY ? (
                   <HCaptcha sitekey={SITEKEY} onVerify={setToken} onExpire={() => setToken(null)} />
                 ) : (
-                  <p className="label border border-dashed border-ink/40 p-3 leading-relaxed text-ink/60">
+                  <p className="label rounded-[2px] border border-dashed border-ink/30 p-3 leading-relaxed text-mute">
                     Captcha chưa được cấu hình (NEXT_PUBLIC_HCAPTCHA_SITEKEY).
                   </p>
                 )}
-                <button
-                  onClick={submit}
-                  disabled={sending}
-                  className="group relative h-16 w-full overflow-hidden bg-ink text-paper disabled:opacity-50"
-                >
-                  <span className="absolute inset-0 origin-bottom scale-y-0 bg-shu transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-y-100" />
-                  <span className="display relative text-xl">{sending ? "Đang gửi…" : "Bỏ phiếu"}</span>
+                <button onClick={submit} disabled={sending} className="btn !h-14 w-full justify-between !pl-6 !text-base">
+                  {sending ? "Đang gửi…" : "Bỏ phiếu"}
+                  <span className="disc !size-10">
+                    <ArrowRight aria-hidden />
+                  </span>
                 </button>
-                <p className="text-xs leading-relaxed text-ink/55">
+                <p className="text-[0.8rem] font-light leading-relaxed text-mute">
                   Mỗi địa chỉ IP chỉ được gửi một lá phiếu và không thể sửa sau khi gửi.
                 </p>
               </div>
@@ -368,22 +354,24 @@ export default function Ballot({
         </motion.section>
       </AnimatePresence>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-paper/15 bg-ink text-paper">
-        <div className="flex items-center justify-between gap-4 px-5 py-3 md:px-16 md:py-4">
-          <button onClick={() => go(step - 1)} disabled={step === 0} className="label inline-flex items-center gap-2 py-2 disabled:opacity-30">
-            <ArrowLeft className="size-3.5" aria-hidden />
+      <div className="hair fixed inset-x-0 bottom-0 z-40 border-t bg-paper/90 backdrop-blur-md">
+        <div className="flex items-center justify-between gap-4 px-5 py-3 md:px-10">
+          <button onClick={() => go(step - 1)} disabled={step === 0} className="btn-ghost !h-10 disabled:pointer-events-none disabled:opacity-30">
+            <ArrowLeft className="size-4" aria-hidden />
             Quay lại
           </button>
-          <span className="label hidden text-paper/55 sm:block">
+          <span className="label hidden text-mute sm:block">
             {meta ? `Đã chọn ${chosen.length} / ${meta.max} ${meta.unit}` : `Bước ${step + 1} / ${total}`}
           </span>
           {step < total - 1 ? (
-            <button onClick={() => go(step + 1)} className="label inline-flex items-center gap-2 bg-paper px-5 py-3 text-ink transition-colors hover:bg-shu hover:text-paper">
+            <button onClick={() => go(step + 1)} className="btn !h-10">
               Tiếp tục
-              <ArrowRight className="size-3.5" aria-hidden />
+              <span className="disc !size-7">
+                <ArrowRight aria-hidden />
+              </span>
             </button>
           ) : (
-            <span className="label text-paper/55">Bước cuối</span>
+            <span className="label text-mute">Bước cuối</span>
           )}
         </div>
       </div>
@@ -392,14 +380,14 @@ export default function Ballot({
         {notice && (
           <motion.div
             role="alert"
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 20, opacity: 0 }}
-            transition={{ duration: 0.4, ease: EASE }}
-            className="fixed bottom-24 left-1/2 z-50 w-[min(92vw,30rem)] -translate-x-1/2 bg-shu p-4 text-paper shadow-2xl"
+            initial={{ opacity: 0, transform: "translate(-50%, 30px)" }}
+            animate={{ opacity: 1, transform: "translate(-50%, 0px)" }}
+            exit={{ opacity: 0, transform: "translate(-50%, 16px)" }}
+            transition={{ duration: 0.5, ease: EASE }}
+            className="fixed bottom-20 left-1/2 z-50 w-[min(92vw,30rem)] rounded-[3px] bg-ink p-5 text-paper shadow-2xl"
           >
-            <span className="label block opacity-80">Lưu ý</span>
-            <span className="mt-1 block font-serif text-lg leading-snug">{notice}</span>
+            <span className="label block text-shu">Lưu ý</span>
+            <span className="mt-1 block leading-snug">{notice}</span>
           </motion.div>
         )}
       </AnimatePresence>

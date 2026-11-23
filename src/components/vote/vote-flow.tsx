@@ -17,7 +17,7 @@ export default function VoteFlow({ steps, periodLabel }: { steps: VoteStep[]; pe
     setVoted(localStorage.getItem(VOTING.storageKey) === "done");
   }, []);
 
-  if (state === null) return <main className="min-h-svh bg-ink" />;
+  if (state === null) return <main className="min-h-svh" />;
   if (voted) return <Gate tone="done" periodLabel={periodLabel} />;
   if (state !== "open" && !preview) return <Gate tone={state} periodLabel={periodLabel} />;
   return <Ballot steps={steps} periodLabel={periodLabel} preview={state !== "open"} onDone={() => setVoted(true)} />;

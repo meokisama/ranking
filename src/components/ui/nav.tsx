@@ -1,88 +1,57 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { SITE } from "@/lib/config";
+import Logo from "./logo";
 
 const LINKS = [
-  { href: "/", label: "Trang chủ", jp: "表紙" },
-  { href: "/leaderboard", label: "Bảng tổng sắp", jp: "順位" },
-  { href: "/feedback", label: "Góp ý", jp: "声" },
-  { href: "/vote", label: "Bình chọn", jp: "投票" },
+  { href: "/leaderboard", label: "Bảng tổng sắp" },
+  { href: "/feedback", label: "Góp ý" },
+  { href: "/vote", label: "Bình chọn" },
 ];
 
+/** A thin bar that takes on a paper backing once the page has moved. */
 export default function Nav() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const active = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const [moved, setMoved] = useState(false);
+  useEffect(() => {
+    const on = () => setMoved(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
 
   return (
-    <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4 text-white mix-blend-difference md:px-8 md:py-6">
-        <Link href="/" className="pointer-events-auto flex items-center gap-3" aria-label="Trang chủ">
-          <span className="display grid size-9 place-items-center border border-current text-[15px] leading-none">
-            <span className="translate-y-[1px]">LN</span>
-          </span>
-          <span className="label hidden leading-tight sm:block">
-            Bảng xếp hạng
-            <br />
-            Light Novel Việt Nam
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-700 ${
+        moved ? "hair bg-paper/80 backdrop-blur-md" : "border-transparent"
+      }`}
+    >
+      <nav className="flex h-14 items-center justify-between px-5 md:h-16 md:px-10" aria-label="Điều hướng chính">
+        <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE.name}, về trang chủ`}>
+          <Logo className="size-7 shrink-0 md:size-8" />
+          <span className="display whitespace-nowrap text-[1.1rem] leading-none md:text-[1.3rem]">
+            <i>Light Novel</i> <span className="font-medium">VN</span>
           </span>
         </Link>
-
-        <nav className="pointer-events-auto hidden items-center gap-8 md:flex" aria-label="Điều hướng chính">
-          {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} className="label group relative py-1">
-              <span className={active(l.href) ? "opacity-100" : "opacity-60 transition-opacity group-hover:opacity-100"}>
-                {l.label}
-              </span>
-              {active(l.href) && (
-                <motion.span layoutId="nav-dot" className="absolute -bottom-1 left-0 h-px w-full bg-current" />
-              )}
-            </Link>
-          ))}
-        </nav>
-
-        <button
-          className="label pointer-events-auto md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-        >
-          {open ? "Đóng" : "Menu"}
-        </button>
-      </header>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink px-5 pb-10 text-paper md:hidden"
-            initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)" }}
-            exit={{ clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-          >
-            {LINKS.map((l, i) => (
-              <motion.div
-                key={l.href}
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.25 + i * 0.07, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              >
+        <ul className="flex items-center gap-3.5 whitespace-nowrap text-[0.74rem] md:gap-8 md:text-[0.875rem]">
+          {LINKS.map((l) => {
+            const active = pathname.startsWith(l.href);
+            return (
+              <li key={l.href}>
                 <Link
                   href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="display flex items-baseline justify-between border-t border-paper/20 py-4 text-[11vw]"
+                  aria-current={active ? "page" : undefined}
+                  className={`link transition-colors duration-300 ${active ? "text-shu" : "hover:text-shu"} ${active ? "" : "[background-size:0%_1px] hover:[background-size:100%_1px]"}`}
                 >
                   {l.label}
-                  <span className="font-jp text-base text-shu">{l.jp}</span>
                 </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </header>
   );
 }
