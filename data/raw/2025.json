@@ -1,0 +1,1434 @@
+{
+ "votes": 1607,
+ "gender": {
+  "male": 645,
+  "female": 37,
+  "other": 32
+ },
+ "ageGroups": [
+  {
+   "label": "10-19",
+   "count": 364
+  },
+  {
+   "label": "20-29",
+   "count": 337
+  },
+  {
+   "label": "30-39",
+   "count": 12
+  },
+  {
+   "label": "40+",
+   "count": 2
+  }
+ ],
+ "categories": {
+  "ranobe": [
+   {
+    "name": "Chúa Tể Bóng Tối",
+    "count": 387
+   },
+   {
+    "name": "86 Eighty Six",
+    "count": 359
+   },
+   {
+    "name": "Chung Một Mái Nhà",
+    "count": 347
+   },
+   {
+    "name": "Cô Nàng Shimotsuki Trót Phải Lòng Nhân Vật Nền",
+    "count": 316
+   },
+   {
+    "name": "Làm Bạn Với Cô Nàng Dễ Thương Nhì Lớp",
+    "count": 297
+   },
+   {
+    "name": "Hội Chứng Tuổi Thanh Xuân",
+    "count": 295
+   },
+   {
+    "name": "Hành Trình Của Elaina",
+    "count": 273
+   },
+   {
+    "name": "Đường hầm tới mùa hạ - Lối thoát của Biệt ly",
+    "count": 267
+   },
+   {
+    "name": "Date A Live",
+    "count": 256
+   },
+   {
+    "name": "Chitose Trong Chai Ramune",
+    "count": 240
+   },
+   {
+    "name": "Dược Sư Tự Sự",
+    "count": 214
+   },
+   {
+    "name": "Chào Mừng Đến Lớp Học Đề Cao Thực Lực",
+    "count": 208
+   },
+   {
+    "name": "5 Centimet Trên Giây",
+    "count": 198
+   },
+   {
+    "name": "Ba Ngày Hạnh Phúc",
+    "count": 174
+   },
+   {
+    "name": "Thế Giới Otome Game Thật Khắc Nghiệt Với Nhân Vật Quần Chúng",
+    "count": 170
+   },
+   {
+    "name": "86-EIGHTY SIX - Alter",
+    "count": 167
+   },
+   {
+    "name": "Arifureta - Từ Tầm Thường Đến Bất Khả Chiến Bại",
+    "count": 164
+   },
+   {
+    "name": "Your Name",
+    "count": 160
+   },
+   {
+    "name": "Re:Zero - Bắt Đầu Lại Ở Thế Giới Khác",
+    "count": 159
+   },
+   {
+    "name": "Ai Dám Bảo Rom-com Không Có Ngoài Đời Thực?",
+    "count": 157
+   },
+   {
+    "name": "Hiệp Sĩ Lưu Ban",
+    "count": 152
+   },
+   {
+    "name": "Thám Tử Đã Chết",
+    "count": 143
+   },
+   {
+    "name": "Sword Art Online",
+    "count": 130
+   },
+   {
+    "name": "Bảo Mẫu Bí Mật Của Tiểu Thư",
+    "count": 130
+   },
+   {
+    "name": "Vị Hôn Thê Giản Dị Của Tôi Rất Dễ Thương Lúc Ở Nhà",
+    "count": 129
+   },
+   {
+    "name": "Vợ Trong Game Của Tôi Là Idol Nổi Tiếng Ngoài Đời",
+    "count": 128
+   },
+   {
+    "name": "Hoàng Tử Thiên Tài - Hành Trình Gây Dựng Lại Đất Nước Đang Lâm Nguy",
+    "count": 124
+   },
+   {
+    "name": "Công Việc Của Long Vương",
+    "count": 113
+   },
+   {
+    "name": "Đứa Con Của Thời Tiết",
+    "count": 111
+   },
+   {
+    "name": "Date A Live Encore",
+    "count": 110
+   },
+   {
+    "name": "Về Chuyện Tôi Chuyển Sinh Thành Slime",
+    "count": 106
+   },
+   {
+    "name": "Nàng Idol Đói Bụng Gặp Được Chàng Nội Trợ Đảm Đang",
+    "count": 105
+   },
+   {
+    "name": "Phá Đảo Dị Giới Cùng Nữ Thần Không Tín Đồ",
+    "count": 102
+   },
+   {
+    "name": "Bakemonogatari",
+    "count": 98
+   },
+   {
+    "name": "Nhắn Gửi Một Tôi, Người Đã Yêu Em",
+    "count": 98
+   },
+   {
+    "name": "Cấm Thư Ma Thuật Index",
+    "count": 96
+   },
+   {
+    "name": "Sword Art Online Progressive",
+    "count": 96
+   },
+   {
+    "name": "Ai Đã Giết Anh Hùng",
+    "count": 94
+   },
+   {
+    "name": "OVERLORD",
+    "count": 93
+   },
+   {
+    "name": "Đợi Anh Trong Mùa Xuân Ngày Hôm Qua",
+    "count": 92
+   },
+   {
+    "name": "Grimgar - Ảo Ảnh Và Tro Tàn",
+    "count": 91
+   },
+   {
+    "name": "Lycoris Recoil",
+    "count": 89
+   },
+   {
+    "name": "Nhắn Gửi Tất Cả Các Em, Những Người Tôi Đã Yêu",
+    "count": 85
+   },
+   {
+    "name": "5 Centimet Trên Giây - One More Side",
+    "count": 84
+   },
+   {
+    "name": "Tớ Muốn Ăn Tụy Của Cậu",
+    "count": 81
+   },
+   {
+    "name": "Phương Pháp \"Đào Tạo\" Nữ Chính Nhạt Nhòa",
+    "count": 78
+   },
+   {
+    "name": "Hẹn Hò Với Người Siêu Dễ Thương Như Tớ Đi!",
+    "count": 78
+   },
+   {
+    "name": "Thế Giới Otome Game Đó Thật Khắc Nghiệt Với Chúng Ta",
+    "count": 76
+   },
+   {
+    "name": "Bởi Vì Tôi Sẽ Gọi Tên Em",
+    "count": 74
+   },
+   {
+    "name": "Unnamed Memory - Hồi Ức Không Tên",
+    "count": 72
+   },
+   {
+    "name": "Hôn Nhân Hạnh Phúc Của Tôi",
+    "count": 71
+   },
+   {
+    "name": "Just Because!",
+    "count": 70
+   },
+   {
+    "name": "Khu vườn ngôn từ",
+    "count": 69
+   },
+   {
+    "name": "Chiếc Hộp Rỗng Và Maria Lần 0",
+    "count": 69
+   },
+   {
+    "name": "Khóa Chặt Cửa Nào Suzume",
+    "count": 69
+   },
+   {
+    "name": "Nàng Cựu Idol Lớp Tôi Lại Có Hành Động Đáng Ngờ Nữa Rồi",
+    "count": 68
+   },
+   {
+    "name": "Vì Con Gái Tôi Có Thể Đánh Bại Cả Ma Vương",
+    "count": 67
+   },
+   {
+    "name": "Diệt Slime Suốt 300 Năm, Tôi Level Max Lúc Nào Chẳng Hay",
+    "count": 67
+   },
+   {
+    "name": "Sói Và Gia Vị",
+    "count": 66
+   },
+   {
+    "name": "Kem Đá",
+    "count": 64
+   },
+   {
+    "name": "Kỵ Sĩ Rồng Bất Bại",
+    "count": 63
+   },
+   {
+    "name": "Spy Room - Lớp Học Điệp Viên",
+    "count": 62
+   },
+   {
+    "name": "Tôi Là Nhện Đấy, Có Sao Không?",
+    "count": 62
+   },
+   {
+    "name": "Fate/Zero",
+    "count": 60
+   },
+   {
+    "name": "Tận Thế Nếu Không Bận, Anh Cứu Chúng Em Nhé?",
+    "count": 60
+   },
+   {
+    "name": "Cô Gái Văn Chương",
+    "count": 59
+   },
+   {
+    "name": "Anohana - Đóa Hoa Ngày Ấy",
+    "count": 58
+   },
+   {
+    "name": "Lũ Ngốc, Bài Thi Và Linh Thú Triệu Hồi",
+    "count": 58
+   },
+   {
+    "name": "Kẻ Dị Biệt Tại Trường Học Phép Thuật",
+    "count": 56
+   },
+   {
+    "name": "Nhân Vật Hạ Cấp Tomozaki",
+    "count": 55
+   },
+   {
+    "name": "Tanya Chiến Ký",
+    "count": 54
+   },
+   {
+    "name": "Bỗng Một Ngày Tôi Có Vị Hôn Thê Là Gal",
+    "count": 49
+   },
+   {
+    "name": "Nguyệt Đạo Dị Giới",
+    "count": 49
+   },
+   {
+    "name": "Thám Tử Lừng Danh Conan",
+    "count": 48
+   },
+   {
+    "name": "Em Là Ánh Sáng Giữa Đêm Trăng",
+    "count": 48
+   },
+   {
+    "name": "Ta Là Chúa Tể Độc Ác Của Đế Quốc Liên Thiên Hà",
+    "count": 48
+   },
+   {
+    "name": "Thần Chết Làm Thêm 300 Yên/Giờ",
+    "count": 47
+   },
+   {
+    "name": "Another",
+    "count": 45
+   },
+   {
+    "name": "Công Cuộc Tái Thiết Vương Quốc Của Anh Hùng Chủ Nghĩa Hiện Thực",
+    "count": 43
+   },
+   {
+    "name": "Ẩn tàng thư Dantalian",
+    "count": 41
+   },
+   {
+    "name": "Đau Ơi Bay Đi!",
+    "count": 41
+   },
+   {
+    "name": "Liệu Có Sai Lầm Khi Tìm Kiếm Cuộc Gặp Gỡ Định Mệnh Trong Dungeon",
+    "count": 40
+   },
+   {
+    "name": "Amagi Công Viên Rực Rỡ",
+    "count": 38
+   },
+   {
+    "name": "Riviere Và Đất Nước Của Lời Cầu Nguyện",
+    "count": 38
+   },
+   {
+    "name": "Nữ Chính Sinh Tồn Mạnh Mẽ Trong Thế Giới Otome Game",
+    "count": 38
+   },
+   {
+    "name": "Ma Vương Tôi Đây Nên Yêu Cô Dâu Elf Của Mình Như Thế Nào?",
+    "count": 38
+   },
+   {
+    "name": "Gosick",
+    "count": 37
+   },
+   {
+    "name": "Ánh Trăng",
+    "count": 37
+   },
+   {
+    "name": "Cuộc Chiến Siêu Nhiên Giữa Đời Thường",
+    "count": 37
+   },
+   {
+    "name": "Tôi Yêu Nữ Phản Diện",
+    "count": 36
+   },
+   {
+    "name": "Cô Nàng Otaku Nhà Tôi",
+    "count": 35
+   },
+   {
+    "name": "Tinh Linh Huyễn Tưởng Ký",
+    "count": 34
+   },
+   {
+    "name": "Your Name: Another Side Earthbound",
+    "count": 33
+   },
+   {
+    "name": "Cuộc Chiến Luân Hồi - All You Need Is Kill",
+    "count": 33
+   },
+   {
+    "name": "Đến Thế Giới Mới Với Smartphone",
+    "count": 33
+   },
+   {
+    "name": "Ngày Mai, Tôi Biến Mất, Cậu Sẽ Hồi Sinh",
+    "count": 33
+   },
+   {
+    "name": "Tớ Sẽ Trú Mưa Cùng Cậu",
+    "count": 32
+   },
+   {
+    "name": "Gamers",
+    "count": 32
+   },
+   {
+    "name": "Khi Ấy Là Một Đêm Đầy Sao",
+    "count": 32
+   },
+   {
+    "name": "Cách Sống Của Thiếu Nữ Hành Quyết - Và Rồi, Cô Ấy Được Tái Sinh",
+    "count": 31
+   },
+   {
+    "name": "Bị Đuổi Khỏi Nhóm Anh Hùng, Tôi Muốn Sống Tự Do Tự Tại Ở Vương Đô",
+    "count": 31
+   },
+   {
+    "name": "Em Là Người Sống, Tôi Là Người Chết, Thế Giới Đôi Lúc Lại Đảo Ngược",
+    "count": 30
+   },
+   {
+    "name": "Cuộc Nổi Dậy Của Cô Nàng Mọt Sách",
+    "count": 30
+   },
+   {
+    "name": "Bạn Gái Vs. Bạn Thời Thơ Ấu",
+    "count": 30
+   },
+   {
+    "name": "Gate: Lực Lượng Phòng Vệ Chiến Đấu Ở Tân Thế Giới",
+    "count": 30
+   },
+   {
+    "name": "Tớ Sẽ Mãi Mãi Không Quên Cậu, Người Từng Sống Trong Khoảnh Khắc",
+    "count": 29
+   },
+   {
+    "name": "Chàng thẩm định viên và Nữ tác giả tập sự",
+    "count": 29
+   },
+   {
+    "name": "Và Rồi, Tháng 9 Không Có Cậu Đã Tới",
+    "count": 29
+   },
+   {
+    "name": "Suzumiya Haruhi",
+    "count": 29
+   },
+   {
+    "name": "Hell Mode - Game Thủ Xuất Chúng Tung Hoành Chốn Dị Giới Hỗn Nguyên",
+    "count": 29
+   },
+   {
+    "name": "Bên Kia Mây Trời, Là Nơi Hẹn Ước",
+    "count": 28
+   },
+   {
+    "name": "Khi Hikaru Còn Trên Thế Gian Này",
+    "count": 27
+   },
+   {
+    "name": "Your Story",
+    "count": 27
+   },
+   {
+    "name": "Thất Kiếm Ma Thuật Thống Trị Thế Giới",
+    "count": 26
+   },
+   {
+    "name": "Chào Mừng Đến Với N.H.K!",
+    "count": 26
+   },
+   {
+    "name": "Đao Ngữ",
+    "count": 25
+   },
+   {
+    "name": "Ame Và Yuki - Những Đứa Con Của Sói",
+    "count": 24
+   },
+   {
+    "name": "Another S/O",
+    "count": 24
+   },
+   {
+    "name": "Nếu Gặp Lại Em Trên Ngọn Đồi Hoa Nở",
+    "count": 24
+   },
+   {
+    "name": "Này Cậu Có Muốn Hẹn Hò Với Tớ Không?",
+    "count": 23
+   },
+   {
+    "name": "Iris Những Ngày Mưa",
+    "count": 23
+   },
+   {
+    "name": "Tháng 8 Cùng Em Và Những Ký Ức Vụn Vỡ",
+    "count": 23
+   },
+   {
+    "name": "Hello World",
+    "count": 23
+   },
+   {
+    "name": "Hành Trình Đến Tận Cùng Thế Giới",
+    "count": 23
+   },
+   {
+    "name": "Ác Nữ Nửa Vời - Truyền Kì Hoán Hồn Đổi Xác",
+    "count": 23
+   },
+   {
+    "name": "Chủ Tiệm Bánh Chiến Binh Và Cô Phục Vụ Người Máy",
+    "count": 22
+   },
+   {
+    "name": "Dã Ngoại Nơi Mặt Sau Của Thế Giới",
+    "count": 22
+   },
+   {
+    "name": "Làm Bạn Thân Có Khó Không?",
+    "count": 22
+   },
+   {
+    "name": "Chuyện Tình Hài Lãng Mạn Không Thể Chê Vào Đâu",
+    "count": 21
+   },
+   {
+    "name": "Infinite Dendrogram",
+    "count": 21
+   },
+   {
+    "name": "Death Note - Another Note",
+    "count": 21
+   },
+   {
+    "name": "ISHURA - Tu la dị giới",
+    "count": 20
+   },
+   {
+    "name": "Chàng Trai Chuyển Kiếp Và Cô Gái Thiên Tài",
+    "count": 19
+   },
+   {
+    "name": "Sứ Giả Bốn Mùa",
+    "count": 19
+   },
+   {
+    "name": "Mùa Hè Thứ Hai, Mất Em Mãi Mãi",
+    "count": 19
+   },
+   {
+    "name": "Sakurako Và Bộ Xương Dưới Gốc Anh Đào",
+    "count": 18
+   },
+   {
+    "name": "Anh Hùng Diệt Thần & Bảy Thệ Ước",
+    "count": 18
+   },
+   {
+    "name": "Hiệp Sĩ Xương Trên Đường Du Hành Đến Thế Giới Khác",
+    "count": 18
+   },
+   {
+    "name": "Lời Nói Đùa",
+    "count": 17
+   },
+   {
+    "name": "Bác Sĩ Cuối Cùng Dưới Tán Hoa Anh Đào",
+    "count": 16
+   },
+   {
+    "name": "Bầu Trời Xanh Của Em",
+    "count": 16
+   },
+   {
+    "name": "Chén Thánh Của Eris",
+    "count": 16
+   },
+   {
+    "name": "Amaryllis Ở Xứ Sở Băng Giá",
+    "count": 15
+   },
+   {
+    "name": "Công Chúa Ma Cà Rồng Quyền Năng Chỉ Muốn Có Một Cô Em Gái Mà Thôi",
+    "count": 15
+   },
+   {
+    "name": "Ma Vương Kiến Tạo - Hầm Ngục Kiên Cố Nhất Chính Là Thành Phố Hiện Đại",
+    "count": 15
+   },
+   {
+    "name": "Tôi Bị Đàn Em Đứng Hạng Nhất Trong Cuộc Thi Người Vợ Lý Tưởng Nắm Được Điểm Yếu",
+    "count": 14
+   },
+   {
+    "name": "SPY Room - Lớp Học Điệp Viên - Ngoại Truyện",
+    "count": 14
+   },
+   {
+    "name": "Kino Du Ký",
+    "count": 14
+   },
+   {
+    "name": "Tiệm Sách Cũ Biblia",
+    "count": 14
+   },
+   {
+    "name": "Văn Hào Lưu Lạc",
+    "count": 13
+   },
+   {
+    "name": "Biên Niên Sử Đế Chế Alexis",
+    "count": 12
+   },
+   {
+    "name": "Mê Cung Thư Viện",
+    "count": 12
+   },
+   {
+    "name": "Phép Thuật Chỉ Chạm Tới Bán Kính Của Anh Và Em",
+    "count": 12
+   },
+   {
+    "name": "Khi Muốn Khóc Tôi Đeo Mặt Nạ Mèo",
+    "count": 12
+   },
+   {
+    "name": "Số Phận Của Vị Hôn Thê",
+    "count": 11
+   },
+   {
+    "name": "Dịch vụ giao hàng của phù thủy Kiki",
+    "count": 11
+   },
+   {
+    "name": "Ma Pháp Thiếu Nữ",
+    "count": 11
+   },
+   {
+    "name": "Pháo Hoa, Ngắm Từ Dưới Hay Bên Cạnh",
+    "count": 11
+   },
+   {
+    "name": "Calling You",
+    "count": 11
+   },
+   {
+    "name": "Durarara!!",
+    "count": 11
+   },
+   {
+    "name": "Bí Mật Giao Ước Bóng Tối",
+    "count": 11
+   },
+   {
+    "name": "Câu Lạc Bộ Giỏi Và Sành Sỏi",
+    "count": 10
+   },
+   {
+    "name": "Ký Ức Bầu Trời",
+    "count": 10
+   },
+   {
+    "name": "Cuốn Sách Của Sự Kết Thúc",
+    "count": 10
+   },
+   {
+    "name": "Hành Trình Trở Thành Nhà Thám Hiểm Của Chàng Lính Đánh Thuê Bần Hàn",
+    "count": 10
+   },
+   {
+    "name": "Đã Bảo Là Cho Tôi Năng Lực Trung Bình Thôi Mà!",
+    "count": 10
+   },
+   {
+    "name": "World Teacher",
+    "count": 9
+   },
+   {
+    "name": "Beatless",
+    "count": 9
+   },
+   {
+    "name": "Những Lời Chúng Tôi Nói Ở Bệnh Viện Bên Bờ Biển",
+    "count": 8
+   },
+   {
+    "name": "Vào Đêm Trăng Xanh, Tôi Lại Yêu Em Thêm Lần Nữa",
+    "count": 8
+   },
+   {
+    "name": "Câu Chuyện Về Cô Bé Yêu Bánh Hạnh Nhân Đã Sống Một Nghìn Năm",
+    "count": 8
+   },
+   {
+    "name": "Holmes Ở Kyoto",
+    "count": 8
+   },
+   {
+    "name": "Ma Vương Đi Làm!",
+    "count": 8
+   },
+   {
+    "name": "Tình Đầu Lúc Lâm Chung Với Thiếu Nữ Thần Chết",
+    "count": 8
+   },
+   {
+    "name": "Cuộc Hôn Nhân Chính Trị Giả Với Thiếu Gia Ác Quỷ",
+    "count": 8
+   },
+   {
+    "name": "Yokohama Station SF",
+    "count": 8
+   },
+   {
+    "name": "Aura - Trận Chiến Cuối Cùng Của Maryuin Koga",
+    "count": 7
+   },
+   {
+    "name": "Dear",
+    "count": 7
+   },
+   {
+    "name": "Thiếu Nữ & Chiến Xa",
+    "count": 7
+   },
+   {
+    "name": "Okitegami Kyoko",
+    "count": 7
+   },
+   {
+    "name": "Orange - Lá Thư Từ Tương Lai",
+    "count": 7
+   },
+   {
+    "name": "Con Gái Tôi Đã Đến Thủ Đô Và Trở Thành Mạo Hiểm Giả Hạng S",
+    "count": 7
+   },
+   {
+    "name": "Musubu Và Sách",
+    "count": 6
+   },
+   {
+    "name": "Ghost Hunt",
+    "count": 6
+   },
+   {
+    "name": "Phù Thủy Thế Hệ Satori",
+    "count": 6
+   },
+   {
+    "name": "Narcissu",
+    "count": 6
+   },
+   {
+    "name": "Truyền Kỳ Về Tình Yêu Của Quỷ",
+    "count": 6
+   },
+   {
+    "name": "Xa Một Chút Hơn Một Triệu Năm Ánh Sáng",
+    "count": 6
+   },
+   {
+    "name": "Hẹn Ước Mùa Hè",
+    "count": 6
+   },
+   {
+    "name": "Nhật Ký Kẻ Cô Đơn",
+    "count": 5
+   },
+   {
+    "name": "The Tatami Galaxy - Truyền Kỳ Phòng Bốn Chiếu Rưỡi",
+    "count": 5
+   },
+   {
+    "name": "Hướng Dẫn Sử Dụng Thiên Sứ Vụng Về",
+    "count": 5
+   },
+   {
+    "name": "Just Be Friends",
+    "count": 5
+   },
+   {
+    "name": "Tôi Thích Một Cô Gái Nhưng Chẳng Dám Ngỏ Lời",
+    "count": 5
+   },
+   {
+    "name": "Từ Tân Thế Giới",
+    "count": 5
+   },
+   {
+    "name": "Quái Vật Trong Đêm",
+    "count": 5
+   },
+   {
+    "name": "Cop Craft - Cảnh Sát Đến Từ Hai Thế Giới",
+    "count": 5
+   },
+   {
+    "name": "Tặng Hoa Cho Quái Vật Trong Rừng",
+    "count": 5
+   },
+   {
+    "name": "Hướng Dẫn Thư Viện Dành Cho Người Ghét Đọc",
+    "count": 5
+   },
+   {
+    "name": "Dưới Ánh Sáng Ma Pháp 0.2 Lux",
+    "count": 4
+   },
+   {
+    "name": "Nhật Ký Giấc Mơ – Trong Giấc Mơ Của Bạn, Tôi Không Tồn Tại",
+    "count": 4
+   },
+   {
+    "name": "Torinoko City - Thành phố bị bỏ rơi",
+    "count": 4
+   },
+   {
+    "name": "Thuần Thú Sư Ở Dị Giới",
+    "count": 4
+   },
+   {
+    "name": "NO.6",
+    "count": 4
+   },
+   {
+    "name": "Đội Bảo An Kyoto",
+    "count": 4
+   },
+   {
+    "name": "Dạo Bước Phố Đêm",
+    "count": 4
+   },
+   {
+    "name": "Tập Tỏ Tình",
+    "count": 4
+   },
+   {
+    "name": "Gia Sư Của Công Chúa Quỷ",
+    "count": 4
+   },
+   {
+    "name": "Pháp Sư Tokyo",
+    "count": 4
+   },
+   {
+    "name": "Chuyển Sinh Làm Người Sói, Tôi Trở Thành Cánh Tay Phải Của Ma Vương",
+    "count": 4
+   },
+   {
+    "name": "Quán Ăn Xuyên Không",
+    "count": 4
+   },
+   {
+    "name": "Thế Giới Đầy「Khoảng Trống」",
+    "count": 3
+   },
+   {
+    "name": "Phù Thủy Trắng Định Tội",
+    "count": 3
+   },
+   {
+    "name": "Tiếng gọi từ vì sao xa",
+    "count": 3
+   },
+   {
+    "name": "Khúc Nguyền Ca Của Thánh Kiếm Sĩ",
+    "count": 3
+   },
+   {
+    "name": "Riku và Chise - Chàng Trai Phân Chia Thế Giới Và Cô Gái Trong Biệt Thự",
+    "count": 3
+   },
+   {
+    "name": "Những Ngày Mai Đến Không Có Cậu Kề Bên",
+    "count": 3
+   },
+   {
+    "name": "Thánh Hiệp Sĩ Nơi Tận Cùng Thế Giới",
+    "count": 3
+   },
+   {
+    "name": "ECHO - Tiếng vọng",
+    "count": 3
+   },
+   {
+    "name": "Re:Monster - Hồi Sinh Thành Quái Vật",
+    "count": 3
+   },
+   {
+    "name": "Những Đứa Trẻ Đuổi Theo Tinh Tú",
+    "count": 2
+   },
+   {
+    "name": "Khách Sạn Yêu Quái Ở Izumo",
+    "count": 2
+   },
+   {
+    "name": "Hãy Đi Đi, Xanh Biếc",
+    "count": 2
+   },
+   {
+    "name": "The Dungeon Seeker",
+    "count": 2
+   },
+   {
+    "name": "Tạm Biệt Pháo Hoa",
+    "count": 1
+   },
+   {
+    "name": "Xa Lộ Chim Cánh Cụt",
+    "count": 1
+   },
+   {
+    "name": "Thọ Mệnh Thế Giới Và Bảy Ngày Đầu Tiên",
+    "count": 1
+   },
+   {
+    "name": "Gia Tộc Thần Bí",
+    "count": 1
+   },
+   {
+    "name": "Rừng Taiga",
+    "count": 1
+   },
+   {
+    "name": "Lãnh Chúa Vùng Đất Không Cư Dân",
+    "count": 1
+   },
+   {
+    "name": "Subaru Và Vì Tinh Tú Thứ 7",
+    "count": 1
+   },
+   {
+    "name": "Nàng Thợ May Tinh Linh",
+    "count": 1
+   }
+  ],
+  "oneshot": [
+   {
+    "name": "5 Centimet Trên Giây",
+    "count": 429
+   },
+   {
+    "name": "Đường hầm tới mùa hạ - Lối thoát của Biệt ly",
+    "count": 402
+   },
+   {
+    "name": "Your Name",
+    "count": 309
+   },
+   {
+    "name": "Ba Ngày Hạnh Phúc",
+    "count": 239
+   },
+   {
+    "name": "Đứa Con Của Thời Tiết",
+    "count": 184
+   },
+   {
+    "name": "5 Centimet Trên Giây - One More Side",
+    "count": 158
+   },
+   {
+    "name": "Tớ Muốn Ăn Tụy Của Cậu",
+    "count": 146
+   },
+   {
+    "name": "Nhắn Gửi Một Tôi, Người Đã Yêu Em",
+    "count": 138
+   },
+   {
+    "name": "Nhắn Gửi Tất Cả Các Em, Những Người Tôi Đã Yêu",
+    "count": 137
+   },
+   {
+    "name": "Khóa Chặt Cửa Nào Suzume",
+    "count": 125
+   },
+   {
+    "name": "Bởi Vì Tôi Sẽ Gọi Tên Em",
+    "count": 120
+   },
+   {
+    "name": "Đợi Anh Trong Mùa Xuân Ngày Hôm Qua",
+    "count": 117
+   },
+   {
+    "name": "Just Because!",
+    "count": 115
+   },
+   {
+    "name": "Khu vườn ngôn từ",
+    "count": 105
+   },
+   {
+    "name": "Tớ Sẽ Trú Mưa Cùng Cậu",
+    "count": 97
+   },
+   {
+    "name": "Thần Chết Làm Thêm 300 Yên/Giờ",
+    "count": 96
+   },
+   {
+    "name": "Anohana - Đóa Hoa Ngày Ấy",
+    "count": 94
+   },
+   {
+    "name": "Chàng thẩm định viên và Nữ tác giả tập sự",
+    "count": 85
+   },
+   {
+    "name": "Em Là Người Sống, Tôi Là Người Chết, Thế Giới Đôi Lúc Lại Đảo Ngược",
+    "count": 79
+   },
+   {
+    "name": "Khi Ấy Là Một Đêm Đầy Sao",
+    "count": 77
+   },
+   {
+    "name": "Another",
+    "count": 75
+   },
+   {
+    "name": "Ánh Trăng",
+    "count": 65
+   },
+   {
+    "name": "Your Name: Another Side Earthbound",
+    "count": 63
+   },
+   {
+    "name": "Ame Và Yuki - Những Đứa Con Của Sói",
+    "count": 62
+   },
+   {
+    "name": "Tớ Sẽ Mãi Mãi Không Quên Cậu, Người Từng Sống Trong Khoảnh Khắc",
+    "count": 58
+   },
+   {
+    "name": "Đau Ơi Bay Đi!",
+    "count": 58
+   },
+   {
+    "name": "Cuộc Chiến Luân Hồi - All You Need Is Kill",
+    "count": 51
+   },
+   {
+    "name": "Em Là Ánh Sáng Giữa Đêm Trăng",
+    "count": 50
+   },
+   {
+    "name": "Hello World",
+    "count": 50
+   },
+   {
+    "name": "Chào Mừng Đến Với N.H.K!",
+    "count": 48
+   },
+   {
+    "name": "Bên Kia Mây Trời, Là Nơi Hẹn Ước",
+    "count": 47
+   },
+   {
+    "name": "Death Note - Another Note",
+    "count": 46
+   },
+   {
+    "name": "Và Rồi, Tháng 9 Không Có Cậu Đã Tới",
+    "count": 42
+   },
+   {
+    "name": "Amaryllis Ở Xứ Sở Băng Giá",
+    "count": 41
+   },
+   {
+    "name": "Hành Trình Đến Tận Cùng Thế Giới",
+    "count": 40
+   },
+   {
+    "name": "Công Chúa Ma Cà Rồng Quyền Năng Chỉ Muốn Có Một Cô Em Gái Mà Thôi",
+    "count": 39
+   },
+   {
+    "name": "Nếu Gặp Lại Em Trên Ngọn Đồi Hoa Nở",
+    "count": 37
+   },
+   {
+    "name": "Another S/O",
+    "count": 36
+   },
+   {
+    "name": "Tháng 8 Cùng Em Và Những Ký Ức Vụn Vỡ",
+    "count": 35
+   },
+   {
+    "name": "Mê Cung Thư Viện",
+    "count": 35
+   },
+   {
+    "name": "Iris Những Ngày Mưa",
+    "count": 34
+   },
+   {
+    "name": "Bầu Trời Xanh Của Em",
+    "count": 33
+   },
+   {
+    "name": "Mùa Hè Thứ Hai, Mất Em Mãi Mãi",
+    "count": 33
+   },
+   {
+    "name": "Khi Muốn Khóc Tôi Đeo Mặt Nạ Mèo",
+    "count": 32
+   },
+   {
+    "name": "Your Story",
+    "count": 32
+   },
+   {
+    "name": "Xa Một Chút Hơn Một Triệu Năm Ánh Sáng",
+    "count": 26
+   },
+   {
+    "name": "Dịch vụ giao hàng của phù thủy Kiki",
+    "count": 25
+   },
+   {
+    "name": "Pháo Hoa, Ngắm Từ Dưới Hay Bên Cạnh",
+    "count": 25
+   },
+   {
+    "name": "Narcissu",
+    "count": 25
+   },
+   {
+    "name": "Hướng Dẫn Sử Dụng Thiên Sứ Vụng Về",
+    "count": 23
+   },
+   {
+    "name": "Vào Đêm Trăng Xanh, Tôi Lại Yêu Em Thêm Lần Nữa",
+    "count": 22
+   },
+   {
+    "name": "Quán Ăn Xuyên Không",
+    "count": 22
+   },
+   {
+    "name": "Truyền Kỳ Về Tình Yêu Của Quỷ",
+    "count": 21
+   },
+   {
+    "name": "Bí Mật Giao Ước Bóng Tối",
+    "count": 21
+   },
+   {
+    "name": "Calling You",
+    "count": 20
+   },
+   {
+    "name": "Câu Chuyện Về Cô Bé Yêu Bánh Hạnh Nhân Đã Sống Một Nghìn Năm",
+    "count": 20
+   },
+   {
+    "name": "Re:Monster - Hồi Sinh Thành Quái Vật",
+    "count": 20
+   },
+   {
+    "name": "Tình Đầu Lúc Lâm Chung Với Thiếu Nữ Thần Chết",
+    "count": 19
+   },
+   {
+    "name": "Những Lời Chúng Tôi Nói Ở Bệnh Viện Bên Bờ Biển",
+    "count": 17
+   },
+   {
+    "name": "Dear",
+    "count": 17
+   },
+   {
+    "name": "Aura - Trận Chiến Cuối Cùng Của Maryuin Koga",
+    "count": 16
+   },
+   {
+    "name": "Orange - Lá Thư Từ Tương Lai",
+    "count": 16
+   },
+   {
+    "name": "Tặng Hoa Cho Quái Vật Trong Rừng",
+    "count": 16
+   },
+   {
+    "name": "Đội Bảo An Kyoto",
+    "count": 14
+   },
+   {
+    "name": "ECHO - Tiếng vọng",
+    "count": 14
+   },
+   {
+    "name": "Ký Ức Bầu Trời",
+    "count": 14
+   },
+   {
+    "name": "Nhật Ký Giấc Mơ – Trong Giấc Mơ Của Bạn, Tôi Không Tồn Tại",
+    "count": 13
+   },
+   {
+    "name": "Thế Giới Đầy「Khoảng Trống」",
+    "count": 13
+   },
+   {
+    "name": "Những Ngày Mai Đến Không Có Cậu Kề Bên",
+    "count": 13
+   },
+   {
+    "name": "Hướng Dẫn Thư Viện Dành Cho Người Ghét Đọc",
+    "count": 13
+   },
+   {
+    "name": "Dạo Bước Phố Đêm",
+    "count": 12
+   },
+   {
+    "name": "Torinoko City - Thành phố bị bỏ rơi",
+    "count": 11
+   },
+   {
+    "name": "Dưới Ánh Sáng Ma Pháp 0.2 Lux",
+    "count": 11
+   },
+   {
+    "name": "Mimizuku Và Vua Bóng Đêm",
+    "count": 11
+   },
+   {
+    "name": "Nàng Thợ May Tinh Linh",
+    "count": 11
+   },
+   {
+    "name": "Những Đứa Trẻ Đuổi Theo Tinh Tú",
+    "count": 11
+   },
+   {
+    "name": "Tôi Thích Một Cô Gái Nhưng Chẳng Dám Ngỏ Lời",
+    "count": 10
+   },
+   {
+    "name": "Hẹn Ước Mùa Hè",
+    "count": 10
+   },
+   {
+    "name": "Yokohama Station SF",
+    "count": 10
+   },
+   {
+    "name": "The Tatami Galaxy - Truyền Kỳ Phòng Bốn Chiếu Rưỡi",
+    "count": 9
+   },
+   {
+    "name": "Quái Vật Trong Đêm",
+    "count": 9
+   },
+   {
+    "name": "Riku và Chise - Chàng Trai Phân Chia Thế Giới Và Cô Gái Trong Biệt Thự",
+    "count": 8
+   },
+   {
+    "name": "Nhật Ký Kẻ Cô Đơn",
+    "count": 8
+   },
+   {
+    "name": "Pháp Sư Tokyo",
+    "count": 8
+   },
+   {
+    "name": "Tiếng gọi từ vì sao xa",
+    "count": 8
+   },
+   {
+    "name": "Phép Thuật Chỉ Chạm Tới Bán Kính Của Anh Và Em",
+    "count": 8
+   },
+   {
+    "name": "Gia Sư Của Công Chúa Quỷ",
+    "count": 8
+   },
+   {
+    "name": "Just Be Friends",
+    "count": 7
+   },
+   {
+    "name": "Tạm Biệt Pháo Hoa",
+    "count": 7
+   },
+   {
+    "name": "Xa Lộ Chim Cánh Cụt",
+    "count": 7
+   },
+   {
+    "name": "Thọ Mệnh Thế Giới Và Bảy Ngày Đầu Tiên",
+    "count": 7
+   },
+   {
+    "name": "Hãy Đi Đi, Xanh Biếc",
+    "count": 4
+   },
+   {
+    "name": "Bác Sĩ Cuối Cùng Dưới Tán Hoa Anh Đào",
+    "count": 3
+   },
+   {
+    "name": "Phù Thủy Thế Hệ Satori",
+    "count": 2
+   }
+  ],
+  "rookie": [
+   {
+    "name": "Làm Bạn Với Cô Nàng Dễ Thương Nhì Lớp",
+    "count": 666
+   },
+   {
+    "name": "86-EIGHTY SIX - Alter",
+    "count": 625
+   },
+   {
+    "name": "Vị Hôn Thê Giản Dị Của Tôi Rất Dễ Thương Lúc Ở Nhà",
+    "count": 434
+   },
+   {
+    "name": "Lycoris Recoil",
+    "count": 382
+   },
+   {
+    "name": "Thế Giới Otome Game Đó Thật Khắc Nghiệt Với Chúng Ta",
+    "count": 311
+   },
+   {
+    "name": "Ta Là Chúa Tể Độc Ác Của Đế Quốc Liên Thiên Hà",
+    "count": 206
+   },
+   {
+    "name": "Hẹn Hò Với Người Siêu Dễ Thương Như Tớ Đi!",
+    "count": 181
+   },
+   {
+    "name": "Hell Mode - Game Thủ Xuất Chúng Tung Hoành Chốn Dị Giới Hỗn Nguyên",
+    "count": 116
+   },
+   {
+    "name": "Ác Nữ Nửa Vời - Truyền Kì Hoán Hồn Đổi Xác",
+    "count": 105
+   },
+   {
+    "name": "Beatless",
+    "count": 78
+   },
+   {
+    "name": "Musubu Và Sách",
+    "count": 49
+   }
+  ],
+  "publisher": [
+   {
+    "name": "Wingsbooks (Kim Đồng)",
+    "count": 1013
+   },
+   {
+    "name": "IPM",
+    "count": 784
+   },
+   {
+    "name": "Hikari Light Novel (Thái Hà Books)",
+    "count": 519
+   },
+   {
+    "name": "Amak",
+    "count": 286
+   },
+   {
+    "name": "Shine Novel",
+    "count": 250
+   },
+   {
+    "name": "Tsuki Light Novel",
+    "count": 248
+   },
+   {
+    "name": "Sky Light Novel",
+    "count": 238
+   },
+   {
+    "name": "Orion Books",
+    "count": 180
+   },
+   {
+    "name": "Usagi Light Novel",
+    "count": 33
+   }
+  ],
+  "era": [
+   {
+    "name": "Chuyện Tình Thanh Xuân Bi Hài Của Tôi Quả Nhiên Là Sai Lầm",
+    "count": 673
+   },
+   {
+    "name": "Thiên Sứ Nhà Bên",
+    "count": 563
+   },
+   {
+    "name": "Arya Bàn Bên Thỉnh Thoảng Lại Trêu Ghẹo Tôi Bằng Tiếng Nga",
+    "count": 371
+   }
+  ]
+ }
+}

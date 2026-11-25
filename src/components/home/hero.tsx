@@ -147,7 +147,7 @@ export default function Hero({
       <ol className="sr-only">
         {items.map((it) => (
           <li key={it.id}>
-            Hạng {it.rank}: {it.name}, {it.publisher}, {nf.format(it.count)} phiếu
+            Hạng {it.rank}: {it.name}, {it.publisher && `${it.publisher}, `}{nf.format(it.count)} phiếu
           </li>
         ))}
       </ol>

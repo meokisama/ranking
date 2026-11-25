@@ -185,7 +185,7 @@ export default function CoverArc({
           Bảng tổng sắp · {period.long}
         </span>
         <span className="h-px flex-1 bg-ink/15" />
-        <span className="hidden shrink-0 sm:block">{nf.format(period.votes)} lượt bình chọn hợp lệ</span>
+        {period.votes && <span className="hidden shrink-0 sm:block">{nf.format(period.votes)} lượt bình chọn hợp lệ</span>}
       </div>
 
       <div className="relative z-10 mt-6 px-5 md:absolute md:left-10 md:top-32 md:mt-0 md:px-0">
@@ -290,8 +290,7 @@ export default function CoverArc({
                 <span className="num text-[2.2rem] leading-none">{nf.format(e.count)}</span> <span className="label text-mute">phiếu</span>
               </span>
               <span className="label text-right text-mute">
-                {percent(e.count, period.votes)}
-                {e.rank > 1 && ` · kém ${nf.format(max - e.count)}`}
+                {[period.votes && percent(e.count, period.votes), e.rank > 1 && `kém ${nf.format(max - e.count)}`].filter(Boolean).join(" · ")}
               </span>
             </p>
           </motion.div>

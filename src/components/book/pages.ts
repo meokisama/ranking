@@ -414,7 +414,7 @@ export function paintEntry(w: number, f: Faces, e: Leafed, votes: number, max: n
   const text =
     e.rank === 1
       ? `${nf.format(e.count)} độc giả đã viết tên cuốn sách này lên lá phiếu, ${share} tổng số phiếu của kỳ, nhiều hơn bất kỳ cuốn nào khác. Đây là cuốn sách được yêu thích nhất ${period}.`
-      : `${nf.format(e.count)} độc giả đã viết tên cuốn sách này lên lá phiếu, chiếm ${share} tổng số phiếu của kỳ. Cuốn sách đứng thứ ${e.rank} trong số những tác phẩm được gọi tên ${period}, do ${e.publisher} phát hành.`;
+      : `${nf.format(e.count)} độc giả đã viết tên cuốn sách này lên lá phiếu, chiếm ${share} tổng số phiếu của kỳ. Cuốn sách đứng thứ ${e.rank} trong số những tác phẩm được gọi tên ${period}${e.publisher ? `, do ${e.publisher} phát hành` : ""}.`;
   body(ctx, text, u * 13, y + u * 9, w - u * 25, u * 4.4, 5);
 
   const foot = h - u * 17;

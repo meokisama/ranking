@@ -13,7 +13,12 @@ const readJson = async (p) => JSON.parse(await fs.readFile(path.join(RAW, p), "u
 
 // i.docln.net is gone; i.hako.vip serves the same paths.
 const fixHost = (url) => url.replace(/\/\/i\d?\.docln\.net\//, "//i.hako.vip/");
-const coverKey = (url) => path.basename(new URL(url).pathname).replace(/\.\w+$/, "");
+// kurano.moe names every file "cover" and puts the id in the folder above it.
+const coverKey = (url) => {
+  const parts = new URL(url).pathname.split("/").filter(Boolean);
+  const base = parts.at(-1).replace(/\.\w+$/, "");
+  return base === "cover" ? `kurano-${parts.at(-2)}` : base;
+};
 
 const coverMeta = new Map(); // key -> { file, color } | null
 const queue = new Map(); // key -> url
@@ -89,11 +94,17 @@ const withCover = ({ coverKey: key, ...rest }) => {
   return { ...rest, cover: meta?.file ?? null, color: meta?.color ?? null };
 };
 
+const norm = (s) => s.normalize("NFC").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
+
+// Covers looked up by hand on kurano.moe (data/raw/extra-books.json), by title; they win over a dead API link.
+const extraCovers = new Map();
+const coverOf = (name, url) => want(extraCovers.get(norm(name)) ?? url);
+
 const book = (e) => ({
   id: e._id,
   name: e.ranobe.seriesName.trim(),
   publisher: e.ranobe.publisherName.trim(),
-  coverKey: want(e.ranobe.coverUrl),
+  coverKey: coverOf(e.ranobe.seriesName.trim(), e.ranobe.coverUrl),
   count: e.count,
 });
 
@@ -108,7 +119,7 @@ const illustrator = (e) => ({
   id: e._id,
   name: e.illustrator.name.trim(),
   works: e.illustrator.series.map((s) => s.seriesTitle.trim()),
-  coverKey: want(e.illustrator.series[0]?.coverUrl),
+  coverKey: e.illustrator.series[0] && coverOf(e.illustrator.series[0].seriesTitle.trim(), e.illustrator.series[0].coverUrl),
   count: e.count,
 });
 
@@ -122,6 +133,8 @@ async function main() {
   const h2 = (await readJson("second_half_2024.json")).data;
   const voteRanobe = await readJson("vote_ranobe.json");
   const votePublisher = await readJson("vote_publisher.json");
+  const extraBooks = await readJson("extra-books.json");
+  for (const b of extraBooks) extraCovers.set(norm(b.name), b.coverUrl);
 
   const p1 = {
     ranobe: h1.favoriteRanobes.map(book),
@@ -138,8 +151,39 @@ async function main() {
     id: r.id,
     name: r.seriesName.trim(),
     publisher: r.publisherName.trim(),
-    coverKey: want(r.coverUrl),
+    coverKey: coverOf(r.seriesName.trim(), r.coverUrl),
   }));
+
+  // The spreadsheet periods carry names and counts only: id, publisher and cover come from a title the API already knows.
+  const knownBooks = new Map();
+  for (const e of [...p2.ranobe, ...p2.oneshot, ...p2.rookie, ...p1.ranobe, ...voteBooks]) {
+    if (!knownBooks.has(norm(e.name))) knownBooks.set(norm(e.name), e);
+  }
+  // Titles new in 2025, which the API never had.
+  let extraId = 90000;
+  for (const b of extraBooks) {
+    if (!knownBooks.has(norm(b.name))) knownBooks.set(norm(b.name), { id: extraId++, name: b.name, publisher: b.publisher, coverKey: want(b.coverUrl) });
+  }
+  const knownPublishers = new Map([...p2.publisher, ...p1.publisher].map((e) => [e.name, e]));
+  // Titles the API never had get ids past any real one, so list keys stay unique.
+  let nextId = 100000;
+  const fromSheet = (known) => (list) => {
+    const used = new Set();
+    return list.map(({ name, count }) => {
+      const k = known(name);
+      const id = k && !used.has(k.id) ? k.id : nextId++;
+      used.add(id);
+      return { ...k, id, name: k?.name ?? name, count };
+    });
+  };
+  const sheetBook = fromSheet((name) => knownBooks.get(norm(name)));
+  const sheetPublisher = fromSheet((name) => knownPublishers.get(name));
+
+  const history = (await readJson("history.json")).map((h) => ({ ...h, ranobe: sheetBook(h.ranobe) }));
+  const y2025 = await readJson("2025.json");
+  const c2025 = Object.fromEntries(
+    Object.entries(y2025.categories).map(([k, v]) => [k, k === "publisher" ? sheetPublisher(v) : sheetBook(v)]),
+  );
 
   console.log(`Tải ${queue.size} ảnh bìa…`);
   await downloadAll();
@@ -155,6 +199,16 @@ async function main() {
   const gender = Object.fromEntries(h2.gender.map((g) => [g._id, g.count]));
 
   const periods = [
+    {
+      slug: "2025",
+      label: "Cả năm · 2025",
+      long: "Năm 2025",
+      votes: y2025.votes,
+      gender: y2025.gender,
+      ages: null,
+      ageGroups: y2025.ageGroups,
+      categories: Object.fromEntries(Object.entries(c2025).map(([k, v]) => [k, resolve(v)])),
+    },
     {
       slug: "2-2024",
       label: "Kỳ II · 2024",
@@ -173,6 +227,8 @@ async function main() {
       ages: null,
       categories: Object.fromEntries(Object.entries(p1).map(([k, v]) => [k, resolve(v)])),
     },
+    // Ballot totals were not kept for these periods.
+    ...history.map(({ ranobe, ...h }) => ({ ...h, votes: null, gender: null, ages: null, categories: { ranobe: resolve(ranobe) } })),
   ];
 
   const ROOKIE = [2, 6, 13, 17, 19, 22, 24, 38, 39, 40, 41, 43, 47];

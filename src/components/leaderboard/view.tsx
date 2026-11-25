@@ -9,7 +9,7 @@ export default function LeaderboardView({ period }: { period: Period }) {
       <Board
         key={period.slug}
         period={period}
-        periods={periods.map((p) => ({ slug: p.slug, label: p.label, href: periodHref(p.slug) }))}
+        periods={periods.map((p) => ({ slug: p.slug, label: p.label, href: periodHref(p.slug), votes: p.votes }))}
       />
       <Footer />
     </>

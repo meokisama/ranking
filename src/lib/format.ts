@@ -4,6 +4,9 @@ export const pad = (n: number) => String(n).padStart(2, "0");
 
 export const percent = (count: number, total: number) => ((count / total) * 100).toFixed(1).replace(".", ",") + "%";
 
+/** `percent` as a trailing " · 12,3%", or nothing for a period with no ballot total. */
+export const shareOf = (count: number, total: number | null) => (total ? ` · ${percent(count, total)}` : "");
+
 /** A date (and with `time`, the hour) as read in Vietnam, whatever the reader's own zone. */
 export const dateVN = (iso: string, time = false) =>
   new Date(iso).toLocaleString("vi-VN", {

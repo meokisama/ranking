@@ -188,7 +188,7 @@ export default function Footer() {
                       <span className="display block text-[1.6rem] leading-none transition-colors duration-500 group-hover:text-gold">
                         {name} <i>{year}</i>
                       </span>
-                      <span className="label mt-1.5 block text-paper/55">{nf.format(p.votes)} lá phiếu</span>
+                      {p.votes && <span className="label mt-1.5 block text-paper/55">{nf.format(p.votes)} lá phiếu</span>}
                     </Link>
                   </li>
                   );

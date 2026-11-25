@@ -1,16 +1,16 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import Book3D from "@/components/ui/book3d";
 import { LogoBoard, Mark } from "@/components/ui/cover";
 import { Kicker } from "@/components/ui/reveal";
+import Picker from "@/components/ui/picker";
 import SearchField from "@/components/ui/search-field";
 import { CATEGORIES } from "@/lib/config";
 import type { CategoryKey } from "@/lib/config";
 import type { Entry, Period } from "@/lib/data";
-import { fold, nf, pad, percent } from "@/lib/format";
+import { fold, nf, pad, percent, shareOf } from "@/lib/format";
 import { EASE } from "@/lib/motion";
 import Demographics from "./demographics";
 import CoverArc from "./arc";
@@ -53,7 +53,7 @@ const rise = (i: number) => ({
 });
 
 /** The winner: a full-height cover beside its number, name and count. */
-function Champion({ e, votes }: { e: Entry; votes: number }) {
+function Champion({ e, votes }: { e: Entry; votes: number | null }) {
   return (
     <motion.li
       className="group grid grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] items-end gap-5 py-8 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-10 md:py-12 md:pr-12"
@@ -68,7 +68,7 @@ function Champion({ e, votes }: { e: Entry; votes: number }) {
         <Thickness e={e} max={e.count} delay={0.3} className="mt-6" />
         <p className="mt-3 flex items-baseline justify-between gap-3">
           <span className="num text-4xl md:text-5xl">{nf.format(e.count)}</span>
-          <span className="label text-mute">phiếu · {percent(e.count, votes)}</span>
+          <span className="label text-mute">phiếu{shareOf(e.count, votes)}</span>
         </p>
       </div>
     </motion.li>
@@ -76,7 +76,7 @@ function Champion({ e, votes }: { e: Entry; votes: number }) {
 }
 
 /** Second and third: a smaller cover, and how far each stands from the top. */
-function Runner({ e, votes, max, place }: { e: Entry; votes: number; max: number; place: number }) {
+function Runner({ e, votes, max, place }: { e: Entry; votes: number | null; max: number; place: number }) {
   return (
     <motion.li
       className={`hair group grid flex-1 grid-cols-[6.5rem_minmax(0,1fr)] items-center gap-5 border-t py-8 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-8 md:pl-12 ${place === 1 ? "md:border-t-0" : ""}`}
@@ -91,7 +91,7 @@ function Runner({ e, votes, max, place }: { e: Entry; votes: number; max: number
         <p className="mt-2 flex items-baseline justify-between gap-3">
           <span className="num text-2xl md:text-3xl">{nf.format(e.count)}</span>
           <span className="label text-right text-mute">
-            {percent(e.count, votes)} · kém {nf.format(max - e.count)}
+            {votes && `${percent(e.count, votes)} · `}kém {nf.format(max - e.count)}
           </span>
         </p>
       </div>
@@ -99,7 +99,7 @@ function Runner({ e, votes, max, place }: { e: Entry; votes: number; max: number
   );
 }
 
-function Row({ e, max, votes }: { e: Entry; max: number; votes: number }) {
+function Row({ e, max, votes }: { e: Entry; max: number; votes: number | null }) {
   return (
     <li
       className="hair group grid grid-cols-[2.4rem_2.6rem_1fr_auto] items-center gap-x-3 border-b py-3.5 transition-colors duration-700 hover:bg-card md:grid-cols-[4rem_2.8rem_minmax(0,1.3fr)_minmax(0,1.2fr)_5.5rem_4rem] md:gap-x-6"
@@ -113,12 +113,12 @@ function Row({ e, max, votes }: { e: Entry; max: number; votes: number }) {
       </div>
       <Thickness e={e} max={max} className="hidden md:block" />
       <span className="num pr-1 text-right text-xl md:pr-0 md:text-2xl">{nf.format(e.count)}</span>
-      <span className="label hidden pr-1 text-right text-mute md:block">{percent(e.count, votes)}</span>
+      <span className="label hidden pr-1 text-right text-mute md:block">{votes && percent(e.count, votes)}</span>
     </li>
   );
 }
 
-export default function Board({ period, periods }: { period: Period; periods: { slug: string; label: string; href: string }[] }) {
+export default function Board({ period, periods }: { period: Period; periods: { slug: string; label: string; href: string; votes: number | null }[] }) {
   const keys = Object.keys(period.categories) as CategoryKey[];
   const [cat, setCat] = useState<CategoryKey>(keys[0]);
   const [q, setQ] = useState("");
@@ -158,29 +158,39 @@ export default function Board({ period, periods }: { period: Period; periods: { 
 
       {/* Controls: which period, which category. Always in reach. */}
       <div className="hair sticky top-14 z-40 border-y bg-paper/85 backdrop-blur-md md:top-16">
-        <div className="no-scrollbar flex items-center gap-2 overflow-x-auto px-5 py-2.5 md:px-10">
-          <span className="label shrink-0 pr-1 text-mute">Kỳ</span>
-          {periods.map((p) => (
-            <Link
-              key={p.slug}
-              href={p.href}
-              scroll={false}
-              aria-current={p.slug === period.slug ? "page" : undefined}
-              className="btn-ghost chip"
-            >
-              {p.label}
-            </Link>
-          ))}
-          <span className="hair mx-2 h-6 shrink-0 border-l" />
-          <span className="label shrink-0 pr-1 text-mute">Hạng mục</span>
-          <div className="flex shrink-0 gap-2" role="tablist" aria-label="Hạng mục">
+        <div className="flex items-center gap-2 px-5 py-2.5 md:gap-3 md:px-10">
+          <span className="label hidden shrink-0 text-mute sm:block">Kỳ</span>
+          <Picker
+            label="Kỳ"
+            value={period.slug}
+            options={periods.map((p) => ({ key: p.slug, label: p.label, href: p.href, hint: p.votes ? `${nf.format(p.votes)} phiếu` : undefined }))}
+            className="min-w-0 flex-1 sm:flex-none"
+          />
+          <span className="hair mx-1 hidden h-6 shrink-0 border-l sm:block" />
+          <span className="label hidden shrink-0 text-mute sm:block">Hạng mục</span>
+          {/* Tabs while they fit; a second list below lg. */}
+          <div className="hidden min-w-0 rounded-full border border-ink/20 p-0.5 lg:flex" role="tablist" aria-label="Hạng mục">
             {keys.map((k) => (
-              <button key={k} role="tab" aria-selected={k === cat} onClick={() => choose(k)} className="btn-ghost chip">
+              <button
+                key={k}
+                role="tab"
+                aria-selected={k === cat}
+                onClick={() => choose(k)}
+                className="flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-[0.8rem] font-medium transition-colors duration-500 hover:text-shu aria-selected:bg-ink aria-selected:text-paper aria-selected:hover:text-paper"
+              >
                 {CATEGORIES[k].short}
-                <span className="num text-[0.95rem] opacity-60">{period.categories[k]!.length}</span>
+                <span className="num text-[0.9rem] opacity-55">{period.categories[k]!.length}</span>
               </button>
             ))}
           </div>
+          <Picker
+            label="Hạng mục"
+            value={cat}
+            options={keys.map((k) => ({ key: k, label: CATEGORIES[k].short, hint: String(period.categories[k]!.length) }))}
+            onChoose={(k) => choose(k as CategoryKey)}
+            align="right"
+            className="min-w-0 flex-1 sm:flex-none lg:hidden"
+          />
         </div>
       </div>
 
@@ -212,7 +222,7 @@ export default function Board({ period, periods }: { period: Period; periods: { 
             </ol>
           </section>
 
-          <section className="px-5 pb-28 pt-20 md:px-10 md:pb-40 md:pt-32" aria-label="Danh sách đầy đủ">
+          <section className={`px-5 pb-28 pt-20 md:px-10 md:pb-40 md:pt-32 ${list.length > 3 ? "" : "hidden"}`} aria-label="Danh sách đầy đủ">
             <Kicker no="B" right={searching ? `${nf.format(rows.length)} / ${nf.format(list.length)}` : `Hạng 04 – ${pad(list.length)}`}>
               Từng dòng một
             </Kicker>
@@ -251,7 +261,7 @@ export default function Board({ period, periods }: { period: Period; periods: { 
               <span>{meta.unit}</span>
               <span>So với hạng nhất</span>
               <span className="text-right">Phiếu</span>
-              <span className="pr-1 text-right">Tỉ lệ</span>
+              <span className="pr-1 text-right">{period.votes && "Tỉ lệ"}</span>
             </div>
             <ol className="mt-3 border-t border-ink">
               {shown.map((e) => (
@@ -272,7 +282,7 @@ export default function Board({ period, periods }: { period: Period; periods: { 
         </motion.div>
       </AnimatePresence>
 
-      {period.gender && period.ages && <Demographics gender={period.gender} ages={period.ages} />}
+      {period.gender && (period.ages || period.ageGroups) && <Demographics gender={period.gender} ages={period.ages} groups={period.ageGroups} />}
     </main>
   );
 }

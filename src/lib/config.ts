@@ -7,7 +7,7 @@ export const SITE = {
 };
 
 /** Period shown by default (matches a slug in src/data/periods.json). */
-export const CURRENT_PERIOD = "2-2024";
+export const CURRENT_PERIOD = "2025";
 
 /** Voting window (Vietnam time). Change both for each period. */
 export const VOTING = {
@@ -25,7 +25,7 @@ export function votingState(now = new Date()): VotingState {
   return "open";
 }
 
-export type CategoryKey = "ranobe" | "oneshot" | "rookie" | "publisher" | "illustrator";
+export type CategoryKey = "ranobe" | "oneshot" | "rookie" | "publisher" | "illustrator" | "era";
 
 export const CATEGORIES: Record<
   CategoryKey,
@@ -74,5 +74,13 @@ export const CATEGORIES: Record<
     max: 5,
     unit: "họa sĩ",
     blurb: "Những nét vẽ thổi hồn vào từng trang sách, khiến nhân vật bước ra khỏi con chữ.",
+  },
+  era: {
+    label: "End of an Era",
+    short: "End of an Era",
+    api: "endOfAnEra",
+    max: 1,
+    unit: "tác phẩm",
+    blurb: "Tác phẩm đã định hình cả một thế hệ độc giả Light Novel Việt Nam.",
   },
 };
